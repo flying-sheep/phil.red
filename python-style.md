@@ -1,3 +1,7 @@
+---
+title: Python Style
+---
+
 Python Style
 ============
 Python 3.3+
