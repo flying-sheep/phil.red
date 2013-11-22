@@ -6,7 +6,7 @@ not easy due to license bullshit.
 
 best thing is to run the downloader, then cancel, then run the installer using `kdesu sh install` (or `gksu`), because `sudo sh install` fails with a huge stacktrace revealing horrible incantation on Java’s reflection API.
 
-now it’s probably installed in `/usr/local/MATLAB`. (if you can’t be bothered to use linux’ directory structure, at least go to `/opt/yourshit`, not somewhere else!) but `/usr/local/bin` doesn’t contain a symlink to `/usr/local/MATLAB/somebullshit/bin/matlab`. create it.
+now it’s probably installed in `/usr/local/MATLAB`. (dear devs: if you can’t be bothered to use linux’ directory structure, at least go to `/opt/yourshit`, not somewhere else!) but `/usr/local/bin` doesn’t contain a symlink to `/usr/local/MATLAB/somebullshit/bin/matlab`. create it.
 
 now fire up `kmenuedit` or create a `.desktop` file in `/usr/local/share/applications`, with the following as call:
 
