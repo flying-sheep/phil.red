@@ -10,13 +10,17 @@ now it’s probably installed in `/usr/local/MATLAB`. (dear devs: if you can’t
 
 now fire up `kmenuedit` or create a `.desktop` file in `/usr/local/share/applications`, with the following as call:
 
-	env -u _JAVA_OPTIONS matlab -desktop
+```bash
+env -u _JAVA_OPTIONS matlab -desktop
+```
 
 configure it
 ------------
 finally start that godforsaken piece of atrociously wrapped implicitness and immediately call
 
-	`userpath('/user/you/somewhere/sane')`
+```matlab
+userpath('/user/you/somewhere/sane')
+```
 
 because the default is `~/Documents/MATLAB` no matter if that folder exists in your language. (you’ll have to delete it because MATLAB immediately created it when starting)
 
