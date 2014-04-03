@@ -12,7 +12,7 @@ a series of bytes, which can hold a *representation* of the first.
 
 .. csv-table:: The whole ASCII Table: All 1-byte encodings only had this and again as many glyphs
 	:delim: tab
-	:quote: ”
+	:quote: \0
 
 	␀	␁	␂	␃	␄	␅	␆	␇	␈	␉	␊	␋	␌	␍	␎	␏
 	␐	␑	␒	␓	␔	␕	␖	␗	␘	␙	␚	␛	␜	␝	␞	␟
