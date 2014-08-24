@@ -19,5 +19,5 @@ But don’t belive everything you’re told either. Egoistic people exist and do
 
 As an anti-sexist I hate this. I hate it as much as I hate male provilege, because although the latter is more prevasive, the former is disregarded by even well-adjusted, fair people I know. But both exists, and is a consequence of patriarchy.
 
-.. _Quinnspiracy: http://www.reddit.com/r/pcgaming/comments/2e0oh6/depression_quest_scandal_psa/
+.. _Quinnspiracy: http://www.twitlonger.com/show/n_1s4nmr1
 .. _disadvantages men: http://honeybadgerbrigade.com/badgerfesto/
