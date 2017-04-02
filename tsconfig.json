@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"jsx": "react",
+		//stronger types
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"preserveConstEnums": true,
+		//rollup enforced
+		"noEmitHelpers": true,
+		"importHelpers": true,
+		"noResolve": false,
+		//more
+		"removeComments": true,
+		"sourceMap": true
+	},
+	"include": [
+		"src/**/*"
+	]
+}
