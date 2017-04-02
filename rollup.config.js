@@ -13,13 +13,20 @@ import postcssModules from 'postcss-modules'
 
 const cssExports = {}
 
-function getCSSExportDefinition(base, names) {
-	const name = camelcase(base)
+function formatCSSExportDefinition(name, classNames) {
 	return `\
 declare namespace ${name} {
-	${names.map(t => `const ${t}: string`).join('\n\t')}
+	${classNames.map(t => `const ${t}: string`).join('\n\t')}
 }
 export default ${name}`
+}
+
+function writeCSSExportDefinition(cssPath, classNames) {
+	const name = camelcase(cssPath.basename(id, '.css'))
+	const definition = formatCSSExportDefinition(name, classNames)
+	return new Promise((resolve, reject) => {
+		fs.writeFile(`${cssPath}.d.ts`, `${definition}\n`, e => e ? reject(e) : resolve())
+	})
 }
 
 export default {
@@ -32,9 +39,7 @@ export default {
 				autoprefixer(),
 				postcssModules({
 					getJSON(id, exportTokens) {
-						const d = getCSSExportDefinition(path.basename(id, '.css'), Object.keys(exportTokens))
-						fs.writeFile(`${id}.d.ts`, `${d}\n`, () => console.log(`${id}.d.ts written`))
-						
+						writeCSSExportDefinition(id, Object.keys(exportTokens)).then(() => console.log(`${id}.d.ts written`))
 						cssExports[id] = exportTokens
 					}
 				}),
