@@ -48,7 +48,7 @@ export default {
 		}),
 		typescript(),
 		nodeResolve(),
-		commonjs({
+		commonjs({  // https://github.com/rollup/rollup-plugin-commonjs/issues/185
 			namedExports: {
 				'node_modules/react/react.js': ['createElement', 'Component'],
 				'node_modules/react-dom/index.js': ['render'],
