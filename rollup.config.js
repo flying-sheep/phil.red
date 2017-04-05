@@ -13,13 +13,11 @@ import postcssModules from 'postcss-modules'
 
 const cssExports = {}
 
-function formatCSSExportDefinition(name, classNames) {
-	return `\
+const formatCSSExportDefinition = (name, classNames) => `\
 declare namespace ${name} {
 	${classNames.map(t => `const ${t}: string`).join('\n\t')}
 }
 export default ${name}`
-}
 
 function writeCSSExportDefinition(cssPath, classNames) {
 	const name = camelcase(path.basename(cssPath, '.css'))
