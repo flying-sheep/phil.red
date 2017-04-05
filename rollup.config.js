@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs   from 'fs'
 import path from 'path'
 
 import camelcase from 'camelcase'
@@ -22,7 +22,7 @@ export default ${name}`
 }
 
 function writeCSSExportDefinition(cssPath, classNames) {
-	const name = camelcase(cssPath.basename(id, '.css'))
+	const name = camelcase(path.basename(cssPath, '.css'))
 	const definition = formatCSSExportDefinition(name, classNames)
 	return new Promise((resolve, reject) => {
 		fs.writeFile(`${cssPath}.d.ts`, `${definition}\n`, e => e ? reject(e) : resolve())
