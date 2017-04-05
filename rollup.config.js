@@ -6,7 +6,7 @@ import camelcase from 'camelcase'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs    from 'rollup-plugin-commonjs'
 import typescript  from 'rollup-plugin-typescript2'
-import postcss     from 'rollup-plugin-postcss'
+import postcss     from 'rollup-plugin-postcss-export'
 
 import autoprefixer   from 'autoprefixer'
 import postcssModules from 'postcss-modules'
@@ -31,8 +31,10 @@ export default {
 	entry: 'src/index.tsx',
 	dest: 'dist/bundle.js',
 	format: 'iife',
+	sourceMap: true,
 	plugins: [
 		postcss({
+			export: 'dist/style.css',
 			plugins: [
 				autoprefixer(),
 				postcssModules({
