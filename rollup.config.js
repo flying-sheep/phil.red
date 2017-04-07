@@ -3,6 +3,7 @@ import path from 'path'
 
 import camelcase from 'camelcase'
 
+import replace     from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs    from 'rollup-plugin-commonjs'
 import typescript  from 'rollup-plugin-typescript2'
@@ -47,6 +48,9 @@ export default {
 			getExport(id) {
 				return cssExports[id]
 			},
+		}),
+		replace({
+			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
 		typescript(),
 		nodeResolve(),
