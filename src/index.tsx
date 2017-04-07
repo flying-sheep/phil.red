@@ -3,6 +3,6 @@ import * as ReactDOM from 'react-dom'
 
 import C from './components/C'
 
-document.addEventListener('DOMContentLoaded', e => {
-    ReactDOM.render(<C/>, document.querySelector('#main'))
+document.addEventListener('DOMContentLoaded', (_) => {
+	ReactDOM.render(<C/>, document.querySelector('#main'))
 })
