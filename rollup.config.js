@@ -9,7 +9,7 @@ import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
-import postcss from 'rollup-plugin-postcss-export'
+import postcss from 'rollup-plugin-postcss'
 
 import autoprefixer from 'autoprefixer'
 import postcssModules from 'postcss-modules'
@@ -37,7 +37,7 @@ export default {
 	sourceMap: true,
 	plugins: [
 		postcss({
-			export: 'dist/style.css',
+			extract: true,
 			plugins: [
 				autoprefixer(),
 				postcssModules({
