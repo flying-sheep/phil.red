@@ -1,4 +1,7 @@
-Before I have to relearn this again here the necessary ``tsconfig.json`` settings:
+Typescript Module Declarations
+==============================
+
+Before I have to relearn this again, here the necessary ``tsconfig.json`` settings:
 
 .. code:: typescript
 
