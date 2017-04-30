@@ -9,6 +9,7 @@
 		"noImplicitAny": true,
 		"strictNullChecks": true,
 		"preserveConstEnums": true,
+        "alwaysStrict": true,
 		//rollup enforced
 		"noEmitHelpers": true,
 		"importHelpers": true,
