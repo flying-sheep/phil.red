@@ -1,0 +1,149 @@
+====================
+Arch Linux KDE setup
+====================
+
+--------
+Packages
+--------
+
+Basics
+======
+- base
+- networkmanager
+- intel-ucode
+- nvidia
+- samsung-unified-driver
+
+Shell
+=====
+- zsh
+- vim
+- sudo (``visudo`` → ``:wheel …``)
+- openssh
+- prezto-git
+- ripgrep
+- mlocate
+- lesspipe (+ unzip, unrar, cabextract, p7zip, cdrkit, html2text)
+
+Devel
+=====
+- git
+- base-devel
+- pacaur
+- jshon
+- xdg-utils
+- pkgbuild-introspection
+- qtcreator (+ qmake-mimetypes)
+
+Others
+======
+- firefox
+- steam (+ lib32-nvidia-utils)
+
+KDE
+===
+Plasma & Basics
+---------------
+- plasma-meta
+- yakuake
+- kwalletmanager (+ ksshaskpass)
+- print-manager
+- kcharselect
+- kcolorchooser
+- kio-extras
+- octopi (and octopi-notifier, …)
+- pacmanlogviewer-qt5
+
+File Management
+---------------
+- kde-meta-kdebase
+- filelight
+- ark
+- kdf
+- dolphin-plugins
+
+Devel
+-----
+- kcachegrind
+- kompare
+- okteta
+
+Documents & Media
+---------
+- phonon-qt5-gstreamer (+ gst-plugins-base, gst-plugins-good, gst-plugins-bad)
+- gwenview
+- spectacle
+- kamera
+- skanlite
+- okular
+- dragon
+- kig
+- kmplot
+
+------
+Config
+------
+
+Kate
+====
+
+Add to ``~/.zshenv``::
+
+    export EDITOR=kate
+
+use ``sudoedit`` to edit files as root (with Kate).
+
+SSH
+===
+
+Uncomment the SSH line in the ``~/.zpreztorc``::
+
+    zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+
+Add to ``~/.zshenv``::
+
+    export SSH_ASKPASS='/usr/bin/ksshaskpass'
+
+If `sorin-ionescu/prezto#1320 <https://github.com/sorin-ionescu/prezto/issues/1320>` isn’t fixed,
+you need to add `</dev/null` after each ``ssh-add`` in ``/usr/lib/prezto/modules/ssh/init.zsh``
+
+
+Lesspipe
+========
+
+Add to ``~/.zshenv``::
+
+    export LESSOPEN='|lesspipe.sh %s'
+
+Fontconfig
+==========
+
+Link those configs::
+
+    sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
+    sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+
+And assign default fonts in ``/etc/fonts/local.conf``::
+
+    <?xml version="1.0"?>
+    <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+    <fontconfig>
+     <alias>
+      <family>serif</family>
+      <prefer><family>Noto Serif</family></prefer>
+     </alias>
+     <alias>
+      <family>sans-serif</family>
+      <prefer><family>Noto Sans</family></prefer>
+     </alias>
+     <alias>
+      <family>monospace</family>
+      <prefer><family>Hack</family></prefer>
+     </alias>
+     <!-- we don’t want this one to fc-match the wrong font -->
+     <alias>
+      <family>Arial</family>
+      <prefer><family>sans-serif</family></prefer>
+     </alias>
+    </fontconfig>
+    <!-- kate: space-indent on; indent-width 1; mixedindent off -->
