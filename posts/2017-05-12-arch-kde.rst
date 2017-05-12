@@ -42,18 +42,24 @@ Others
 
 KDE
 ===
-Plasma & Basics
----------------
+Plasma
+------
 - plasma-meta
 - plasma5-applets-eventcalendar
+- plasma5-applets-redshift-control
+
+Utilities & KCMs
+----------------
 - yakuake
 - kwalletmanager (+ ksshaskpass)
-- print-manager
 - kcharselect
 - kcolorchooser
-- kio-extras
 - octopi (and octopi-notifier, …)
 - pacmanlogviewer-qt5
+- print-manager
+- systemd-kcm
+- (kcm-pointing-devices-git): for laptops, as it has better touchpad support
+- kio-extras
 
 File Management
 ---------------
