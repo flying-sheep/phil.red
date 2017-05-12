@@ -45,6 +45,7 @@ KDE
 Plasma & Basics
 ---------------
 - plasma-meta
+- plasma5-applets-eventcalendar
 - yakuake
 - kwalletmanager (+ ksshaskpass)
 - print-manager
@@ -79,11 +80,6 @@ Documents & Media
 - dragon
 - kig
 - kmplot
-
-PIM
----
-- kdepim-addons
-- korganizer
 
 ------
 Config
@@ -167,6 +163,4 @@ And assign default fonts in ``/etc/fonts/local.conf``:
 
 Plasma Calendar
 ===============
-This is what ``kdepim-addons`` and ``korganizer`` is for. I guess you can remove the latter (and only keep ``kdepim-runtime``) after using it to setup your google calendar sync.
-
-Unfortunately there seems to be a `bug <https://bugs.archlinux.org/task/54019>`_ and I can’t add the Akonadi google resource at the moment.
+The builtin version would use ``kdepim-addons`` and ``korganizer``, but ``plasma5-applets-eventcalendar`` has less overhead
