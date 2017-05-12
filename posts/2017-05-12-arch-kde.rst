@@ -30,6 +30,7 @@ Devel
 - git
 - base-devel
 - pacaur
+- reflector-timer
 - jshon
 - xdg-utils
 - pkgbuild-introspection
@@ -171,3 +172,11 @@ And assign default fonts in ``/etc/fonts/local.conf``:
 Plasma Calendar
 ===============
 The builtin version would use ``kdepim-addons`` and ``korganizer``, but ``plasma5-applets-eventcalendar`` has less overhead
+
+Systemd
+=======
+There are only few services that have to be enabled::
+
+    sudo systemctl enable sddm
+    sudo systemctl enable org.cups.cupsd && sudo systemctl start org.cups.cupsd
+    systemctl enable reflector.timer && systemctl start reflector.timer
