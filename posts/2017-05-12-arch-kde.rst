@@ -9,7 +9,7 @@ Packages
 Basics
 ======
 - base
-- networkmanager
+- networkmanager (+ networkmanager-openconnect)
 - intel-ucode
 - nvidia
 - samsung-unified-driver
