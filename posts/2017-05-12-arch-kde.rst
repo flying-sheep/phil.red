@@ -80,6 +80,11 @@ Documents & Media
 - kig
 - kmplot
 
+PIM
+---
+- kdepim-addons
+- korganizer
+
 ------
 Config
 ------
@@ -159,3 +164,9 @@ And assign default fonts in ``/etc/fonts/local.conf``:
      </alias>
     </fontconfig>
     <!-- kate: space-indent on; indent-width 1; mixedindent off -->
+
+Plasma Calendar
+===============
+This is what ``kdepim-addons`` and ``korganizer`` is for. I guess you can remove the latter (and only keep ``kdepim-runtime``) after using it to setup your google calendar sync.
+
+Unfortunately there seems to be a `bug <https://bugs.archlinux.org/task/54019>`_ and I can’t add the Akonadi google resource at the moment.
