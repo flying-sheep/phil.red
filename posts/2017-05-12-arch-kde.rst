@@ -170,13 +170,26 @@ And assign default fonts in ``/etc/fonts/local.conf``:
     </fontconfig>
     <!-- kate: space-indent on; indent-width 1; mixedindent off -->
 
+Cursor
+======
+Make sure the default icon theme inherits from your cursor theme:
+
+.. code:: zsh
+
+    cat <'EOF' >/usr/share/icons/default/index.theme
+    [Icon Theme]
+    Inherits=breeze_cursors
+    EOF
+
 Plasma Calendar
 ===============
 The builtin version would use ``kdepim-addons`` and ``korganizer``, but ``plasma5-applets-eventcalendar`` has less overhead
 
 Systemd
 =======
-There are only few services that have to be enabled::
+There are only few services that have to be enabled:
+
+.. code:: zsh
 
     sudo systemctl enable sddm
     sudo systemctl enable org.cups.cupsd && sudo systemctl start org.cups.cupsd
