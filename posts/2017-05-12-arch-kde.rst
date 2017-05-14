@@ -38,7 +38,7 @@ Devel
 
 Others
 ======
-- firefox
+- firefox (or firefox-kde-opensuse + kmozillahelper-kf5)
 - rambox-bin
 - steam (+ lib32-nvidia-utils)
 - otf-fira-code or ttf-iosevka (the latter has variants)
