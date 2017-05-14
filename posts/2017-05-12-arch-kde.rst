@@ -38,7 +38,7 @@ Devel
 
 Others
 ======
-- firefox (or firefox-kde-opensuse + kmozillahelper + libdbusmenu-gtk3-ubuntu)
+- firefox (or firefox-kde-opensuse + kmozillahelper + libdbusmenu-gtk3)
 - rambox-bin
 - steam (+ lib32-nvidia-utils)
 - otf-fira-code or ttf-iosevka (the latter has variants)
@@ -57,6 +57,9 @@ Utilities & KCMs
 - kwalletmanager (+ ksshaskpass)
 - kcharselect
 - kcolorchooser
+- kdialog
+- khelpcenter
+- keditbookmarks
 - octopi (and octopi-notifier, …)
 - pacmanlogviewer-qt5
 - print-manager
@@ -66,17 +69,19 @@ Utilities & KCMs
 
 File Management
 ---------------
-- kde-meta-kdebase
+- dolphin
+- dolphin-plugins
 - filelight
 - ark
 - kdf
-- dolphin-plugins
 
 Devel
 -----
 - kcachegrind
 - kompare
 - okteta
+- konsole
+- kate
 
 Documents & Media
 ---------
