@@ -50,6 +50,7 @@ Plasma
 - plasma-meta
 - plasma5-applets-eventcalendar
 - plasma5-applets-redshift-control
+- kdeconnect
 
 Utilities & KCMs
 ----------------
