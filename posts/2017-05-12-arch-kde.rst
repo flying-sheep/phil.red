@@ -38,7 +38,7 @@ Devel
 
 Others
 ======
-- firefox (or firefox-kde-opensuse + kmozillahelper-kf5)
+- firefox (or firefox-kde-opensuse + kmozillahelper + libdbusmenu-gtk3-ubuntu)
 - rambox-bin
 - steam (+ lib32-nvidia-utils)
 - otf-fira-code or ttf-iosevka (the latter has variants)
@@ -132,6 +132,17 @@ Add to ``~/.zshenv``:
 .. code:: zsh
 
     export LESSOPEN='|lesspipe.sh %s'
+
+GTK 3
+=====
+
+Add to ``~/.config/gtk-3.0/settings.ini``
+
+.. code:: ini
+
+    [Settings]
+    gtk-primary-button-warps-slider=false
+    gtk-shell-shows-menubar=1
 
 Fontconfig
 ==========
