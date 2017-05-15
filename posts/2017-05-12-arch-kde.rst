@@ -25,6 +25,7 @@ Shell
 - mlocate
 - thefuck
 - lesspipe (+ unzip, unrar, cabextract, p7zip, cdrkit, html2text)
+- hdparm
 
 Devel
 =====
@@ -104,7 +105,6 @@ Config
 
 Kate
 ====
-
 Add to ``~/.zshenv``:
 
 .. code:: zsh
@@ -113,9 +113,12 @@ Add to ``~/.zshenv``:
 
 use ``sudoedit`` to edit files as root (with Kate).
 
+HD standby
+==========
+Time to spin down those old-fashined HDDs, `using a udev rule or oneshot service <https://wiki.archlinux.org/index.php/Hdparm#Persistent_configuration_using_udev_rule>`_:
+
 SSH
 ===
-
 Uncomment the SSH line in the ``~/.zpreztorc``:
 
 .. code:: zsh
@@ -134,7 +137,6 @@ you need to add ``</dev/null`` after each ``ssh-add`` in ``/usr/lib/prezto/modul
 
 Lesspipe
 ========
-
 Add to ``~/.zshenv``:
 
 .. code:: zsh
@@ -143,7 +145,6 @@ Add to ``~/.zshenv``:
 
 GTK 3
 =====
-
 Add to ``~/.config/gtk-3.0/settings.ini``
 
 .. code:: ini
@@ -154,7 +155,6 @@ Add to ``~/.config/gtk-3.0/settings.ini``
 
 Fontconfig
 ==========
-
 Link those configs:
 
 .. code:: zsh
