@@ -23,6 +23,7 @@ Shell
 - prezto-git
 - ripgrep
 - mlocate
+- thefuck
 - lesspipe (+ unzip, unrar, cabextract, p7zip, cdrkit, html2text)
 
 Devel
@@ -75,6 +76,7 @@ File Management
 - filelight
 - ark
 - kdf
+- partitionmanager
 
 Devel
 -----
