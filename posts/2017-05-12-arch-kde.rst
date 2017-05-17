@@ -24,6 +24,7 @@ Shell
 - ripgrep
 - mlocate
 - thefuck
+- machma (or parallel)
 - lesspipe (+ unzip, unrar, cabextract, p7zip, cdrkit, html2text)
 - hdparm
 
@@ -33,7 +34,7 @@ Devel
 - base-devel
 - pacaur
 - reflector-timer
-- jshon
+- jq (or jshon)
 - xdg-utils
 - pkgbuild-introspection
 - qtcreator (+ qmake-mimetypes)
@@ -88,7 +89,7 @@ Devel
 - kate
 
 Documents & Media
----------
+-----------------
 - phonon-qt5-gstreamer (+ gst-plugins-base, gst-plugins-good, gst-plugins-bad)
 - gwenview
 - spectacle
@@ -98,6 +99,13 @@ Documents & Media
 - dragon
 - kig
 - kmplot
+
+Python
+------
+- PyCharm
+- ttystatus
+- tqdm
+- jupyter (+ jupyter-notebook, jupyter_console, jupyter_nbconvert, …)
 
 ------
 Config
