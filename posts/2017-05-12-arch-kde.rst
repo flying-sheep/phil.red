@@ -163,6 +163,8 @@ Add to ``~/.config/gtk-3.0/settings.ini``
 
 Fontconfig
 ==========
+Something probably depended on `ttf-font` and pulled in `ttf-dejavu`. Remove it, KDE pulled in Noto.
+
 Link those configs:
 
 .. code:: zsh
