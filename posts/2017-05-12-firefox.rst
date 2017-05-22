@@ -1,0 +1,39 @@
+Hidden firefox tweaks
+=====================
+
+Enable tracking protection for all devices: ``privacy.trackingprotection.enabled = true`` ``extensions.e10sBlockedByAddons = false``
+
+Don’t sync which addons are active per device: ``services.sync.addons.ignoreUserEnabledChanges = true``
+
+Force-enable e10s: ``browser.tabs.remote.force-enable = true``
+
+Good addons
+===========
+Formerly
+--------
+- Colorblind design (defunct, no e10s)
+- Lazarus Form recovery (defunct, no e10s)
+- Markdown here (no e10s)
+- MozRepl (no e10s)
+- Regex find (no e10s)
+- Tab in Textarea (defunct, no e10s)
+- Terms of Service; Didn’t read (no e10s)
+
+Still
+-----
+- BackTrack Tab History
+- JSONView
+- Greasemonkey
+- MathML Fonts
+- Media Keys
+- Native MathML
+- React Devtools
+- Reddit Enhancement Suite
+- Saved Password editor
+- searchlinkfix
+- Stylish
+- tabkit
+- uBlock Origin
+- UnloadTabs
+- Unity Launcher API Addon e10s
+- xclear
