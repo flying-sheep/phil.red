@@ -45,6 +45,7 @@ Others
 - rambox-bin
 - steam (+ lib32-nvidia-utils)
 - otf-fira-code or ttf-iosevka (the latter has variants)
+- polkit-use-wheel-group
 
 KDE
 ===
