@@ -29,9 +29,9 @@ export default {
 		}),
 		typescript(),
 		nodeResolve(),
-		commonjs({  // https://github.com/rollup/rollup-plugin-commonjs/issues/185
+		commonjs({ // https://github.com/rollup/rollup-plugin-commonjs/issues/185
 			namedExports: {
-				'node_modules/react/index.js': ['createElement', 'Component'],
+				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],
 				'node_modules/react-dom/index.js': ['render'],
 			},
 		}),

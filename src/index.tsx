@@ -1,8 +1,16 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-import C from './components/C'
+import App from './App'
 
-document.addEventListener('DOMContentLoaded', (_) => {
-	ReactDOM.render(<C/>, document.querySelector('#main'))
+document.addEventListener('DOMContentLoaded', () => {
+	ReactDOM.render(
+		<Router>
+			<div>
+				<App/>
+			</div>
+		</Router>,
+		document.querySelector('#main'),
+	)
 })
