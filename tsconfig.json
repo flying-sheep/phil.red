@@ -1,15 +1,13 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
+		"module": "ES2015",
 		"moduleResolution": "node",
 		"target": "ES2017",
-		"lib": ["ES2017", "DOM", "DOM.Iterable"],
+		"lib": ["es2017", "dom", "dom.iterable"],
 		"jsx": "react",
 		//stronger types
-		"noImplicitAny": true,
-		"strictNullChecks": true,
+		"strict": true,
 		"preserveConstEnums": true,
-        "alwaysStrict": true,
 		//rollup enforced
 		"noEmitHelpers": true,
 		"importHelpers": true,
