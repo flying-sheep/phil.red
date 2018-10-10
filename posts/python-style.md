@@ -7,7 +7,7 @@ Python Style
 Python 3.3+
 -----------
 When writing new libraries and tools, ignore Python 2.
-Consider a port only if someone creates a feature request or otherwise asks you for i, but require good reasons.
+Consider a port only if someone creates a feature request or otherwise asks you for it, but require good reasons.
 
 This way, you won’t have to deal with `Unicode(En|De)codeError`s, and are able to use all the new features.
 Also modules have to avoid circular dependencies per default by forcing you to use `from .submodule import name`.
@@ -23,9 +23,9 @@ Idiomaticity
 * `itertools`
 * `functools`
 
-Expression handling
+Exception handling
 -------------------
-Define your own if no standard one is suited, and only catch the most specific ones. Avoid Pokémon expression handling.
+Define your own if no standard one is suited, and only catch the most specific ones. Avoid Pokémon exception handling.
 
 Tabs, not spaces
 ----------------
