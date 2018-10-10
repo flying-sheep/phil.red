@@ -13,7 +13,7 @@ export default {
 	output: {
 		file: 'dist/bundle.js',
 		format: 'iife',
-		sourceMap: true,
+		sourcemap: true,
 	},
 	plugins: [
 		postcss({
@@ -26,6 +26,7 @@ export default {
 		}),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
+			'process.env.MUI_SUPPRESS_DEPRECATION_WARNINGS': JSON.stringify(false),
 		}),
 		typescript(),
 		nodeResolve(),

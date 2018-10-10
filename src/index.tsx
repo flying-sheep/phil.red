@@ -7,9 +7,7 @@ import App from './App'
 document.addEventListener('DOMContentLoaded', () => {
 	ReactDOM.render(
 		<Router>
-			<div>
-				<App/>
-			</div>
+			<><App/></>
 		</Router>,
 		document.querySelector('#main'),
 	)
