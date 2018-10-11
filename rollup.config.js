@@ -5,6 +5,7 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import typescript from 'rollup-plugin-typescript2'
 import postcss from 'rollup-plugin-postcss-modules'
+import serve from 'rollup-plugin-serve'
 
 import autoprefixer from 'autoprefixer'
 
@@ -35,6 +36,10 @@ export default {
 				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],
 				'node_modules/react-dom/index.js': ['render'],
 			},
+		}),
+		serve({
+			contentBase: '.',
+			historyApiFallback: true,
 		}),
 	],
 }
