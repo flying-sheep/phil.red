@@ -1,5 +1,8 @@
 import * as React from 'react'
-import { Route, Switch, Link, RouteComponentProps } from 'react-router-dom'
+import {
+	RouteComponentProps,
+	Route, Switch, Link,
+} from 'react-router-dom'
 
 import Post from './Post'
 

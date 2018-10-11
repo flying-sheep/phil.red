@@ -1,5 +1,9 @@
 import * as React from 'react'
-import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom'
+import {
+	RouteComponentProps,
+	Route, Switch,
+	withRouter,
+} from 'react-router-dom'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import AppBar from '@material-ui/core/Toolbar'

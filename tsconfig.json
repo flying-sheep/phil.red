@@ -8,6 +8,7 @@
 		//stronger types
 		"strict": true,
 		"preserveConstEnums": true,
+		"noUnusedLocals": true,
 		//rollup enforced
 		"noEmitHelpers": true,
 		"importHelpers": true,
