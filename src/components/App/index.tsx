@@ -10,7 +10,9 @@ import AppBar from '@material-ui/core/Toolbar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 
-import Blog from './components/Blog'
+import Blog from '../Blog'
+
+import styles from './style.css'
 
 
 function App({ location, history }: RouteComponentProps) {
@@ -24,11 +26,13 @@ function App({ location, history }: RouteComponentProps) {
 					<Tab label="Blog" value="/blog"/>
 				</Tabs>
 			</AppBar>
-			<Switch>
-				<Route path="/" exact component={() => <span>Home</span>}/>
-				<Route path="/blog" component={Blog}/>
-				<Route render={() => <span>No Match</span>}/>
-			</Switch>
+			<main className={styles.layout}>
+				<Switch>
+					<Route path="/" exact component={() => <span>Home</span>}/>
+					<Route path="/blog" component={Blog}/>
+					<Route render={() => <span>No Match</span>}/>
+				</Switch>
+			</main>
 		</>
 	)
 }

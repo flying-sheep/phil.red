@@ -1,0 +1,9 @@
+:root {
+    --spacing-unit: 8px;
+}
+
+.layout {
+    width: auto;
+    margin-left:  calc(var(--spacing-unit) * 3);
+    margin-right: calc(var(--spacing-unit) * 3);
+}
