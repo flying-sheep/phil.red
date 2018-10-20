@@ -3,6 +3,8 @@
 import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import builtins from 'rollup-plugin-node-builtins'
+import json from 'rollup-plugin-json'
 import typescript from '@wessberg/rollup-plugin-ts'
 import postcss from 'rollup-plugin-postcss-modules'
 import serve from 'rollup-plugin-serve'
@@ -40,6 +42,8 @@ export default {
 				'node_modules/@material-ui/core/styles/index.js': ['withStyles', 'createStyles'],
 			},
 		}),
+		builtins(),
+		json(),
 		textdir({
 			include: '*.@(md|rst)',
 		}),

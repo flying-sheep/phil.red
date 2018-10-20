@@ -8,11 +8,13 @@ import Post from './Post'
 import posts from '../../posts'
 
 function Index({ match }: RouteComponentProps) {
+	const titles = Object.keys(posts)
+		.map(filename => filename.replace(/\.[^./]+$/, ''))
 	return (
 		<ul>
-			{Object.keys(posts).map(filename => (
+			{titles.map(title => (
 				<li>
-					<Link to={`${match.url}/example`}>{filename}</Link>
+					<Link to={`${match.url}/${title}`}>{title}</Link>
 				</li>
 			))}
 		</ul>

@@ -24,20 +24,24 @@ export default function textdir(config = {}) {
 	}
 	const patterns = include.concat(exclude.map(pattern => `!${pattern}`))
 	
+	async function doGlob(id) {
+		const stats = await fs.stat(id)
+		if (!stats.isDirectory()) return []
+		const paths = await glob(patterns, { realpath: true, cwd: id })
+		return paths
+	}
+	
 	return {
 		name: 'textdir',
-		async resolveId(importee, importer) {
+		async resolveId(id, importer) {
 			const rel = importer === undefined
-				? importee
-				: path.join(path.dirname(importer), importee)
-			const stats = await fs.stat(rel)
-			if (stats.isDirectory()) return rel
-			return null
+				? id
+				: path.join(path.dirname(importer), id)
+			if (doGlob(rel).length === 0) return null
+			return rel
 		},
 		async load(id) {
-			const stats = await fs.stat(id)
-			if (!stats.isDirectory()) return null
-			const paths = await glob(patterns, { realpath: true, cwd: id })
+			const paths = await doGlob(id)
 			if (paths.length === 0) return null
 			const contents = await Promise.all(paths.map(
 				p => fs.readFile(p, { encoding: 'utf-8' }),
