@@ -5,10 +5,17 @@ import {
 } from 'react-router-dom'
 
 import Post from './Post'
+import posts from '../../posts'
 
 function Index({ match }: RouteComponentProps) {
 	return (
-		<Link to={`${match.url}/example`}>Example</Link>
+		<ul>
+			{Object.keys(posts).map(filename => (
+				<li>
+					<Link to={`${match.url}/example`}>{filename}</Link>
+				</li>
+			))}
+		</ul>
 	)
 }
 

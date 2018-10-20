@@ -3,11 +3,13 @@
 import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
-import typescript from 'rollup-plugin-typescript2'
+import typescript from '@wessberg/rollup-plugin-ts'
 import postcss from 'rollup-plugin-postcss-modules'
 import serve from 'rollup-plugin-serve'
 
 import autoprefixer from 'autoprefixer'
+
+import textdir from './rollup-plugin-textdir.js'
 
 export default {
 	input: 'src/index.tsx',
@@ -37,6 +39,9 @@ export default {
 				'node_modules/react-dom/index.js': ['render'],
 				'node_modules/@material-ui/core/styles/index.js': ['withStyles', 'createStyles'],
 			},
+		}),
+		textdir({
+			include: '*.@(md|rst)',
 		}),
 		serve({
 			contentBase: '.',
