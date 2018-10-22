@@ -1,5 +1,5 @@
 import * as React from 'react'
-
+import { Typography } from '@material-ui/core'
 import restructured, { Node, NodeType } from 'restructured'
 
 
@@ -15,16 +15,16 @@ const converters: RSTConverters = {
 		return <section>{convertChildren(node)}</section>
 	},
 	title(node: Node) {
-		return <h1>{convertChildren(node)}</h1>
+		return <Typography variant="h6">{convertChildren(node)}</Typography>
 	},
 	paragraph(node: Node) {
-		return <p>{convertChildren(node)}</p>
+		return <Typography paragraph>{convertChildren(node)}</Typography>
 	},
 	text(node: Node) {
 		return <>{node.value}</>
 	},
 	literal(node: Node) {
-		return <>{convertChildren(node)}</>
+		return <code>{convertChildren(node)}</code>
 	},
 	directive(node: Node) {
 		if (node.directive === 'code') {
@@ -55,4 +55,5 @@ function convertChildren(node: Node): React.ReactElement<{}>[] {
 export default function rstConvert(code: string): React.ReactElement<{}> {
 	const root = restructured.parse(code)
 	return <>{convert(root)}</>
+	// return <pre>{JSON.stringify(root, undefined, '\t')}</pre>
 }

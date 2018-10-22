@@ -39,7 +39,16 @@ export default {
 			namedExports: {
 				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],
 				'node_modules/react-dom/index.js': ['render'],
-				'node_modules/@material-ui/core/styles/index.js': ['withStyles', 'createStyles'],
+				'node_modules/@material-ui/core/styles/index.js': [
+					'MuiThemeProvider',
+					'createGenerateClassName',
+					'createMuiTheme',
+					'withTheme',
+					'withStyles',
+					'createStyles',
+					'jssPreset',
+				],
+				'node_modules/@material-ui/core/Modal/index.js': ['ModalManager'],
 			},
 		}),
 		builtins(),

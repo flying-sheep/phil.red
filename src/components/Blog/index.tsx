@@ -1,23 +1,24 @@
 import * as React from 'react'
 import {
 	RouteComponentProps,
-	Route, Switch, Link,
+	Route, Switch,
 } from 'react-router-dom'
+import { List } from '@material-ui/core'
 
 import Post from './Post'
 import posts from '../../posts'
+import ListItemLink from '../ListItemLink'
+
 
 function Index({ match }: RouteComponentProps) {
 	const titles = Object.keys(posts)
 		.map(filename => filename.replace(/\.[^./]+$/, ''))
 	return (
-		<ul>
+		<List component="nav">
 			{titles.map(title => (
-				<li>
-					<Link to={`${match.url}/${title}`}>{title}</Link>
-				</li>
+				<ListItemLink to={`${match.url}/${title}`} primary={title}/>
 			))}
-		</ul>
+		</List>
 	)
 }
 
