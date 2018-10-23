@@ -1,6 +1,10 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
-import restructured, { Node, NodeType } from 'restructured'
+import { Node, NodeType } from 'restructured'
+
+import Markup from './Markup'
+import { ASTError } from './ASTError'
+import rstConvert from '../../converters/rst'
 
 
 type RSTConverters = {
@@ -52,8 +56,22 @@ function convertChildren(node: Node): React.ReactElement<{}>[] {
 	return (node.children || []).map(convert)
 }
 
-export default function rstConvert(code: string): React.ReactElement<{}> {
-	const root = restructured.parse(code)
-	return <>{convert(root)}</>
-	// return <pre>{JSON.stringify(root, undefined, '\t')}</pre>
+export default class ReStructuredText extends Markup<Node> {
+	getAST(): Node {
+		return rstConvert(this.props.code)
+	}
+	
+	getTitle(): string {
+		const body = this.ast.children
+		if (body === undefined || body[0].type !== 'section') throw new ASTError('No section!', body && body[0])
+		const section = body[0].children
+		if (section === undefined || section[0].type !== 'title') throw new ASTError('No title!', section && section[0])
+		const title = section[0].children
+		if (title === undefined || title[0].type !== 'text') throw new ASTError('Empty title!', title && title[0])
+		return title[0].value as string
+	}
+	
+	renderPost(): React.ReactNode {
+		return convert(this.ast)
+	}
 }

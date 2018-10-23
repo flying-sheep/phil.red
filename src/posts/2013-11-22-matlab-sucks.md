@@ -1,3 +1,6 @@
+MATLAB sucks
+============
+
 yeah, so to make MATLAB usable on linux (if you call that “usable” ;)) you’ll have to do this:
 
 install it

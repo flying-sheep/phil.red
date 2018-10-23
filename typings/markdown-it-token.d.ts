@@ -1,5 +1,3 @@
-/* eslint no-useless-constructor: 0 */
-
 declare module 'markdown-it/lib/token' {
 	import * as MarkdownIt from 'markdown-it'
 	
@@ -10,5 +8,6 @@ declare module 'markdown-it/lib/token' {
 	interface Token extends MarkdownIt.Token {
 	}
 	
+	export type TokenType = 'inline' | 'text' | 'paragraph' | 'heading' | 'hardbreak' | 'code_inline' | 'fence'
 	export default Token
 }

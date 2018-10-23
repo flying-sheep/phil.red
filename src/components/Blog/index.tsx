@@ -11,22 +11,30 @@ import ListItemLink from '../ListItemLink'
 
 
 function Index({ match }: RouteComponentProps) {
-	const titles = Object.keys(posts)
-		.map(filename => filename.replace(/\.[^./]+$/, ''))
 	return (
 		<List component="nav">
-			{titles.map(title => (
-				<ListItemLink to={`${match.url}/${title}`} primary={title}/>
-			))}
+			{Object.keys(posts).map((filename) => {
+				const title = filename.replace(/\.[^./]+$/, '')
+				return (
+					<ListItemLink
+						to={`${match.url}/${title}`}
+						primary={<Post id={title} justTitle/>}
+					/>
+				)
+			})}
 		</List>
 	)
+}
+
+function RoutedPost({ match }: RouteComponentProps<{id: string}>) {
+	return <Post id={match.params.id}/>
 }
 
 export default function Blog({ match }: RouteComponentProps) {
 	return (
 		<Switch>
 			<Route path={`${match.url}/`} exact component={Index}/>
-			<Route path={`${match.url}/:id`} component={Post}/>
+			<Route path={`${match.url}/:id`} component={RoutedPost}/>
 		</Switch>
 	)
 }

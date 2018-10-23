@@ -33,7 +33,7 @@
 		"autoprefixer": "^9.1.5",
 		"eslint": "^5.6.1",
 		"eslint-config-airbnb": "^17.1.0",
-		"eslint-config-flying-sheep": "^5.1.0",
+		"eslint-config-flying-sheep": "^5.2.0",
 		"eslint-plugin-import": "^2.8.0",
 		"eslint-plugin-jsx-a11y": "^6.1.2",
 		"eslint-plugin-no-foreach": "^1.0.0",

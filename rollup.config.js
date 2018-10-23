@@ -13,6 +13,8 @@ import autoprefixer from 'autoprefixer'
 
 import textdir from './rollup-plugin-textdir.js'
 
+const NODE_ENV = process.env.NODE_ENV || 'development'
+
 export default {
 	input: 'src/index.tsx',
 	output: {
@@ -30,7 +32,7 @@ export default {
 			],
 		}),
 		replace({
-			'process.env.NODE_ENV': JSON.stringify('production'),
+			'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
 			'process.env.MUI_SUPPRESS_DEPRECATION_WARNINGS': JSON.stringify(false),
 		}),
 		typescript(),
