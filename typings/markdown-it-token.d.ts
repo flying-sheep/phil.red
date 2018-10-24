@@ -13,6 +13,7 @@ declare module 'markdown-it/lib/token' {
 		'text' |
 		'paragraph' |
 		'heading' |
+		'link' |
 		'hardbreak' |
 		'softbreak' |
 		'code_inline' |

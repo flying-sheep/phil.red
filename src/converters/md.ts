@@ -6,23 +6,30 @@ import { rsplit } from '../utils'
 
 const NO_END = Symbol('no end')
 
-function tokens2ast(
+function* tokens2ast(
 	tokens: Token[] | IterableIterator<Token>,
-	root: Token = new Token('inline', '', 0),
 	end: string | Symbol = NO_END,
-): Token {
+): IterableIterator<Token> {
 	const tokenIter = tokens[Symbol.iterator]()
 	for (const token of tokenIter) {
-		if (end !== NO_END && token.type === `${end}_close`) break
-		// eslint-disable-next-line no-param-reassign
-		if (root.children === null) root.children = []
+		if (end !== NO_END && token.type === `${end}_close`) {
+			// console.log(end, 'close')
+			break
+		}
 		const [openType, open] = rsplit(token.type, '_', 2)
-		const node = open === 'open'
-			? tokens2ast(tokenIter, new Token(openType, token.tag, 0), openType)
-			: token
-		root.children.push(node)
+		// console.log(openType, open, token.content)
+		if (open === 'open') {
+			const synth = new Token(openType, token.tag, 0)
+			synth.attrs = token.attrs
+			synth.children = Array.from(tokens2ast(tokenIter, openType))
+			yield synth
+		} else if (token.type === 'inline') {
+			token.children = Array.from(tokens2ast(token.children))
+			yield token
+		} else {
+			yield token
+		}
 	}
-	return root
 }
 
 export default function mdConvert(code: string): Token {
@@ -30,5 +37,7 @@ export default function mdConvert(code: string): Token {
 	const Mdi = (MarkdownIt as any).default
 	const md: MarkdownIt.MarkdownIt = new Mdi('commonmark', { breaks: false })
 	const tokens = md.parse(code, {})
-	return tokens2ast(tokens)
+	const root = new Token('inline', '', 0)
+	root.children = Array.from(tokens2ast(tokens))
+	return root
 }

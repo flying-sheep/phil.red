@@ -25,6 +25,10 @@ const converters: MDConverters = {
 	heading(token: Token) {
 		return <Typography variant={token.tag as ThemeStyle}>{convertChildren(token)}</Typography>
 	},
+	link(token: Token) {
+		const hrefs = token.attrs.filter(([a, v]) => a === 'href')
+		return <a href={hrefs[0][1]}>{convertChildren(token)}</a>
+	},
 	hardbreak(token: Token) {
 		return <br/>
 	},
