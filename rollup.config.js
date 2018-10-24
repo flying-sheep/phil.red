@@ -36,7 +36,9 @@ export default {
 			'process.env.MUI_SUPPRESS_DEPRECATION_WARNINGS': JSON.stringify(false),
 		}),
 		typescript(),
-		nodeResolve(),
+		nodeResolve({
+			preferBuiltins: true,
+		}),
 		commonjs({ // https://github.com/rollup/rollup-plugin-commonjs/issues/185
 			namedExports: {
 				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],

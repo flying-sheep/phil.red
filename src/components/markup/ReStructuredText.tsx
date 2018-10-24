@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
+import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 import { Node, NodeType } from 'restructured'
 
 import Markup from './Markup'
@@ -8,52 +9,57 @@ import rstConvert from '../../converters/rst'
 
 
 type RSTConverters = {
-	[ T in NodeType ]: (node: Node) => React.ReactElement<{}>
+	[ T in NodeType ]: (node: Node, level: number) => React.ReactNode
 }
 
 const converters: RSTConverters = {
-	document(node: Node) {
-		return <>{convertChildren(node)}</>
+	document(node: Node, level: number) {
+		return <>{convertChildren(node, level)}</>
 	},
-	section(node: Node) {
-		return <section>{convertChildren(node)}</section>
+	section(node: Node, level: number) {
+		return <section>{convertChildren(node, level + 1)}</section>
 	},
-	title(node: Node) {
-		return <Typography variant="h6">{convertChildren(node)}</Typography>
+	title(node: Node, level: number) {
+		if (level < 1) return `Header with level ${level} < 1`
+		const hLevel = Math.min(level, 6)
+		return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
 	},
-	paragraph(node: Node) {
-		return <Typography paragraph>{convertChildren(node)}</Typography>
+	paragraph(node: Node, level: number) {
+		return <Typography paragraph>{convertChildren(node, level)}</Typography>
 	},
-	text(node: Node) {
+	text(node: Node, level: number) {
 		return <>{node.value}</>
 	},
-	literal(node: Node) {
-		return <code>{convertChildren(node)}</code>
+	literal(node: Node, level: number) {
+		return <code>{convertChildren(node, level)}</code>
 	},
-	directive(node: Node) {
+	emphasis(node: Node, level: number) {
+		return <em>{convertChildren(node, level)}</em>
+	},
+	directive(node: Node, level: number) {
 		if (node.directive === 'code') {
-			return <pre><code>{convertChildren(node)}</code></pre>
+			return <pre><code>{convertChildren(node, level)}</code></pre>
 		}
 		return <code>{`Unknown directive ${node.directive}: ${JSON.stringify(node)}`}</code>
 	},
-	bullet_list(node: Node) {
-		return <ul className={node.bullet}>{convertChildren(node)}</ul>
+	bullet_list(node: Node, level: number) {
+		return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
 	},
-	list_item(node: Node) {
-		return <li>{convertChildren(node)}</li>
+	list_item(node: Node, level: number) {
+		return <li>{convertChildren(node, level)}</li>
 	},
 }
 
-function convert(node: Node): React.ReactElement<{}> {
+function convert(node: Node, level: number): React.ReactNode {
 	const converter = converters[node.type]
 	if (converter === undefined) {
-		return <>{JSON.stringify(node)}</>
+		return JSON.stringify(node)
 	}
-	return converter(node)
+	return converter(node, level)
 }
 
-function convertChildren(node: Node): React.ReactElement<{}>[] {
-	return (node.children || []).map(convert)
+function convertChildren(node: Node, level: number): React.ReactNode[] {
+	return (node.children || []).map(c => convert(c, level))
 }
 
 export default class ReStructuredText extends Markup<Node> {
@@ -72,6 +78,6 @@ export default class ReStructuredText extends Markup<Node> {
 	}
 	
 	renderPost(): React.ReactNode {
-		return convert(this.ast)
+		return convert(this.ast, 0)
 	}
 }

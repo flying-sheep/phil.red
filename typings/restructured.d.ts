@@ -1,5 +1,16 @@
 declare module 'restructured' {
-    export type NodeType = 'document' | 'section' | 'title' | 'paragraph' | 'text' | 'literal' | 'directive' | 'bullet_list' | 'list_item'
+    export type NodeType = (
+        'document' |
+        'section' |
+        'title' |
+        'paragraph' |
+        'text' |
+        'literal' |
+        'emphasis' |
+        'directive' |
+        'bullet_list' |
+        'list_item'
+    )
     export interface Node {
         type: NodeType
         children?: Node[]

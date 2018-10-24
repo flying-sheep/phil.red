@@ -9,15 +9,15 @@ import mdConvert from '../../converters/md'
 
 
 type MDConverters = {
-	[ T in TokenType ]: (token: Token) => React.ReactElement<{}>
+	[ T in TokenType ]: (token: Token) => React.ReactNode
 }
 
 const converters: MDConverters = {
 	inline(token: Token) {
-		return <>{convertChildren(token)}</>
+		return convertChildren(token)
 	},
 	text(token: Token) {
-		return <>{token.content}</>
+		return token.content
 	},
 	paragraph(token: Token) {
 		return <Typography paragraph>{convertChildren(token)}</Typography>
@@ -26,7 +26,10 @@ const converters: MDConverters = {
 		return <Typography variant={token.tag as ThemeStyle}>{convertChildren(token)}</Typography>
 	},
 	hardbreak(token: Token) {
-		return React.createElement(token.tag)
+		return <br/>
+	},
+	softbreak(token: Token) {
+		return null
 	},
 	code_inline(token: Token) {
 		return <code>{token.content}</code>
@@ -36,15 +39,15 @@ const converters: MDConverters = {
 	},
 }
 
-function convert(token: Token): React.ReactElement<{}> {
+function convert(token: Token): React.ReactNode {
 	const converter = converters[token.type as TokenType]
 	if (converter === undefined) {
-		return <>{JSON.stringify(token)}</>
+		return JSON.stringify(token)
 	}
 	return converter(token)
 }
 
-function convertChildren(token: Token): React.ReactElement<{}>[] {
+function convertChildren(token: Token): React.ReactNode[] {
 	return (token.children || []).map(convert)
 }
 

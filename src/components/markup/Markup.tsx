@@ -24,18 +24,17 @@ export default abstract class Markup
 	}
 	
 	render(): React.ReactNode {
-		const rendered = this.props.justTitle
-			? this.title
-			: this.renderPost()
+		if (this.props.justTitle) return this.title
+		const rendered = this.renderPost()
 		if (process.env.NODE_ENV === 'development') {
 			return (
-				<>
+				<article>
 					{rendered}
 					<pre>{JSON.stringify(this.ast, undefined, '\t')}</pre>
-				</>
+				</article>
 			)
 		}
-		return rendered
+		return <article>rendered</article>
 	}
 	
 	abstract getAST(): AST

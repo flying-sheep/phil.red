@@ -8,6 +8,15 @@ declare module 'markdown-it/lib/token' {
 	interface Token extends MarkdownIt.Token {
 	}
 	
-	export type TokenType = 'inline' | 'text' | 'paragraph' | 'heading' | 'hardbreak' | 'code_inline' | 'fence'
+	export type TokenType = (
+		'inline' |
+		'text' |
+		'paragraph' |
+		'heading' |
+		'hardbreak' |
+		'softbreak' |
+		'code_inline' |
+		'fence'
+	)
 	export default Token
 }

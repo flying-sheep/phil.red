@@ -20,5 +20,5 @@ export default function Post({ id, justTitle = false }: PostProps) {
 		return <article>{`Unknown format “${format}” of file ${filename}`}</article>
 	}
 	const Renderer = { md: Markdown, rst: ReStructuredText }[format]
-	return <article><Renderer code={postMarkup} justTitle={justTitle}/></article>
+	return <Renderer code={postMarkup} justTitle={justTitle}/>
 }
