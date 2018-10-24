@@ -29,13 +29,19 @@ const converters: MDConverters = {
 		return <br/>
 	},
 	softbreak(token: Token) {
-		return null
+		return ' '
 	},
 	code_inline(token: Token) {
 		return <code>{token.content}</code>
 	},
 	fence(token: Token) {
 		return <pre><code>{token.content}</code></pre>
+	},
+	bullet_list(token: Token) {
+		return <ul>{convertChildren(token)}</ul>
+	},
+	list_item(token: Token) {
+		return <li>{convertChildren(token)}</li>
 	},
 }
 

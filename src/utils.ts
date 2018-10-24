@@ -2,7 +2,7 @@ export function rsplit(string: string, sep: string, limit: number = Infinity): s
 	if (!Number.isFinite(limit)) return string.split(sep)
 	let prefix = string
 	const suffixes = []
-	for (let lim = limit; lim > 0; lim -= 1) {
+	for (let lim = limit; lim > 1; lim -= 1) {
 		const end = prefix.lastIndexOf(sep)
 		if (end === -1) break
 		suffixes.push(prefix.slice(end + 1))

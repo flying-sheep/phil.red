@@ -16,7 +16,9 @@ declare module 'markdown-it/lib/token' {
 		'hardbreak' |
 		'softbreak' |
 		'code_inline' |
-		'fence'
+		'fence' |
+		'bullet_list' |
+		'list_item'
 	)
 	export default Token
 }
