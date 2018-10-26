@@ -1,12 +1,33 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
 import { ThemeStyle } from '@material-ui/core/styles/createTypography'
-import { Node, NodeType } from 'restructured'
+import { Node, NodeType, DirectiveType } from 'restructured'
 
 import Markup from './Markup'
 import { ASTError } from './ASTError'
 import rstConvert from '../../converters/rst'
 
+
+type DirectiveConverters = {
+	[ T in DirectiveType ]: (node: Node, level: number) => React.ReactNode
+}
+
+const directives: DirectiveConverters = {
+	code(node: Node, level: number) {
+		return <pre><code>{convertChildren(node, level)}</code></pre>
+	},
+	'csv-table': (node: Node) => {
+		const texts = (node.children || [])
+			.map(n => (n.type === 'text' ? n.value : JSON.stringify(n)))
+		const [header = null, ...rest] = texts
+		return (
+			<table>
+				{header && <caption>{header}</caption>}
+				{rest.map(r => <tr>{r}</tr>)}
+			</table>
+		)
+	},
+}
 
 type RSTConverters = {
 	[ T in NodeType ]: (node: Node, level: number) => React.ReactNode
@@ -37,8 +58,9 @@ const converters: RSTConverters = {
 		return <em>{convertChildren(node, level)}</em>
 	},
 	directive(node: Node, level: number) {
-		if (node.directive === 'code') {
-			return <pre><code>{convertChildren(node, level)}</code></pre>
+		if (node.directive !== undefined && node.directive in directives) {
+			const converter = directives[node.directive]
+			return converter(node, level)
 		}
 		return <code>{`Unknown directive ${node.directive}: ${JSON.stringify(node)}`}</code>
 	},

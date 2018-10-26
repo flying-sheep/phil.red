@@ -11,4 +11,11 @@ export function rsplit(string: string, sep: string, limit: number = Infinity): s
 	return [prefix, ...suffixes.reverse()]
 }
 
-/* eslint import/prefer-default-export: 0 */
+export function partition<I>(array: I[], pred: (item: I) => boolean): [I[], I[]] {
+	const a: I[] = []
+	const b: I[] = []
+	for (const element of array) {
+		(pred ? a : b).push(element)
+	}
+	return [a, b]
+}
