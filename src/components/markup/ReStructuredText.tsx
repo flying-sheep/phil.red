@@ -1,83 +1,79 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
 import { ThemeStyle } from '@material-ui/core/styles/createTypography'
-import { Node, NodeType, DirectiveType } from 'restructured'
+import { Node } from 'restructured'
 
 import Markup from './Markup'
 import { ASTError } from './ASTError'
 import rstConvert from '../../converters/rst'
 
 
-type DirectiveConverters = {
-	[ T in DirectiveType ]: (node: Node, level: number) => React.ReactNode
-}
-
-const directives: DirectiveConverters = {
-	code(node: Node, level: number) {
-		return <pre><code>{convertChildren(node, level)}</code></pre>
-	},
-	'csv-table': (node: Node) => {
-		const texts = (node.children || [])
-			.map(n => (n.type === 'text' ? n.value : JSON.stringify(n)))
-		const [header = null, ...rest] = texts
-		return (
-			<table>
-				{header && <caption>{header}</caption>}
-				{rest.map(r => <tr>{r}</tr>)}
-			</table>
-		)
-	},
-}
-
-type RSTConverters = {
-	[ T in NodeType ]: (node: Node, level: number) => React.ReactNode
-}
-
-const converters: RSTConverters = {
-	document(node: Node, level: number) {
+function convert(node: Node, level: number): React.ReactNode {
+	switch (node.type) {
+	case 'document':
 		return <>{convertChildren(node, level)}</>
-	},
-	section(node: Node, level: number) {
+	case 'section':
 		return <section>{convertChildren(node, level + 1)}</section>
-	},
-	title(node: Node, level: number) {
+	case 'title': {
 		if (level < 1) return `Header with level ${level} < 1`
 		const hLevel = Math.min(level, 6)
 		return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
-	},
-	paragraph(node: Node, level: number) {
+	}
+	case 'paragraph':
 		return <Typography paragraph>{convertChildren(node, level)}</Typography>
-	},
-	text(node: Node, level: number) {
+	case 'text':
 		return <>{node.value}</>
-	},
-	literal(node: Node, level: number) {
+	case 'literal':
 		return <code>{convertChildren(node, level)}</code>
-	},
-	emphasis(node: Node, level: number) {
+	case 'emphasis':
 		return <em>{convertChildren(node, level)}</em>
-	},
-	directive(node: Node, level: number) {
-		if (node.directive !== undefined && node.directive in directives) {
-			const converter = directives[node.directive]
-			return converter(node, level)
-		}
-		return <code>{`Unknown directive ${node.directive}: ${JSON.stringify(node)}`}</code>
-	},
-	bullet_list(node: Node, level: number) {
+	case 'bullet_list':
 		return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
-	},
-	list_item(node: Node, level: number) {
+	case 'list_item':
 		return <li>{convertChildren(node, level)}</li>
-	},
-}
-
-function convert(node: Node, level: number): React.ReactNode {
-	const converter = converters[node.type]
-	if (converter === undefined) {
+	case 'directive':
+		switch (node.directive) {
+		case 'code':
+			return <pre><code>{convertChildren(node, level)}</code></pre>
+		case 'csv-table': {
+			const texts = (node.children || [])
+				.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
+			const [header = null, ...rest] = texts
+			const delim = rest
+				.filter(l => l.startsWith(':delim:'))
+				.reduce((_, cur) => {
+					switch (cur.split(':delim: ')[1]) {
+					case 'tab': return '\t'
+					case 'space': return ' '
+					default: return cur
+					}
+				}, ',')
+			/*
+			const quote = rest
+				.filter(l => l.startsWith(':quote:'))
+			*/
+			const lines = rest.filter(l => !/^:(delim|quote):/.test(l))
+			return (
+				<figure>
+					<table>
+						{lines.map(r => (
+							<tr>
+								{r.split(delim).map(cell => (
+									<td>{cell}</td>
+								))}
+							</tr>
+						))}
+					</table>
+					{header && <figcaption>{header}</figcaption>}
+				</figure>
+			)
+		}
+		default:
+			return <code>{`Unknown directive ${node.directive}: ${JSON.stringify(node)}`}</code>
+		}
+	default:
 		return JSON.stringify(node)
 	}
-	return converter(node, level)
 }
 
 function convertChildren(node: Node, level: number): React.ReactNode[] {

@@ -8,53 +8,35 @@ import Markup from './Markup'
 import mdConvert from '../../converters/md'
 
 
-type MDConverters = {
-	[ T in TokenType ]: (token: Token) => React.ReactNode
-}
-
-const converters: MDConverters = {
-	inline(token: Token) {
+function convert(token: Token): React.ReactNode {
+	switch (token.type as TokenType | undefined) {
+	case 'inline':
 		return convertChildren(token)
-	},
-	text(token: Token) {
+	case 'text':
 		return token.content
-	},
-	paragraph(token: Token) {
+	case 'paragraph':
 		return <Typography paragraph>{convertChildren(token)}</Typography>
-	},
-	heading(token: Token) {
+	case 'heading':
 		return <Typography variant={token.tag as ThemeStyle}>{convertChildren(token)}</Typography>
-	},
-	link(token: Token) {
+	case 'link': {
 		const hrefs = token.attrs.filter(([a, v]) => a === 'href')
 		return <a href={hrefs[0][1]}>{convertChildren(token)}</a>
-	},
-	hardbreak(token: Token) {
+	}
+	case 'hardbreak':
 		return <br/>
-	},
-	softbreak(token: Token) {
+	case 'softbreak':
 		return ' '
-	},
-	code_inline(token: Token) {
+	case 'code_inline':
 		return <code>{token.content}</code>
-	},
-	fence(token: Token) {
+	case 'fence':
 		return <pre><code>{token.content}</code></pre>
-	},
-	bullet_list(token: Token) {
+	case 'bullet_list':
 		return <ul>{convertChildren(token)}</ul>
-	},
-	list_item(token: Token) {
+	case 'list_item':
 		return <li>{convertChildren(token)}</li>
-	},
-}
-
-function convert(token: Token): React.ReactNode {
-	const converter = converters[token.type as TokenType]
-	if (converter === undefined) {
+	default:
 		return JSON.stringify(token)
 	}
-	return converter(token)
 }
 
 function convertChildren(token: Token): React.ReactNode[] {
