@@ -82,7 +82,7 @@ function convertChildren(node: Node, level: number): React.ReactNode[] {
 
 export default class ReStructuredText extends Markup<Node> {
 	getAST(): Node {
-		return rstConvert(this.props.code)
+		return rstConvert(this.markup)
 	}
 	
 	getTitle(): string {

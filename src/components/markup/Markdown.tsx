@@ -45,7 +45,7 @@ function convertChildren(token: Token): React.ReactNode[] {
 
 export default class Markdown extends Markup<Token> {
 	getAST(): Token {
-		return mdConvert(this.props.code)
+		return mdConvert(this.markup)
 	}
 	
 	getTitle(): string {

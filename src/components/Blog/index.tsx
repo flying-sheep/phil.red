@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom'
 import { List } from '@material-ui/core'
 
-import Post from './Post'
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
 
@@ -13,12 +12,12 @@ import ListItemLink from '../ListItemLink'
 function Index({ match }: RouteComponentProps) {
 	return (
 		<List component="nav">
-			{Object.keys(posts).map((filename) => {
-				const title = filename.replace(/\.[^./]+$/, '')
+			{Object.entries(posts).map(([slug, post]) => {
+				const { date } = post
 				return (
 					<ListItemLink
-						to={`${match.url}/${title}`}
-						primary={<Post id={title} justTitle/>}
+						to={`${match.url}/${date.getFullYear()}/${date.getMonth()}/${date.getDay()}/${slug}`}
+						primary={post.title}
 					/>
 				)
 			})}
@@ -26,15 +25,19 @@ function Index({ match }: RouteComponentProps) {
 	)
 }
 
-function RoutedPost({ match }: RouteComponentProps<{id: string}>) {
-	return <Post id={match.params.id}/>
+function RoutedPost({ match }: RouteComponentProps<{id: string}>): React.ReactElement<any> {
+	const { id } = match.params
+	if (!(id in posts)) {
+		return <div>{`404 – post ${id} not found`}</div>
+	}
+	return posts[id].element
 }
 
 export default function Blog({ match }: RouteComponentProps) {
 	return (
 		<Switch>
 			<Route path={`${match.url}/`} exact component={Index}/>
-			<Route path={`${match.url}/:id`} component={RoutedPost}/>
+			<Route path={`${match.url}/:year/:month/:day/:id`} component={RoutedPost}/>
 		</Switch>
 	)
 }

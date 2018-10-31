@@ -1,18 +1,12 @@
 import * as React from 'react'
 import { ASTError, ASTErrorMessage } from './ASTError'
 
-export interface MarkupProps {
-	code: string
-	justTitle: boolean
-}
-
-export default abstract class Markup
-	<AST, PropType extends MarkupProps = MarkupProps>
-	extends React.Component<PropType> {
+export default abstract class Markup<AST> {
+	markup: string
 	ast: AST
 	title: string | React.ReactNode
-	constructor(props: PropType) {
-		super(props)
+	constructor(markup: string) {
+		this.markup = markup
 		this.ast = this.getAST()
 		try {
 			this.title = this.getTitle()
@@ -23,8 +17,7 @@ export default abstract class Markup
 		}
 	}
 	
-	render(): React.ReactNode {
-		if (this.props.justTitle) return this.title
+	render(): React.ReactElement<any> {
 		const rendered = this.renderPost()
 		if (process.env.NODE_ENV === 'development') {
 			return (
@@ -34,7 +27,7 @@ export default abstract class Markup
 				</article>
 			)
 		}
-		return <article>rendered</article>
+		return <article>{rendered}</article>
 	}
 	
 	abstract getAST(): AST
