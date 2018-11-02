@@ -4,18 +4,24 @@ import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 import { Node } from 'restructured'
 
 import Markup from './Markup'
-import { ASTError } from './ASTError'
+import ASTError from './ASTError'
 import rstConvert from '../../converters/rst'
 
+export interface ReStructuredTextNodeProps {
+	node: Node
+	level: number
+}
 
-function convert(node: Node, level: number): React.ReactNode {
+export function ReStructuredTextNode(
+	{ node, level }: ReStructuredTextNodeProps,
+): React.ReactElement<any> | null {
 	switch (node.type) {
 	case 'document':
 		return <>{convertChildren(node, level)}</>
 	case 'section':
 		return <section>{convertChildren(node, level + 1)}</section>
 	case 'title': {
-		if (level < 1) return `Header with level ${level} < 1`
+		if (level < 1) return <>{`Header with level ${level} < 1`}</>
 		const hLevel = Math.min(level, 6)
 		return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
 	}
@@ -69,15 +75,15 @@ function convert(node: Node, level: number): React.ReactNode {
 			)
 		}
 		default:
-			return <code>{`Unknown directive ${node.directive}: ${JSON.stringify(node)}`}</code>
+			throw new ASTError(`Unknown directive ${node.directive}`, node)
 		}
 	default:
-		return JSON.stringify(node)
+		throw new ASTError(`Unknown node type ${node.type}`, node)
 	}
 }
 
 function convertChildren(node: Node, level: number): React.ReactNode[] {
-	return (node.children || []).map(c => convert(c, level))
+	return (node.children || []).map(n => <ReStructuredTextNode node={n} level={level}/>)
 }
 
 export default class ReStructuredText extends Markup<Node> {
@@ -96,6 +102,6 @@ export default class ReStructuredText extends Markup<Node> {
 	}
 	
 	renderPost(): React.ReactNode {
-		return convert(this.ast, 0)
+		return <ReStructuredTextNode node={this.ast} level={0}/>
 	}
 }

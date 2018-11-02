@@ -1,7 +1,7 @@
 import * as React from 'react'
 import red from '@material-ui/core/colors/red'
 
-export class ASTError<AST> extends Error {
+export default class ASTError<AST> extends Error {
 	msg: string
 	ast: AST
 	constructor(msg: string, ast: AST) {

@@ -2,7 +2,6 @@ import rawPosts from './markup'
 import { Markdown, ReStructuredText } from '../components/markup'
 
 export class Post {
-	title: string
 	renderer: Markdown | ReStructuredText
 	date: Date
 	markup: string
@@ -15,11 +14,6 @@ export class Post {
 		this.format = format
 		const Renderer = { md: Markdown, rst: ReStructuredText }[format]
 		this.renderer = new Renderer(markup)
-		try {
-			this.title = this.renderer.getTitle()
-		} catch (e) {
-			this.title = e.toString()
-		}
 		this.element = this.renderer.render()
 	}
 }

@@ -1,13 +1,17 @@
 import * as React from 'react'
 import {
 	RouteComponentProps,
-	Route, Switch,
+	Route, Switch, Redirect,
 } from 'react-router-dom'
 import { List } from '@material-ui/core'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
 
+
+function date2url(date: Date) {
+	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+}
 
 function Index({ match }: RouteComponentProps) {
 	return (
@@ -16,8 +20,8 @@ function Index({ match }: RouteComponentProps) {
 				const { date } = post
 				return (
 					<ListItemLink
-						to={`${match.url}/${date.getFullYear()}/${date.getMonth()}/${date.getDay()}/${slug}`}
-						primary={post.title}
+						to={`${match.url}/${date2url(date)}/${slug}`}
+						primary={post.renderer.title}
 					/>
 				)
 			})}
@@ -25,12 +29,27 @@ function Index({ match }: RouteComponentProps) {
 	)
 }
 
-function RoutedPost({ match }: RouteComponentProps<{id: string}>): React.ReactElement<any> {
-	const { id } = match.params
+interface PostProps {
+	id: string
+	year: string
+	month: string
+	day: string
+}
+
+function RoutedPost({ match }: RouteComponentProps<PostProps>): React.ReactElement<any> {
+	const {
+		id,
+		year, month, day,
+	} = match.params
 	if (!(id in posts)) {
 		return <div>{`404 – post ${id} not found`}</div>
 	}
-	return posts[id].element
+	const { date, element } = posts[id]
+	if (+year !== date.getFullYear() || +month !== date.getMonth() + 1 || +day !== date.getDate()) {
+		// TODO: after redirect, match.params stay the same!
+		return <Redirect to={`${match.url}/../../../../${date2url(date)}/${id}`}/>
+	}
+	return element
 }
 
 export default function Blog({ match }: RouteComponentProps) {

@@ -5,15 +5,20 @@ import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 import Token, { TokenType } from 'markdown-it/lib/token'
 
 import Markup from './Markup'
+import ASTError from './ASTError'
 import mdConvert from '../../converters/md'
 
 
-function convert(token: Token): React.ReactNode {
-	switch (token.type as TokenType | undefined) {
+export interface MarkdownElementProps {
+	token: Token
+}
+
+export function MarkdownNode({ token }: MarkdownElementProps): React.ReactElement<any> | null {
+	switch (token.type as TokenType) {
 	case 'inline':
-		return convertChildren(token)
+		return <>{convertChildren(token)}</>
 	case 'text':
-		return token.content
+		return <>{token.content}</>
 	case 'paragraph':
 		return <Typography paragraph>{convertChildren(token)}</Typography>
 	case 'heading':
@@ -25,7 +30,7 @@ function convert(token: Token): React.ReactNode {
 	case 'hardbreak':
 		return <br/>
 	case 'softbreak':
-		return ' '
+		return <>' '</>
 	case 'code_inline':
 		return <code>{token.content}</code>
 	case 'fence':
@@ -35,12 +40,12 @@ function convert(token: Token): React.ReactNode {
 	case 'list_item':
 		return <li>{convertChildren(token)}</li>
 	default:
-		return JSON.stringify(token)
+		throw new ASTError(`Unknown token type ${token.type}`, token)
 	}
 }
 
-function convertChildren(token: Token): React.ReactNode[] {
-	return (token.children || []).map(convert)
+function convertChildren(token: Token): React.ReactElement<MarkdownElementProps>[] {
+	return (token.children || []).map(tok => <MarkdownNode token={tok}/>)
 }
 
 export default class Markdown extends Markup<Token> {
@@ -53,6 +58,6 @@ export default class Markdown extends Markup<Token> {
 	}
 	
 	renderPost(): React.ReactNode {
-		return convert(this.ast)
+		return <MarkdownNode token={this.ast}/>
 	}
 }

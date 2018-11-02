@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { ASTError, ASTErrorMessage } from './ASTError'
+import ASTError, { ASTErrorMessage, ASTErrorMessageProps } from './ASTError'
 
 export default abstract class Markup<AST> {
 	markup: string
 	ast: AST
-	title: string | React.ReactNode
+	title: string | React.ReactElement<ASTErrorMessageProps<AST>>
 	constructor(markup: string) {
 		this.markup = markup
 		this.ast = this.getAST()
