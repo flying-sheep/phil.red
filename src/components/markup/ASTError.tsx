@@ -2,17 +2,22 @@ import * as React from 'react'
 import red from '@material-ui/core/colors/red'
 
 export default class ASTError<AST> extends Error {
-	msg: string
+	message: string
 	ast: AST
-	constructor(msg: string, ast: AST) {
-		super()
-		this.msg = msg
+	constructor(message: string, ast: AST) {
+		super(message)
+		this.message = message
 		this.ast = ast
+		Object.setPrototypeOf(this, ASTError.prototype)
+	}
+	
+	toString() {
+		return `AST Error: ${this.message}\n${JSON.stringify(this.ast)}`
 	}
 }
 
 export interface ASTErrorMessageProps<AST> {
-	ast: AST
+	ast?: AST
 }
 
 export function ASTErrorMessage<AST>(
@@ -21,7 +26,7 @@ export function ASTErrorMessage<AST>(
 	return (
 		<span style={{ color: red.A400 }}>
 			{children}
-			<pre>{JSON.stringify(ast, undefined, 2)}</pre>
+			{ast && <pre>{JSON.stringify(ast, undefined, 2)}</pre>}
 		</span>
 	)
 }

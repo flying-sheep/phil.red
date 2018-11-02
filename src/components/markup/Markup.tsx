@@ -12,7 +12,7 @@ export default abstract class Markup<AST> {
 			this.title = this.getTitle()
 		} catch (e) {
 			if (e instanceof ASTError) {
-				this.title = <ASTErrorMessage ast={e.ast}>{e.msg}</ASTErrorMessage>
+				this.title = <ASTErrorMessage ast={e.ast}>{e.message}</ASTErrorMessage>
 			} else throw e
 		}
 	}

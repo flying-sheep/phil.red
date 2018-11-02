@@ -2,6 +2,8 @@ declare module 'restructured' {
     export type NodeType = (
         'document' |
         'section' |
+        'comment' |
+        'reference' |
         'title' |
         'paragraph' |
         'text' |

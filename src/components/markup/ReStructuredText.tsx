@@ -4,81 +4,103 @@ import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 import { Node } from 'restructured'
 
 import Markup from './Markup'
-import ASTError from './ASTError'
+import ASTError, { ASTErrorMessage } from './ASTError'
 import rstConvert from '../../converters/rst'
 
 export interface ReStructuredTextNodeProps {
 	node: Node
 	level: number
 }
+export interface ReStructuredTextNodeState {
+	errorMessage: string | null
+}
 
-export function ReStructuredTextNode(
-	{ node, level }: ReStructuredTextNodeProps,
-): React.ReactElement<any> | null {
-	switch (node.type) {
-	case 'document':
-		return <>{convertChildren(node, level)}</>
-	case 'section':
-		return <section>{convertChildren(node, level + 1)}</section>
-	case 'title': {
-		if (level < 1) return <>{`Header with level ${level} < 1`}</>
-		const hLevel = Math.min(level, 6)
-		return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
+export class ReStructuredTextNode extends React.Component
+		<ReStructuredTextNodeProps, ReStructuredTextNodeState> {
+	constructor(props: ReStructuredTextNodeProps) {
+		super(props)
+		this.state = { errorMessage: null }
 	}
-	case 'paragraph':
-		return <Typography paragraph>{convertChildren(node, level)}</Typography>
-	case 'text':
-		return <>{node.value}</>
-	case 'literal':
-		return <code>{convertChildren(node, level)}</code>
-	case 'emphasis':
-		return <em>{convertChildren(node, level)}</em>
-	case 'bullet_list':
-		return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
-	case 'list_item':
-		return <li>{convertChildren(node, level)}</li>
-	case 'directive':
-		switch (node.directive) {
-		case 'code':
-			return <pre><code>{convertChildren(node, level)}</code></pre>
-		case 'csv-table': {
-			const texts = (node.children || [])
-				.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
-			const [header = null, ...rest] = texts
-			const delim = rest
-				.filter(l => l.startsWith(':delim:'))
-				.reduce((_, cur) => {
-					switch (cur.split(':delim: ')[1]) {
-					case 'tab': return '\t'
-					case 'space': return ' '
-					default: return cur
-					}
-				}, ',')
-			/*
-			const quote = rest
-				.filter(l => l.startsWith(':quote:'))
-			*/
-			const lines = rest.filter(l => !/^:(delim|quote):/.test(l))
-			return (
-				<figure>
-					<table>
-						{lines.map(r => (
-							<tr>
-								{r.split(delim).map(cell => (
-									<td>{cell}</td>
-								))}
-							</tr>
-						))}
-					</table>
-					{header && <figcaption>{header}</figcaption>}
-				</figure>
-			)
+	
+	static getDerivedStateFromError(error: Error) {
+		return { errorMessage: error.message }
+	}
+	
+	render(): React.ReactElement<any> | null {
+		const { node, level } = this.props
+		const { errorMessage } = this.state
+		if (errorMessage !== null) {
+			return <ASTErrorMessage ast={node}>{errorMessage}</ASTErrorMessage>
 		}
+		switch (node.type) {
+		case 'document':
+			return <>{convertChildren(node, level)}</>
+		case 'comment':
+			return null
+		case 'reference':
+			return <ASTErrorMessage>{`Unhandled reference: ${(node.children as Node[])[0].value}`}</ASTErrorMessage>
+		case 'section':
+			return <section>{convertChildren(node, level + 1)}</section>
+		case 'title': {
+			if (level < 1) return <>{`Header with level ${level} < 1`}</>
+			const hLevel = Math.min(level, 6)
+			return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
+		}
+		case 'paragraph':
+			return <Typography paragraph>{convertChildren(node, level)}</Typography>
+		case 'text':
+			return <>{`${node.value}\n`}</>
+		case 'literal':
+			return <code>{convertChildren(node, level)}</code>
+		case 'emphasis':
+			return <em>{convertChildren(node, level)}</em>
+		case 'bullet_list':
+			return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
+		case 'list_item':
+			return <li>{convertChildren(node, level)}</li>
+		case 'directive':
+			switch (node.directive) {
+			case 'code':
+				return <pre><code>{convertChildren(node, level)}</code></pre>
+			case 'csv-table': {
+				const texts = (node.children || [])
+					.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
+				const [header = null, ...rest] = texts
+				const delim = rest
+					.filter(l => l.startsWith(':delim:'))
+					.reduce((_, cur) => {
+						switch (cur.split(':delim: ')[1]) {
+						case 'tab': return '\t'
+						case 'space': return ' '
+						default: return cur
+						}
+					}, ',')
+				/*
+				const quote = rest
+					.filter(l => l.startsWith(':quote:'))
+				*/
+				const lines = rest.filter(l => !/^:(delim|quote):/.test(l))
+				return (
+					<figure>
+						<table>
+							{lines.map(r => (
+								<tr>
+									{r.split(delim).map(cell => (
+										<td>{cell}</td>
+									))}
+								</tr>
+							))}
+						</table>
+						{header && <figcaption>{header}</figcaption>}
+					</figure>
+				)
+			}
+			default:
+				throw new ASTError(`Unknown directive “${node.directive}”`, node)
+			}
 		default:
-			throw new ASTError(`Unknown directive ${node.directive}`, node)
+			throw new ASTError(`Unknown node type “${node.type}”`, node)
 		}
-	default:
-		throw new ASTError(`Unknown node type ${node.type}`, node)
 	}
 }
 
