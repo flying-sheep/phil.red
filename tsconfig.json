@@ -13,6 +13,8 @@
 		"noEmitHelpers": true,
 		"importHelpers": true,
 		"noResolve": false,
+		//allow importing CJS modules without a namespace in its .d.ts
+		"allowSyntheticDefaultImports": true,
 		//more
 		"removeComments": true,
 		"sourceMap": true

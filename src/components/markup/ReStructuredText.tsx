@@ -16,7 +16,7 @@ export interface ReStructuredTextNodeState {
 }
 
 export class ReStructuredTextNode extends React.Component
-		<ReStructuredTextNodeProps, ReStructuredTextNodeState> {
+	<ReStructuredTextNodeProps, ReStructuredTextNodeState> {
 	constructor(props: ReStructuredTextNodeProps) {
 		super(props)
 		this.state = { errorMessage: null }

@@ -1,4 +1,4 @@
-import * as MarkdownIt from 'markdown-it'
+import MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token'
 
 import { rsplit } from '../utils'
@@ -34,8 +34,7 @@ function* tokens2ast(
 
 export default function mdConvert(code: string): Token {
 	// https://github.com/rollup/rollup-plugin-commonjs/issues/350
-	const Mdi = (MarkdownIt as any).default
-	const md: MarkdownIt.MarkdownIt = new Mdi('commonmark', { breaks: false })
+	const md = new MarkdownIt('commonmark', { breaks: false })
 	const tokens = md.parse(code, {})
 	const root = new Token('inline', '', 0)
 	root.children = Array.from(tokens2ast(tokens))

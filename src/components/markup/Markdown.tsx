@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Typography } from '@material-ui/core'
 import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 
-import Token, { TokenType } from 'markdown-it/lib/token'
+import Token from 'markdown-it/lib/token'
 
 import Markup from './Markup'
 import ASTError, { ASTErrorMessage } from './ASTError'
@@ -18,7 +18,7 @@ export interface MarkdownElementState {
 }
 
 export class MarkdownNode extends React.Component
-		<MarkdownElementProps, MarkdownElementState> {
+	<MarkdownElementProps, MarkdownElementState> {
 	constructor(props: MarkdownElementProps) {
 		super(props)
 		this.state = { errorMessage: null }
@@ -34,7 +34,7 @@ export class MarkdownNode extends React.Component
 		if (errorMessage !== null) {
 			return <ASTErrorMessage ast={token}>{errorMessage}</ASTErrorMessage>
 		}
-		switch (token.type as TokenType) {
+		switch (token.type) {
 		case 'inline':
 			return <>{convertChildren(token)}</>
 		case 'text':
