@@ -8,6 +8,7 @@ import json from 'rollup-plugin-json'
 import typescript from '@wessberg/rollup-plugin-ts'
 import postcss from 'rollup-plugin-postcss-modules'
 import serve from 'rollup-plugin-serve'
+import conditional from 'rollup-plugin-conditional'
 
 import autoprefixer from 'autoprefixer'
 
@@ -60,9 +61,11 @@ export default {
 		textdir({
 			include: '*.@(md|rst)',
 		}),
-		serve({
-			contentBase: '.',
-			historyApiFallback: true,
-		}),
+		conditional(NODE_ENV === 'development', () => [
+			serve({
+				contentBase: '.',
+				historyApiFallback: true,
+			}),
+		]),
 	],
 }

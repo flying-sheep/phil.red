@@ -50,7 +50,7 @@ export class MarkdownNode extends React.Component
 		case 'hardbreak':
 			return <br/>
 		case 'softbreak':
-			return <>' '</>
+			return <> </>
 		case 'code_inline':
 			return <code>{token.content}</code>
 		case 'fence':
