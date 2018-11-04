@@ -19,7 +19,7 @@ export default abstract class Markup<AST> {
 	
 	render(): React.ReactElement<any> {
 		const rendered = this.renderPost()
-		if (process.env.NODE_ENV === 'development') {
+		if (process.env.NODE_ENV === 'development' as 'production' | 'development') {
 			return (
 				<article>
 					{rendered}
