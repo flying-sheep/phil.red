@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
 import { ThemeStyle } from '@material-ui/core/styles/createTypography'
-import { Node } from 'restructured'
+import { Node, DirectiveType } from 'restructured'
 import { InlineMath } from 'react-katex'
 import 'katex/dist/katex.min.css'
 
 import Markup from './Markup'
 import ASTError, { ASTErrorMessage } from './ASTError'
+import Plotly from '../Plotly'
 import rstConvert from '../../converters/rst'
 
 export interface ReStructuredTextNodeProps {
@@ -15,6 +16,12 @@ export interface ReStructuredTextNodeProps {
 }
 export interface ReStructuredTextNodeState {
 	errorMessage: string | null
+}
+
+interface Directive {
+	header: string | null
+	params: { [k: string]: string }
+	body: string[]
 }
 
 export class ReStructuredTextNode extends React.Component
@@ -26,6 +33,26 @@ export class ReStructuredTextNode extends React.Component
 	
 	static getDerivedStateFromError(error: Error) {
 		return { errorMessage: error.message }
+	}
+	
+	static parseDirective(lines: Node[]): Directive {
+		const texts = lines.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
+		const [header = null, ...rest] = texts
+		let lastParam = -1
+		const params = rest
+			.filter((line, i) => {
+				if (i > lastParam + 1) return false // there have been non-params
+				if (!/^:\w+:\s/.test(line)) return false
+				lastParam = i + 1
+				return true
+			})
+			.reduce((obj, line) => {
+				const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as string[]
+				obj[name] = val
+				return obj
+			}, {} as { [k: string]: string })
+		const body = rest.slice(lastParam + 1)
+		return { header, params, body }
 	}
 	
 	render(): React.ReactElement<any> | null {
@@ -70,31 +97,22 @@ export class ReStructuredTextNode extends React.Component
 				throw new ASTError(`Unknown role “${node.role}”`, node)
 			}
 		case 'directive':
-			switch (node.directive) {
+			switch (node.directive as DirectiveType | 'plotly') {
 			case 'code':
 				return <pre><code>{convertChildren(node, level)}</code></pre>
 			case 'csv-table': {
-				const texts = (node.children || [])
-					.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
-				const [header = null, ...rest] = texts
-				const delim = rest
-					.filter(l => l.startsWith(':delim:'))
-					.reduce((_, cur) => {
-						switch (cur.split(':delim: ')[1]) {
-						case 'tab': return '\t'
-						case 'space': return ' '
-						default: return cur
-						}
-					}, ',')
-				/*
-				const quote = rest
-					.filter(l => l.startsWith(':quote:'))
-				*/
-				const lines = rest.filter(l => !/^:(delim|quote):/.test(l))
+				const { header, params, body } = ReStructuredTextNode.parseDirective(node.children || [])
+				const delim = (() => {
+					switch (params.delim) {
+					case 'tab': return '\t'
+					case 'space': return ' '
+					default: return params.delim
+					}
+				})()
 				return (
 					<figure>
 						<table>
-							{lines.map(r => (
+							{body.map(r => (
 								<tr>
 									{r.split(delim).map(cell => (
 										<td>{cell}</td>
@@ -105,6 +123,11 @@ export class ReStructuredTextNode extends React.Component
 						{header && <figcaption>{header}</figcaption>}
 					</figure>
 				)
+			}
+			// custom
+			case 'plotly': {
+				const { header } = ReStructuredTextNode.parseDirective(node.children || [])
+				return <Plotly url={header || ''}/>
 			}
 			default:
 				throw new ASTError(`Unknown directive “${node.directive}”`, node)

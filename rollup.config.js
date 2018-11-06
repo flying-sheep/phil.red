@@ -22,7 +22,13 @@ export default {
 		file: 'dist/bundle.js',
 		format: 'iife',
 		sourcemap: true,
+		globals: {
+			react: 'React',
+			'react-dom': 'ReactDOM',
+			'plotly.js': 'Plotly',
+		},
 	},
+	external: ['react', 'react-dom', 'plotly'],
 	plugins: [
 		postcss({
 			extract: true,
