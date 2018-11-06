@@ -7,11 +7,15 @@ declare module 'restructured' {
         'title' |
         'paragraph' |
         'text' |
-        'literal' |
+		'literal' |
+		'interpreted_text' |
         'emphasis' |
         'directive' |
         'bullet_list' |
         'list_item'
+	)
+	export type RoleType = (
+		'math'
 	)
 	export type DirectiveType = (
 		'code' |
@@ -21,7 +25,8 @@ declare module 'restructured' {
         type: NodeType
         children?: Node[]
         value?: string
-        directive?: DirectiveType
+		role?: RoleType
+		directive?: DirectiveType
         bullet?: '-' | string
     }
     interface RST {

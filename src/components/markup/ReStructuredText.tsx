@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Typography } from '@material-ui/core'
 import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 import { Node } from 'restructured'
+import { InlineMath } from 'react-katex'
+import 'katex/dist/katex.min.css'
 
 import Markup from './Markup'
 import ASTError, { ASTErrorMessage } from './ASTError'
@@ -58,6 +60,15 @@ export class ReStructuredTextNode extends React.Component
 			return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
 		case 'list_item':
 			return <li>{convertChildren(node, level)}</li>
+		case 'interpreted_text':
+			switch (node.role) {
+			case 'math':
+				return <InlineMath math={(node.children || []).map(text => text.value).join('')}/>
+			case undefined:
+				return <em>{convertChildren(node, level)}</em>
+			default:
+				throw new ASTError(`Unknown role “${node.role}”`, node)
+			}
 		case 'directive':
 			switch (node.directive) {
 			case 'code':

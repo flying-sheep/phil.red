@@ -54,6 +54,7 @@ export default {
 					'jssPreset',
 				],
 				'node_modules/@material-ui/core/Modal/index.js': ['ModalManager'],
+				'node_modules/react-katex/dist/react-katex.js': ['InlineMath', 'DisplayMath'],
 			},
 		}),
 		builtins(),
