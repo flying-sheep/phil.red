@@ -1,5 +1,6 @@
 /* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
 
+import { plugin as analyze } from 'rollup-plugin-analyzer'
 import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
@@ -15,6 +16,7 @@ import autoprefixer from 'autoprefixer'
 import textdir from './rollup-plugin-textdir.js'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
+const isDev = NODE_ENV === 'development'
 
 export default {
 	input: 'src/index.tsx',
@@ -26,10 +28,17 @@ export default {
 			react: 'React',
 			'react-dom': 'ReactDOM',
 			'plotly.js': 'Plotly',
+			'plotly.js/dist/plotly': 'Plotly',
+			katex: 'katex',
 		},
 	},
-	external: ['react', 'react-dom', 'plotly'],
+	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'katex'],
 	plugins: [
+		analyze({
+			writeTo(formatted) {
+				require('fs').writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e): {}))
+			},
+		}),
 		postcss({
 			extract: true,
 			sourceMap: true,
@@ -68,7 +77,7 @@ export default {
 		textdir({
 			include: '*.@(md|rst)',
 		}),
-		conditional(NODE_ENV === 'development', () => [
+		conditional(isDev, () => [
 			serve({
 				contentBase: '.',
 				historyApiFallback: true,

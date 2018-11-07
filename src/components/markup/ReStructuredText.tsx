@@ -3,7 +3,6 @@ import { Typography } from '@material-ui/core'
 import { ThemeStyle } from '@material-ui/core/styles/createTypography'
 import { Node, DirectiveType } from 'restructured'
 import { InlineMath } from 'react-katex'
-import 'katex/dist/katex.min.css'
 
 import Markup from './Markup'
 import ASTError, { ASTErrorMessage } from './ASTError'
