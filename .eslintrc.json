@@ -17,6 +17,29 @@
         "import/extensions": 0,
         "no-dupe-args": 0,
         "no-undef": 0,
-        "no-unused-vars": 0
+        "no-unused-vars": 0,
+        "react/sort-comp": [2, {
+            "order": [
+                "displayName",
+                "mixins",
+                "statics",
+                "contextTypes",
+                "propTypes",
+                "constructor",
+                "getDefaultProps",
+                "getInitialState",
+                "componentWillMount",
+                "componentDidMount",
+                "componentWillReceiveProps",
+                "shouldComponentUpdate",
+                "componentWillUpdate",
+                "componentWillUnmount",
+                "/^(on|handle).+$/",
+                "/^get.+$/",
+                "/^(?!render).+$/",
+                "/^render.+$/",
+                "render"
+            ]
+        }]
     }
 }

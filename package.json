@@ -11,7 +11,7 @@
 		"start": "rollup -cw",
 		"build": "rollup -c",
 		"init-css": "./init-css.js",
-		"test": "eslint *.js src"
+		"test": "eslint *.js src/**/*.ts*"
 	},
 	"dependencies": {
 		"@material-ui/core": "^3.3.2",
