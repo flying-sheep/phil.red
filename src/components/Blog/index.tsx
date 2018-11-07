@@ -55,8 +55,9 @@ function RoutedPost({ match }: RouteComponentProps<PostProps>): React.ReactEleme
 export default function Blog({ match }: RouteComponentProps) {
 	return (
 		<Switch>
-			<Route path={`${match.url}/`} exact component={Index}/>
+			<Route path={match.url} exact component={Index}/>
 			<Route path={`${match.url}/:year/:month/:day/:id`} component={RoutedPost}/>
+			<Redirect to={match.url}/>
 		</Switch>
 	)
 }

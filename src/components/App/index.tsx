@@ -3,6 +3,7 @@ import {
 	RouteComponentProps,
 	Route, Switch,
 	withRouter,
+	Redirect,
 } from 'react-router-dom'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -30,7 +31,7 @@ function App({ location, history }: RouteComponentProps) {
 				<Switch>
 					<Route path="/" exact component={() => <span>Home</span>}/>
 					<Route path="/blog" component={Blog}/>
-					<Route render={() => <span>No Match</span>}/>
+					<Redirect to="/"/>
 				</Switch>
 			</main>
 		</>
