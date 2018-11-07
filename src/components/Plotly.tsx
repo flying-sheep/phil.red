@@ -19,7 +19,9 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 		fetch(props.url).then((r) => {
 			if (r.ok) return r.json()
 			throw new Error(r.statusText)
-		}).then(({ layout, data }) => this.setState({ layout, data }))
+		}).then(({ layout, data }) => {
+			this.setState({ layout, data })
+		})
 	}
 	
 	render(): React.ReactNode {
