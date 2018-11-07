@@ -19,3 +19,7 @@ export function partition<I>(array: I[], pred: (item: I) => boolean): [I[], I[]]
 	}
 	return [a, b]
 }
+
+export function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+	return value !== null && value !== undefined
+}

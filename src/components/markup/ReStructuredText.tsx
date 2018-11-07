@@ -9,6 +9,8 @@ import ASTError, { ASTErrorMessage } from './ASTError'
 import Plotly from '../Plotly'
 import rstConvert from '../../converters/rst'
 
+const ReferenceContext = React.createContext({} as { [name: string ]: string})
+
 export interface ReStructuredTextNodeProps {
 	node: Node
 	level: number
@@ -25,6 +27,8 @@ interface Directive {
 
 export class ReStructuredTextNode extends React.Component
 	<ReStructuredTextNodeProps, ReStructuredTextNodeState> {
+	static contextType = ReferenceContext
+	
 	constructor(props: ReStructuredTextNodeProps) {
 		super(props)
 		this.state = { errorMessage: null }
@@ -47,6 +51,7 @@ export class ReStructuredTextNode extends React.Component
 			})
 			.reduce((obj, line) => {
 				const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as string[]
+				// eslint-disable-next-line no-param-reassign
 				obj[name] = val
 				return obj
 			}, {} as { [k: string]: string })
@@ -57,6 +62,7 @@ export class ReStructuredTextNode extends React.Component
 	render(): React.ReactElement<any> | null {
 		const { node, level } = this.props
 		const { errorMessage } = this.state
+		const references = this.context
 		if (errorMessage !== null) {
 			return <ASTErrorMessage ast={node}>{errorMessage}</ASTErrorMessage>
 		}
@@ -65,8 +71,10 @@ export class ReStructuredTextNode extends React.Component
 			return <>{convertChildren(node, level)}</>
 		case 'comment':
 			return null
-		case 'reference':
-			return <ASTErrorMessage>{`Unhandled reference: ${(node.children as Node[])[0].value}`}</ASTErrorMessage>
+		case 'reference': {
+			const name = (node.children as [Node])[0].value as string
+			return <a href={references[name]}>{name}</a>
+		}
 		case 'section':
 			return <section>{convertChildren(node, level + 1)}</section>
 		case 'title': {
@@ -141,6 +149,18 @@ function convertChildren(node: Node, level: number): React.ReactNode[] {
 	return (node.children || []).map(n => <ReStructuredTextNode node={n} level={level}/>)
 }
 
+function* extractTargets(node: Node): IterableIterator<[string, string]> {
+	for (const child of node.children || []) {
+		if (child.type === 'comment') {
+			const comment = (child.children as [Node])[0].value as string
+			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
+			if (name !== null && href !== null) yield [name, href]
+		} else if (child.children) {
+			yield* extractTargets(child)
+		}
+	}
+}
+
 export default class ReStructuredText extends Markup<Node> {
 	getAST(): Node {
 		return rstConvert(this.markup)
@@ -157,6 +177,14 @@ export default class ReStructuredText extends Markup<Node> {
 	}
 	
 	renderPost(): React.ReactNode {
-		return <ReStructuredTextNode node={this.ast} level={0}/>
+		const references: { [name: string]: string } = {}
+		for (const [name, target] of extractTargets(this.ast)) {
+			references[name] = target
+		}
+		return (
+			<ReferenceContext.Provider value={references}>
+				<ReStructuredTextNode node={this.ast} level={0}/>
+			</ReferenceContext.Provider>
+		)
 	}
 }

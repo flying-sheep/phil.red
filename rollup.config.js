@@ -1,5 +1,7 @@
 /* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
 
+import fs from 'fs'
+
 import { plugin as analyze } from 'rollup-plugin-analyzer'
 import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
@@ -32,11 +34,14 @@ export default {
 			katex: 'katex',
 		},
 	},
+	watch: {
+		include: ['src/**'],
+	},
 	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'katex'],
 	plugins: [
 		analyze({
 			writeTo(formatted) {
-				require('fs').writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e): {}))
+				fs.writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e): {}))
 			},
 		}),
 		postcss({
