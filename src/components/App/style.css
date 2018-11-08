@@ -3,7 +3,7 @@
 }
 
 .layout {
-    width: auto;
-    margin-left:  calc(var(--spacing-unit) * 3);
-    margin-right: calc(var(--spacing-unit) * 3);
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing-unit) * 3);
 }
