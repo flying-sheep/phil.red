@@ -134,7 +134,7 @@ export class ReStructuredTextNode extends React.Component
 			// custom
 			case 'plotly': {
 				const { header, params } = ReStructuredTextNode.parseDirective(node.children || [])
-				return <Plotly url={header || ''} onClickLink={params.onClickLink}/>
+				return <Plotly url={header || ''} onClickLink={params.onClickLink} style={{ width: '100%' }}/>
 			}
 			default:
 				throw new ASTError(`Unknown directive “${node.directive}”`, node)

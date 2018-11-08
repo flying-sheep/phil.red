@@ -28,7 +28,9 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 	
 	handleOnClickLink(e: Readonly<Plotly.PlotMouseEvent>) {
 		const { onClickLink = '{}' } = this.props
-		window.open(onClickLink.replace('{}', (e.points[0] as any).text))
+		const point = e.points[0] as { [key: string]: any }
+		const url = onClickLink.replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key] : `{${key}}`))
+		window.open(url)
 	}
 	
 	render(): React.ReactNode {
@@ -42,7 +44,9 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 			layout: { ...DEFAULT_OVERRIDE.layout, ...layout, ...rest.layout },
 			data: [...(data || []), ...(rest.data || [])],
 			onClick: onClickLink ? this.handleOnClickLink : onClickExplicit,
+			...rest,
 		}
+		// TODO: resize plot on window resize
 		return <Plot {...props}>{children}</Plot>
 	}
 }
