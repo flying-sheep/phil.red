@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { Margin } from 'plotly.js'
 import Plot, { PlotParams, Figure } from 'react-plotly.js'
 
 export interface PlotlyProps extends Partial<PlotParams> {
@@ -10,6 +11,15 @@ const DEFAULT_OVERRIDE: Partial<PlotParams> = {
 	layout: {
 		paper_bgcolor: 'transparent',
 		plot_bgcolor: 'transparent',
+		xaxis: { automargin: true },
+		yaxis: { automargin: true },
+		margin: {
+			l: 70,
+			r: 0,
+			b: 70,
+			t: 30, // title
+			pad: 0,
+		} as Margin & { pad: number },
 	},
 }
 
@@ -40,6 +50,7 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 			url, children, onClickLink, onClick: onClickExplicit,
 			...rest
 		} = this.props
+		// TODO: deep merge everything
 		const props: PlotParams = {
 			layout: { ...DEFAULT_OVERRIDE.layout, ...layout, ...rest.layout },
 			data: [...(data || []), ...(rest.data || [])],

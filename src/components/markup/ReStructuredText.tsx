@@ -139,7 +139,7 @@ export class ReStructuredTextNode extends React.Component
 						url={header || ''}
 						onClickLink={params.onClickLink}
 						style={{ width: '100%', height: '400px', maxHeight: '60vw' }}
-						config={{ responsive: true } as any}
+						config={{ responsive: true } as any} // typing has no responsive
 					/>
 				)
 			}
