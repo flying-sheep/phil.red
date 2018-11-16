@@ -162,6 +162,15 @@ Add to ``~/.config/gtk-3.0/settings.ini``
     gtk-primary-button-warps-slider=false
     gtk-shell-shows-menubar=1
 
+For globalmenu support (see Kai Uwe’s post `GTK Global Menu`_) you need the package ``appmenu-gtk-module`` and:
+
+.. code:: zsh
+
+   export SAL_USE_VCLPLUGIN=gtk3
+   export GTK_MODULES=appmenu-gtk-module
+
+.. _GTK Global Menu: https://blog.broulik.de/2018/03/gtk-global-menu/
+
 Fontconfig
 ==========
 Something probably depended on `ttf-font` and pulled in `ttf-dejavu`. Remove it, KDE pulled in Noto.
