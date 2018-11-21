@@ -13,6 +13,7 @@ Basics
 - intel-ucode
 - nvidia
 - samsung-unified-driver
+- earlyoom (+ ``systemctl enable earlyoom``)
 
 Shell
 =====
@@ -168,6 +169,10 @@ For globalmenu support (see Kai Uwe’s post `GTK Global Menu`_) you need the pa
 
    export SAL_USE_VCLPLUGIN=gtk3
    export GTK_MODULES=appmenu-gtk-module
+
+For java applications, you additionally need the package ``vala-panel-appmenu-jayatana-git`` and to add ``-javaagent:/usr/share/java/jayatanaag.jar`` to the VM options. (in Intellij products, use Help→Edit custom VM options).
+
+However there seems to be a memory leak at least when using this with PyCharm.
 
 .. _GTK Global Menu: https://blog.broulik.de/2018/03/gtk-global-menu/
 
