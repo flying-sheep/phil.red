@@ -28,7 +28,7 @@ export class MarkdownNode extends React.Component
 		return { errorMessage: error.message }
 	}
 	
-	render(): React.ReactElement<any> | null {
+	render(): React.ReactNode {
 		const { token } = this.props
 		const { errorMessage } = this.state
 		if (errorMessage !== null) {
@@ -36,9 +36,9 @@ export class MarkdownNode extends React.Component
 		}
 		switch (token.type) {
 		case 'inline':
-			return <>{convertChildren(token)}</>
+			return convertChildren(token)
 		case 'text':
-			return <>{token.content}</>
+			return token.content
 		case 'paragraph':
 			return <Typography paragraph>{convertChildren(token)}</Typography>
 		case 'heading':
@@ -65,8 +65,10 @@ export class MarkdownNode extends React.Component
 	}
 }
 
-function convertChildren(token: Token): React.ReactElement<MarkdownElementProps>[] {
-	return (token.children || []).map(tok => <MarkdownNode token={tok}/>)
+function convertChildren(token: Token): React.ReactChild[] {
+	return React.Children.toArray(
+		(token.children || []).map(tok => <MarkdownNode token={tok}/>),
+	)
 }
 
 export default class Markdown extends Markup<Token> {

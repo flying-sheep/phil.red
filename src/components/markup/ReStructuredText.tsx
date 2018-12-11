@@ -59,7 +59,7 @@ export class ReStructuredTextNode extends React.Component
 		return { header, params, body }
 	}
 	
-	render(): React.ReactElement<any> | null {
+	render(): React.ReactNode {
 		const { node, level } = this.props
 		const { errorMessage } = this.state
 		const references = this.context
@@ -68,7 +68,7 @@ export class ReStructuredTextNode extends React.Component
 		}
 		switch (node.type) {
 		case 'document':
-			return <>{convertChildren(node, level)}</>
+			return convertChildren(node, level)
 		case 'comment':
 			return null
 		case 'reference': {
@@ -78,14 +78,14 @@ export class ReStructuredTextNode extends React.Component
 		case 'section':
 			return <section>{convertChildren(node, level + 1)}</section>
 		case 'title': {
-			if (level < 1) return <>{`Header with level ${level} < 1`}</>
+			if (level < 1) return `Header with level ${level} < 1`
 			const hLevel = Math.min(level, 6)
 			return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
 		}
 		case 'paragraph':
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>
 		case 'text':
-			return <>{`${node.value}\n`}</>
+			return `${node.value}\n`
 		case 'literal':
 			return <code>{convertChildren(node, level)}</code>
 		case 'emphasis':
@@ -153,7 +153,9 @@ export class ReStructuredTextNode extends React.Component
 }
 
 function convertChildren(node: Node, level: number): React.ReactNode[] {
-	return (node.children || []).map(n => <ReStructuredTextNode node={n} level={level}/>)
+	return React.Children.toArray(
+		(node.children || []).map(n => <ReStructuredTextNode node={n} level={level}/>),
+	)
 }
 
 function* extractTargets(node: Node): IterableIterator<[string, string]> {
