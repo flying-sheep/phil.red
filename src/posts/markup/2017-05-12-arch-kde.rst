@@ -46,6 +46,7 @@ Others
 - rambox-bin
 - steam (+ lib32-nvidia-utils)
 - otf-fira-code or ttf-iosevka (the latter has variants)
+- ttf-twemoji-color (and a fontconfig inspired by ``/etc/fonts/conf.avail/56-ttf-twemoji-color.conf``)
 - polkit-use-wheel-group
 
 KDE
