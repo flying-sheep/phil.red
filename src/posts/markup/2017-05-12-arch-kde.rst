@@ -57,6 +57,7 @@ Plasma
 - plasma5-applets-eventcalendar
 - plasma5-applets-redshift-control
 - kdeconnect
+- kwin-effect-shapecorners-git
 
 Utilities & KCMs
 ----------------
