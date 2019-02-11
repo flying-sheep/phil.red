@@ -20,7 +20,7 @@ Shell
 - zsh
 - vim
 - sudo (``visudo`` → ``:wheel …``)
-- openssh
+- openssh (+ mosh oder eternalterminal)
 - prezto-git
 - ripgrep
 - mlocate
