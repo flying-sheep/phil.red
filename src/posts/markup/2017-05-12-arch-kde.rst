@@ -133,21 +133,13 @@ Time to spin down those old-fashined HDDs, `using a udev rule or oneshot service
 
 SSH
 ===
-Uncomment the SSH line in the ``~/.zpreztorc``:
+Install ``plasma-workspace-agent-ssh`` and add ``AddKeysToAgent yes`` to ``~/.ssh/config``
 
-.. code:: zsh
+.. export SSH_ASKPASS='/usr/bin/ksshaskpass'
 
-    zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+This will only enable the agent in your plasma sessions however, so you might want to go for the `systemd user service`_
 
-Add to ``~/.zshenv``:
-
-.. code:: zsh
-
-    export SSH_ASKPASS='/usr/bin/ksshaskpass'
-
-If `sorin-ionescu/prezto#1320 <https://github.com/sorin-ionescu/prezto/issues/1320>`_ isn’t fixed,
-you need to add ``</dev/null`` after each ``ssh-add`` in ``/usr/lib/prezto/modules/ssh/init.zsh``
-
+.. _`systemd user service`: https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
 
 Lesspipe
 ========
