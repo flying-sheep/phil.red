@@ -133,11 +133,22 @@ Time to spin down those old-fashined HDDs, `using a udev rule or oneshot service
 
 SSH
 ===
-Install ``plasma-workspace-agent-ssh`` and add ``AddKeysToAgent yes`` to ``~/.ssh/config``
+I was long confused how that agent stuff worked but it’s easy:
+SSH (and things using it, like Git) simply asks a running agent (identified by ``$SSH_AUTH_SOCK`` existing) for your identity.
+So what you want to do is start the agent and set ``$SSH_AUTH_SOCK`` once for your whole session
+(i.e. not in a shell, but at a higher level). In Plasma, that’s easy via env scripts:
 
-.. export SSH_ASKPASS='/usr/bin/ksshaskpass'
+Install ``plasma-workspace-agent-ssh``.
+If you want to be asked for your key only once, add ``AddKeysToAgent yes`` to ``~/.ssh/config``.
+If you want to avoid doing that even once, you can add the following to your `~/.zshrc`:
 
-This will only enable the agent in your plasma sessions however, so you might want to go for the `systemd user service`_
+.. code:: zsh
+
+   # No TTY may be attached, SSH_ASKPASS and DISPLAY need to be set.
+   export SSH_ASKPASS='/usr/bin/ksshaskpass'
+   DISPLAY= ssh-add </dev/null
+
+``plasma-workspace-agent-ssh`` will only enable the agent in your plasma sessions, so you might want to go for the `systemd user service`_
 
 .. _`systemd user service`: https://wiki.archlinux.org/index.php/SSH_keys#Start_ssh-agent_with_systemd_user
 
