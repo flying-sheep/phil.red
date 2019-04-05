@@ -81,6 +81,8 @@ File Management
 ---------------
 - dolphin
 - dolphin-plugins
+- kdegraphics-thumbnailers
+- resvg (contains fast SVG thumbnailer)
 - filelight
 - ark
 - kdf
