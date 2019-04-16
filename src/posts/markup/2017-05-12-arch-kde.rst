@@ -238,6 +238,10 @@ Plasma Calendar
 ===============
 The builtin version would use ``kdepim-addons`` and ``korganizer``, but ``plasma5-applets-eventcalendar`` has less overhead
 
+LibreOffice
+===========
+In order to not have two global menus, uncomment the “kde5” line in ``/etc/profile.d/libreoffice-fresh.sh``
+
 Systemd
 =======
 There are only few services that have to be enabled:
