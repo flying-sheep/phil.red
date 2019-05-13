@@ -58,6 +58,7 @@ Plasma
 - plasma5-applets-redshift-control
 - kdeconnect
 - kwin-effect-shapecorners-git
+- kwin-scripts-forceblur (for yakuake blurring)
 - kwin-decoration-sierra-breeze-enhanced-git
 - better-plasma5-video-wallpaper-git
 
