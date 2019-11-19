@@ -138,7 +138,7 @@ export class ReStructuredTextNode extends React.Component
 					<Plotly
 						url={header || ''}
 						onClickLink={params.onClickLink}
-						style={{ width: '100%', height: '400px', maxHeight: '60vw' }}
+						style={{ width: '100%' }}
 						config={{ responsive: true } as any} // typing has no responsive
 					/>
 				)
