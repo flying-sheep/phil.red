@@ -15,7 +15,7 @@ import conditional from 'rollup-plugin-conditional'
 
 import autoprefixer from 'autoprefixer'
 
-import textdir from './rollup-plugin-textdir.js'
+import textdir from './src/build-tools/rollup-plugin-textdir'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isDev = NODE_ENV === 'development'
@@ -41,7 +41,7 @@ export default {
 	plugins: [
 		analyze({
 			writeTo(formatted) {
-				fs.writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e): {}))
+				fs.writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e) : {}))
 			},
 		}),
 		postcss({
