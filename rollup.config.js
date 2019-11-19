@@ -1,21 +1,19 @@
 /* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
 
-import fs from 'fs'
+import { plugin as analyze } from 'https://unpkg.com/rollup-plugin-analyzer@3.2'
+import replace from 'https://unpkg.com/rollup-plugin-replace@2.2'
+import nodeResolve from 'https://unpkg.com/rollup-plugin-node-resolve@5.2'
+import commonjs from 'https://unpkg.com/rollup-plugin-commonjs@10.1'
+import builtins from 'https://unpkg.com/rollup-plugin-node-builtins@2.1'
+import json from 'https://unpkg.com/rollup-plugin-json@4.0'
+import typescript from 'https://unpkg.com/@wessberg/rollup-plugin-ts@1.1'
+import postcss from 'https://unpkg.com/rollup-plugin-postcss-modules@2.0'
+import serve from 'https://unpkg.com/rollup-plugin-serve@1.0'
+import conditional from 'https://unpkg.com/rollup-plugin-conditional@3.1'
 
-import { plugin as analyze } from 'rollup-plugin-analyzer'
-import replace from 'rollup-plugin-replace'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import builtins from 'rollup-plugin-node-builtins'
-import json from 'rollup-plugin-json'
-import typescript from '@wessberg/rollup-plugin-ts'
-import postcss from 'rollup-plugin-postcss-modules'
-import serve from 'rollup-plugin-serve'
-import conditional from 'rollup-plugin-conditional'
+import autoprefixer from 'https://unpkg.com/autoprefixer@9.6'
 
-import autoprefixer from 'autoprefixer'
-
-import textdir from './rollup-plugin-textdir.js'
+import textdir from './rollup-plugin-textdir.ts'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isDev = NODE_ENV === 'development'
@@ -41,7 +39,8 @@ export default {
 	plugins: [
 		analyze({
 			writeTo(formatted) {
-				fs.writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e): {}))
+				const encoder = new TextEncoder()
+				Deno.writeFile('dist/bundle.log', encoder.encode(formatted)).then(e => (e !== null ? console.error(e): {}))
 			},
 		}),
 		postcss({
