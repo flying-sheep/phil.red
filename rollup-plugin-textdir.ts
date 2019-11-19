@@ -1,4 +1,4 @@
-/* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
+/* global Deno */
 
 import { walk } from 'https://deno.land/std/fs/mod.ts'
 import * as path from 'https://deno.land/std/path/mod.ts'
@@ -48,11 +48,11 @@ export default function textdir(config: Config = {}) {
 		},
 		async load(id) {
 			const paths = []
-			for await (const path of await doGlob(id)) paths.push(path)
+			for await (const p of await doGlob(id)) paths.push(p)
 			if (paths.length === 0) return null
-			const contents = await Promise.all(paths.map(p => {
+			const contents = await Promise.all(paths.map((p) => {
 				const decoder = new TextDecoder('utf-8')
-				return Deno.readFile("hello.txt").then(d => decoder.decode(d))
+				return Deno.readFile(p).then(d => decoder.decode(d))
 			}))
 			const map = zipObject(paths.map(p => path.basename(p)), contents)
 			return `export default ${JSON.stringify(map)}`

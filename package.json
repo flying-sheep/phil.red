@@ -8,8 +8,8 @@
 	"author": "Philipp A. <flying-sheep@web.de>",
 	"license": "GPL-3.0",
 	"scripts": {
-		"start": "rollup -cw",
-		"build": "rollup -c",
+		"start": "deno rollup.ts -w",
+		"build": "deno rollup.ts",
 		"init-css": "./init-css.js",
 		"test": "eslint *.js src/**/*.ts*"
 	},
