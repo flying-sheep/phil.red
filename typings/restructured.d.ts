@@ -11,8 +11,13 @@ declare module 'restructured' {
 		'interpreted_text' |
         'emphasis' |
         'directive' |
-        'bullet_list' |
-        'list_item'
+		'bullet_list' |
+		'enumerated_list' |
+		'list_item' |
+		'definition_list' |
+		'definition_list_item' |
+		'term' |
+		'definition'
 	)
 	export type RoleType = (
 		'math'

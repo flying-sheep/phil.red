@@ -92,13 +92,24 @@ export class ReStructuredTextNode extends React.Component
 			return <em>{convertChildren(node, level)}</em>
 		case 'bullet_list':
 			return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
+		case 'enumerated_list':
+			return <ol>{convertChildren(node, level)}</ol>
 		case 'list_item':
 			return <li>{convertChildren(node, level)}</li>
+		case 'definition_list':
+			return <dl>{convertChildren(node, level)}</dl>
+		case 'definition_list_item':
+			return <>{convertChildren(node, level)}</>
+		case 'term':
+			return <dt>{convertChildren(node, level)}</dt>
+		case 'definition':
+			return <dd>{convertChildren(node, level)}</dd>
 		case 'interpreted_text':
 			switch (node.role) {
 			case 'math':
 				return <InlineMath math={(node.children || []).map(text => text.value).join('')}/>
 			case undefined:
+			case null:
 				return <em>{convertChildren(node, level)}</em>
 			default:
 				throw new ASTError(`Unknown role “${node.role}”`, node)

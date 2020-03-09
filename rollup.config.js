@@ -42,7 +42,7 @@ export default {
 	plugins: [
 		analyze({
 			writeTo(formatted) {
-				fs.writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e): {}))
+				fs.writeFile('dist/bundle.log', formatted, e => (e !== null ? console.error(e) : {}))
 			},
 		}),
 		postcss({
@@ -71,6 +71,15 @@ export default {
 				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],
 				'node_modules/react-dom/index.js': ['render'],
 				'node_modules/react-katex/dist/react-katex.js': ['InlineMath', 'DisplayMath'],
+				'node_modules/react-router-dom/index.js': [
+					'BrowserRouter',
+					'Link',
+					'Redirect',
+					'Route',
+					'RouteComponentProps',
+					'Switch',
+					'withRouter',
+				],
 				'node_modules/@material-ui/core/index.js': [
 					'List',
 					'ListItem',
