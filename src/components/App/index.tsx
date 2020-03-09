@@ -11,6 +11,7 @@ import AppBar from '@material-ui/core/Toolbar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 
+import Home from '../Home'
 import Blog from '../Blog'
 
 import styles from './style.css'
@@ -29,7 +30,7 @@ function App({ location, history }: RouteComponentProps) {
 			</AppBar>
 			<main className={styles.layout}>
 				<Switch>
-					<Route path="/" exact component={() => <span>Home</span>}/>
+					<Route path="/" exact component={Home}/>
 					<Route path="/blog" component={Blog}/>
 					<Redirect to="/"/>
 				</Switch>

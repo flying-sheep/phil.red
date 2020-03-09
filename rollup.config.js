@@ -81,6 +81,10 @@ export default {
 					'withRouter',
 				],
 				'node_modules/@material-ui/core/index.js': [
+					'CardActionArea',
+					'Card',
+					'CardContent',
+					'CardHeader',
 					'List',
 					'ListItem',
 					'ListItemIcon',

@@ -13,6 +13,10 @@ function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
+export function postURL(date: Date, slug: string) {
+	return `${date2url(date)}/${slug}`
+}
+
 function Index({ match }: RouteComponentProps) {
 	return (
 		<List component="nav">
@@ -20,7 +24,7 @@ function Index({ match }: RouteComponentProps) {
 				const { date } = post
 				return (
 					<ListItemLink
-						to={`${match.url}/${date2url(date)}/${slug}`}
+						to={`${match.url}/${postURL(date, slug)}`}
 						primary={post.renderer.title}
 					/>
 				)
