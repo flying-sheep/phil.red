@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.5",
+		"@material-ui/icons": "^4.9.1",
 		"@material-ui/utils": "^4.7.1",
 		"katex": "^0.11.1",
 		"markdown-it": "^10.0.0",

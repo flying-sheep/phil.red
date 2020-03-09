@@ -3,7 +3,7 @@ import {
 	RouteComponentProps,
 	Route, Switch, Redirect,
 } from 'react-router-dom'
-import { List } from '@material-ui/core'
+import { List, Typography } from '@material-ui/core'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
@@ -25,7 +25,12 @@ function Index({ match }: RouteComponentProps) {
 				return (
 					<ListItemLink
 						to={`${match.url}/${postURL(date, slug)}`}
-						primary={post.renderer.title}
+						primary={(
+							<>
+								<Typography variant="subtitle2">{post.date.toISOString().substr(0, 10)}</Typography>
+								{post.renderer.title}
+							</>
+						)}
 					/>
 				)
 			})}
