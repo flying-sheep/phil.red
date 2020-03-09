@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
-import { ThemeStyle } from '@material-ui/core/styles/createTypography'
+import { Variant } from '@material-ui/core/styles/createTypography'
 
 import Token from 'markdown-it/lib/token'
 
@@ -42,7 +42,7 @@ export class MarkdownNode extends React.Component
 		case 'paragraph':
 			return <Typography paragraph>{convertChildren(token)}</Typography>
 		case 'heading':
-			return <Typography variant={token.tag as ThemeStyle}>{convertChildren(token)}</Typography>
+			return <Typography variant={token.tag as Variant}>{convertChildren(token)}</Typography>
 		case 'link': {
 			const hrefs = token.attrs.filter(([a, v]) => a === 'href')
 			return <a href={hrefs[0][1]}>{convertChildren(token)}</a>
@@ -65,10 +65,9 @@ export class MarkdownNode extends React.Component
 	}
 }
 
-function convertChildren(token: Token): React.ReactChild[] {
-	return React.Children.toArray(
-		(token.children || []).map(tok => <MarkdownNode token={tok}/>),
-	)
+function convertChildren(token: Token): React.ReactNode[] {
+	const children = (token.children || []).map(tok => <MarkdownNode token={tok}/>)
+	return React.Children.toArray(children)
 }
 
 export default class Markdown extends Markup<Token> {

@@ -19,6 +19,7 @@ import textdir from './rollup-plugin-textdir.js'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isDev = NODE_ENV === 'development'
+const isWatching = process.env.ROLLUP_WATCH !== undefined
 
 export default {
 	input: 'src/index.tsx',
@@ -59,22 +60,24 @@ export default {
 		typescript(),
 		nodeResolve({
 			preferBuiltins: true,
+			customResolveOptions: {
+				packageFilter(pkg, file) {
+					return pkg
+				},
+			},
 		}),
 		commonjs({ // https://github.com/rollup/rollup-plugin-commonjs/issues/185
 			namedExports: {
 				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],
 				'node_modules/react-dom/index.js': ['render'],
-				'node_modules/@material-ui/core/styles/index.js': [
-					'MuiThemeProvider',
-					'createGenerateClassName',
-					'createMuiTheme',
-					'withTheme',
-					'withStyles',
-					'createStyles',
-					'jssPreset',
-				],
-				'node_modules/@material-ui/core/Modal/index.js': ['ModalManager'],
 				'node_modules/react-katex/dist/react-katex.js': ['InlineMath', 'DisplayMath'],
+				'node_modules/@material-ui/core/index.js': [
+					'List',
+					'ListItem',
+					'ListItemIcon',
+					'ListItemText',
+					'Typography',
+				],
 			},
 		}),
 		builtins(),
@@ -82,7 +85,7 @@ export default {
 		textdir({
 			include: '*.@(md|rst)',
 		}),
-		conditional(isDev, () => [
+		conditional(isDev && isWatching, () => [
 			serve({
 				contentBase: '.',
 				historyApiFallback: true,

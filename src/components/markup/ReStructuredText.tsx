@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Typography } from '@material-ui/core'
-import { ThemeStyle } from '@material-ui/core/styles/createTypography'
+import { Variant } from '@material-ui/core/styles/createTypography'
 import { Node, DirectiveType } from 'restructured'
 import { InlineMath } from 'react-katex'
 
@@ -80,7 +80,7 @@ export class ReStructuredTextNode extends React.Component
 		case 'title': {
 			if (level < 1) return `Header with level ${level} < 1`
 			const hLevel = Math.min(level, 6)
-			return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
+			return <Typography variant={`h${hLevel}` as Variant}>{convertChildren(node, level)}</Typography>
 		}
 		case 'paragraph':
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>
@@ -153,9 +153,8 @@ export class ReStructuredTextNode extends React.Component
 }
 
 function convertChildren(node: Node, level: number): React.ReactNode[] {
-	return React.Children.toArray(
-		(node.children || []).map(n => <ReStructuredTextNode node={n} level={level}/>),
-	)
+	const children = (node.children || []).map(n => <ReStructuredTextNode node={n} level={level}/>)
+	return React.Children.toArray(children)
 }
 
 function* extractTargets(node: Node): IterableIterator<[string, string]> {
