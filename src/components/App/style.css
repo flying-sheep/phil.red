@@ -7,3 +7,7 @@
     margin: 0 auto;
     padding: 0 calc(var(--spacing-unit) * 3);
 }
+
+.toolbar {
+	justify-content: center;
+}

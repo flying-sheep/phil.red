@@ -1,28 +1,15 @@
 import * as React from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-
-import posts from '../../posts'
-import { postURL } from '../Blog'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
 	box: {
 		marginBlock: `${theme.spacing(4)}px`,
 	},
 }))
-
-const [firstSlug, firstPost] = (
-	Object.entries(posts).sort(
-		(a, b) => b[1].date.getTime() - a[1].date.getTime(),
-	)[0]
-)
-const firstURL = postURL(firstPost.date, firstSlug)
 
 export default function Home({ match, ...props }: RouteComponentProps) {
 	const classes = useStyles(props)
@@ -33,22 +20,22 @@ export default function Home({ match, ...props }: RouteComponentProps) {
 				phil.red
 			</Typography>
 			<Typography variant="h5" align="center" color="textSecondary" paragraph className={classes.box}>
-				coder, computational biologist, anarchist.
-				<br/>
-				check out my newest rant about
+				programming, science, emancipation
 			</Typography>
-			<CardActionArea component={Link} to={`/blog/${firstURL}`}>
-				<Card>
-					<CardContent>
-						<Typography variant="h3">
-							{firstPost.renderer.getTitle()}
-						</Typography>
-						<Typography variant="subtitle1">
-							{firstPost.date.toISOString().substr(0, 10)}
-						</Typography>
-					</CardContent>
-				</Card>
-			</CardActionArea>
+			<Typography variant="h6" align="center" paragraph>
+				What software won’t sell you out?
+				<br/>
+				When do we get full automation and eternal life?
+				<br/>
+				Why are people blaming immigrants, not capitalism?
+			</Typography>
+			<Typography variant="h6" align="center" paragraph>
+				I won’t be the one fix those questions.
+				<br/>
+				Currently most progress happens for the first.
+				<br/>
+				But I will never stop living for all.
+			</Typography>
 		</Container>
 		// <CardMedia image={firstPost.image} title={post.imageTitle} />
 	)

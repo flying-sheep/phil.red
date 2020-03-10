@@ -8,6 +8,7 @@ import {
 
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
@@ -16,6 +17,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Home from '../Home'
 import Blog from '../Blog'
 import Code from '../Code'
+import ElevationScroll from './ElevationScroll'
 
 import styles from './style.css'
 
@@ -34,13 +36,21 @@ function App({ location, history }: RouteComponentProps) {
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline/>
-			<Toolbar>
-				<Tabs value={currentTab} onChange={(e, value) => history.push(value)}>
-					<Tab label="Home" value="/"/>
-					<Tab label="Blog" value="/blog"/>
-					<Tab label="Code" value="/code"/>
-				</Tabs>
-			</Toolbar>
+			<ElevationScroll>
+				<AppBar position="sticky" style={{ background: theme.palette.background.default }}>
+					<Toolbar component="nav" classes={{ root: styles.toolbar }}>
+						<Tabs
+							centered
+							value={currentTab}
+							onChange={(e, value) => history.push(value)}
+						>
+							<Tab label="Blog" value="/blog"/>
+							<Tab label="Home" value="/"/>
+							<Tab label="Code" value="/code"/>
+						</Tabs>
+					</Toolbar>
+				</AppBar>
+			</ElevationScroll>
 			<main className={styles.layout}>
 				<Switch>
 					<Route path="/" exact component={Home}/>
