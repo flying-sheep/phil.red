@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 interface LilProps extends LinkProps {
 	icon?: React.ReactElement<any>,
 	primary?: React.ReactNode,
+	secondary?: React.ReactNode,
 }
 
 export default class ListItemLink extends React.Component<LilProps> {
@@ -18,17 +19,19 @@ export default class ListItemLink extends React.Component<LilProps> {
 	}
 	
 	renderLink({ children, className, role }: ListItemProps) {
-		const { icon, primary, ...props } = this.props
+		const {
+			icon, primary, secondary, ...props
+		} = this.props
 		return <Link {...props} className={className} role={role}>{children}</Link>
 	}
 
 	render() {
-		const { icon, primary } = this.props
+		const { icon, primary, secondary } = this.props
 		return (
 			<li>
 				<ListItem button component={this.renderLink}>
 					{icon && <ListItemIcon>{icon}</ListItemIcon>}
-					<ListItemText inset primary={primary}/>
+					<ListItemText inset primary={primary} secondary={secondary}/>
 				</ListItem>
 			</li>
 		)

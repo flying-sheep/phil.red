@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom'
 
 import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
@@ -20,22 +19,24 @@ export function postURL(date: Date, slug: string) {
 }
 
 function Index({ match }: RouteComponentProps) {
+	const sorted = (
+		Object.entries(posts)
+			.map(([slug, post]) => ({
+				slug, post, date: post.date, url: postURL(post.date, slug),
+			}))
+			.sort((a, b) => b.date.getTime() - a.date.getTime())
+	)
 	return (
 		<List component="nav">
-			{Object.entries(posts).map(([slug, post]) => {
-				const { date } = post
-				return (
-					<ListItemLink
-						to={`${match.url}/${postURL(date, slug)}`}
-						primary={(
-							<>
-								<Typography variant="subtitle2">{post.date.toISOString().substr(0, 10)}</Typography>
-								{post.renderer.title}
-							</>
-						)}
-					/>
-				)
-			})}
+			{sorted.map(({
+				slug, post, date, url,
+			}) => (
+				<ListItemLink
+					to={`${match.url}/${url}`}
+					primary={post.renderer.title}
+					secondary={date.toISOString().substr(0, 10)}
+				/>
+			))}
 		</List>
 	)
 }
