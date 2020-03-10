@@ -1,7 +1,9 @@
 import * as React from 'react'
 import { Link, LinkProps } from 'react-router-dom'
-import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
-import { ListItemProps } from '@material-ui/core/ListItem'
+
+import ListItem, { ListItemProps } from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 
 interface LilProps extends LinkProps {

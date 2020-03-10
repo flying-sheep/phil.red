@@ -6,10 +6,12 @@ import {
 	Redirect,
 } from 'react-router-dom'
 
-import {
-	CssBaseline, Tab, Tabs, Toolbar, ThemeProvider,
-	useMediaQuery, createMuiTheme,
-} from '@material-ui/core'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Toolbar from '@material-ui/core/Toolbar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import Home from '../Home'
 import Blog from '../Blog'

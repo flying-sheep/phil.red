@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { Typography } from '@material-ui/core'
+
+import Typography from '@material-ui/core/Typography'
 import { Variant } from '@material-ui/core/styles/createTypography'
+
 import { Node, DirectiveType } from 'restructured'
 import { InlineMath } from 'react-katex'
 

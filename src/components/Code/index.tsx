@@ -1,10 +1,22 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 
-import {
-	Link, List, ListItem, ListItemAvatar, Avatar, ListItemText,
-} from '@material-ui/core'
-import i from '@material-ui/icons'
+import Link from '@material-ui/core/Link'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from '@material-ui/core/Avatar'
+import ListItemText from '@material-ui/core/ListItemText'
+import List from '@material-ui/core/List'
+
+import GitHub from '@material-ui/icons/GitHub'
+import AllInclusive from '@material-ui/icons/AllInclusive'
+import ViewComfy from '@material-ui/icons/ViewComfy'
+import SwapCalls from '@material-ui/icons/SwapCalls'
+import BlurOn from '@material-ui/icons/BlurOn'
+import BubbleChart from '@material-ui/icons/BubbleChart'
+import EmojiSymbols from '@material-ui/icons/EmojiSymbols'
+import Settings from '@material-ui/icons/Settings'
+import Web from '@material-ui/icons/Web'
 
 import PythonIcon from './python-icon'
 import ArchIcon from './arch-icon'
@@ -35,50 +47,50 @@ const GitHubItems = () => (
 		<ListItem><ListItemText primary="2nd author"/></ListItem>
 		<ListItemLink
 			href="https://github.com/theislab/scanpy"
-			icon={i.AllInclusive}
+			icon={AllInclusive}
 			text="scanpy"
 			sub="single cell analysis in Python"
 		/>
 		<ListItem><ListItemText primary="1st, main, or only author"/></ListItem>
 		<ListItemLink
 			href="https://github.com/theislab/anndata"
-			icon={i.ViewComfy}
+			icon={ViewComfy}
 			text="AnnData"
 			sub="annotated single cell expression matrix for Python"
 		/>
 		<ListItemLink
 			href="https://github.com/theislab/anndata2ri"
-			icon={i.SwapCalls}
+			icon={SwapCalls}
 			text="anndata2ri"
 			sub="convert between AnnData (Python) and SingleCellExperiment (R)"
 		/>
 		<ListItemLink
 			href="https://github.com/theislab/destiny"
-			icon={i.BlurOn}
+			icon={BlurOn}
 			text="destiny"
 			sub="diffusion maps, pseudotime, and gene relevance in R"
 		/>
 		<ListItemLink
 			href="https://github.com/IRkernel/IRkernel"
-			icon={i.BubbleChart}
+			icon={BubbleChart}
 			text="IRkernel"
 			sub="R kernel for JupyterLab/Notebooks"
 		/>
 		<ListItemLink
 			href="https://github.com/IRkernel/repr"
-			icon={i.EmojiSymbols}
+			icon={EmojiSymbols}
 			text="repr"
 			sub="rich representations for R objects"
 		/>
 		<ListItemLink
 			href="https://github.com/flying-sheep/rust-rst"
-			icon={i.Settings}
+			icon={Settings}
 			text="rust-rst"
 			sub="reStructuredText parser and renderer in Rust"
 		/>
 		<ListItemLink
 			href="https://github.com/flying-sheep/phil.red"
-			icon={i.Web}
+			icon={Web}
 			text="phil.red"
 			sub="this website"
 		/>
@@ -90,7 +102,7 @@ export default function Blog({ match }: RouteComponentProps) {
 		<List>
 			<ListItemLink
 				href="https://github.com/flying-sheep"
-				icon={i.GitHub}
+				icon={GitHub}
 				text="GitHub"
 				sub="flying-sheep"
 			/>

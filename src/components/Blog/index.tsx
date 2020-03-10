@@ -3,7 +3,9 @@ import {
 	RouteComponentProps,
 	Route, Switch, Redirect,
 } from 'react-router-dom'
-import { List, Typography } from '@material-ui/core'
+
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
