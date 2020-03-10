@@ -82,6 +82,7 @@ export default {
 				],
 				'node_modules/@material-ui/core/index.js': [
 					'AppBar',
+					'Avatar',
 					'CardActionArea',
 					'Card',
 					'CardContent',
@@ -92,8 +93,10 @@ export default {
 					'Link',
 					'List',
 					'ListItem',
+					'ListItemAvatar',
 					'ListItemIcon',
 					'ListItemText',
+					'SvgIcon',
 					'Tab',
 					'Tabs',
 					'Toolbar',
