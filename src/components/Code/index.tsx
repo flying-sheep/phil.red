@@ -36,7 +36,7 @@ const GitHubList = () => (
 		<ListItemLink href="https://github.com/theislab/anndata" icon={i.ViewComfy} sub="annotated single cell expression matrix">AnnData</ListItemLink>
 		<ListItemLink href="https://github.com/theislab/anndata2ri" icon={i.SwapCalls} sub="convert between AnnData and SingleCellExperiment">anndata2ri</ListItemLink>
 		<ListItemLink href="https://github.com/IRkernel/IRkernel" icon={i.BubbleChart} sub="R kernel for JupyterLab/Notebooks">IRkernel</ListItemLink>
-		<ListItemLink href="https://github.com/IRkernel/repr" icon={i.EmojiSymbols} sub="Rich representations for R objects">repr</ListItemLink>
+		<ListItemLink href="https://github.com/IRkernel/repr" icon={i.EmojiSymbols} sub="rich representations for R objects">repr</ListItemLink>
 		<ListItemLink href="https://github.com/flying-sheep/rust-rst" icon={i.Settings} sub="reStructuredText parser and renderer in Rust">rust-rst</ListItemLink>
 		<ListItemLink href="https://github.com/flying-sheep/phil.red" icon={i.Web} sub="this website">phil.red</ListItemLink>
 	</List>
