@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom'
 
 import {
-	CssBaseline, Tab, Tabs, Toolbar,
+	CssBaseline, Tab, Tabs, Toolbar, ThemeProvider,
+	useMediaQuery, createMuiTheme,
 } from '@material-ui/core'
 
 import Home from '../Home'
@@ -16,11 +17,20 @@ import Code from '../Code'
 
 import styles from './style.css'
 
-
 function App({ location, history }: RouteComponentProps) {
+	const dark = useMediaQuery('(prefers-color-scheme: dark)')
+	const theme = React.useMemo(
+		() => createMuiTheme({
+			palette: {
+				type: dark ? 'dark' : 'light',
+			},
+		}),
+		[dark],
+	)
+	
 	const currentTab = `/${location.pathname.split('/')[1]}`
 	return (
-		<>
+		<ThemeProvider theme={theme}>
 			<CssBaseline/>
 			<Toolbar>
 				<Tabs value={currentTab} onChange={(e, value) => history.push(value)}>
@@ -37,7 +47,7 @@ function App({ location, history }: RouteComponentProps) {
 					<Redirect to="/"/>
 				</Switch>
 			</main>
-		</>
+		</ThemeProvider>
 	)
 }
 
