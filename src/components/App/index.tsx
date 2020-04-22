@@ -37,7 +37,13 @@ function App({ location, history }: RouteComponentProps) {
 		<ThemeProvider theme={theme}>
 			<CssBaseline/>
 			<ElevationScroll>
-				<AppBar position="sticky" style={{ background: theme.palette.background.default }}>
+				<AppBar
+					position="sticky"
+					style={{
+						color: theme.palette.text.primary,
+						background: theme.palette.background.default,
+					}}
+				>
 					<Toolbar component="nav" classes={{ root: styles.toolbar }}>
 						<Tabs
 							centered
