@@ -1,5 +1,5 @@
 import Markup from './Markup'
-import Markdown from './Markdown'
-import ReStructuredText from './ReStructuredText'
+import Markdown from '../../markup/Markdown'
+import ReStructuredText from '../../markup/ReStructuredText'
 
 export { Markup, Markdown, ReStructuredText }

@@ -2,7 +2,7 @@
 
 import fs from 'fs'
 
-import { plugin as analyze } from 'rollup-plugin-analyzer'
+import analyze from 'rollup-plugin-analyzer'
 import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
@@ -11,11 +11,10 @@ import json from 'rollup-plugin-json'
 import typescript from '@wessberg/rollup-plugin-ts'
 import postcss from 'rollup-plugin-postcss-modules'
 import serve from 'rollup-plugin-serve'
-import conditional from 'rollup-plugin-conditional'
 
 import autoprefixer from 'autoprefixer'
 
-import textdir from './src/build-tools/rollup-plugin-textdir'
+import renderdoc from './src/build-tools/rollup-plugin-renderdoc'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isDev = NODE_ENV === 'development'
@@ -79,14 +78,14 @@ export default {
 		}),
 		builtins(),
 		json(),
-		textdir({
+		renderdoc({
 			include: '*.@(md|rst)',
 		}),
-		conditional(isDev, () => [
+		...isDev ? [
 			serve({
 				contentBase: '.',
 				historyApiFallback: true,
 			}),
-		]),
+		] : [],
 	],
 }

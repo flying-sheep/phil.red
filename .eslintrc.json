@@ -18,6 +18,8 @@
         "no-dupe-args": 0,
         "no-undef": 0,
         "no-unused-vars": 0,
+		"no-useless-constructor": 0,
+		"no-empty-function": 0,
         "react/sort-comp": [2, {
             "order": [
                 "displayName",
