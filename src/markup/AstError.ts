@@ -1,9 +1,7 @@
-import { MarkupNode } from './MarkupDocument'
-
 export default class ASTError extends Error {
 	message: string
-	node: MarkupNode
-	constructor(message: string, node: MarkupNode) {
+	node: any
+	constructor(message: string, node: any) {
 		super(message)
 		this.message = message
 		this.node = node

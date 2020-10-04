@@ -59,10 +59,21 @@ export interface MarkupElementState {
 }
 
 function convertChildren(elem: Element | Document | Markup): React.ReactChild[] {
-	const children: Node[] = elem.children || []
 	return React.Children.toArray(
-		children.map(e => <MarkupNodeComponent node={e}/>),
+		elem.children.map(e => <MarkupNodeComponent node={e}/>),
 	)
+}
+
+function* extractTargets(elem: Element): IterableIterator<[string, string]> {
+	for (const child of elem.children) {
+		if (child.type === 'comment') {
+			const comment = (child.children as [rst.Node])[0].value as string
+			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
+			if (name !== null && href !== null) yield [name, href]
+		} else if (child.children) {
+			yield* extractTargets(child)
+		}
+	}
 }
 
 export class MarkupNodeComponent extends React.Component

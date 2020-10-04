@@ -9,6 +9,7 @@ export enum Type {
 	CodeBlock,
 	Table, Row, Cell,
 	// inline
+	LineBreak,
 	Emph,
 	Strong,
 	Link,
@@ -107,6 +108,9 @@ interface Cell extends Element { type: Type.Cell }
 export const Cell = mkFun<Cell>(Type.Cell)
 
 // Inline
+
+interface LineBreak extends Element { type: Type.LineBreak }
+export const LineBreak = mkFun<LineBreak>(Type.LineBreak)
 
 interface Emph extends Element { type: Type.Emph }
 export const Emph = mkFun<Emph>(Type.Emph)

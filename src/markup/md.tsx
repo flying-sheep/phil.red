@@ -9,11 +9,6 @@ import ASTError from './AstError'
 
 const NO_END = Symbol('no end')
 
-/** https://github.com/microsoft/TypeScript/issues/21699 */
-function x(n: unknown): m.Element {
-	return n as m.Element
-}
-
 function* tokens2ast(
 	tokens: Token[] | IterableIterator<Token>,
 	end: string | Symbol = NO_END,
@@ -47,25 +42,27 @@ function convertNode(token: Token): m.Node[] {
 	case 'text':
 		return [token.content]
 	case 'paragraph':
-		return [x(<m.Paragraph>{convertChildren(token)}</m.Paragraph>)]
+		return [<m.Paragraph>{convertChildren(token)}</m.Paragraph>]
 	case 'heading':
-		return [data(token.tag, {}, convertChildren(token))]
+		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.level
+		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
+		return [<m.Title level={parseInt(level)}>{convertChildren(token)}</m.Title>]
 	case 'link': {
 		const hrefs = token.attrs.filter(([a, v]) => a === 'href')
-		return [x(<a href={hrefs[0][1]}>{convertChildren(token)}</a>)]
+		return [<m.Link ref={{href: hrefs[0][1]}}>{convertChildren(token)}</m.Link>]
 	}
 	case 'hardbreak':
-		return [x(<br/>)]
+		return [<m.LineBreak/>]
 	case 'softbreak':
 		return []
 	case 'code_inline':
-		return [x(<code>{token.content}</code>)]
+		return [<m.Code>{token.content}</m.Code>]
 	case 'fence':
-		return [x(<pre><code>{token.content}</code></pre>)]
+		return [<m.CodeBlock>{token.content}</m.CodeBlock>]
 	case 'bullet_list':
-		return [x(<ul>{convertChildren(token)}</ul>)]
+		return [<m.BulletList>{convertChildren(token)}</m.BulletList>]
 	case 'list_item':
-		return [x(<li>{convertChildren(token)}</li>)]
+		return [<m.ListItem>{convertChildren(token)}</m.ListItem>]
 	default:
 		throw new ASTError(`Unknown token type “${token.type}”`, JSON.stringify(token))
 	}

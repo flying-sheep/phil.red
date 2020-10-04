@@ -127,18 +127,6 @@ function convertChildren(node: rst.Node, level: number): m.Node[] {
 	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => ns.concat(convertNode(n, level)), [])
 }
 
-function* extractTargets(node: rst.Node): IterableIterator<[string, string]> {
-	for (const child of node.children || []) {
-		if (child.type === 'comment') {
-			const comment = (child.children as [rst.Node])[0].value as string
-			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
-			if (name !== null && href !== null) yield [name, href]
-		} else if (child.children) {
-			yield* extractTargets(child)
-		}
-	}
-}
-
 function getTitle(root: m.Element): string {
 	const body = root.children
 	if (body === undefined || (body[0] as m.Element).type !== m.Type.Section) throw new ASTError('No section!', body && body[0])
