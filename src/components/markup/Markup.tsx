@@ -1,11 +1,14 @@
 import * as React from 'react'
 
 import { Typography } from '@material-ui/core'
+import { ThemeStyle } from '@material-ui/core/styles/createTypography'
+import { InlineMath } from 'react-katex'
 
 import ASTErrorMessage, { ASTErrorMessageProps } from './ASTErrorMessage'
-import { Document, Node, Element, Type } from '../../markup/MarkupDocument'
+import { Document, Node, Elem, Type, Bullet } from '../../markup/MarkupDocument'
+import ASTError from '../../markup/AstError'
+import Plotly from '../Plotly'
 
-const ReferenceContext = React.createContext({} as { [name: string ]: string})
 
 export interface MarkupProps {
 	doc: Document
@@ -28,40 +31,31 @@ export default class Markup extends React.Component {
 	}
 	
 	render(): React.ReactElement<any> {
-		const nodes = convertChildren(this)
-		const references: { [name: string]: string } = {}
-		for (const [name, target] of extractTargets(this.ast)) {
-			references[name] = target
-		}
-		const rendered = (
-			<ReferenceContext.Provider value={references}>
-				{nodes}
-			</ReferenceContext.Provider>
-		)
+		const nodes = convertChildren(this, 0)
 		if (process.env.NODE_ENV === 'development') {
 			return (
 				<article>
-					{rendered}
-					<pre>{JSON.stringify(rendered, undefined, '\t')}</pre>
+					{nodes}
+					<pre>{JSON.stringify(nodes, undefined, '\t')}</pre>
 				</article>
 			)
 		}
-		return <article>{rendered}</article>
+		return <article>{nodes}</article>
 	}
 }
 
 export interface MarkupElementProps {
 	node: Node
+	level: number
 }
 
 export interface MarkupElementState {
 	errorMessage: string | null
 }
 
-function convertChildren(elem: Element | Document | Markup): React.ReactChild[] {
-	return React.Children.toArray(
-		elem.children.map(e => <MarkupNodeComponent node={e}/>),
-	)
+function convertChildren(elem: Elem | Document | Markup, level: number): React.ReactNode[] {
+	const children = elem.children.map(e => <MarkupNodeComponent node={e} level={level}/>)
+	return React.Children.toArray(children)
 }
 
 export class MarkupNodeComponent extends React.Component
@@ -78,120 +72,60 @@ export class MarkupNodeComponent extends React.Component
 	render(): React.ReactNode {
 		const { node, level } = this.props
 		const { errorMessage } = this.state
-		const references = this.context
 		if (errorMessage !== null) {
-			return <ASTErrorMessage ast={node}>{errorMessage}</ASTErrorMessage>
+			return <ASTErrorMessage node={node}>{errorMessage}</ASTErrorMessage>
 		}
-		switch (token.type) {
-		case 'inline':
-			return convertChildren(token)
-		case 'text':
-			return token.content
-		case 'paragraph':
-			return <Typography paragraph>{convertChildren(token)}</Typography>
-		case 'heading':
-			return <Typography variant={token.tag as ThemeStyle}>{convertChildren(token)}</Typography>
-		case 'link': {
-			const hrefs = token.attrs.filter(([a, v]) => a === 'href')
-			return <a href={hrefs[0][1]}>{convertChildren(token)}</a>
-		}
-		case 'hardbreak':
-			return <br/>
-		case 'softbreak':
-			return <> </>
-		case 'code_inline':
-			return <code>{token.content}</code>
-		case 'fence':
-			return <pre><code>{token.content}</code></pre>
-		case 'bullet_list':
-			return <ul>{convertChildren(token)}</ul>
-		case 'list_item':
-			return <li>{convertChildren(token)}</li>
-		default:
-			throw new ASTError(`Unknown token type “${token.type}”`, token)
-		}
+		if (typeof node === 'string') return `${node}\n`
 		switch (node.type) {
-		case 'document':
-			return convertChildren(node, level)
-		case 'comment':
-			return null
-		case 'reference': {
-			const name = (node.children as [Node])[0].value as string
-			return <a href={references[name]}>{name}</a>
+		case Type.LineBreak:
+			return <br/>
+		case Type.Link: {
+			if ('name' in node.ref) throw new ASTError(`Unresolved reference ${node.ref.name}`, node)
+			return <a href={node.ref.href}>{convertChildren(node, level)}</a>
 		}
-		case 'section':
+		case Type.Section:
 			return <section>{convertChildren(node, level + 1)}</section>
-		case 'title': {
-			if (level < 1) return `Header with level ${level} < 1`
+		case Type.Title: {
+			if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node)
 			const hLevel = Math.min(level, 6)
 			return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
 		}
-		case 'paragraph':
+		case Type.Paragraph:
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>
-		case 'text':
-			return `${node.value}\n`
-		case 'literal':
+		case Type.Code:
 			return <code>{convertChildren(node, level)}</code>
-		case 'emphasis':
+		case Type.Emph:
 			return <em>{convertChildren(node, level)}</em>
-		case 'bullet_list':
-			return <ul className={node.bullet}>{convertChildren(node, level)}</ul>
-		case 'list_item':
+		case Type.Strong:
+			return <strong>{convertChildren(node, level)}</strong>
+		case Type.BulletList: {
+			const listStyleType = node.bullet == Bullet.text ? node.text : node.bullet
+			return <ul style={{listStyleType}}>{convertChildren(node, level)}</ul>
+		}
+		case Type.EnumList:
+			return <ul style={{listStyleType: node.enumeration}}>{convertChildren(node, level)}</ul>
+		case Type.ListItem:
 			return <li>{convertChildren(node, level)}</li>
-		case 'interpreted_text':
-			switch (node.role) {
-			case 'math':
-				return <InlineMath math={(node.children || []).map(text => text.value).join('')}/>
-			case undefined:
-				return <em>{convertChildren(node, level)}</em>
-			default:
-				throw new ASTError(`Unknown role “${node.role}”`, node)
-			}
-		case 'directive':
-			switch (node.directive as DirectiveType | 'plotly') {
-			case 'code':
-				return <pre><code>{convertChildren(node, level)}</code></pre>
-			case 'csv-table': {
-				const { header, params, body } = ReStructuredTextNode.parseDirective(node.children || [])
-				const delim = (() => {
-					switch (params.delim) {
-					case 'tab': return '\t'
-					case 'space': return ' '
-					default: return params.delim
-					}
-				})()
-				return (
-					<figure>
-						<table>
-							{body.map(r => (
-								<tr>
-									{r.split(delim).map(cell => (
-										<td>{cell}</td>
-									))}
-								</tr>
-							))}
-						</table>
-						{header && <figcaption>{header}</figcaption>}
-					</figure>
-				)
-			}
-			// custom
-			case 'plotly': {
-				const { header, params } = ReStructuredTextNode.parseDirective(node.children || [])
-				return (
-					<Plotly
-						url={header || ''}
-						onClickLink={params.onClickLink}
-						style={{ width: '100%' }}
-						config={{ responsive: true } as any} // typing has no responsive
-					/>
-				)
-			}
-			default:
-				throw new ASTError(`Unknown directive “${node.directive}”`, node)
-			}
-		default:
-			throw new ASTError(`Unknown node type “${node.type}”`, node)
+		case Type.InlineMath:
+			return <InlineMath math={node.math}/>
+		case Type.CodeBlock:
+			return <pre><code>{convertChildren(node, level)}</code></pre>
+		case Type.Table:
+			return (
+				<figure>
+					<table>{convertChildren(node, level)}</table>
+					{node.caption && <figcaption>{node.caption}</figcaption>}
+				</figure>
+			)
+		case Type.Row:
+			return <tr>{convertChildren(node, level)}</tr>
+		case Type.Cell:
+			return <td>{convertChildren(node, level)}</td>
+		// custom
+		case Type.Plotly: {
+			const props = Object.assign({type: undefined}, node)
+			return <Plotly {...props}/>
+		}
 		}
 	}
 }
