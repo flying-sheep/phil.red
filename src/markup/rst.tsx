@@ -11,10 +11,7 @@ interface Directive {
 	body: string[]
 }
 
-/** https://github.com/microsoft/TypeScript/issues/21699 */
-function x(n: unknown): m.Element {
-	return n as m.Element
-}
+// https://github.com/microsoft/TypeScript/issues/21699
 
 function parseDirective(lines: rst.Node[]): Directive {
 	const texts = lines.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
@@ -44,41 +41,47 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 	case 'comment':
 		return []
 	case 'reference': {
-		const name = (node.children as [string])[0]
-		return [x(<m.Link ref={references[name]}>{name}</a>)]
+		const name = node.children?.[0].value as string
+		return [<m.Link ref={{name}}>{[name]}</m.Link>]
 	}
 	case 'section':
-		return [x(<section>{convertChildren(node, level + 1)}</section>)]
+		return [<m.Section>{convertChildren(node, level + 1)}</m.Section>]
 	case 'title': {
-		if (level < 1) return `Header with level ${level} < 1`
+		if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node)
 		const hLevel = Math.min(level, 6)
-		return [x(<Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>)]
+		return [<m.Title level={hLevel}>{convertChildren(node, level)}</m.Title>]
 	}
 	case 'paragraph':
-		return [x(<Typography paragraph>{convertChildren(node, level)}</Typography>)]
+		return [<m.Paragraph>{convertChildren(node, level)}</m.Paragraph>]
 	case 'text':
 		return [`${node.value}\n`]
 	case 'literal':
-		return [x(<code>{convertChildren(node, level)}</code>)]
+		return [<m.Code>{convertChildren(node, level)}</m.Code>]
 	case 'emphasis':
-		return [x(<em>{convertChildren(node, level)}</em>)]
+		return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
 	case 'bullet_list':
-		return [x(<ul className={node.bullet}>{convertChildren(node, level)}</ul>)]
+		return [
+			<m.BulletList
+				bullet={node.bullet ? m.Bullet.text : undefined}
+				text={node.bullet || undefined}
+			>{convertChildren(node, level)}</m.BulletList>
+		]
 	case 'list_item':
-		return [x(<li>{convertChildren(node, level)}</li>)]
+		return [<m.ListItem>{convertChildren(node, level)}</m.ListItem>]
 	case 'interpreted_text':
 		switch (node.role) {
 		case 'math':
-			return [x(<InlineMath math={(node.children || []).map(text => text.value).join('')}/>)]
+			return [<m.InlineMath math={(node.children || []).map(text => text.value).join('')}/>]
 		case undefined:
-			return [x(<em>{convertChildren(node, level)}</em>)]
+			return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
 		default:
 			throw new ASTError(`Unknown role “${node.role}”`, node)
 		}
 	case 'directive':
 		switch (node.directive as rst.DirectiveType | 'plotly') {
 		case 'code':
-			return [x(<pre><code>{convertChildren(node, level)}</code></pre>)]
+			const { header, body } = parseDirective(node.children || [])
+			return [<m.CodeBlock language={header || undefined}>{body}</m.CodeBlock>]
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children || [])
 			const delim = (() => {
@@ -88,32 +91,29 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 				default: return params.delim
 				}
 			})()
-			return [x(
-				<figure>
-					<table>
-						{body.map(r => (
-							<tr>
-								{r.split(delim).map(cell => (
-									<td>{cell}</td>
-								))}
-							</tr>
-						))}
-					</table>
-					{header && <figcaption>{header}</figcaption>}
-				</figure>
-			)]
+			return [
+				<m.Table caption={header || undefined}>
+					{body.map(r => (
+						<m.Row>
+							{r.split(delim).map(cell => (
+								<m.Cell>{cell}</m.Cell>
+							))}
+						</m.Row>
+					))}
+				</m.Table>
+			]
 		}
 		// custom
 		case 'plotly': {
 			const { header, params } = parseDirective(node.children || [])
-			return [x(
-				<Plotly
+			return [
+				<m.Plotly
 					url={header || ''}
 					onClickLink={params.onClickLink}
 					style={{ width: '100%' }}
 					config={{ responsive: true } as any} // typing has no responsive
 				/>
-			)]
+			]
 		}
 		default:
 			throw new ASTError(`Unknown directive “${node.directive}”`, node)
@@ -124,7 +124,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 }
 
 function convertChildren(node: rst.Node, level: number): m.Node[] {
-	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => [...ns, ...convertNode(n, level)], [])
+	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => ns.concat(convertNode(n, level)), [])
 }
 
 function* extractTargets(node: rst.Node): IterableIterator<[string, string]> {

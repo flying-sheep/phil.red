@@ -1,12 +1,12 @@
 import * as React from 'react'
 import red from '@material-ui/core/colors/red'
-import { MarkupNode } from '../../markup/MarkupDocument'
+import { Node } from '../../markup/MarkupDocument'
 
 export interface ASTErrorMessageProps {
-	node?: MarkupNode
+	node?: Node
 }
 
-export function ASTErrorMessage(
+export default function ASTErrorMessage(
 	{ node, children }: ASTErrorMessageProps & { children: React.ReactNode },
 ) {
 	return (

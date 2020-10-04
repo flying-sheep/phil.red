@@ -2,18 +2,18 @@ import * as React from 'react'
 
 import { Typography } from '@material-ui/core'
 
-import { ASTErrorMessageProps, ASTErrorMessage } from './ASTErrorMessage'
-import MarkupDocument, { MarkupNode, MarkupElement } from '../../markup/MarkupDocument'
+import ASTErrorMessage, { ASTErrorMessageProps } from './ASTErrorMessage'
+import { Document, Node, Element } from '../../markup/MarkupDocument'
 
 const ReferenceContext = React.createContext({} as { [name: string ]: string})
 
 export interface MarkupProps {
-	doc: MarkupDocument
+	doc: Document
 }
 
 export default class Markup extends React.Component {
 	title: string | React.ReactElement<ASTErrorMessageProps>
-	children: MarkupNode[]
+	children: Node[]
 
 	constructor(props: MarkupProps) {
 		super(props)
@@ -38,7 +38,7 @@ export default class Markup extends React.Component {
 				{nodes}
 			</ReferenceContext.Provider>
 		)
-		if (process.env.NODE_ENV === 'development' as 'production' | 'development') {
+		if (process.env.NODE_ENV === 'development') {
 			return (
 				<article>
 					{rendered}
@@ -51,15 +51,15 @@ export default class Markup extends React.Component {
 }
 
 export interface MarkupElementProps {
-	node: MarkupNode
+	node: Node
 }
 
 export interface MarkupElementState {
 	errorMessage: string | null
 }
 
-function convertChildren(elem: MarkupElement | MarkupDocument | Markup): React.ReactChild[] {
-	const children: MarkupNode[] = elem.children || []
+function convertChildren(elem: Element | Document | Markup): React.ReactChild[] {
+	const children: Node[] = elem.children || []
 	return React.Children.toArray(
 		children.map(e => <MarkupNodeComponent node={e}/>),
 	)
