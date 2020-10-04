@@ -127,19 +127,70 @@ function convertChildren(node: rst.Node, level: number): m.Node[] {
 	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => ns.concat(convertNode(n, level)), [])
 }
 
-function getTitle(root: m.Element): string {
+function* extractTargetsInner(elem: rst.Node): IterableIterator<[string, string]> {
+	for (const child of elem.children || []) {
+		if (typeof child === 'string') continue
+		if (child.type === 'comment') {
+			const comment = (child.children as [rst.Node])[0].value as string
+			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
+			if (name !== null && href !== null) yield [name, href]
+		} else if (child.children) {
+			yield* extractTargetsInner(child)
+		}
+	}
+}
+
+const URL_SCHEMA = /^https?:.*$/
+
+function extractTargets(node: rst.Node): {[key: string]: string} {
+	const pending =
+		Array.from(extractTargetsInner(node))
+		.reduce((obj, [k, v]) => { obj[k] = v; return obj }, {} as {[key: string]: string})
+	const resolved: {[key: string]: string} = {}
+	let newResolvable = true
+	while (newResolvable) {
+		newResolvable = false
+		for (let [k, v] of Object.entries(pending)) {
+			if (v in resolved) v = resolved[v]  // now the match will be true
+			// TODO: more schemas
+			if (v.match(URL_SCHEMA)) {
+				resolved[k] = v
+				delete pending[k]
+				newResolvable = true
+			}
+		}
+	}
+	if (Object.keys(pending).length) {
+		console.warn('Could not resolve references: %s', pending)
+	}
+	return resolved
+}
+
+function resolveTargets(root: m.Elem, targets: {[key: string]: string}): m.Elem {
+	root = {...root}
+	if (root.type === m.Type.Link && 'name' in root.ref && root.ref.name in targets) {
+		root.ref = { href: targets[root.ref.name] }
+	}
+	root.children = root.children.map(c => typeof c === 'string' ? c : resolveTargets(c, targets))
+	return root
+}
+
+function getTitle(root: m.Elem): string {
 	const body = root.children
-	if (body === undefined || (body[0] as m.Element).type !== m.Type.Section) throw new ASTError('No section!', body && body[0])
-	const section = (body[0] as m.Element).children
-	if (section === undefined || (section[0] as m.Element).type !== m.Type.Title) throw new ASTError('No title!', section && section[0])
-	const title = (section[0] as m.Element).children
-	if (title === undefined || !(typeof title[0] === 'string')) throw new ASTError('Empty title!', title && title[0])
+	if ((body[0] as m.Elem).type !== m.Type.Section) throw new ASTError('No section!', body && body[0])
+	const section = (body[0] as m.Elem).children
+	if ((section[0] as m.Elem).type !== m.Type.Title) throw new ASTError('No title!', section && section[0])
+	const title = (section[0] as m.Elem).children
+	if (!(typeof title[0] === 'string')) throw new ASTError('Empty title!', title && title[0])
 	return title[0]
 }
 
 export default function rstConvert(code: string): m.Document {
 	const parsed = rst.default.parse(code)
-	const root = convertNode(parsed, 0)[0] as m.Element
+	const root = resolveTargets(
+		convertNode(parsed, 0)[0] as m.Elem,
+		 extractTargets(parsed),
+	)
 	return {
 		title: getTitle(root),
 		children: [root],

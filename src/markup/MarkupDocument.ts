@@ -60,9 +60,17 @@ export enum Enumeration {
 
 // Generics
 
-export type Node = string | Element
+export type Node = string | Elem
 
-export interface Element {
+export type Elem =
+	// Block
+	Paragraph | Section | Title | BulletList | EnumList | ListItem | CodeBlock | Table | Row | Cell |
+	// Inline
+	LineBreak | Emph | Strong | Link | Code | InlineMath |
+	// Custom
+	Plotly
+
+interface Element {
 	type: Type
 	children: Node[]
 }

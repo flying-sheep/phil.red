@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Typography } from '@material-ui/core'
 
 import ASTErrorMessage, { ASTErrorMessageProps } from './ASTErrorMessage'
-import { Document, Node, Element } from '../../markup/MarkupDocument'
+import { Document, Node, Element, Type } from '../../markup/MarkupDocument'
 
 const ReferenceContext = React.createContext({} as { [name: string ]: string})
 
@@ -62,18 +62,6 @@ function convertChildren(elem: Element | Document | Markup): React.ReactChild[] 
 	return React.Children.toArray(
 		elem.children.map(e => <MarkupNodeComponent node={e}/>),
 	)
-}
-
-function* extractTargets(elem: Element): IterableIterator<[string, string]> {
-	for (const child of elem.children) {
-		if (child.type === 'comment') {
-			const comment = (child.children as [rst.Node])[0].value as string
-			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
-			if (name !== null && href !== null) yield [name, href]
-		} else if (child.children) {
-			yield* extractTargets(child)
-		}
-	}
 }
 
 export class MarkupNodeComponent extends React.Component
