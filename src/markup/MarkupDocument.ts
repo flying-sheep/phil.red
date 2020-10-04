@@ -1,3 +1,5 @@
+import { FunctionComponent } from 'typed-jsx'
+
 export enum Type {
 	// block
 	Paragraph,
@@ -70,53 +72,56 @@ export interface Document {
 }
 export const Document = (props: Document) => props
 
-type Props<P> = Omit<P, 'type' | 'children'> & { children?: Node[] | Node }
+type Props<P> = Omit<P, 'type' | 'children'> & { children?: Node | Node[] }
+function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
+	return (props) => ({ type, ...props } as unknown as P)
+}
 
 
 // Block
 
 interface Paragraph extends Element { type: Type.Paragraph }
-export const Paragraph = (props: Omit<Paragraph, 'type'>) => ({ type: Type.Paragraph, ...props })
+export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
 
 interface Section extends Element { type: Type.Section }
-export const Section = (props: Omit<Section, 'type'>) => ({ type: Type.Section, ...props })
+export const Section = mkFun<Section>(Type.Section)
 
 interface Title extends Element { type: Type.Title, level: number }
-export const Title = (props: Omit<Title, 'type'>) => ({ type: Type.Title, ...props })
+export const Title = mkFun<Title>(Type.Title)
 
 interface BulletList extends Element { type: Type.BulletList, bullet?: Bullet, text?: string }
-export const BulletList = (props: Omit<BulletList, 'type'>) => ({ type: Type.BulletList, ...props })
+export const BulletList = mkFun<BulletList>(Type.BulletList)
 interface EnumList extends Element { type: Type.EnumList, enumeration?: Enumeration }  // TODO: rst also has prefix/suffix
-export const EnumList = (props: Omit<EnumList, 'type'>) => ({ type: Type.EnumList, ...props })
+export const EnumList = mkFun<EnumList>(Type.EnumList)
 interface ListItem extends Element { type: Type.ListItem }
-export const ListItem = (props: Omit<ListItem, 'type'>) => ({ type: Type.ListItem, ...props })
+export const ListItem = mkFun<ListItem>(Type.ListItem)
 
 interface CodeBlock extends Element { type: Type.CodeBlock, language?: string }
-export const CodeBlock = (props: Omit<CodeBlock, 'type'>) => ({ type: Type.CodeBlock, ...props })
+export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 
 interface Table extends Element { type: Type.Table, caption?: string }
-export const Table = (props: Omit<Table, 'type'>) => ({ type: Type.Table, ...props })
+export const Table = mkFun<Table>(Type.Table)
 interface Row extends Element { type: Type.Row }
-export const Row = (props: Omit<Row, 'type'>) => ({ type: Type.Row, ...props })
+export const Row = mkFun<Row>(Type.Row)
 interface Cell extends Element { type: Type.Cell }
-export const Cell = (props: Omit<Cell, 'type'>) => ({ type: Type.Cell, ...props })
+export const Cell = mkFun<Cell>(Type.Cell)
 
 // Inline
 
 interface Emph extends Element { type: Type.Emph }
-export const Emph = (props: Omit<Emph, 'type'>) => ({ type: Type.Emph, ...props })
+export const Emph = mkFun<Emph>(Type.Emph)
 
 interface Strong extends Element { type: Type.Strong }
-export const Strong = (props: Omit<Strong, 'type'>) => ({ type: Type.Strong, ...props })
+export const Strong = mkFun<Strong>(Type.Strong)
 
 interface Link extends Element { type: Type.Link, ref: {name: string} | {href: string} }
-export const Link = (props: Omit<Link, 'type'>) => ({ type: Type.Link, ...props })
+export const Link = mkFun<Link>(Type.Link)
 
 interface Code extends Element { type: Type.Code }
-export const Code = (props: Omit<Code, 'type'>) => ({ type: Type.Code, ...props })
+export const Code = mkFun<Code>(Type.Code)
 
 interface InlineMath extends Element { type: Type.InlineMath, math: string }
-export const InlineMath = (props: Omit<InlineMath, 'type'>) => ({ type: Type.InlineMath, ...props })
+export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
 
 // Custom
 
@@ -127,4 +132,4 @@ interface Plotly extends Element {
 	style?: Partial<CSSStyleDeclaration>,
 	config?: Plotly.Config,
 }
-export const Plotly = (props: Omit<Plotly, 'type'>) => ({ type: Type.Plotly, ...props })
+export const Plotly = mkFun<Plotly>(Type.Plotly)
