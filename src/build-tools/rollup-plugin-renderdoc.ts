@@ -3,7 +3,7 @@
 import * as path from 'path'
 import { promises as fs } from 'fs'
 import { glob } from 'matched'
-import { mdConvert, rstConvert, MarkupDocument } from '../markup'
+import { mdConvert, rstConvert, Document } from '../markup'
 
 function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 	if (keys.length !== values.length) {
@@ -13,7 +13,7 @@ function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 }
 
 export interface Converter {
-	(source: string): MarkupDocument
+	(source: string): Document
 }
 
 export interface Config {

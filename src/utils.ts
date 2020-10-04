@@ -15,7 +15,7 @@ export function partition<I>(array: I[], pred: (item: I) => boolean): [I[], I[]]
 	const a: I[] = []
 	const b: I[] = []
 	for (const element of array) {
-		(pred ? a : b).push(element)
+		(pred(element) ? a : b).push(element)
 	}
 	return [a, b]
 }
