@@ -2,19 +2,20 @@
 
 import fs from 'fs'
 
+import * as replace from '@rollup/plugin-replace'
+import nodeResolve from '@rollup/plugin-node-resolve'
+import * as commonjs from '@rollup/plugin-commonjs'
+import * as json from '@rollup/plugin-json'
 import analyze from 'rollup-plugin-analyzer'
-import replace from 'rollup-plugin-replace'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
-import builtins from 'rollup-plugin-node-builtins'
-import json from 'rollup-plugin-json'
-import typescript from '@wessberg/rollup-plugin-ts'
+import * as builtins from 'rollup-plugin-node-builtins'
+import * as typescript from '@wessberg/rollup-plugin-ts'
 import postcss from 'rollup-plugin-postcss-modules'
-import serve from 'rollup-plugin-serve'
+import * as serve from 'rollup-plugin-serve'
 
-import autoprefixer from 'autoprefixer'
+import * as autoprefixer from 'autoprefixer'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc'
+
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isDev = NODE_ENV === 'development'
@@ -51,38 +52,22 @@ export default {
 				autoprefixer(),
 			],
 		}),
-		replace({
+		(replace as unknown as (options?: replace.RollupReplaceOptions) => Plugin)({
 			'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
 			'process.env.MUI_SUPPRESS_DEPRECATION_WARNINGS': JSON.stringify(false),
 		}),
-		typescript(),
+		(typescript as unknown as () => Plugin)(),
 		nodeResolve({
 			preferBuiltins: true,
 		}),
-		commonjs({ // https://github.com/rollup/rollup-plugin-commonjs/issues/185
-			namedExports: {
-				'node_modules/react/index.js': ['createElement', 'Component', 'Fragment'],
-				'node_modules/react-dom/index.js': ['render'],
-				'node_modules/@material-ui/core/styles/index.js': [
-					'MuiThemeProvider',
-					'createGenerateClassName',
-					'createMuiTheme',
-					'withTheme',
-					'withStyles',
-					'createStyles',
-					'jssPreset',
-				],
-				'node_modules/@material-ui/core/Modal/index.js': ['ModalManager'],
-				'node_modules/react-katex/dist/react-katex.js': ['InlineMath', 'DisplayMath'],
-			},
-		}),
+		(commonjs as unknown as () => Plugin)(),
 		builtins(),
-		json(),
+		(json as unknown as () => Plugin)(),
 		renderdoc({
 			include: '*.@(md|rst)',
 		}),
 		...isDev ? [
-			serve({
+			(serve as unknown as (o?: any) => Plugin)({
 				contentBase: '.',
 				historyApiFallback: true,
 			}),

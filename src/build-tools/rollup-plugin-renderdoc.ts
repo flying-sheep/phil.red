@@ -2,7 +2,7 @@
 
 import * as path from 'path'
 import { promises as fs } from 'fs'
-import { glob } from 'matched'
+import * as glob from 'matched'
 import { mdConvert, rstConvert, Document } from '../markup'
 
 function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {

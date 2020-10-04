@@ -72,7 +72,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		switch (node.role) {
 		case 'math':
 			return [<m.InlineMath math={(node.children || []).map(text => text.value).join('')}/>]
-		case undefined:
+		case null:
 			return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
 		default:
 			throw new ASTError(`Unknown role “${node.role}”`, node)
@@ -124,7 +124,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 }
 
 function convertChildren(node: rst.Node, level: number): m.Node[] {
-	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => ns.concat(convertNode(n, level)), [])
+	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => [...ns, ...convertNode(n, level)], [])
 }
 
 function* extractTargetsInner(elem: rst.Node): IterableIterator<[string, string]> {
@@ -171,7 +171,7 @@ function resolveTargets(root: m.Elem, targets: {[key: string]: string}): m.Elem 
 	if (root.type === m.Type.Link && 'name' in root.ref && root.ref.name in targets) {
 		root.ref = { href: targets[root.ref.name] }
 	}
-	root.children = root.children.map(c => typeof c === 'string' ? c : resolveTargets(c, targets))
+	root.children = (root.children || []).map(c => typeof c === 'string' ? c : resolveTargets(c, targets))
 	return root
 }
 
@@ -189,7 +189,7 @@ export default function rstConvert(code: string): m.Document {
 	const parsed = rst.default.parse(code)
 	const root = resolveTargets(
 		convertNode(parsed, 0)[0] as m.Elem,
-		 extractTargets(parsed),
+		extractTargets(parsed),
 	)
 	return {
 		title: getTitle(root),

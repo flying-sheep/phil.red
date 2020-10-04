@@ -5,5 +5,5 @@ declare module 'matched' {
 		function sync(patterns: string[], options: IOptions): string[]
 	}
 	function glob(patterns: string[], options: IOptions): Promise<string[]>
-	export { glob }
+	export = glob
 }

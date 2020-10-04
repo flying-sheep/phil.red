@@ -1,7 +1,7 @@
 /** @jsx data */
 import { data } from 'typed-jsx'
-import MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token'
+import * as MarkdownIt from 'markdown-it'
+import * as Token from 'markdown-it/lib/token'
 
 import { rsplit } from '../utils'
 import * as m from './MarkupDocument'
@@ -27,7 +27,7 @@ function* tokens2ast(
 			synth.children = Array.from(tokens2ast(tokenIter, openType))
 			yield synth
 		} else if (token.type === 'inline') {
-			token.children = Array.from(tokens2ast(token.children))
+			token.children = Array.from(tokens2ast(token.children || []))
 			yield token
 		} else {
 			yield token
@@ -48,8 +48,9 @@ function convertNode(token: Token): m.Node[] {
 		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
 		return [<m.Title level={parseInt(level)}>{convertChildren(token)}</m.Title>]
 	case 'link': {
-		const hrefs = token.attrs.filter(([a, v]) => a === 'href')
-		return [<m.Link ref={{href: hrefs[0][1]}}>{convertChildren(token)}</m.Link>]
+		const href = token.attrs?.filter(([a, v]) => a === 'href')?.[0]?.[1]
+		if (!href) throw new ASTError(`Link without href encountered`, token)
+		return [<m.Link ref={{href}}>{convertChildren(token)}</m.Link>]
 	}
 	case 'hardbreak':
 		return [<m.LineBreak/>]
@@ -79,7 +80,7 @@ export default function mdConvert(code: string): m.Document {
 	// https://github.com/rollup/rollup-plugin-commonjs/issues/350
 	const md = new MarkdownIt('commonmark', { breaks: false })
 	const ast = Array.from(tokens2ast(md.parse(code, {})))
-	const title = ast[0].children[0].content
+	const title = ast[0].children?.[0].content || ''
 	const children = convertAll(ast)
 	return { title, children }
 }

@@ -84,9 +84,25 @@ export interface Document {
 }
 export const Document = (props: Document) => props
 
-type Props<P> = Omit<P, 'type' | 'children'> & { children?: Node | Node[] }
+function flatten<E, A extends E | A[]>(nested: A[]): E[] {
+	const cumul: E[] = []
+	for (const elem of nested) {
+		if (Array.isArray(elem)) {
+			cumul.push(...flatten<E, A>(elem))
+		} else {
+			cumul.push(elem as E)
+		}
+	}
+	return cumul
+}
+
+type Nodes = Node | Nodes[]
+type Props<P> = Omit<P, 'type' | 'children'> & { children?: Nodes }
 function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
-	return (props) => ({ type, ...props } as unknown as P)
+	return ({children: nestedChildren, ...props}) => {
+		const children: Node[] = Array.isArray(nestedChildren) ? flatten(nestedChildren) : nestedChildren !== undefined ? [nestedChildren] : []
+		return { type, children, ...props } as unknown as P
+	}
 }
 
 
