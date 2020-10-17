@@ -43,14 +43,15 @@ function convertNode(token: Token): m.Node[] {
 		return [token.content]
 	case 'paragraph':
 		return [<m.Paragraph>{convertChildren(token)}</m.Paragraph>]
-	case 'heading':
+	case 'heading': {
 		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.level
 		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
-		return [<m.Title level={parseInt(level)}>{convertChildren(token)}</m.Title>]
+		return [<m.Title level={parseInt(level, 10)}>{convertChildren(token)}</m.Title>]
+	}
 	case 'link': {
 		const href = token.attrs?.filter(([a, v]) => a === 'href')?.[0]?.[1]
-		if (!href) throw new ASTError(`Link without href encountered`, token)
-		return [<m.Link ref={{href}}>{convertChildren(token)}</m.Link>]
+		if (!href) throw new ASTError('Link without href encountered', token)
+		return [<m.Link ref={{ href }}>{convertChildren(token)}</m.Link>]
 	}
 	case 'hardbreak':
 		return [<m.LineBreak/>]

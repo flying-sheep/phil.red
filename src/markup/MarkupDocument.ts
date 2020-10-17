@@ -25,7 +25,7 @@ export enum Bullet {
 	disc = 'disc',
 	circle = 'circle',
 	square = 'square',
-	text = '__text__',  // custom text
+	text = '__text__', // custom text
 	// none can be represented by null.
 }
 
@@ -33,21 +33,21 @@ export enum Bullet {
 /// but CSS list-style-type.
 export enum Enumeration {
 	decimal = 'decimal',
-	decimal_leading_zero = 'decimal-leading-zero',
-	lower_roman = 'lower-roman',
-	upper_roman = 'upper-roman',
-	lower_greek = 'lower-greek',
-	lower_alpha = 'lower-alpha',
-	upper_alpha = 'upper-alpha',
-	lower_latin = 'lower-latin',
-	upper_latin = 'upper-latin',
-	arabic_indic = 'arabic-indic',
+	decimalLeadingZero = 'decimal-leading-zero',
+	lowerRoman = 'lower-roman',
+	upperRoman = 'upper-roman',
+	lowerGreek = 'lower-greek',
+	lowerAlpha = 'lower-alpha',
+	upperAlpha = 'upper-alpha',
+	lowerLatin = 'lower-latin',
+	upperLatin = 'upper-latin',
+	arabicIndic = 'arabic-indic',
 	armenian = 'armenian',
 	bengali = 'bengali',
-	cjk_earthly_branch = 'cjk-earthly-branch',
-	cjk_heavenly_stem = 'cjk-heavenly-stem',
+	cjkEarthlyBranch = 'cjk-earthly-branch',
+	cjkHeavenlyStem = 'cjk-heavenly-stem',
 	devanagari = 'devanagari',
-	ethiopic_numeric = 'ethiopic_numeric',
+	ethiopicNumeric = 'ethiopic_numeric',
 	georgian = 'georgian',
 	gujarati = 'gujarati',
 	gurmukhi = 'gurmukhi',
@@ -96,15 +96,19 @@ function flatten<E, A extends E | A[]>(nested: A[]): E[] {
 	return cumul
 }
 
+function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
+	if (obj === undefined) return []
+	if (Array.isArray(obj)) return flatten(obj)
+	return [obj]
+}
+
 type Nodes = Node | Nodes[]
 type Props<P> = Omit<P, 'type' | 'children'> & { children?: Nodes }
 function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
-	return ({children: nestedChildren, ...props}) => {
-		const children: Node[] = Array.isArray(nestedChildren) ? flatten(nestedChildren) : nestedChildren !== undefined ? [nestedChildren] : []
-		return { type, children, ...props } as unknown as P
-	}
+	return ({ children: nested, ...props }) => ({
+		type, children: arrayify(nested), ...props,
+	} as unknown as P)
 }
-
 
 // Block
 
@@ -119,7 +123,8 @@ export const Title = mkFun<Title>(Type.Title)
 
 interface BulletList extends Element { type: Type.BulletList, bullet?: Bullet, text?: string }
 export const BulletList = mkFun<BulletList>(Type.BulletList)
-interface EnumList extends Element { type: Type.EnumList, enumeration?: Enumeration }  // TODO: rst also has prefix/suffix
+// TODO: rst also has prefix/suffix
+interface EnumList extends Element { type: Type.EnumList, enumeration?: Enumeration }
 export const EnumList = mkFun<EnumList>(Type.EnumList)
 interface ListItem extends Element { type: Type.ListItem }
 export const ListItem = mkFun<ListItem>(Type.ListItem)
@@ -160,7 +165,7 @@ interface Plotly extends Element {
 	type: Type.Plotly,
 	url: string,
 	onClickLink?: string,
-	style?: Partial<CSSStyleDeclaration>,
+	style?: Partial<React.CSSProperties>,
 	config?: Plotly.Config,
 }
 export const Plotly = mkFun<Plotly>(Type.Plotly)

@@ -32,7 +32,7 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 			throw new Error(r.statusText)
 		}).then(({ layout, data }) => {
 			this.setState({ layout, data })
-		}).catch(e => console.error(e))
+		}).catch((e) => console.error(e))
 		this.handleOnClickLink = this.handleOnClickLink.bind(this)
 	}
 	

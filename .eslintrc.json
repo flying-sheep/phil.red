@@ -4,7 +4,7 @@
         "browser": true,
         "es6": true
     },
-    "parser": "typescript-eslint-parser",
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "sourceType": "module",
         "ecmaFeatures": {
@@ -14,12 +14,19 @@
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
         "import/no-unresolved": 0,
-        "import/extensions": 0,
+		"import/extensions": 0,
+		"import/no-extraneous-dependencies": 0,
+		"no-continue": 0,
         "no-dupe-args": 0,
-        "no-undef": 0,
-        "no-unused-vars": 0,
+		"no-undef": 0,
+		"no-redeclare": 0,
+		"no-shadow": 0,
+		"no-use-before-define": 0,
+		"no-unused-vars": 0,
 		"no-useless-constructor": 0,
 		"no-empty-function": 0,
+		"react/prop-types": 0,
+		"react/jsx-props-no-spreading": 0,
         "react/sort-comp": [2, {
             "order": [
                 "displayName",
@@ -42,6 +49,6 @@
                 "/^render.+$/",
                 "render"
             ]
-        }]
+		}]
     }
 }

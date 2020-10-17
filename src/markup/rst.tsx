@@ -4,7 +4,6 @@ import * as rst from 'restructured'
 import * as m from './MarkupDocument'
 import ASTError from './AstError'
 
-
 interface Directive {
 	header: string | null
 	params: { [k: string]: string }
@@ -14,7 +13,7 @@ interface Directive {
 // https://github.com/microsoft/TypeScript/issues/21699
 
 function parseDirective(lines: rst.Node[]): Directive {
-	const texts = lines.map(n => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
+	const texts = lines.map((n) => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
 	const [header = null, ...rest] = texts
 	let lastParam = -1
 	const params = rest
@@ -42,7 +41,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		return []
 	case 'reference': {
 		const name = node.children?.[0].value as string
-		return [<m.Link ref={{name}}>{[name]}</m.Link>]
+		return [<m.Link ref={{ name }}>{[name]}</m.Link>]
 	}
 	case 'section':
 		return [<m.Section>{convertChildren(node, level + 1)}</m.Section>]
@@ -64,14 +63,16 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 			<m.BulletList
 				bullet={node.bullet ? m.Bullet.text : undefined}
 				text={node.bullet || undefined}
-			>{convertChildren(node, level)}</m.BulletList>
+			>
+				{convertChildren(node, level)}
+			</m.BulletList>,
 		]
 	case 'list_item':
 		return [<m.ListItem>{convertChildren(node, level)}</m.ListItem>]
 	case 'interpreted_text':
 		switch (node.role) {
 		case 'math':
-			return [<m.InlineMath math={(node.children || []).map(text => text.value).join('')}/>]
+			return [<m.InlineMath math={(node.children || []).map((text) => text.value).join('')}/>]
 		case null:
 			return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
 		default:
@@ -79,9 +80,10 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		}
 	case 'directive':
 		switch (node.directive as rst.DirectiveType | 'plotly') {
-		case 'code':
+		case 'code': {
 			const { header, body } = parseDirective(node.children || [])
 			return [<m.CodeBlock language={header || undefined}>{body}</m.CodeBlock>]
+		}
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children || [])
 			const delim = (() => {
@@ -93,14 +95,14 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 			})()
 			return [
 				<m.Table caption={header || undefined}>
-					{body.map(r => (
+					{body.map((r) => (
 						<m.Row>
-							{r.split(delim).map(cell => (
+							{r.split(delim).map((cell) => (
 								<m.Cell>{cell}</m.Cell>
 							))}
 						</m.Row>
 					))}
-				</m.Table>
+				</m.Table>,
 			]
 		}
 		// custom
@@ -112,7 +114,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 					onClickLink={params.onClickLink}
 					style={{ width: '100%' }}
 					config={{ responsive: true } as any} // typing has no responsive
-				/>
+				/>,
 			]
 		}
 		default:
@@ -124,7 +126,10 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 }
 
 function convertChildren(node: rst.Node, level: number): m.Node[] {
-	return (node.children || []).reduce((ns: m.Node[], n: rst.Node) => [...ns, ...convertNode(n, level)], [])
+	return (node.children || []).reduce(
+		(ns: m.Node[], n: rst.Node) => [...ns, ...convertNode(n, level)],
+		[],
+	)
 }
 
 function* extractTargetsInner(elem: rst.Node): IterableIterator<[string, string]> {
@@ -143,15 +148,14 @@ function* extractTargetsInner(elem: rst.Node): IterableIterator<[string, string]
 const URL_SCHEMA = /^https?:.*$/
 
 function extractTargets(node: rst.Node): {[key: string]: string} {
-	const pending =
-		Array.from(extractTargetsInner(node))
-		.reduce((obj, [k, v]) => { obj[k] = v; return obj }, {} as {[key: string]: string})
+	const pending = Object.fromEntries(extractTargetsInner(node))
 	const resolved: {[key: string]: string} = {}
 	let newResolvable = true
 	while (newResolvable) {
 		newResolvable = false
-		for (let [k, v] of Object.entries(pending)) {
-			if (v in resolved) v = resolved[v]  // now the match will be true
+		for (const entry of Object.entries(pending)) {
+			const k = entry[0]
+			const v = entry[1] in resolved ? resolved[entry[1]] : entry[1] // if so the match will be true
 			// TODO: more schemas
 			if (v.match(URL_SCHEMA)) {
 				resolved[k] = v
@@ -166,12 +170,12 @@ function extractTargets(node: rst.Node): {[key: string]: string} {
 	return resolved
 }
 
-function resolveTargets(root: m.Elem, targets: {[key: string]: string}): m.Elem {
-	root = {...root}
+function resolveTargets(root_: m.Elem, targets: {[key: string]: string}): m.Elem {
+	const root = { ...root_ }
 	if (root.type === m.Type.Link && 'name' in root.ref && root.ref.name in targets) {
 		root.ref = { href: targets[root.ref.name] }
 	}
-	root.children = (root.children || []).map(c => typeof c === 'string' ? c : resolveTargets(c, targets))
+	root.children = (root.children || []).map((c) => (typeof c === 'string' ? c : resolveTargets(c, targets)))
 	return root
 }
 

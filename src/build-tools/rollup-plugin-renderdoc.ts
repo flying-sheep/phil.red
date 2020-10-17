@@ -31,7 +31,7 @@ export default function renderdoc(config: Partial<Config> = {}) {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
 	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include || []
 	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude || []
-	const patterns = include.concat(exclude.map(pattern => `!${pattern}`))
+	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 	
 	async function doGlob(id: string): Promise<string[]> {
 		const stats = await fs.stat(id)
@@ -58,7 +58,7 @@ export default function renderdoc(config: Partial<Config> = {}) {
 				const convert = converters[path.extname(p)]
 				return convert(content)
 			}))
-			const map = zipObject(paths.map(p => path.basename(p)), contents)
+			const map = zipObject(paths.map((p) => path.basename(p)), contents)
 			return `export default ${JSON.stringify(map)}`
 		},
 	}
