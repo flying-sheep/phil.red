@@ -170,17 +170,19 @@ function extractTargets(node: rst.Node): {[key: string]: string} {
 	return resolved
 }
 
-function resolveTargets(root_: m.Elem, targets: {[key: string]: string}): m.Elem {
-	const root = { ...root_ }
-	if (root.type === m.Type.Link && 'name' in root.ref && root.ref.name in targets) {
-		root.ref = { href: targets[root.ref.name] }
-	}
-	root.children = (root.children || []).map((c) => (typeof c === 'string' ? c : resolveTargets(c, targets)))
-	return root
+function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.Node[] {
+	return nodes.map((node) => {
+		if (typeof node === 'string') return node
+		const elem = { ...node }
+		if (elem.type === m.Type.Link && 'name' in elem.ref && elem.ref.name in targets) {
+			elem.ref = { href: targets[elem.ref.name] }
+		}
+		elem.children = resolveTargets(elem.children, targets)
+		return elem
+	})
 }
 
-function getTitle(root: m.Elem): string {
-	const body = root.children
+function getTitle(body: m.Node[]): string {
 	if ((body[0] as m.Elem).type !== m.Type.Section) throw new ASTError('No section!', body && body[0])
 	const section = (body[0] as m.Elem).children
 	if ((section[0] as m.Elem).type !== m.Type.Title) throw new ASTError('No title!', section && section[0])
@@ -191,12 +193,10 @@ function getTitle(root: m.Elem): string {
 
 export default function rstConvert(code: string): m.Document {
 	const parsed = rst.default.parse(code)
-	const root = resolveTargets(
-		convertNode(parsed, 0)[0] as m.Elem,
-		extractTargets(parsed),
-	)
+	const children = convertNode(parsed, 0)
+	const targets = extractTargets(parsed)
 	return {
-		title: getTitle(root),
-		children: [root],
+		title: getTitle(children),
+		children: resolveTargets(children, targets),
 	}
 }

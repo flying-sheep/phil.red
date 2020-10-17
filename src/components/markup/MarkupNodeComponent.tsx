@@ -53,8 +53,8 @@ export default class MarkupNodeComponent extends React.Component
 		case Type.Section:
 			return <section>{convertChildren(node, level + 1)}</section>
 		case Type.Title: {
-			if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node)
-			const hLevel = Math.min(level, 6)
+			if (node.level < 1) throw new ASTError(`Header with level ${node.level} < 1`, node)
+			const hLevel = Math.min(node.level, 6)
 			return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
 		}
 		case Type.Paragraph:

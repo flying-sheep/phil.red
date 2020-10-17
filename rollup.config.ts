@@ -1,20 +1,24 @@
 /* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
 
-import fs from 'fs'
-
 import * as replace from '@rollup/plugin-replace'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import * as commonjs from '@rollup/plugin-commonjs'
 import * as json from '@rollup/plugin-json'
-import analyze from 'rollup-plugin-analyzer'
+// import analyze from 'rollup-plugin-analyzer'
 import * as builtins from 'rollup-plugin-node-builtins'
-import * as typescript from '@wessberg/rollup-plugin-ts'
+// import * as typescript from '@wessberg/rollup-plugin-ts'
+import * as typescript from '@rollup/plugin-typescript'
 import postcss from 'rollup-plugin-postcss-modules'
 import * as serve from 'rollup-plugin-serve'
 
-import * as autoprefixer from 'autoprefixer'
+// import * as autoprefixer from 'autoprefixer'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc'
+
+// eslint-disable-next-line import/order
+import fs = require('fs')
+
+const tsConfig = JSON.parse(fs.readFileSync('./tsconfig.json', { encoding: 'utf-8' }).replace(/\/\/.*$/gm, ''))
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 const isDev = NODE_ENV === 'development'
@@ -38,24 +42,28 @@ export default {
 	},
 	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'katex'],
 	plugins: [
+		/*
 		analyze({
 			writeTo(formatted) {
 				fs.writeFile('dist/bundle.log', formatted, (e) => (e !== null ? console.error(e) : {}))
 			},
 		}),
+		*/
 		postcss({
 			extract: true,
 			sourceMap: true,
 			writeDefinitions: true,
 			plugins: [
-				autoprefixer(),
+				// autoprefixer(),
 			],
 		}),
 		(replace as unknown as (options?: replace.RollupReplaceOptions) => Plugin)({
 			'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
 			'process.env.MUI_SUPPRESS_DEPRECATION_WARNINGS': JSON.stringify(false),
 		}),
-		(typescript as unknown as () => Plugin)(),
+		(typescript as unknown as (options?: typescript.RollupTypescriptOptions) => Plugin)({
+			...(tsConfig.compilerOptions as unknown as typescript.RollupTypescriptOptions),
+		}),
 		nodeResolve({
 			preferBuiltins: true,
 		}),

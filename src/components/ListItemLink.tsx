@@ -3,7 +3,6 @@ import { Link, LinkProps } from 'react-router-dom'
 import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
 import { ListItemProps } from '@material-ui/core/ListItem'
 
-
 interface LilProps extends LinkProps {
 	icon?: React.ReactElement<any>,
 	primary?: React.ReactNode,

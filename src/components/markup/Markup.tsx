@@ -8,7 +8,11 @@ export interface MarkupProps {
 	doc: Document
 }
 
-export default class Markup extends React.Component {
+export interface MarkupState {
+	errorMessage: string
+}
+
+export default class Markup extends React.Component<MarkupProps, MarkupState> {
 	title: string | React.ReactElement<ASTErrorMessageProps>
 	children: Node[]
 
@@ -30,7 +34,7 @@ export default class Markup extends React.Component {
 			return (
 				<article>
 					{body}
-					<pre>{JSON.stringify(this.children, undefined, '\t')}</pre>
+					<pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(this.children, undefined, '\t')}</pre>
 				</article>
 			)
 		}

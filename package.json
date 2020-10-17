@@ -1,10 +1,10 @@
 {
-	"name": "flying-sheep.github.com",
+	"name": "phil.red",
 	"version": "1.0.0",
 	"description": "flying-sheep’s blog",
 	"private": true,
 	"main": "dist/bundle.js",
-	"repository": "https://github.com/flying-sheep/flying-sheep.github.com.git",
+	"repository": "https://github.com/flying-sheep/phil.red.git",
 	"author": "Philipp A. <flying-sheep@web.de>",
 	"license": "GPL-3.0",
 	"scripts": {
@@ -33,6 +33,7 @@
 		"@rollup/plugin-json": "^4.1.0",
 		"@rollup/plugin-node-resolve": "^9.0.0",
 		"@rollup/plugin-replace": "^2.3.3",
+		"@rollup/plugin-typescript": "^6.0.0",
 		"@types/autoprefixer": "^9.7.2",
 		"@types/detect-browser": "^4.0.0",
 		"@types/glob": "^7.1.1",

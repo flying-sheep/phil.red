@@ -15,7 +15,6 @@ import Blog from '../Blog'
 
 import styles from './style.css'
 
-
 function App({ location, history }: RouteComponentProps) {
 	const currentTab = `/${location.pathname.split('/')[1]}`
 	return (

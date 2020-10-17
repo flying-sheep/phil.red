@@ -1,4 +1,6 @@
-declare namespace style {
-	const layout: string
+export const layout: string
+interface Namespace {
+	'layout': string,
 }
+declare const style: Namespace
 export default style
