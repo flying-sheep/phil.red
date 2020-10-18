@@ -5,7 +5,6 @@ import ListItem, { ListItemProps } from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 
-
 interface LilProps extends LinkProps {
 	icon?: React.ReactElement<any>,
 	primary?: React.ReactNode,

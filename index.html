@@ -3,11 +3,14 @@
 <meta charset=utf-8>
 <meta name=viewport content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"/>
 
-<!-- No “crossorigin” since unpkg has CORS problems: https://github.com/unpkg/unpkg.com/issues/176 -->
-<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<!--
+<script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+-->
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/plotly.js@1/dist/plotly.min.js"></script>
-<script src="https://unpkg.com/katex@0.10/dist/katex.min.js"></script>
+<script src="https://unpkg.com/katex@0.12/dist/katex.min.js"></script>
 <link rel=stylesheet href="https://unpkg.com/katex@0.10/dist/katex.min.css">
 
 <script src=/dist/bundle.js></script>

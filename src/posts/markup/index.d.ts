@@ -1,5 +1,7 @@
-interface StringFiles {
-    [key: string]: string
+import { Document } from '../../markup'
+
+interface Documents {
+    [key: string]: Document
 }
-declare const stringfiles: StringFiles
+declare const stringfiles: Documents
 export default stringfiles

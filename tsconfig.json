@@ -1,9 +1,14 @@
 {
+	"ts-node": {
+	  "compilerOptions": {
+		"module": "commonjs"
+	  }
+	},
 	"compilerOptions": {
 		"module": "ES2015",
 		"moduleResolution": "node",
 		"target": "ES2017",
-		"lib": ["es2017", "dom", "dom.iterable"],
+		"lib": ["es2019", "dom", "dom.iterable"],
 		"jsx": "react",
 		//stronger types
 		"strict": true,
@@ -17,10 +22,11 @@
 		"allowSyntheticDefaultImports": true,
 		//more
 		"removeComments": true,
-		"sourceMap": true
+		"sourceMap": true,
+		"typeRoots": [
+			"./node_modules/@types",
+			"./typings"
+		]
 	},
-	"include": [
-		"src/**/*",
-		"typings/*.d.ts"
-	]
+	"include": ["src/**/*"]
 }

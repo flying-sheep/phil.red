@@ -1,0 +1,3857 @@
+{
+	"2013-11-17-python-style.md": {
+		"title": "Python Style",
+		"children": [
+			{
+				"type": 2,
+				"children": [
+					"Python Style"
+				],
+				"level": 1
+			},
+			{
+				"type": 2,
+				"children": [
+					"Python 3.3+"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"When writing new libraries and tools, ignore Python 2.",
+					"Consider a port only if someone creates a feature request or otherwise asks you for it, but require good reasons."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"This way, you won’t have to deal with ",
+					{
+						"type": 14,
+						"children": [
+							"Unicode(En|De)codeError"
+						]
+					},
+					"s, and are able to use all the new features.",
+					"Also modules have to avoid circular dependencies per default by forcing you to use ",
+					{
+						"type": 14,
+						"children": [
+							"from .submodule import name"
+						]
+					},
+					"."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"You can and should avoid encoding directive at the top.",
+					{
+						"type": 14,
+						"children": [
+							"# -*- coding: utf-8 -*-"
+						]
+					},
+					" is the default and should never ever be deviated from."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Idiomaticity"
+				],
+				"level": 2
+			},
+			{
+				"type": 3,
+				"children": [
+					{
+						"type": 5,
+						"children": [
+							{
+								"type": 0,
+								"children": [
+									"Propertites"
+								]
+							}
+						]
+					},
+					{
+						"type": 5,
+						"children": [
+							{
+								"type": 0,
+								"children": [
+									"Generators"
+								]
+							}
+						]
+					},
+					{
+						"type": 5,
+						"children": [
+							{
+								"type": 0,
+								"children": [
+									"Context managers"
+								]
+							}
+						]
+					},
+					{
+						"type": 5,
+						"children": [
+							{
+								"type": 0,
+								"children": [
+									{
+										"type": 14,
+										"children": [
+											"itertools"
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": 5,
+						"children": [
+							{
+								"type": 0,
+								"children": [
+									{
+										"type": 14,
+										"children": [
+											"functools"
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Exception handling"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"Define your own if no standard one is suited, and only catch the most specific ones. Avoid Pokémon exception handling."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Tabs, not spaces"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"One tab per indentation level, no other literal tabs anywhere else in the file (use ",
+					{
+						"type": 14,
+						"children": [
+							"\\t"
+						]
+					},
+					" for tabs in strings).",
+					"This gives tabs an unambiguous, semantic meaning."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Other resons for the choice can be looked up ",
+					{
+						"type": 13,
+						"children": [
+							"here"
+						],
+						"ref": {
+							"href": "http://lea.verou.me/2012/01/why-tabs-are-clearly-superior/"
+						}
+					},
+					"."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Naming"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"Use expressive, but not AbstractProxyBeanImpl-style names for everything.",
+					"Avoid names like used in this document (",
+					{
+						"type": 14,
+						"children": [
+							"Test"
+						]
+					},
+					", etc.)."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Use ",
+					{
+						"type": 14,
+						"children": [
+							"CAPS_WITH_UNDERSCORES"
+						]
+					},
+					" for constants, ",
+					{
+						"type": 14,
+						"children": [
+							"lower_with_underscores"
+						]
+					},
+					" for functions, methods, properties, and fields,",
+					"and ",
+					{
+						"type": 14,
+						"children": [
+							"CamelCase"
+						]
+					},
+					" for classes. ",
+					{
+						"type": 14,
+						"children": [
+							"loweCamelCase"
+						]
+					},
+					" is only for overriding methods and protocol-defined fields, nothing else."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Alignment"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"Don’t align in leading whitespace regions such as ",
+					{
+						"type": 14,
+						"children": [
+							"dict"
+						]
+					},
+					" and ",
+					{
+						"type": 14,
+						"children": [
+							"list"
+						]
+					},
+					" literals, long function calls, and function declarations."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Small one liner literals are fine. For multiline ones, use a comma even in the last line. Do:"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"short_dict = { 'foo': 'bar', 'fooz': 'baz' }\n\nlong_dict = {\n\t'a': 'd',\n\t'c': 'f',\n\t'e': 'b',\n}\n\ndef test(\n\t\targ1='',\n\t\targ2=None,\n\t\targ2=print):\n\tpass\n"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Don’t:"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"short_dict = {'foo': 'bar', 'fooz': 'baz',}\n\nlong_dict = {'a': 'd',\n             'c': 'f',\n             'e': 'b'}\n\ndef test(arg1='',\n\t     arg2=None,\n\t     arg2=print):\n\tpass\n"
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Aligning in assignments"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"When defining multiple variables and dict keys with similarly long names, feel free to align them:"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"foo_fn  = 'foo.txt'\nfooz_fn = 'fooz.txt'\n\nali_dict = {\n\t'barz': 1,\n\t'bar':  2,\n}\n"
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Blank lines for grouping"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"Do what you want regarding grouping of methods/classes/functions, but don’t use more than two kinds of space between item groups."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"E.g. You can omit blank lines for brevity in a class with only oneliner methods, while other classes have one blank line between methods and two between groups of similar methods,",
+					"but don’t use create supergroups from method/function groups. Use namespaces or submodules for that."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Don’t put blank lines between nested block creations, such as:"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"class Test:  # no newline now\n\tdef __init__(self):\n\t\tpass\n\ndef read_stuff():\n\twith open('stuff') as f:\n\t\treturn f.read()\n"
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Indent blank lines"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"Indent empty lines to the same level as surrounding lines.",
+					"That way you have visually uniform blocks when making whitespace visible."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Also you don’t have to rely on your editor to remove “trailing whitespace” when editing/saving.",
+					"E.g. the workflow of adding a new line of code between the following lines:"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"def foo():\n\tline1\n\t\n\tline2\n"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"With unindented empty lines:"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					":\t1. Put cursor at the end of ",
+					{
+						"type": 14,
+						"children": [
+							"line1"
+						]
+					},
+					"2. Press return to create an indented blank line that shouldn’t be indented",
+					"3. Press return",
+					"3. Input code",
+					"4. Rely on your editor to remove the whitespace in the blank line"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"With indented empty lines:"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					":\t1. Put the cursor between ",
+					{
+						"type": 14,
+						"children": [
+							"line1"
+						]
+					},
+					" and ",
+					{
+						"type": 14,
+						"children": [
+							"line2"
+						]
+					},
+					"2. Press return",
+					"3. input code",
+					"4. press return"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"The latter has less editor magic and more control, and, as said, is more consistent with your block structure."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"No limit on line length"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"If a line gets longer than ~120 chars, though, the code could be overly complex.",
+					"So consider breaking it up for clarity, e.g. by extracting a variable or putting the parts of a long boolean expression on separate lines."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"Comparisons"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"Compare ",
+					{
+						"type": 14,
+						"children": [
+							"None"
+						]
+					},
+					" using ",
+					{
+						"type": 14,
+						"children": [
+							"is"
+						]
+					},
+					":"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"if param is None:\n\tparam = []\n"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"Never compare booleans using ",
+					{
+						"type": 14,
+						"children": [
+							"=="
+						]
+					},
+					" or ",
+					{
+						"type": 14,
+						"children": [
+							"!="
+						]
+					},
+					".",
+					"Use boolean logic like ",
+					{
+						"type": 14,
+						"children": [
+							"and"
+						]
+					},
+					", ",
+					{
+						"type": 14,
+						"children": [
+							"or"
+						]
+					},
+					", ",
+					{
+						"type": 14,
+						"children": [
+							"not"
+						]
+					},
+					", ",
+					{
+						"type": 14,
+						"children": [
+							"any"
+						]
+					},
+					" and ",
+					{
+						"type": 14,
+						"children": [
+							"all"
+						]
+					},
+					" instead, and use the truthiness of everything; e.g. use ",
+					{
+						"type": 14,
+						"children": [
+							"if my_list"
+						]
+					},
+					" instead of comparing its length to 0."
+				]
+			}
+		]
+	},
+	"2013-11-22-matlab-sucks.md": {
+		"title": "MATLAB sucks",
+		"children": [
+			{
+				"type": 2,
+				"children": [
+					"MATLAB sucks"
+				],
+				"level": 1
+			},
+			{
+				"type": 0,
+				"children": [
+					"yeah, so to make MATLAB usable on linux (if you call that “usable” ;)) you’ll have to do this:"
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"install it"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"not easy due to license bullshit."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"best thing is to run the downloader, then cancel, then run the installer using ",
+					{
+						"type": 14,
+						"children": [
+							"kdesu sh install"
+						]
+					},
+					" (or ",
+					{
+						"type": 14,
+						"children": [
+							"gksu"
+						]
+					},
+					"), because ",
+					{
+						"type": 14,
+						"children": [
+							"sudo sh install"
+						]
+					},
+					" fails with a huge stacktrace revealing horrible incantation on Java’s reflection API."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"now it’s probably installed in ",
+					{
+						"type": 14,
+						"children": [
+							"/usr/local/MATLAB"
+						]
+					},
+					". (dear devs: if you can’t be bothered to use linux’ directory structure, at least go to ",
+					{
+						"type": 14,
+						"children": [
+							"/opt/yourshit"
+						]
+					},
+					", not somewhere else!) but ",
+					{
+						"type": 14,
+						"children": [
+							"/usr/local/bin"
+						]
+					},
+					" doesn’t contain a symlink to ",
+					{
+						"type": 14,
+						"children": [
+							"/usr/local/MATLAB/somebullshit/bin/matlab"
+						]
+					},
+					". create it."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"now fire up ",
+					{
+						"type": 14,
+						"children": [
+							"kmenuedit"
+						]
+					},
+					" or create a ",
+					{
+						"type": 14,
+						"children": [
+							".desktop"
+						]
+					},
+					" file in ",
+					{
+						"type": 14,
+						"children": [
+							"/usr/local/share/applications"
+						]
+					},
+					", with the following as call:"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"env -u _JAVA_OPTIONS matlab -desktop\n"
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"configure it"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"finally start that godforsaken piece of atrociously wrapped implicitness and immediately call"
+				]
+			},
+			{
+				"type": 6,
+				"children": [
+					"userpath('/user/you/somewhere/sane')\n"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"because the default is ",
+					{
+						"type": 14,
+						"children": [
+							"~/Documents/MATLAB"
+						]
+					},
+					" no matter if that folder exists in your language. (you’ll have to delete it because MATLAB immediately created it when starting)"
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"then go to “Settings → MATLAB → Keyboard → Shortcuts” and select “Windows Default Set” if you like your GUI application to behave like every other GUI application."
+				]
+			},
+			{
+				"type": 0,
+				"children": [
+					"now you can use it without it not starting up, starting in terminal mode despite no terminal being attached, creating junk directories in your homedir, creating an “error log” containing the information that ",
+					{
+						"type": 14,
+						"children": [
+							"$_JAVA_OPTIONS"
+						]
+					},
+					" is set (but we can thank Sun/Oracle for that one), or doing interesting things on standard shortcuts."
+				]
+			},
+			{
+				"type": 2,
+				"children": [
+					"using it"
+				],
+				"level": 2
+			},
+			{
+				"type": 0,
+				"children": [
+					"don’t."
+				]
+			}
+		]
+	},
+	"2014-03-05-unicode.rst": {
+		"title": "Uniwhat‽\n",
+		"children": [
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Uniwhat‽\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 0,
+						"children": [
+							"Many people don’t understand Unicode, UTF, UCS, and en- as well as decoding to and from bytes in programming languages like Python.\n\n"
+						]
+					},
+					{
+						"type": 0,
+						"children": [
+							"Since I often explained all of that, here one attempt to do it a last time.\n\n"
+						]
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"Glyphs and 1-byte encodings\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 0,
+								"children": [
+									"A way to think about strings and bytestrings is that the first is a series of glyphs (or symbols) and the latter\n\n",
+									"a series of bytes, which can hold a \n",
+									{
+										"type": 11,
+										"children": [
+											"representation\n"
+										]
+									},
+									" of the first.\n\n"
+								]
+							},
+							{
+								"type": 7,
+								"children": [
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"␐"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␑"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␒"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␓"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␔"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␕"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␖"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␗"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␘"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␙"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␚"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␛"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␜"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␝"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␞"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␟"
+												]
+											}
+										]
+									},
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"␠"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"!"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"\""
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"#"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"$"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"%"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"&"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"'"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"("
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													")"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"*"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"+"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													","
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"-"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"."
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"/"
+												]
+											}
+										]
+									},
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"0"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"1"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"2"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"3"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"4"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"5"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"6"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"7"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"8"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"9"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													":"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													";"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"<"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"="
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													">"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"?"
+												]
+											}
+										]
+									},
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"@"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"A"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"B"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"C"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"D"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"E"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"F"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"G"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"H"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"I"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"J"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"K"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"L"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"M"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"N"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"O"
+												]
+											}
+										]
+									},
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"P"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"Q"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"R"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"S"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"T"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"U"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"V"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"W"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"X"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"Y"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"Z"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"["
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"\\"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"]"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"^"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"_"
+												]
+											}
+										]
+									},
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"`"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"a"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"b"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"c"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"d"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"e"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"f"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"g"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"h"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"i"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"j"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"k"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"l"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"m"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"n"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"o"
+												]
+											}
+										]
+									},
+									{
+										"type": 8,
+										"children": [
+											{
+												"type": 9,
+												"children": [
+													"p"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"q"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"r"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"s"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"t"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"u"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"v"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"w"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"x"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"y"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"z"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"{"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"|"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"}"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"~"
+												]
+											},
+											{
+												"type": 9,
+												"children": [
+													"␡"
+												]
+											}
+										]
+									}
+								],
+								"caption": "The whole ASCII Table: All 1-byte encodings only had this and again as many glyphs"
+							},
+							{
+								"type": 0,
+								"children": [
+									"In the past, there was ASCII and friends, all 1:1 mappings from one to another; one byte = one glyph. One byte is a number between 1 and \n",
+									{
+										"type": 15,
+										"children": [],
+										"math": "2^{8bit} = 256"
+									},
+									", or 0 and 255, or any other range you agree upon. If the agreed upon range is a range of glyphs, you have a text encoding, and translating a string of glyphs into a string of such numbers means encoding that string to a bytestring. (The reverse operation being a decoding)\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"[72, 105, 33]: This is a bytestring encoding “Hi!” in ASCII. (Its position in above table, beginning from 0). All encodings back then had twice as much glyphs encoded as the ones pictured above, because that’s what fits in a byte; And mostly exactly the ones above and then 128 more, because that’s compatible with ASCII and when something goes wrong, you can at least read the compatible part (i.e. the latin letters forming English sentences encoded by ASCII)\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"But there are more than 256 different glyphs in the world, so all of these 1-byte-encodings could only encode that small 256 glyph subset of them. There were American encodings (The latin alphabet + a number of special symbols in the remaining space), and more for other alphabets, such as latin1 for some languages including German, or Vietnamese, Cyrillic and Hebrew ones.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"So we needed more bytes to encode it all.\n\n"
+								]
+							}
+						]
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"Unicode, UTF and UCS\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 0,
+								"children": [
+									"Since all the encodings mapped the same code numbers to different glyphs, garbling everything once you used the wrong table to decode those numbers, the Unicode Consortium was founded, to give all glyphs, and all to come, a single, unambiguous number: Its code-point.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"This is basically UCS-4 aka UTF-32 (They are the same thing for all intents and purposes): 4 bytes to represent one glyph. Unambigous, simple, and wasting space. Partly intentionally, because leaving room is important that glyphs can be added without changing everything, and partly because reserving 4 bytes for every glyph is wasteful when the whole text only consists of a subset.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"Because most text on the internet is English, and English fits into those 128 ASCII glyphs, wouldn’t it be useful to represent that stuff as one byte, and everything else as more? Yes, and that’s UTF-8: 1 byte for ASCII (yes, it’s exactly the same as ASCII for those glyphs and thus also follows the tradition to be ASCII-compatible), and up until 3 bytes for every other glyph.\n\n"
+								]
+							}
+						]
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"The Part where it isn’t that easy\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 0,
+								"children": [
+									"Just use UTF-8. Then there’s no problem.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"You don’t because you are a Java or Microsoft developer? A pity, because then you use UCS-2, and UCS-2 is basically the encoding hell from 30 years ago on a lesser scale. As I said: Unicode has 32-bit codepoints, but until 2003, nobody used any above 65535. Being shortsighted, some people insisted that they were strong, independent language designers who don’t need no future-proof design and used UCS-2. UCS-2 basically ignores the existence of any codepoint above 65535, and encodes the rest as two bytes (\n",
+									{
+										"type": 15,
+										"children": [],
+										"math": "2^{16} = 65536"
+									},
+									"). This way, once something “exotic” is encountered in one of those programs, weird and unpredictable errors happen, such as splitting a string in the middle of a glyph, generating garbage (when the encoding is UTF-16 in reality, not UCS-2), or unencodable glyphs.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"Not pretty, and a reality that was avoidable. Just use UTF-8.\n\n"
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"2017-04-12-typescript-declarations.rst": {
+		"title": "Typescript Module Declarations\n",
+		"children": [
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Typescript Module Declarations\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 0,
+						"children": [
+							"Before I have to relearn this again, here the necessary \n",
+							{
+								"type": 14,
+								"children": [
+									"tsconfig.json\n"
+								]
+							},
+							" settings:\n\n"
+						]
+					},
+					{
+						"type": 6,
+						"children": [
+							"{",
+							"\"compilerOptions\": {",
+							"\"baseUrl\": \".\",                                  // without this, \"paths\" doesn’t work",
+							"\"paths\" :{ \"*\": [\"typings/*\", \"*\"] },            // add `typings/` to search path",
+							"\"typeRoots\": [\"node_modules/@types\", \"typings\"]  // accept module declaration files/dirs from there",
+							"},",
+							"\"include\": [\"index.ts\"]  // \"typings/**/*.d.ts\" doesn’t need to be here",
+							"}"
+						],
+						"language": "typescript"
+					},
+					{
+						"type": 0,
+						"children": [
+							"Now i can create module declaration files as \n",
+							{
+								"type": 14,
+								"children": [
+									"typings/module-name.d.ts\n"
+								]
+							},
+							", e.g. a node-style module function from the \n",
+							{
+								"type": 13,
+								"children": [
+									"templates"
+								],
+								"ref": {
+									"href": "https://www.typescriptlang.org/docs/handbook/declaration-files/templates.html"
+								}
+							},
+							":\n\n"
+						]
+					},
+					{
+						"type": 6,
+						"children": [
+							"/* eslint import/no-extraneous-dependencies: 0 */",
+							"import { Plugin } from 'postcss'",
+							"declare namespace postcssModules {",
+							"interface Options { ... }",
+							"}",
+							"declare const postcssModules: Plugin<postcssModules.Options>",
+							"export = postcssModules"
+						],
+						"language": "typescript"
+					},
+					{
+						"type": 0,
+						"children": [
+							"And for the record, a \n",
+							{
+								"type": 14,
+								"children": [
+									"tsconfig.json\n"
+								]
+							},
+							" boilerplate:\n\n"
+						]
+					},
+					{
+						"type": 6,
+						"children": [
+							"{",
+							"\"compilerOptions\": {",
+							"\"module\": \"commonjs\",        // output format, for apps use \"none\"",
+							"\"moduleResolution\": \"node\",  // accept `module/index.ts` when doing `import 'module'`",
+							"\"target\": \"es2015\",          // don’t convert language features; browsers and node are modern",
+							"\"lib\": [\"es2015\"],           // Promise & co.",
+							"// stronger types (in the 2.3 future, use `\"strict\": true`)",
+							"\"alwaysStrict\": true,",
+							"\"noImplicitAny\": true,",
+							"\"noImplicitThis\": true,",
+							"\"strictNullChecks\": true,",
+							"// general",
+							"\"removeComments\": true,",
+							"\"sourceMap\": true,",
+							"// custom typings",
+							"\"baseUrl\": \".\",",
+							"\"paths\" :{ \"*\": [\"typings/*\", \"*\"] },",
+							"\"typeRoots\": [\"node_modules/@types\", \"typings\"]",
+							"},",
+							"\"include\": [\"index.ts\"]",
+							"}"
+						],
+						"language": "typescript"
+					}
+				]
+			}
+		]
+	},
+	"2017-05-12-arch-kde.rst": {
+		"title": "Arch Linux KDE setup\n",
+		"children": [
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Arch Linux KDE setup\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"Packages\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Basics\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 3,
+										"children": [
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"base\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"networkmanager (+ networkmanager-openconnect)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"intel-ucode\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"nvidia\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"samsung-unified-driver\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"earlyoom (+ \n",
+															{
+																"type": 14,
+																"children": [
+																	"systemctl enable earlyoom\n"
+																]
+															},
+															")\n\n"
+														]
+													}
+												]
+											}
+										],
+										"bullet": "__text__",
+										"text": "-"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Shell\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 3,
+										"children": [
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"zsh\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"vim\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"sudo (\n",
+															{
+																"type": 14,
+																"children": [
+																	"visudo\n"
+																]
+															},
+															" → \n",
+															{
+																"type": 14,
+																"children": [
+																	":wheel …\n"
+																]
+															},
+															")\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"openssh (+ mosh oder eternalterminal)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"prezto-git\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"ripgrep\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"mlocate\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"thefuck\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"machma (or parallel)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"lesspipe (+ unzip, unrar, cabextract, p7zip, cdrkit, html2text)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"hdparm\n\n"
+														]
+													}
+												]
+											}
+										],
+										"bullet": "__text__",
+										"text": "-"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Devel\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 3,
+										"children": [
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"git\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"base-devel\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"pacaur\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"reflector-timer\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"jq (or jshon)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"xdg-utils\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"pkgbuild-introspection\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"qtcreator (+ qmake-mimetypes)\n\n"
+														]
+													}
+												]
+											}
+										],
+										"bullet": "__text__",
+										"text": "-"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Others\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 3,
+										"children": [
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"firefox (or firefox-kde-opensuse + kmozillahelper + libdbusmenu-gtk3)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"rambox-bin\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"steam (+ lib32-nvidia-utils)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"otf-fira-code or ttf-iosevka (the latter has variants)\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"ttf-twemoji-color (and a fontconfig inspired by \n",
+															{
+																"type": 14,
+																"children": [
+																	"/etc/fonts/conf.avail/56-ttf-twemoji-color.conf\n"
+																]
+															},
+															")\n\n"
+														]
+													}
+												]
+											},
+											{
+												"type": 5,
+												"children": [
+													{
+														"type": 0,
+														"children": [
+															"polkit-use-wheel-group\n\n"
+														]
+													}
+												]
+											}
+										],
+										"bullet": "__text__",
+										"text": "-"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"KDE\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 1,
+										"children": [
+											{
+												"type": 2,
+												"children": [
+													"Plasma\n"
+												],
+												"level": 4
+											},
+											{
+												"type": 3,
+												"children": [
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"plasma-meta\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"plasma5-applets-eventcalendar\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"plasma5-applets-redshift-control\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kdeconnect\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kwin-effect-shapecorners-git\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kwin-scripts-forceblur (for yakuake blurring)\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kwin-decoration-sierra-breeze-enhanced-git\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"better-plasma5-video-wallpaper-git\n\n"
+																]
+															}
+														]
+													}
+												],
+												"bullet": "__text__",
+												"text": "-"
+											}
+										]
+									},
+									{
+										"type": 1,
+										"children": [
+											{
+												"type": 2,
+												"children": [
+													"Utilities & KCMs\n"
+												],
+												"level": 4
+											},
+											{
+												"type": 3,
+												"children": [
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"yakuake\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kwalletmanager (+ ksshaskpass)\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kcharselect\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kcolorchooser\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kdialog\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"khelpcenter\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"keditbookmarks\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"octopi (and octopi-notifier, …)\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"pacmanlogviewer-qt5\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"print-manager\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"systemd-kcm\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"(kcm-pointing-devices-git): for laptops, as it has better touchpad support\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kio-extras\n\n"
+																]
+															}
+														]
+													}
+												],
+												"bullet": "__text__",
+												"text": "-"
+											}
+										]
+									},
+									{
+										"type": 1,
+										"children": [
+											{
+												"type": 2,
+												"children": [
+													"File Management\n"
+												],
+												"level": 4
+											},
+											{
+												"type": 3,
+												"children": [
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"dolphin\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"dolphin-plugins\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kdegraphics-thumbnailers\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"resvg (contains fast SVG thumbnailer)\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"filelight\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"ark\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kdf\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"partitionmanager\n\n"
+																]
+															}
+														]
+													}
+												],
+												"bullet": "__text__",
+												"text": "-"
+											}
+										]
+									},
+									{
+										"type": 1,
+										"children": [
+											{
+												"type": 2,
+												"children": [
+													"Devel\n"
+												],
+												"level": 4
+											},
+											{
+												"type": 3,
+												"children": [
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kcachegrind\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kompare\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"okteta\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"konsole\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kate\n\n"
+																]
+															}
+														]
+													}
+												],
+												"bullet": "__text__",
+												"text": "-"
+											}
+										]
+									},
+									{
+										"type": 1,
+										"children": [
+											{
+												"type": 2,
+												"children": [
+													"Documents & Media\n"
+												],
+												"level": 4
+											},
+											{
+												"type": 3,
+												"children": [
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"phonon-qt5-gstreamer (+ gst-plugins-base, gst-plugins-good, gst-plugins-bad)\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"gwenview\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"spectacle\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kamera\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"skanlite\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"okular\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"dragon\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kig\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"kmplot\n\n"
+																]
+															}
+														]
+													}
+												],
+												"bullet": "__text__",
+												"text": "-"
+											}
+										]
+									},
+									{
+										"type": 1,
+										"children": [
+											{
+												"type": 2,
+												"children": [
+													"Python\n"
+												],
+												"level": 4
+											},
+											{
+												"type": 3,
+												"children": [
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"PyCharm\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"ttystatus\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"tqdm\n\n"
+																]
+															}
+														]
+													},
+													{
+														"type": 5,
+														"children": [
+															{
+																"type": 0,
+																"children": [
+																	"jupyter (+ jupyter-notebook, jupyter_console, jupyter_nbconvert, …)\n\n"
+																]
+															}
+														]
+													}
+												],
+												"bullet": "__text__",
+												"text": "-"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"Config\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Kate\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"Add to \n",
+											{
+												"type": 14,
+												"children": [
+													"~/.zshenv\n"
+												]
+											},
+											":\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"export EDITOR=kate"
+										],
+										"language": "zsh"
+									},
+									{
+										"type": 0,
+										"children": [
+											"use \n",
+											{
+												"type": 14,
+												"children": [
+													"sudoedit\n"
+												]
+											},
+											" to edit files as root (with Kate).\n\n"
+										]
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"HD standby\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"Time to spin down those old-fashined HDDs, \n",
+											{
+												"type": 13,
+												"children": [
+													"using a udev rule or oneshot service <https://wiki.archlinux.org/index.php/Hdparm#Persistent_configuration_using_udev_rule>"
+												],
+												"ref": {
+													"name": "using a udev rule or oneshot service <https://wiki.archlinux.org/index.php/Hdparm#Persistent_configuration_using_udev_rule>"
+												}
+											},
+											":\n\n"
+										]
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"SSH\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"I was long confused how that agent stuff worked but it’s easy:\n\n",
+											"SSH (and things using it, like Git) simply asks a running agent (identified by \n",
+											{
+												"type": 14,
+												"children": [
+													"$SSH_AUTH_SOCK\n"
+												]
+											},
+											" existing) for your identity.\n\n",
+											"So what you want to do is start the agent and set \n",
+											{
+												"type": 14,
+												"children": [
+													"$SSH_AUTH_SOCK\n"
+												]
+											},
+											" once for your whole session\n\n",
+											"(i.e. not in a shell, but at a higher level). In Plasma, that’s easy via env scripts:\n\n"
+										]
+									},
+									{
+										"type": 0,
+										"children": [
+											"Install \n",
+											{
+												"type": 14,
+												"children": [
+													"plasma-workspace-agent-ssh\n"
+												]
+											},
+											".\n\n",
+											"If you want to be asked for your key only once, add \n",
+											{
+												"type": 14,
+												"children": [
+													"AddKeysToAgent yes\n"
+												]
+											},
+											" to \n",
+											{
+												"type": 14,
+												"children": [
+													"~/.ssh/config\n"
+												]
+											},
+											".\n\n",
+											"If you want to avoid doing that even once, you can add the following to your \n",
+											{
+												"type": 11,
+												"children": [
+													"~/.zshrc\n"
+												]
+											},
+											":\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"# No TTY may be attached, SSH_ASKPASS and DISPLAY need to be set.",
+											"export SSH_ASKPASS='/usr/bin/ksshaskpass'",
+											"DISPLAY= ssh-add </dev/null"
+										],
+										"language": "zsh"
+									},
+									{
+										"type": 0,
+										"children": [
+											{
+												"type": 14,
+												"children": [
+													"plasma-workspace-agent-ssh\n"
+												]
+											},
+											" will only enable the agent in your plasma sessions, so you might want to go for the \n",
+											{
+												"type": 13,
+												"children": [
+													"systemd user service"
+												],
+												"ref": {
+													"name": "systemd user service"
+												}
+											},
+											"\n\n"
+										]
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Lesspipe\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"Add to \n",
+											{
+												"type": 14,
+												"children": [
+													"~/.zshenv\n"
+												]
+											},
+											":\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"export LESSOPEN='|lesspipe.sh %s'"
+										],
+										"language": "zsh"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"GTK 3\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"Add to \n",
+											{
+												"type": 14,
+												"children": [
+													"~/.config/gtk-3.0/settings.ini\n"
+												]
+											},
+											"\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"[Settings]",
+											"gtk-primary-button-warps-slider=false",
+											"gtk-shell-shows-menubar=1"
+										],
+										"language": "ini"
+									},
+									{
+										"type": 0,
+										"children": [
+											"For globalmenu support (see Kai Uwe’s post \n",
+											{
+												"type": 13,
+												"children": [
+													"GTK Global Menu"
+												],
+												"ref": {
+													"href": "https://blog.broulik.de/2018/03/gtk-global-menu/"
+												}
+											},
+											") you need the package \n",
+											{
+												"type": 14,
+												"children": [
+													"appmenu-gtk-module\n"
+												]
+											},
+											" and:\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"export SAL_USE_VCLPLUGIN=gtk3",
+											"export GTK_MODULES=appmenu-gtk-module"
+										],
+										"language": "zsh"
+									},
+									{
+										"type": 0,
+										"children": [
+											"For java applications, you additionally need the package \n",
+											{
+												"type": 14,
+												"children": [
+													"vala-panel-appmenu-jayatana-git\n"
+												]
+											},
+											" and to add \n",
+											{
+												"type": 14,
+												"children": [
+													"-javaagent:/usr/share/java/jayatanaag.jar\n"
+												]
+											},
+											" to the VM options. (in Intellij products, use Help→Edit custom VM options).\n\n"
+										]
+									},
+									{
+										"type": 0,
+										"children": [
+											"However there seems to be a memory leak at least when using this with PyCharm.\n\n"
+										]
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Fontconfig\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"Something probably depended on \n",
+											{
+												"type": 11,
+												"children": [
+													"ttf-font\n"
+												]
+											},
+											" and pulled in \n",
+											{
+												"type": 11,
+												"children": [
+													"ttf-dejavu\n"
+												]
+											},
+											". Remove it, KDE pulled in Noto.\n\n"
+										]
+									},
+									{
+										"type": 0,
+										"children": [
+											"Link those configs:\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"sudo ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/",
+											"sudo ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/"
+										],
+										"language": "zsh"
+									},
+									{
+										"type": 0,
+										"children": [
+											"And assign default fonts in \n",
+											{
+												"type": 14,
+												"children": [
+													"/etc/fonts/local.conf\n"
+												]
+											},
+											":\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"<?xml version=\"1.0\"?>",
+											"<!DOCTYPE fontconfig SYSTEM \"fonts.dtd\">",
+											"<fontconfig>",
+											" <alias>",
+											"  <family>serif</family>",
+											"  <prefer><family>Noto Serif</family></prefer>",
+											" </alias>",
+											" <alias>",
+											"  <family>sans-serif</family>",
+											"  <prefer><family>Noto Sans</family></prefer>",
+											" </alias>",
+											" <alias>",
+											"  <family>monospace</family>",
+											"  <prefer><family>Hack</family></prefer>",
+											" </alias>",
+											" <!-- we don’t want this one to fc-match the wrong font -->",
+											" <alias>",
+											"  <family>Arial</family>",
+											"  <prefer><family>sans-serif</family></prefer>",
+											" </alias>",
+											"</fontconfig>",
+											"<!-- kate: space-indent on; indent-width 1; mixedindent off -->"
+										],
+										"language": "xml"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Cursor\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"Make sure the default icon theme inherits from your cursor theme:\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"cat <'EOF' >/usr/share/icons/default/index.theme",
+											"[Icon Theme]",
+											"Inherits=breeze_cursors",
+											"EOF"
+										],
+										"language": "zsh"
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Plasma Calendar\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"The builtin version would use \n",
+											{
+												"type": 14,
+												"children": [
+													"kdepim-addons\n"
+												]
+											},
+											" and \n",
+											{
+												"type": 14,
+												"children": [
+													"korganizer\n"
+												]
+											},
+											", but \n",
+											{
+												"type": 14,
+												"children": [
+													"plasma5-applets-eventcalendar\n"
+												]
+											},
+											" has less overhead\n\n"
+										]
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"LibreOffice\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"In order to not have two global menus, uncomment the “kde5” line in \n",
+											{
+												"type": 14,
+												"children": [
+													"/etc/profile.d/libreoffice-fresh.sh\n"
+												]
+											},
+											"\n\n"
+										]
+									}
+								]
+							},
+							{
+								"type": 1,
+								"children": [
+									{
+										"type": 2,
+										"children": [
+											"Systemd\n"
+										],
+										"level": 3
+									},
+									{
+										"type": 0,
+										"children": [
+											"There are only few services that have to be enabled:\n\n"
+										]
+									},
+									{
+										"type": 6,
+										"children": [
+											"sudo systemctl enable sddm",
+											"sudo systemctl enable org.cups.cupsd && sudo systemctl start org.cups.cupsd",
+											"systemctl enable reflector.timer && systemctl start reflector.timer"
+										],
+										"language": "zsh"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"2017-05-12-firefox.rst": {
+		"title": "Hidden firefox tweaks\n",
+		"children": [
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Hidden firefox tweaks\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 0,
+						"children": [
+							"Enable tracking protection for all devices: \n",
+							{
+								"type": 14,
+								"children": [
+									"privacy.trackingprotection.enabled = true\n"
+								]
+							},
+							" \n",
+							{
+								"type": 14,
+								"children": [
+									"extensions.e10sBlockedByAddons = false\n"
+								]
+							},
+							"\n\n"
+						]
+					},
+					{
+						"type": 0,
+						"children": [
+							"Don’t sync which addons are active per device: \n",
+							{
+								"type": 14,
+								"children": [
+									"services.sync.addons.ignoreUserEnabledChanges = true\n"
+								]
+							},
+							"\n\n"
+						]
+					},
+					{
+						"type": 0,
+						"children": [
+							"Force-enable e10s: \n",
+							{
+								"type": 14,
+								"children": [
+									"browser.tabs.remote.force-enable = true\n"
+								]
+							},
+							"\n\n"
+						]
+					}
+				]
+			},
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Good addons\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"Formerly\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 3,
+								"children": [
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Colorblind design (defunct, no e10s)\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Lazarus Form recovery (defunct, no e10s)\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Markdown here (no e10s)\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"MozRepl (no e10s)\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Regex find (no e10s)\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Tab in Textarea (defunct, no e10s)\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Terms of Service; Didn’t read (no e10s)\n\n"
+												]
+											}
+										]
+									}
+								],
+								"bullet": "__text__",
+								"text": "-"
+							}
+						]
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"Still\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 3,
+								"children": [
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"BackTrack Tab History\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"JSONView\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Greasemonkey\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"MathML Fonts\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Media Keys\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Native MathML\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"React Devtools\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Reddit Enhancement Suite\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Saved Password editor\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"searchlinkfix\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Stylish\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"tabkit\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"uBlock Origin\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"UnloadTabs\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"Unity Launcher API Addon e10s\n\n"
+												]
+											}
+										]
+									},
+									{
+										"type": 5,
+										"children": [
+											{
+												"type": 0,
+												"children": [
+													"xclear\n\n"
+												]
+											}
+										]
+									}
+								],
+								"bullet": "__text__",
+								"text": "-"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"2018-11-06-sc-data-size.rst": {
+		"title": "Single cell data Size\n",
+		"children": [
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Single cell data Size\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 0,
+						"children": [
+							"In \n",
+							{
+								"type": 13,
+								"children": [
+									"our"
+								],
+								"ref": {
+									"href": "https://www.helmholtz-muenchen.de/icb/"
+								}
+							},
+							" review paper \n",
+							{
+								"type": 13,
+								"children": [
+									"single cells make big data"
+								],
+								"ref": {
+									"href": "https://www.sciencedirect.com/science/article/pii/S245231001730077X"
+								}
+							},
+							", we showed a graph of the rising numbers of cells in datasets from the \n",
+							{
+								"type": 13,
+								"children": [
+									"Gene Expression Omnibus"
+								],
+								"ref": {
+									"href": "https://www.ncbi.nlm.nih.gov/geo/"
+								}
+							},
+							" (GEO). This is an updated version:\n\n"
+						]
+					},
+					{
+						"type": 16,
+						"children": [],
+						"url": "/static/cellplot.json",
+						"onClickLink": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={text}",
+						"style": {
+							"width": "100%"
+						},
+						"config": {
+							"responsive": true
+						}
+					},
+					{
+						"type": 0,
+						"children": [
+							"(last updated: 2018-11-06)\n\n"
+						]
+					}
+				]
+			}
+		]
+	},
+	"2020-04-25-falc.rst": {
+		"title": "Fully Automated Luxury Communism\n",
+		"children": [
+			{
+				"type": 1,
+				"children": [
+					{
+						"type": 2,
+						"children": [
+							"Fully Automated Luxury Communism\n"
+						],
+						"level": 1
+					},
+					{
+						"type": 0,
+						"children": [
+							"The logical end goal of human strife.\n\n",
+							"I want to explain why.\n\n"
+						]
+					},
+					{
+						"type": 0,
+						"children": [
+							"FAL(GS)C?\n\n"
+						]
+					},
+					{
+						"type": 0,
+						"children": [
+							"Also known as fully automated luxury gay space communism,\n\n",
+							"the additions serve more to distract than to enlighten.\n\n",
+							"Do I have to be gay? Why space? Let’s go over it:\n\n"
+						]
+					},
+					{
+						"type": 1,
+						"children": [
+							{
+								"type": 2,
+								"children": [
+									"fully automated\n"
+								],
+								"level": 2
+							},
+							{
+								"type": 0,
+								"children": [
+									"Automation’s steady advance is no secret.\n\n",
+									"The simpler and more repetitive a job, the easier it is to automate.\n\n",
+									"First came conveyor belt work, now driving.\n\n",
+									"The logical end result is (nearly) fully automated production.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"Humans decreasingly need to be cogs in a machine.\n\n",
+									"The idea that less work does not mean more free time is absurd.\n\n",
+									"It’s a historic remnant of our capitalist society.\n\n",
+									"Self worth has been coupled to a narrow definition of “work”.\n\n"
+								]
+							},
+							{
+								"type": 0,
+								"children": [
+									"Unless warmongers turn back the clock on us, this won’t hold.\n\n"
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

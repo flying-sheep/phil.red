@@ -1,5 +1,4 @@
 declare module 'react-did-catch' {
-    // eslint-disable-next-line import/no-extraneous-dependencies
     import { BrowserInfo } from 'detect-browser'
     
     interface CatchErrorProps {

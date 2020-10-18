@@ -1,36 +1,43 @@
 import * as React from 'react'
-import ASTError, { ASTErrorMessage, ASTErrorMessageProps } from './ASTError'
 
-export default abstract class Markup<AST> {
-	markup: string
-	ast: AST
-	title: string | React.ReactElement<ASTErrorMessageProps<AST>>
-	constructor(markup: string) {
-		this.markup = markup
-		this.ast = this.getAST()
-		try {
-			this.title = this.getTitle()
-		} catch (e) {
-			if (e instanceof ASTError) {
-				this.title = <ASTErrorMessage ast={e.ast}>{e.message}</ASTErrorMessage>
-			} else throw e
-		}
+import { Document, Node } from '../../markup/MarkupDocument'
+import { ASTErrorMessageProps } from './ASTErrorMessage'
+import MarkupNodeComponent from './MarkupNodeComponent'
+
+export interface MarkupProps {
+	doc: Document
+}
+
+export interface MarkupState {
+	errorMessage: string
+}
+
+export default class Markup extends React.Component<MarkupProps, MarkupState> {
+	title: string | React.ReactElement<ASTErrorMessageProps>
+	children: Node[]
+
+	constructor(props: MarkupProps) {
+		super(props)
+		const { doc } = props
+		this.title = doc.title
+		this.children = doc.children // DEBUG
+	}
+	
+	static getDerivedStateFromError(error: Error) {
+		return { errorMessage: error.message }
 	}
 	
 	render(): React.ReactElement<any> {
-		const rendered = this.renderPost()
-		if (process.env.NODE_ENV === 'development' as 'production' | 'development') {
+		const nodes = this.children.map((e) => <MarkupNodeComponent node={e} level={0}/>)
+		const body = React.Children.toArray(nodes)
+		if (process.env.NODE_ENV === 'development') {
 			return (
 				<article>
-					{rendered}
-					<pre>{JSON.stringify(this.ast, undefined, '\t')}</pre>
+					{body}
+					<pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(this.children, undefined, '\t')}</pre>
 				</article>
 			)
 		}
-		return <article>{rendered}</article>
+		return <article>{body}</article>
 	}
-	
-	abstract getAST(): AST
-	abstract getTitle(): string
-	abstract renderPost(): React.ReactNode
 }
