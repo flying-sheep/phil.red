@@ -6,6 +6,7 @@ export enum Type {
 	Section,
 	Title,
 	BulletList, EnumList, ListItem,
+	DefList, DefItem, DefTerm, Def,
 	CodeBlock,
 	Table, Row, Cell,
 	// inline
@@ -128,6 +129,15 @@ interface EnumList extends Element { type: Type.EnumList, enumeration?: Enumerat
 export const EnumList = mkFun<EnumList>(Type.EnumList)
 interface ListItem extends Element { type: Type.ListItem }
 export const ListItem = mkFun<ListItem>(Type.ListItem)
+
+interface DefList extends Element { type: Type.DefList }
+export const DefList = mkFun<DefList>(Type.DefList)
+interface DefItem extends Element { type: Type.DefItem }
+export const DefItem = mkFun<DefItem>(Type.DefItem)
+interface DefTerm extends Element { type: Type.DefTerm }
+export const DefTerm = mkFun<DefItem>(Type.DefTerm)
+interface Def extends Element { type: Type.Def }
+export const Def = mkFun<Def>(Type.Def)
 
 interface CodeBlock extends Element { type: Type.CodeBlock, language?: string }
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)

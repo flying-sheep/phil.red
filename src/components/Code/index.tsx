@@ -21,12 +21,11 @@ import Web from '@material-ui/icons/Web'
 import PythonIcon from './python-icon'
 import ArchIcon from './arch-icon'
 
-
 type ListItemLinkProps = {
-	href?: string,
-	icon?: React.ReactNode | React.ElementType,
-	text?: React.ReactNode,
-	sub?: React.ReactNode,
+	href?: string
+	icon?: React.ReactNode | React.ElementType
+	text?: React.ReactNode
+	sub?: React.ReactNode
 }
 
 const ListItemLink = ({

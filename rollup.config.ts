@@ -39,6 +39,7 @@ export default {
 	plugins: [
 		analyze({
 			writeTo(formatted) {
+				// eslint-disable-next-line global-require,no-console
 				require('fs').writeFile('dist/bundle.log', formatted, (e: Error) => (e !== null ? console.error(e) : {}))
 			},
 		}),

@@ -67,8 +67,18 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 				{convertChildren(node, level)}
 			</m.BulletList>,
 		]
+	case 'enumerated_list':
+		return [<m.EnumList>{convertChildren(node, level)}</m.EnumList>]
 	case 'list_item':
 		return [<m.ListItem>{convertChildren(node, level)}</m.ListItem>]
+	case 'definition_list':
+		return [<m.DefList>{convertChildren(node, level)}</m.DefList>]
+	case 'definition_list_item':
+		return [<m.DefItem>{convertChildren(node, level)}</m.DefItem>]
+	case 'term':
+		return [<m.DefTerm>{convertChildren(node, level)}</m.DefTerm>]
+	case 'definition':
+		return [<m.Def>{convertChildren(node, level)}</m.Def>]
 	case 'interpreted_text':
 		switch (node.role) {
 		case 'math':
@@ -165,6 +175,7 @@ function extractTargets(node: rst.Node): {[key: string]: string} {
 		}
 	}
 	if (Object.keys(pending).length) {
+		// eslint-disable-next-line no-console
 		console.warn('Could not resolve references: %s', pending)
 	}
 	return resolved
