@@ -1,10 +1,25 @@
-import { FunctionComponent } from 'typed-jsx'
+import {
+	FunctionComponent, ComponentInstance, data,
+} from 'typed-jsx'
+
+namespace markupElement {
+	export declare namespace JSX {
+		type Element = Elem
+		type IntrinsicElements = {}
+		type ElementClass = ComponentInstance
+		interface IntrinsicAttributes {}
+		interface IntrinsicClassAttributes<T> {}
+		interface ElementChildrenAttribute { children: {} }
+	}
+}
+const markupElement = data
+export { markupElement }
 
 export enum Type {
 	// block
-	Paragraph,
 	Section,
 	Title,
+	Paragraph,
 	BulletList, EnumList, ListItem,
 	DefList, DefItem, DefTerm, Def,
 	CodeBlock,
@@ -68,7 +83,11 @@ export type Node = string | Elem
 
 export type Elem =
 	// Block
-	Paragraph | Section | Title | BulletList | EnumList | ListItem | CodeBlock | Table | Row | Cell |
+	Paragraph | Section | Title |
+	BulletList | EnumList | ListItem |
+	DefList | DefItem | DefTerm | Def |
+	CodeBlock |
+	Table | Row | Cell |
 	// Inline
 	LineBreak | Emph | Strong | Link | Code | InlineMath |
 	// Custom
@@ -113,14 +132,14 @@ function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
 
 // Block
 
-interface Paragraph extends Element { type: Type.Paragraph }
-export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
-
 interface Section extends Element { type: Type.Section }
 export const Section = mkFun<Section>(Type.Section)
 
 interface Title extends Element { type: Type.Title, level: number }
 export const Title = mkFun<Title>(Type.Title)
+
+interface Paragraph extends Element { type: Type.Paragraph }
+export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
 
 interface BulletList extends Element { type: Type.BulletList, bullet?: Bullet, text?: string }
 export const BulletList = mkFun<BulletList>(Type.BulletList)

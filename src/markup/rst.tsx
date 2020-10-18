@@ -1,7 +1,7 @@
-/** @jsx data */
-import { data } from 'typed-jsx'
+/** @jsx markupElement */
 import * as rst from 'restructured'
 import * as m from './MarkupDocument'
+import { markupElement } from './MarkupDocument'
 import ASTError from './AstError'
 
 interface Directive {
@@ -25,8 +25,7 @@ function parseDirective(lines: rst.Node[]): Directive {
 		})
 		.reduce((obj, line) => {
 			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as string[]
-			// eslint-disable-next-line no-param-reassign
-			obj[name] = val
+			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
 		}, {} as { [k: string]: string })
 	const body = rest.slice(lastParam + 1)
@@ -90,6 +89,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		}
 	case 'directive':
 		switch (node.directive as rst.DirectiveType | 'plotly') {
+		case 'code-block':
 		case 'code': {
 			const { header, body } = parseDirective(node.children || [])
 			return [<m.CodeBlock language={header || undefined}>{body}</m.CodeBlock>]

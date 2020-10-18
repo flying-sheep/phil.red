@@ -2,7 +2,7 @@
 
 import * as path from 'path'
 import { promises as fs } from 'fs'
-import * as glob from 'matched'
+import * as glob from 'globby'
 import { mdConvert, rstConvert, Document } from '../markup'
 
 function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
@@ -36,7 +36,7 @@ export default function renderdoc(config: Partial<Config> = {}) {
 	async function doGlob(id: string): Promise<string[]> {
 		const stats = await fs.stat(id)
 		if (!stats.isDirectory()) return []
-		const paths = await glob(patterns, { realpath: true, cwd: id })
+		const paths = await glob(patterns, { cwd: id, absolute: true })
 		return paths
 	}
 	

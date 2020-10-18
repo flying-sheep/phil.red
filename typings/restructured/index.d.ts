@@ -23,7 +23,7 @@ declare module 'restructured' {
 		'math'
 	)
 	export type DirectiveType = (
-		'code' |
+		'code' | 'code-block' |
 		'csv-table'
 	)
     export interface Node {

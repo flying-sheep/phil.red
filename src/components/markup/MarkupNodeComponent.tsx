@@ -1,6 +1,7 @@
 import * as React from 'react'
 
-import { Typography } from '@material-ui/core'
+import Link from '@material-ui/core/Link'
+import Typography from '@material-ui/core/Typography'
 import { Variant } from '@material-ui/core/styles/createTypography'
 import { InlineMath } from 'react-katex'
 
@@ -44,12 +45,7 @@ export default class MarkupNodeComponent extends React.Component
 		}
 		if (typeof node === 'string') return `${node}\n`
 		switch (node.type) {
-		case Type.LineBreak:
-			return <br/>
-		case Type.Link: {
-			if ('name' in node.ref) throw new ASTError(`Unresolved reference ${node.ref.name}`, node)
-			return <a href={node.ref.href}>{convertChildren(node, level)}</a>
-		}
+		// Block
 		case Type.Section:
 			return <section>{convertChildren(node, level + 1)}</section>
 		case Type.Title: {
@@ -59,12 +55,6 @@ export default class MarkupNodeComponent extends React.Component
 		}
 		case Type.Paragraph:
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>
-		case Type.Code:
-			return <code>{convertChildren(node, level)}</code>
-		case Type.Emph:
-			return <em>{convertChildren(node, level)}</em>
-		case Type.Strong:
-			return <strong>{convertChildren(node, level)}</strong>
 		case Type.BulletList: {
 			const listStyleType = node.bullet === Bullet.text ? node.text : node.bullet
 			return <ul style={{ listStyleType }}>{convertChildren(node, level)}</ul>
@@ -73,8 +63,14 @@ export default class MarkupNodeComponent extends React.Component
 			return <ul style={{ listStyleType: node.enumeration }}>{convertChildren(node, level)}</ul>
 		case Type.ListItem:
 			return <li>{convertChildren(node, level)}</li>
-		case Type.InlineMath:
-			return <InlineMath math={node.math}/>
+		case Type.DefList:
+			return <dl>{convertChildren(node, level)}</dl>
+		case Type.DefItem:
+			return convertChildren(node, level)
+		case Type.DefTerm:
+			return <dt>{convertChildren(node, level)}</dt>
+		case Type.Def:
+			return <dd>{convertChildren(node, level)}</dd>
 		case Type.CodeBlock:
 			return <pre><code>{convertChildren(node, level)}</code></pre>
 		case Type.Table:
@@ -88,6 +84,21 @@ export default class MarkupNodeComponent extends React.Component
 			return <tr>{convertChildren(node, level)}</tr>
 		case Type.Cell:
 			return <td>{convertChildren(node, level)}</td>
+		// Inline
+		case Type.LineBreak:
+			return <br/>
+		case Type.Emph:
+			return <em>{convertChildren(node, level)}</em>
+		case Type.Strong:
+			return <strong>{convertChildren(node, level)}</strong>
+		case Type.Link: {
+			if ('name' in node.ref) throw new ASTError(`Unresolved reference ${node.ref.name}`, node)
+			return <Link href={node.ref.href}>{convertChildren(node, level)}</Link>
+		}
+		case Type.Code:
+			return <code>{convertChildren(node, level)}</code>
+		case Type.InlineMath:
+			return <InlineMath math={node.math}/>
 		// custom
 		case Type.Plotly: {
 			const { type, ...props } = node
