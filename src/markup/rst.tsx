@@ -2,7 +2,8 @@
 import * as rst from 'restructured'
 import * as m from './MarkupDocument'
 import { markupElement } from './MarkupDocument'
-import ASTError from './AstError'
+import ASTError from './ASTError'
+import ParseError from './ParseError'
 
 interface Directive {
 	header: string | null
@@ -39,7 +40,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 	case 'comment':
 		return []
 	case 'reference': {
-		const name = node.children?.[0].value as string
+		const name = (node.children[0] as rst.InlineNode).value as string
 		return [<m.Link ref={{ name }}>{[name]}</m.Link>]
 	}
 	case 'section':
@@ -57,15 +58,16 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		return [<m.Code>{convertChildren(node, level)}</m.Code>]
 	case 'emphasis':
 		return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
-	case 'bullet_list':
+	case 'strong':
+		return [<m.Strong>{convertChildren(node, level)}</m.Strong>]
+	case 'bullet_list': {
+		// TODO: convert some known bullets
 		return [
-			<m.BulletList
-				bullet={node.bullet ? m.Bullet.text : undefined}
-				text={node.bullet || undefined}
-			>
+			<m.BulletList bullet={m.Bullet.text} text={node.bullet}>
 				{convertChildren(node, level)}
 			</m.BulletList>,
 		]
+	}
 	case 'enumerated_list':
 		return [<m.EnumList>{convertChildren(node, level)}</m.EnumList>]
 	case 'list_item':
@@ -81,7 +83,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 	case 'interpreted_text':
 		switch (node.role) {
 		case 'math':
-			return [<m.InlineMath math={(node.children || []).map((text) => text.value).join('')}/>]
+			return [<m.InlineMath math={node.children.map((text) => (text as rst.InlineNode).value).join('')}/>]
 		case null:
 			return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
 		default:
@@ -91,11 +93,11 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		switch (node.directive as rst.DirectiveType | 'plotly') {
 		case 'code-block':
 		case 'code': {
-			const { header, body } = parseDirective(node.children || [])
+			const { header, body } = parseDirective(node.children)
 			return [<m.CodeBlock language={header || undefined}>{body}</m.CodeBlock>]
 		}
 		case 'csv-table': {
-			const { header, params, body } = parseDirective(node.children || [])
+			const { header, params, body } = parseDirective(node.children)
 			const delim = (() => {
 				switch (params.delim) {
 				case 'tab': return '\t'
@@ -117,7 +119,7 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 		}
 		// custom
 		case 'plotly': {
-			const { header, params } = parseDirective(node.children || [])
+			const { header, params } = parseDirective(node.children)
 			return [
 				<m.Plotly
 					url={header || ''}
@@ -131,25 +133,25 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 			throw new ASTError(`Unknown directive “${node.directive}”`, node)
 		}
 	default:
-		throw new ASTError(`Unknown node type “${node.type}”`, node)
+		throw new ASTError(`Unknown node type “${(node as rst.Node).type}”`, node)
 	}
 }
 
 function convertChildren(node: rst.Node, level: number): m.Node[] {
-	return (node.children || []).reduce(
+	return ('children' in node ? node.children : []).reduce(
 		(ns: m.Node[], n: rst.Node) => [...ns, ...convertNode(n, level)],
 		[],
 	)
 }
 
-function* extractTargetsInner(elem: rst.Node): IterableIterator<[string, string]> {
-	for (const child of elem.children || []) {
+function* extractTargetsInner(node: rst.Node): IterableIterator<[string, string]> {
+	for (const child of 'children' in node ? node.children : []) {
 		if (typeof child === 'string') continue
 		if (child.type === 'comment') {
-			const comment = (child.children as [rst.Node])[0].value as string
+			const comment = (child.children as [rst.InlineNode])[0].value as string
 			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
 			if (name !== null && href !== null) yield [name, href]
-		} else if (child.children) {
+		} else if ('children' in child) {
 			yield* extractTargetsInner(child)
 		}
 	}
@@ -203,7 +205,17 @@ function getTitle(body: m.Node[]): string {
 }
 
 export default function rstConvert(code: string): m.Document {
-	const parsed = rst.default.parse(code)
+	let parsed
+	try {
+		parsed = rst.default.parse(code)
+	} catch (e) {
+		// message, expected, found, location, name="SyntaxError"
+		if ('name' in e && e.name === 'SyntaxError' && 'location' in e) {
+			throw new ParseError(e, e.location)
+		} else {
+			throw e
+		}
+	}
 	const children = convertNode(parsed, 0)
 	const targets = extractTargets(parsed)
 	return {

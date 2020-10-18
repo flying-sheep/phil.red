@@ -1,4 +1,4 @@
-import rawPosts from './markup'
+import rawPosts from './rawPosts'
 import { Document } from '../markup'
 
 export class Post {
@@ -14,7 +14,6 @@ export class Post {
 const posts = Object.fromEntries(
 	Object.entries(rawPosts).map(([filename, document]) => {
 		const [, y, m, d, slug] = /(\d{4})-(\d{2})-(\d{2})-(.+)\.(rst|md)/.exec(filename) as RegExpExecArray
-		// eslint-disable-next-line no-param-reassign
 		const post = new Post(new Date(+y, +m - 1, +d), document)
 		return [slug, post]
 	}),

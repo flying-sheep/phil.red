@@ -8,7 +8,7 @@ import { InlineMath } from 'react-katex'
 import {
 	Node, Elem, Type, Bullet,
 } from '../../markup/MarkupDocument'
-import ASTError from '../../markup/AstError'
+import { ASTError } from '../../markup'
 import Plotly from '../Plotly'
 import ASTErrorMessage from './ASTErrorMessage'
 

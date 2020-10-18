@@ -3,7 +3,11 @@
 import * as path from 'path'
 import { promises as fs } from 'fs'
 import * as glob from 'globby'
-import { mdConvert, rstConvert, Document } from '../markup'
+import { PluginImpl } from 'rollup'
+
+import {
+	mdConvert, rstConvert, Document, ParseError, ASTError,
+} from '../markup'
 
 function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 	if (keys.length !== values.length) {
@@ -27,7 +31,7 @@ export const DEFAULT_CONVERTERS: {[ext: string]: Converter} = {
 	'.rst': rstConvert,
 }
 
-export default function renderdoc(config: Partial<Config> = {}) {
+export const renderdoc: PluginImpl<Partial<Config>> = (config: Partial<Config> = {}) => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
 	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include || []
 	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude || []
@@ -53,13 +57,35 @@ export default function renderdoc(config: Partial<Config> = {}) {
 			const paths = await doGlob(id)
 			if (paths.length === 0) return null
 			const contents = await Promise.all(paths.map(async (p) => {
+				this.addWatchFile(p)
 				const content = await fs.readFile(p, { encoding: 'utf-8' })
-				if (!(path.extname(p) in converters)) throw new Error(`No converter for file ${p} registered`)
+				const ext = path.extname(p)
+				if (!(ext in converters)) this.error({ id: p, message: `No converter for ${ext} registered` })
 				const convert = converters[path.extname(p)]
-				return convert(content)
+				try {
+					return convert(content)
+				} catch (e) {
+					let message: string
+					let pos: number | undefined
+					if (e instanceof ParseError) {
+						message = `Error parsing ${ext} file: ${e.orig.message}`
+						pos = e.position
+						e = e.orig // eslint-disable-line no-ex-assign
+					} else if (e instanceof ASTError) {
+						message = `Error converting the ${ext} AST: ${e.message}`
+					} else {
+						message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
+						pos = undefined
+					}
+					this.error({
+						message, pos, id: p, parserError: e,
+					})
+				}
 			}))
 			const map = zipObject(paths.map((p) => path.basename(p)), contents)
 			return `export default ${JSON.stringify(map)}`
 		},
 	}
 }
+
+export default renderdoc

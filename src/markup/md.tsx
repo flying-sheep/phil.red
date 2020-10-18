@@ -5,7 +5,7 @@ import * as Token from 'markdown-it/lib/token'
 
 import { rsplit } from '../utils'
 import * as m from './MarkupDocument'
-import ASTError from './AstError'
+import ASTError from './ASTError'
 
 const NO_END = Symbol('no end')
 
