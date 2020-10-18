@@ -10,7 +10,11 @@
         "ecmaFeatures": {
             "jsx": true
         }
-    },
+	},
+	"ignorePatterns": [
+		"/dist/*",
+		"/**/*.css.d.ts"
+	],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
         "import/no-unresolved": 0,

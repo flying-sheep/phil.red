@@ -1,6 +1,6 @@
 export const layout: string
 interface Namespace {
-	'layout': string,
+	"layout": string,
 }
 declare const style: Namespace
 export default style
