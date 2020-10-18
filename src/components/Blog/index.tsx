@@ -3,7 +3,8 @@ import {
 	RouteComponentProps,
 	Route, Switch, Redirect,
 } from 'react-router-dom'
-import { List } from '@material-ui/core'
+
+import List from '@material-ui/core/List'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
@@ -13,18 +14,27 @@ function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
+export function postURL(date: Date, slug: string) {
+	return `${date2url(date)}/${slug}`
+}
+
 function Index({ match }: RouteComponentProps) {
+	const sorted = (
+		Object.entries(posts)
+			.map(([slug, post]) => ({
+				slug, post, date: post.date, url: postURL(post.date, slug),
+			}))
+			.sort((a, b) => b.date.getTime() - a.date.getTime())
+	)
 	return (
 		<List component="nav">
-			{Object.entries(posts).map(([slug, post]) => {
-				const { date } = post
-				return (
-					<ListItemLink
-						to={`${match.url}/${date2url(date)}/${slug}`}
-						primary={post.document.title}
-					/>
-				)
-			})}
+			{sorted.map(({ post, date, url }) => (
+				<ListItemLink
+					to={`${match.url}/${url}`}
+					primary={post.document.title}
+					secondary={date.toISOString().substr(0, 10)}
+				/>
+			))}
 		</List>
 	)
 }

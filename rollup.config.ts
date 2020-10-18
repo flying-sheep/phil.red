@@ -14,7 +14,8 @@ import * as serve from 'rollup-plugin-serve'
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
-const watching = process.env.ROLLUP_WATCH === 'true'
+const isDev = NODE_ENV === 'development'
+const isWatching = process.env.ROLLUP_WATCH === 'true'
 
 export default {
 	input: 'src/index.tsx',
@@ -57,13 +58,13 @@ export default {
 		nodeResolve({
 			preferBuiltins: true,
 		}),
-		(commonjs as unknown as () => Plugin)(),
+		(commonjs as unknown as (o?: commonjs.RollupCommonJSOptions) => Plugin)(),
 		builtins(),
 		(json as unknown as () => Plugin)(),
 		renderdoc({
 			include: '*.@(md|rst)',
 		}),
-		...watching ? [
+		...(isDev && isWatching) ? [
 			(serve as unknown as (o?: any) => Plugin)({
 				contentBase: '.',
 				historyApiFallback: true,

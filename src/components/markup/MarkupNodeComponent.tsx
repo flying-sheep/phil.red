@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Typography } from '@material-ui/core'
-import { ThemeStyle } from '@material-ui/core/styles/createTypography'
+import { Variant } from '@material-ui/core/styles/createTypography'
 import { InlineMath } from 'react-katex'
 
 import {
@@ -55,7 +55,7 @@ export default class MarkupNodeComponent extends React.Component
 		case Type.Title: {
 			if (node.level < 1) throw new ASTError(`Header with level ${node.level} < 1`, node)
 			const hLevel = Math.min(node.level, 6)
-			return <Typography variant={`h${hLevel}` as ThemeStyle}>{convertChildren(node, level)}</Typography>
+			return <Typography variant={`h${hLevel}` as Variant}>{convertChildren(node, level)}</Typography>
 		}
 		case Type.Paragraph:
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>
