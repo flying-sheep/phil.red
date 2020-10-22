@@ -1,6 +1,10 @@
 import * as React from 'react'
 
 import Link from '@material-ui/core/Link'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
 import Typography from '@material-ui/core/Typography'
 import { Variant } from '@material-ui/core/styles/createTypography'
 import { InlineMath } from 'react-katex'
@@ -71,6 +75,21 @@ export default class MarkupNodeComponent extends React.Component
 			return <dt>{convertChildren(node, level)}</dt>
 		case Type.Def:
 			return <dd>{convertChildren(node, level)}</dd>
+		case Type.FieldList:
+			return (
+				<Table size="small">
+					<TableBody>
+						{convertChildren(node, level)}
+					</TableBody>
+				</Table>
+			)
+		case Type.Field:
+			return (
+				<TableRow>
+					<TableCell component="th" scope="row">{node.name}</TableCell>
+					<TableCell>{convertChildren(node, level)}</TableCell>
+				</TableRow>
+			)
 		case Type.CodeBlock:
 			return <pre><code>{convertChildren(node, level)}</code></pre>
 		case Type.Table:

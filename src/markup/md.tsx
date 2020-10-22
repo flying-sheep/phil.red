@@ -35,6 +35,10 @@ function* tokens2ast(
 	}
 }
 
+function pos(token: Token) {
+	return token.map ? { line: token.map[0], column: 1 } : undefined
+}
+
 function convertNode(token: Token): m.Node[] {
 	switch (token.type) {
 	case 'inline':
@@ -42,29 +46,33 @@ function convertNode(token: Token): m.Node[] {
 	case 'text':
 		return [token.content]
 	case 'paragraph':
-		return [<m.Paragraph>{convertChildren(token)}</m.Paragraph>]
+		return [<m.Paragraph pos={pos(token)}>{convertChildren(token)}</m.Paragraph>]
 	case 'heading': {
 		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.level
 		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
-		return [<m.Title level={parseInt(level, 10)}>{convertChildren(token)}</m.Title>]
+		return [
+			<m.Title level={parseInt(level, 10)} pos={pos(token)}>
+				{convertChildren(token)}
+			</m.Title>,
+		]
 	}
 	case 'link': {
 		const href = token.attrs?.filter(([a, v]) => a === 'href')?.[0]?.[1]
 		if (!href) throw new ASTError('Link without href encountered', token)
-		return [<m.Link ref={{ href }}>{convertChildren(token)}</m.Link>]
+		return [<m.Link ref={{ href }} pos={pos(token)}>{convertChildren(token)}</m.Link>]
 	}
 	case 'hardbreak':
-		return [<m.LineBreak/>]
+		return [<m.LineBreak pos={pos(token)}/>]
 	case 'softbreak':
 		return []
 	case 'code_inline':
-		return [<m.Code>{token.content}</m.Code>]
+		return [<m.Code pos={pos(token)}>{token.content}</m.Code>]
 	case 'fence':
-		return [<m.CodeBlock>{token.content}</m.CodeBlock>]
+		return [<m.CodeBlock pos={pos(token)}>{token.content}</m.CodeBlock>]
 	case 'bullet_list':
-		return [<m.BulletList>{convertChildren(token)}</m.BulletList>]
+		return [<m.BulletList pos={pos(token)}>{convertChildren(token)}</m.BulletList>]
 	case 'list_item':
-		return [<m.ListItem>{convertChildren(token)}</m.ListItem>]
+		return [<m.ListItem pos={pos(token)}>{convertChildren(token)}</m.ListItem>]
 	default:
 		throw new ASTError(`Unknown token type “${token.type}”`, JSON.stringify(token))
 	}
@@ -83,5 +91,5 @@ export default function mdConvert(code: string): m.Document {
 	const ast = Array.from(tokens2ast(md.parse(code, {})))
 	const title = ast[0].children?.[0].content || ''
 	const children = convertAll(ast)
-	return { title, children }
+	return { title, children, metadata: {} }
 }

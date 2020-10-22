@@ -22,6 +22,7 @@ export enum Type {
 	Paragraph,
 	BulletList, EnumList, ListItem,
 	DefList, DefItem, DefTerm, Def,
+	FieldList, Field,
 	CodeBlock,
 	Table, Row, Cell,
 	// inline
@@ -86,6 +87,7 @@ export type Elem =
 	Paragraph | Section | Title |
 	BulletList | EnumList | ListItem |
 	DefList | DefItem | DefTerm | Def |
+	FieldList | Field |
 	CodeBlock |
 	Table | Row | Cell |
 	// Inline
@@ -96,11 +98,13 @@ export type Elem =
 interface Element {
 	type: Type
 	children: Node[]
+	pos: number | { line: number, column: number } | undefined
 }
 
 export interface Document {
 	title: string
 	children: Node[]
+	metadata: {[key: string]: any}
 }
 export const Document = (props: Document) => props
 
@@ -132,65 +136,72 @@ function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
 
 // Block
 
-interface Section extends Element { type: Type.Section }
+export interface Section extends Element { type: Type.Section }
 export const Section = mkFun<Section>(Type.Section)
 
-interface Title extends Element { type: Type.Title, level: number }
+export interface Title extends Element { type: Type.Title, level: number }
 export const Title = mkFun<Title>(Type.Title)
 
-interface Paragraph extends Element { type: Type.Paragraph }
+export interface Paragraph extends Element { type: Type.Paragraph }
 export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
 
-interface BulletList extends Element { type: Type.BulletList, bullet?: Bullet, text?: string }
+export interface BulletList extends Element {
+	type: Type.BulletList, bullet?: Bullet, text?: string
+}
 export const BulletList = mkFun<BulletList>(Type.BulletList)
 // TODO: rst also has prefix/suffix
-interface EnumList extends Element { type: Type.EnumList, enumeration?: Enumeration }
+export interface EnumList extends Element { type: Type.EnumList, enumeration?: Enumeration }
 export const EnumList = mkFun<EnumList>(Type.EnumList)
-interface ListItem extends Element { type: Type.ListItem }
+export interface ListItem extends Element { type: Type.ListItem }
 export const ListItem = mkFun<ListItem>(Type.ListItem)
 
-interface DefList extends Element { type: Type.DefList }
+export interface DefList extends Element { type: Type.DefList }
 export const DefList = mkFun<DefList>(Type.DefList)
-interface DefItem extends Element { type: Type.DefItem }
+export interface DefItem extends Element { type: Type.DefItem }
 export const DefItem = mkFun<DefItem>(Type.DefItem)
-interface DefTerm extends Element { type: Type.DefTerm }
+export interface DefTerm extends Element { type: Type.DefTerm }
 export const DefTerm = mkFun<DefItem>(Type.DefTerm)
-interface Def extends Element { type: Type.Def }
+export interface Def extends Element { type: Type.Def }
 export const Def = mkFun<Def>(Type.Def)
 
-interface CodeBlock extends Element { type: Type.CodeBlock, language?: string }
+export interface FieldList extends Element { type: Type.FieldList }
+export const FieldList = mkFun<FieldList>(Type.FieldList)
+export interface Field extends Element { type: Type.Field, name: string }
+export const Field = mkFun<Field>(Type.Field)
+
+export interface CodeBlock extends Element { type: Type.CodeBlock, language?: string }
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 
-interface Table extends Element { type: Type.Table, caption?: string }
+export interface Table extends Element { type: Type.Table, caption?: string }
 export const Table = mkFun<Table>(Type.Table)
-interface Row extends Element { type: Type.Row }
+export interface Row extends Element { type: Type.Row }
 export const Row = mkFun<Row>(Type.Row)
-interface Cell extends Element { type: Type.Cell }
+export interface Cell extends Element { type: Type.Cell }
 export const Cell = mkFun<Cell>(Type.Cell)
 
 // Inline
 
-interface LineBreak extends Element { type: Type.LineBreak }
+export interface LineBreak extends Element { type: Type.LineBreak }
 export const LineBreak = mkFun<LineBreak>(Type.LineBreak)
 
-interface Emph extends Element { type: Type.Emph }
+export interface Emph extends Element { type: Type.Emph }
 export const Emph = mkFun<Emph>(Type.Emph)
 
-interface Strong extends Element { type: Type.Strong }
+export interface Strong extends Element { type: Type.Strong }
 export const Strong = mkFun<Strong>(Type.Strong)
 
-interface Link extends Element { type: Type.Link, ref: {name: string} | {href: string} }
+export interface Link extends Element { type: Type.Link, ref: {name: string} | {href: string} }
 export const Link = mkFun<Link>(Type.Link)
 
-interface Code extends Element { type: Type.Code }
+export interface Code extends Element { type: Type.Code }
 export const Code = mkFun<Code>(Type.Code)
 
-interface InlineMath extends Element { type: Type.InlineMath, math: string }
+export interface InlineMath extends Element { type: Type.InlineMath, math: string }
 export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
 
 // Custom
 
-interface Plotly extends Element {
+export interface Plotly extends Element {
 	type: Type.Plotly,
 	url: string,
 	onClickLink?: string,

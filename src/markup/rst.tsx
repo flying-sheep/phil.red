@@ -11,9 +11,10 @@ interface Directive {
 	body: string[]
 }
 
-// https://github.com/microsoft/TypeScript/issues/21699
+type RSTNode = rst.Node<true>
+type RSTInlineNode = rst.InlineNode<true>
 
-function parseDirective(lines: rst.Node[]): Directive {
+function parseDirective(lines: RSTNode[]): Directive {
 	const texts = lines.map((n) => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
 	const [header = null, ...rest] = texts
 	let lastParam = -1
@@ -33,68 +34,80 @@ function parseDirective(lines: rst.Node[]): Directive {
 	return { header, params, body }
 }
 
-function convertNode(node: rst.Node, level: number): m.Node[] {
+function pos(node: RSTNode) {
+	return node.position.start
+}
+
+function convertNode(node: RSTNode, level: number): m.Node[] {
 	switch (node.type) {
 	case 'document':
 		return convertChildren(node, level)
 	case 'comment':
 		return []
 	case 'reference': {
-		const name = (node.children[0] as rst.InlineNode).value as string
-		return [<m.Link ref={{ name }}>{[name]}</m.Link>]
+		const name = (node.children[0] as RSTInlineNode).value as string
+		return [<m.Link ref={{ name }} pos={pos(node)}>{[name]}</m.Link>]
 	}
 	case 'section':
-		return [<m.Section>{convertChildren(node, level + 1)}</m.Section>]
+		return [<m.Section pos={pos(node)}>{convertChildren(node, level + 1)}</m.Section>]
 	case 'title': {
-		if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node)
+		if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 		const hLevel = Math.min(level, 6)
-		return [<m.Title level={hLevel}>{convertChildren(node, level)}</m.Title>]
+		return [<m.Title level={hLevel} pos={pos(node)}>{convertChildren(node, level)}</m.Title>]
 	}
 	case 'paragraph':
-		return [<m.Paragraph>{convertChildren(node, level)}</m.Paragraph>]
-	case 'text':
-		return [`${node.value}\n`]
+		return [<m.Paragraph pos={pos(node)}>{convertChildren(node, level)}</m.Paragraph>]
+	case 'text': {
+		const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
+		if (!fieldList) return [`${node.value}\n`]
+		const [, fieldName, fieldValue] = fieldList
+		return [ // TODO: convert runs to single lists, not multiple
+			<m.FieldList pos={pos(node)}>
+				<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field>
+			</m.FieldList>,
+		]
+	}
 	case 'literal':
-		return [<m.Code>{convertChildren(node, level)}</m.Code>]
+		return [<m.Code pos={pos(node)}>{convertChildren(node, level)}</m.Code>]
 	case 'emphasis':
-		return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
+		return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 	case 'strong':
-		return [<m.Strong>{convertChildren(node, level)}</m.Strong>]
+		return [<m.Strong pos={pos(node)}>{convertChildren(node, level)}</m.Strong>]
 	case 'bullet_list': {
 		// TODO: convert some known bullets
 		return [
-			<m.BulletList bullet={m.Bullet.text} text={node.bullet}>
+			<m.BulletList bullet={m.Bullet.text} text={node.bullet} pos={pos(node)}>
 				{convertChildren(node, level)}
 			</m.BulletList>,
 		]
 	}
 	case 'enumerated_list':
-		return [<m.EnumList>{convertChildren(node, level)}</m.EnumList>]
+		return [<m.EnumList pos={pos(node)}>{convertChildren(node, level)}</m.EnumList>]
 	case 'list_item':
-		return [<m.ListItem>{convertChildren(node, level)}</m.ListItem>]
+		return [<m.ListItem pos={pos(node)}>{convertChildren(node, level)}</m.ListItem>]
 	case 'definition_list':
-		return [<m.DefList>{convertChildren(node, level)}</m.DefList>]
+		return [<m.DefList pos={pos(node)}>{convertChildren(node, level)}</m.DefList>]
 	case 'definition_list_item':
-		return [<m.DefItem>{convertChildren(node, level)}</m.DefItem>]
+		return [<m.DefItem pos={pos(node)}>{convertChildren(node, level)}</m.DefItem>]
 	case 'term':
-		return [<m.DefTerm>{convertChildren(node, level)}</m.DefTerm>]
+		return [<m.DefTerm pos={pos(node)}>{convertChildren(node, level)}</m.DefTerm>]
 	case 'definition':
-		return [<m.Def>{convertChildren(node, level)}</m.Def>]
+		return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
 	case 'interpreted_text':
 		switch (node.role) {
 		case 'math':
-			return [<m.InlineMath math={node.children.map((text) => (text as rst.InlineNode).value).join('')}/>]
+			return [<m.InlineMath math={node.children.map((text) => (text as RSTInlineNode).value).join('')} pos={pos(node)}/>]
 		case null:
-			return [<m.Emph>{convertChildren(node, level)}</m.Emph>]
+			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		default:
-			throw new ASTError(`Unknown role “${node.role}”`, node)
+			throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 		}
 	case 'directive':
 		switch (node.directive as rst.DirectiveType | 'plotly') {
 		case 'code-block':
 		case 'code': {
 			const { header, body } = parseDirective(node.children)
-			return [<m.CodeBlock language={header || undefined}>{body}</m.CodeBlock>]
+			return [<m.CodeBlock language={header || undefined} pos={pos(node)}>{body}</m.CodeBlock>]
 		}
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children)
@@ -106,11 +119,11 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 				}
 			})()
 			return [
-				<m.Table caption={header || undefined}>
+				<m.Table caption={header || undefined} pos={pos(node)}>
 					{body.map((r) => (
-						<m.Row>
+						<m.Row pos={pos(node)}>
 							{r.split(delim).map((cell) => (
-								<m.Cell>{cell}</m.Cell>
+								<m.Cell pos={pos(node)}>{cell}</m.Cell>
 							))}
 						</m.Row>
 					))}
@@ -126,29 +139,30 @@ function convertNode(node: rst.Node, level: number): m.Node[] {
 					onClickLink={params.onClickLink}
 					style={{ width: '100%' }}
 					config={{ responsive: true } as any} // typing has no responsive
+					pos={pos(node)}
 				/>,
 			]
 		}
 		default:
-			throw new ASTError(`Unknown directive “${node.directive}”`, node)
+			throw new ASTError(`Unknown directive “${node.directive}”`, node, pos(node))
 		}
 	default:
-		throw new ASTError(`Unknown node type “${(node as rst.Node).type}”`, node)
+		throw new ASTError(`Unknown node type “${(node as RSTNode).type}”`, node, pos(node))
 	}
 }
 
-function convertChildren(node: rst.Node, level: number): m.Node[] {
+function convertChildren(node: RSTNode, level: number): m.Node[] {
 	return ('children' in node ? node.children : []).reduce(
-		(ns: m.Node[], n: rst.Node) => [...ns, ...convertNode(n, level)],
+		(ns: m.Node[], n: RSTNode) => [...ns, ...convertNode(n, level)],
 		[],
 	)
 }
 
-function* extractTargetsInner(node: rst.Node): IterableIterator<[string, string]> {
+function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]> {
 	for (const child of 'children' in node ? node.children : []) {
 		if (typeof child === 'string') continue
 		if (child.type === 'comment') {
-			const comment = (child.children as [rst.InlineNode])[0].value as string
+			const comment = (child.children as [RSTInlineNode])[0].value as string
 			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
 			if (name !== null && href !== null) yield [name, href]
 		} else if ('children' in child) {
@@ -159,7 +173,7 @@ function* extractTargetsInner(node: rst.Node): IterableIterator<[string, string]
 
 const URL_SCHEMA = /^https?:.*$/
 
-function extractTargets(node: rst.Node): {[key: string]: string} {
+function extractTargets(node: RSTNode): {[key: string]: string} {
 	const pending = Object.fromEntries(extractTargetsInner(node))
 	const resolved: {[key: string]: string} = {}
 	let newResolvable = true
@@ -196,18 +210,33 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 }
 
 function getTitle(body: m.Node[]): string {
-	if ((body[0] as m.Elem).type !== m.Type.Section) throw new ASTError('No section!', body && body[0])
-	const section = (body[0] as m.Elem).children
-	if ((section[0] as m.Elem).type !== m.Type.Title) throw new ASTError('No title!', section && section[0])
-	const title = (section[0] as m.Elem).children
-	if (!(typeof title[0] === 'string')) throw new ASTError('Empty title!', title && title[0])
-	return title[0]
+	if (body.length === 0) throw new ASTError('Empty body', undefined)
+	const section = body[0]
+	if (typeof section === 'string') throw new ASTError(`Body starts with string: ${section}`, section)
+	if (section.type !== m.Type.Section) throw new ASTError('No section!', section, section.pos)
+	if (section.children.length === 0) throw new ASTError('Empty Section', section, section.pos)
+	const title = section.children[0]
+	if (typeof title === 'string') throw new ASTError(`Section starts with string: ${title}`, section.pos)
+	if (title.type !== m.Type.Title) throw new ASTError('No title!', title, title.pos)
+	const text = title.children[0]
+	if (typeof text !== 'string') throw new ASTError('Empty title!', title, title.pos)
+	return text.trim()
+}
+
+function getMeta(fieldLists: m.Elem) {
+	const check = ((n) => typeof n !== 'string' && n.type === m.Type.FieldList) as ((n: m.Node) => n is m.FieldList)
+	return Object.fromEntries(
+		fieldLists.children
+			.filter(check)
+			.flatMap((fl) => fl.children as m.Field[])
+			.map((f) => [f.name, f.children[0].toString()]),
+	)
 }
 
 export default function rstConvert(code: string): m.Document {
 	let parsed
 	try {
-		parsed = rst.default.parse(code)
+		parsed = rst.default.parse(code, { position: true, blanklines: true, indent: true })
 	} catch (e) {
 		// message, expected, found, location, name="SyntaxError"
 		if ('name' in e && e.name === 'SyntaxError' && 'location' in e) {
@@ -216,10 +245,12 @@ export default function rstConvert(code: string): m.Document {
 			throw e
 		}
 	}
-	const children = convertNode(parsed, 0)
 	const targets = extractTargets(parsed)
-	return {
-		title: getTitle(children),
-		children: resolveTargets(children, targets),
-	}
+	const children = resolveTargets(convertNode(parsed, 0), targets)
+
+	const metadata = (children[0] as m.Elem).type === m.Type.Section
+		? {}
+		: getMeta(children.shift() as m.Elem)
+
+	return { title: getTitle(children), children, metadata }
 }

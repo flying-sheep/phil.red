@@ -28,30 +28,47 @@ declare module 'restructured' {
 		'code' | 'code-block' |
 		'csv-table'
 	)
-    export interface BlockNode {
-        type: BlockNodeType
-        children: Node[]
+	export interface Positon {
+		offset: number
+		line: number
+		column: number
 	}
-    export interface InlineNode {
+	export type BaseNode<HasPos> = HasPos extends true ? NodeWithPos : {}
+	export interface NodeWithPos {
+		position: { start: Positon, end: Positon },
+	}
+    export type BlockNode<HasPos> = BaseNode<HasPos> & {
+        type: BlockNodeType
+		children: Node<HasPos>[]
+		blanklines?: string[]
+		indent?: { width: number, offset: number }
+	}
+    export type InlineNode<HasPos> = BaseNode<HasPos> & {
         type: InlineNodeType
         value: string
 	}
-	export interface Section extends BlockNode { type: 'section'; depth: number }
-	export interface BulletList extends BlockNode { type: 'bullet_list'; bullet: BulletType }
-	export interface Directive extends BlockNode { type: 'directive'; directive: DirectiveType }
-	export interface InterpretedText extends BlockNode { type: 'interpreted_text'; role: RoleType }
-    export interface OtherBlockNode extends BlockNode {
+	export type Section<HasPos> = BlockNode<HasPos> & { type: 'section'; depth: number }
+	export type BulletList<HasPos> = BlockNode<HasPos> & { type: 'bullet_list'; bullet: BulletType }
+	export type Directive<HasPos> = BlockNode<HasPos> & { type: 'directive'; directive: DirectiveType }
+	export type InterpretedText<HasPos> = BlockNode<HasPos> & { type: 'interpreted_text'; role: RoleType }
+    export type OtherBlockNode<HasPos> = BlockNode<HasPos> & {
         type: Exclude<BlockNodeType, 'section' | 'bullet_list' | 'directive' | 'interpreted_text'>
 	}
-    export interface OtherInlineNode extends InlineNode {
+    export type OtherInlineNode<HasPos> = InlineNode<HasPos> & {
         // type: Exclude<InlineNodeType, ...>
 	}
-	export type Node = (
-		Section | BulletList | Directive | InterpretedText | OtherBlockNode |
-		OtherInlineNode
+	export type Node<HasPos> = (
+		Section<HasPos> | BulletList<HasPos> | Directive<HasPos> | InterpretedText<HasPos> |
+		OtherBlockNode<HasPos> |
+		OtherInlineNode<HasPos>
 	)
+	export type Options<HasPos> = {
+		blanklines?: boolean
+		indent?: boolean
+	} & (HasPos extends true ? { position: true } : { position?: false })
     interface RST {
-        parse(code: string): Node
+        parse(code: string, options?: Options<true>): Node<true>
+        parse(code: string, options?: Options<false>): Node<false>
     }
     const rst: RST
     export default rst

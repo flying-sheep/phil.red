@@ -58,31 +58,35 @@ export const renderdoc: PluginImpl<Partial<Config>> = (config: Partial<Config> =
 			if (paths.length === 0) return null
 			const contents = await Promise.all(paths.map(async (p) => {
 				this.addWatchFile(p)
-				const content = await fs.readFile(p, { encoding: 'utf-8' })
+				const code = await fs.readFile(p, { encoding: 'utf-8' })
 				const ext = path.extname(p)
 				if (!(ext in converters)) this.error({ id: p, message: `No converter for ${ext} registered` })
 				const convert = converters[path.extname(p)]
 				try {
-					return convert(content)
+					return convert(code)
 				} catch (e) {
-					let message: string
-					let pos: number | undefined
+					e.id = p
 					if (e instanceof ParseError) {
-						message = `Error parsing ${ext} file: ${e.orig.message}`
-						pos = e.position
-						e = e.orig // eslint-disable-line no-ex-assign
+						e.message = `Error parsing ${ext} file: ${e.orig.message}`
 					} else if (e instanceof ASTError) {
-						message = `Error converting the ${ext} AST: ${e.message}`
+						e.message = `Error converting the ${ext} AST: ${e.message}`
 					} else {
-						message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
-						pos = undefined
+						e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 					}
-					this.error({
-						message, pos, id: p, parserError: e,
-					})
+					this.error(e, e.loc || e.pos)
 				}
 			}))
+			
 			const map = zipObject(paths.map((p) => path.basename(p)), contents)
+			for (const [p, content] of Object.entries(map)) {
+				if (!content) {
+					console.log(`Skipped ${p}`)
+					delete map[p]
+				} else if (content.metadata.draft) {
+					console.log(`Skipped ${p} (“${content.title}” is a draft)`)
+					delete map[p]
+				}
+			}
 			return `export default ${JSON.stringify(map)}`
 		},
 	}

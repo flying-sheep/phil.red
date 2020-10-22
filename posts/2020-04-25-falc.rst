@@ -1,3 +1,5 @@
+:draft: true
+
 Fully Automated Luxury Communism
 ================================
 

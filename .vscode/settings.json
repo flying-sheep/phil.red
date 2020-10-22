@@ -5,5 +5,14 @@
         "typescript",
         "typescriptreact"
     ],
-    "restructuredtext.confPath": ""
+    "restructuredtext.confPath": "",
+    "spellright.language": [
+        "en_US-large",
+        "en_US"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "restructuredtext",
+        "plaintext"
+    ]
 }
