@@ -31,7 +31,7 @@ But one step at a time.
    .. code:: python
 
       """The first sentence of the docstring is your description."""
-      
+
       from get_version import get_version
       __version__ = get_version(__file__)
       del get_version
@@ -45,9 +45,9 @@ But one step at a time.
 
 6. Add ``get_version`` to ``[build-system].requires``
    *and* ``[tool.flit.metadata].requires`` to it:
-   
+
    .. code:: toml
-   
+
       [build-system]
       requires = ["flit_core >=2,<4", "get_version"]  # here
       build-backend = "flit_core.buildapi"
@@ -59,7 +59,7 @@ But one step at a time.
 7. Add additional runtime dependencies to ``[tool.flit.metadata].requires``.
 
    You can also add test and documentation dependencies_.
-   
+
    .. _dependencies: https://github.com/theislab/scanpydoc/blob/v0.5/pyproject.toml#L26-L36
 
 
@@ -122,8 +122,8 @@ You can get around that with this hack:
     .. code:: python
 
        """Your package docstring"""
-	   
-	   from ._metadata import __version__, within_flit
-	   
-	   if not within_flit():
-	       from .subpackage import thing
+
+       from ._metadata import __version__, within_flit
+
+       if not within_flit():
+           from .subpackage import thing
