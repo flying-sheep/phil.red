@@ -23,10 +23,10 @@ You’ll need the following setup::
 
 But one step at a time.
 
-1. Start by manually creating your project directory (``MyPackage``).
-2. Make it a git repository, e.g. using `git init`.
-3. Create a ``README.rst`` or ``README.md`` file.
-4. Create either ``my_package.py`` or ``my_package/__init__.py``:
+#. Start by manually creating your project directory (``MyPackage``).
+#. Make it a git repository, e.g. using `git init`.
+#. Create a ``README.rst`` or ``README.md`` file.
+#. Create either ``my_package.py`` or ``my_package/__init__.py``:
 
    .. code:: python
 
@@ -36,13 +36,15 @@ But one step at a time.
       __version__ = get_version(__file__)
       del get_version
 
-5. Install the Flit command line interface (CLI) and use it
-   to create a ``pyproject.toml``::
+#. Install the Flit command line interface (CLI) and use it
+   to create a ``pyproject.toml``:
+   
+   .. code:: bash
 
-       python3 -m pip install flit
-       flit init
+      python3 -m pip install flit
+      flit init
 
-6. Add ``get_version`` to ``[build-system].requires``
+#. Add ``get_version`` to ``[build-system].requires``
    *and* ``[tool.flit.metadata].requires`` to it:
 
    .. code:: toml
@@ -55,7 +57,7 @@ But one step at a time.
       ...
       requires = ["get_version"]                      # and here
 
-7. Add additional runtime dependencies to ``[tool.flit.metadata].requires``.
+#. Add additional runtime dependencies to ``[tool.flit.metadata].requires``.
 
    You can also add test and documentation dependencies_.
 

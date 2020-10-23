@@ -40,6 +40,7 @@ export default class Markup extends React.Component<MarkupProps, MarkupState> {
 						style={{
 							marginLeft: 'calc(50% - 50vw + 1em)',
 							marginRight: 'calc(50% - 50vw + 1em)',
+							overflowY: 'auto',
 						}}
 					/>
 				</>

@@ -68,7 +68,7 @@ export default class MarkupNodeComponent extends React.Component
 			return <ul style={{ listStyleType }}>{convertChildren(node, level)}</ul>
 		}
 		case Type.EnumList:
-			return <ul style={{ listStyleType: node.enumeration }}>{convertChildren(node, level)}</ul>
+			return <ol style={{ listStyleType: node.enumeration }}>{convertChildren(node, level)}</ol>
 		case Type.ListItem:
 			return <li>{convertChildren(node, level)}</li>
 		case Type.DefList:
