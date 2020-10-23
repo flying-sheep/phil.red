@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Document, Node } from '../../markup/MarkupDocument'
 import { ASTErrorMessageProps } from './ASTErrorMessage'
-import MarkupNodeComponent from './MarkupNodeComponent'
+import MarkupNodeComponent, { High } from './MarkupNodeComponent'
 
 export interface MarkupProps {
 	doc: Document
@@ -29,15 +29,22 @@ export default class Markup extends React.Component<MarkupProps, MarkupState> {
 	
 	render(): React.ReactElement<any> {
 		const nodes = this.children.map((e) => <MarkupNodeComponent node={e} level={0}/>)
-		const body = React.Children.toArray(nodes)
+		const article = <article>{React.Children.toArray(nodes)}</article>
 		if (process.env.NODE_ENV === 'development') {
 			return (
-				<article>
-					{body}
-					<pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(this.children, undefined, '\t')}</pre>
-				</article>
+				<>
+					{article}
+					<High
+						language="json"
+						code={JSON.stringify(this.children, undefined, '\t')}
+						style={{
+							marginLeft: 'calc(50% - 50vw + 1em)',
+							marginRight: 'calc(50% - 50vw + 1em)',
+						}}
+					/>
+				</>
 			)
 		}
-		return <article>{body}</article>
+		return article
 	}
 }

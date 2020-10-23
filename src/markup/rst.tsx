@@ -1,5 +1,7 @@
 /** @jsx markupElement */
 import * as rst from 'restructured'
+import { Language } from 'prism-react-renderer'
+
 import * as m from './MarkupDocument'
 import { markupElement } from './MarkupDocument'
 import ASTError from './ASTError'
@@ -15,7 +17,7 @@ type RSTNode = rst.Node<true>
 type RSTInlineNode = rst.InlineNode<true>
 
 function parseDirective(lines: RSTNode[]): Directive {
-	const texts = lines.map((n) => (n.type === 'text' ? n.value as string : JSON.stringify(n)))
+	const texts = lines.map((n) => (n.type === 'text' ? n.value : JSON.stringify(n)))
 	const [header = null, ...rest] = texts
 	let lastParam = -1
 	const params = rest
@@ -104,16 +106,21 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		default:
 			throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 		}
-	case 'directive':
 	case 'literal_block': {
-		const directive = node.type === 'directive'
-			? node.directive as rst.DirectiveType | 'plotly'
-			: 'code'
-		switch (directive) {
+		const texts = node.children.map((n) => (n.type === 'text' ? n.value : JSON.stringify(n)))
+		return [<m.CodeBlock pos={pos(node)}>{texts.join('\n')}</m.CodeBlock>]
+	}
+	case 'directive': {
+		switch (node.directive as rst.DirectiveType | 'plotly') {
 		case 'code-block':
 		case 'code': {
 			const { header, body } = parseDirective(node.children)
-			return [<m.CodeBlock language={header || undefined} pos={pos(node)}>{body}</m.CodeBlock>]
+			// TODO: check if in lang dict
+			return [
+				<m.CodeBlock language={header as Language || undefined} pos={pos(node)}>
+					{body}
+				</m.CodeBlock>,
+			]
 		}
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children)
@@ -150,7 +157,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		default:
-			throw new ASTError(`Unknown directive “${directive}”`, node, pos(node))
+			throw new ASTError(`Unknown directive “${node.directive}”`, node, pos(node))
 		}
 	}
 	default:

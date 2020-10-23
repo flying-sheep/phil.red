@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import Typography from '@material-ui/core/Typography'
 import { Variant } from '@material-ui/core/styles/createTypography'
+import Highlight, { defaultProps, Language } from 'prism-react-renderer'
+import theme from 'prism-react-renderer/themes/vsDark'
 import { InlineMath } from 'react-katex'
 
 import {
@@ -92,8 +94,13 @@ export default class MarkupNodeComponent extends React.Component
 					<TableCell>{convertChildren(node, level)}</TableCell>
 				</TableRow>
 			)
-		case Type.CodeBlock:
-			return <pre><code>{convertChildren(node, level)}</code></pre>
+		case Type.CodeBlock: {
+			const code = node.children.map((c) => c.toString()).join('\n')
+			if (!node.language) {
+				return <pre><code>{code}</code></pre>
+			}
+			return <High code={code} language={node.language}/>
+		}
 		case Type.Table:
 			return (
 				<figure>
@@ -130,3 +137,23 @@ export default class MarkupNodeComponent extends React.Component
 		}
 	}
 }
+
+export const High = (
+	{ code, language, style }: { code: string, language: Language, style?: React.CSSProperties },
+) => (
+	<Highlight {...defaultProps} code={code} language={language} theme={theme}>
+		{({
+			className, style: defaultStyle, tokens, getLineProps, getTokenProps,
+		}) => (
+			<pre className={className} style={{ ...defaultStyle, ...style, padding: '5px' }}>
+				{tokens.map((line, i) => (
+					<div {...getLineProps({ line, key: i })}>
+						{line.map((token, key) => (
+							<span {...getTokenProps({ token, key })}/>
+						))}
+					</div>
+				))}
+			</pre>
+		)}
+	</Highlight>
+)
