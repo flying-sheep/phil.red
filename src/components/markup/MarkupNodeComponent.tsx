@@ -59,6 +59,8 @@ export default class MarkupNodeComponent extends React.Component
 		}
 		case Type.Paragraph:
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>
+		case Type.BlockQuote:
+			return <blockquote>{convertChildren(node, level)}</blockquote>
 		case Type.BulletList: {
 			const listStyleType = node.bullet === Bullet.text ? node.text : node.bullet
 			return <ul style={{ listStyleType }}>{convertChildren(node, level)}</ul>

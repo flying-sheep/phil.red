@@ -11,8 +11,10 @@ declare module 'restructured' {
         'comment' |
         'reference' |
         'title' |
-        'paragraph' |
+		'paragraph' |
+		'block_quote' |
 		'interpreted_text' |
+		'literal_block' |
         'directive' |
 		'bullet_list' |
 		'enumerated_list' |

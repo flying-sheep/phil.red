@@ -20,6 +20,7 @@ export enum Type {
 	Section,
 	Title,
 	Paragraph,
+	BlockQuote,
 	BulletList, EnumList, ListItem,
 	DefList, DefItem, DefTerm, Def,
 	FieldList, Field,
@@ -84,7 +85,7 @@ export type Node = string | Elem
 
 export type Elem =
 	// Block
-	Paragraph | Section | Title |
+	Section | Title | Paragraph | BlockQuote |
 	BulletList | EnumList | ListItem |
 	DefList | DefItem | DefTerm | Def |
 	FieldList | Field |
@@ -144,6 +145,9 @@ export const Title = mkFun<Title>(Type.Title)
 
 export interface Paragraph extends Element { type: Type.Paragraph }
 export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
+
+export interface BlockQuote extends Element { type: Type.BlockQuote }
+export const BlockQuote = mkFun<Paragraph>(Type.BlockQuote)
 
 export interface BulletList extends Element {
 	type: Type.BulletList, bullet?: Bullet, text?: string

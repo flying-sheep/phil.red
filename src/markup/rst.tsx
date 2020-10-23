@@ -57,6 +57,8 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	}
 	case 'paragraph':
 		return [<m.Paragraph pos={pos(node)}>{convertChildren(node, level)}</m.Paragraph>]
+	case 'block_quote':
+		return [<m.BlockQuote pos={pos(node)}>{convertChildren(node, level)}</m.BlockQuote>]
 	case 'text': {
 		const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
 		if (!fieldList) return [`${node.value}\n`]
@@ -103,7 +105,11 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 		}
 	case 'directive':
-		switch (node.directive as rst.DirectiveType | 'plotly') {
+	case 'literal_block': {
+		const directive = node.type === 'directive'
+			? node.directive as rst.DirectiveType | 'plotly'
+			: 'code'
+		switch (directive) {
 		case 'code-block':
 		case 'code': {
 			const { header, body } = parseDirective(node.children)
@@ -144,8 +150,9 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		default:
-			throw new ASTError(`Unknown directive “${node.directive}”`, node, pos(node))
+			throw new ASTError(`Unknown directive “${directive}”`, node, pos(node))
 		}
+	}
 	default:
 		throw new ASTError(`Unknown node type “${(node as RSTNode).type}”`, node, pos(node))
 	}
