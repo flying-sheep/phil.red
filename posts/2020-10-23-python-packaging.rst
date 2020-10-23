@@ -36,12 +36,11 @@ But one step at a time.
       __version__ = get_version(__file__)
       del get_version
 
-5. Install the Flit command line interface (CLI) and use it::
+5. Install the Flit command line interface (CLI) and use it
+   to create a ``pyproject.toml``::
 
        python3 -m pip install flit
        flit init
-
-   This will create a ``pyproject.toml``.
 
 6. Add ``get_version`` to ``[build-system].requires``
    *and* ``[tool.flit.metadata].requires`` to it:
