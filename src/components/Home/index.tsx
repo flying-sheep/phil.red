@@ -30,7 +30,7 @@ export default function Home({ match, ...props }: RouteComponentProps) {
 				Why are people blaming immigrants, not capitalism?
 			</Typography>
 			<Typography variant="h6" align="center" paragraph>
-				I won’t be the one fix those questions.
+				I won’t be the one to fix those questions.
 				<br/>
 				Currently most progress happens for the first.
 				<br/>
