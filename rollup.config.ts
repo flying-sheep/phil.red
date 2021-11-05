@@ -94,6 +94,7 @@ export default {
 			react: 'React',
 			'react-dom': 'ReactDOM',
 			'plotly.js': 'Plotly',
+			'plotly.js/dist/plotly': 'Plotly',
 			katex: 'katex',
 		},
 	},
@@ -101,7 +102,7 @@ export default {
 	watch: {
 		include: ['src/**'],
 	},
-	external: ['react', 'react-dom', 'plotly.js', 'katex'],
+	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'katex'],
 	plugins: [
 		analyze({
 			writeTo(formatted) {
@@ -151,7 +152,7 @@ export default {
 		}),
 		...(isDev && isWatching) ? [
 			serve({
-				contentBase: '.',
+				contentBase: './dist',
 				historyApiFallback: true,
 			}),
 		] : [],
