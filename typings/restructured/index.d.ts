@@ -24,7 +24,7 @@ declare module 'restructured' {
 		'term' |
 		'definition'
 	)
-	export type RoleType = null | 'math'
+	export type RoleType = null | 'math' | 'pep'
 	export type BulletType = '*' | '+' | '-' | '•' | '‣' | '⁃'
 	export type DirectiveType = (
 		'code' | 'code-block' |

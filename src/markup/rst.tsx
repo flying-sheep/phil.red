@@ -102,6 +102,10 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		switch (node.role) {
 		case 'math':
 			return [<m.InlineMath math={node.children.map((text) => (text as RSTInlineNode).value).join('')} pos={pos(node)}/>]
+		case 'pep': {
+			const num = node.children.map((text) => (text as RSTInlineNode).value).join('')
+			return [<m.Link ref={{ href: `https://www.python.org/dev/peps/pep-${num.padStart(4, '0')}/` }} pos={pos(node)}/>]
+		}
 		case null:
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		default:
