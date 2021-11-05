@@ -1,7 +1,7 @@
 Python Package Development
 ==========================
 
-In this post, I evaluate Python packaging tools.
+In this post, I evaluate Python `packaging tools`_.
 I assume familiarity with Git and Python venvs.
 
 Package development is the process of working on a Python package.
@@ -44,7 +44,7 @@ Now there’s standards for this!
 :pep:`660` – Editable installs for pyproject.toml based builds (wheel based)
     See `editable installs`_.
 
-Each build system has a corresponding `packaging tools`.
+Each build system has a corresponding `packaging tools`_.
 This means with e.g. ``poetry`` as a build system,
 you might want to use use ``poetry`` as CLI for `feature development`_ and releases_.
 
@@ -108,12 +108,16 @@ There’s two possible solutions:
 #. A release script. You need to write it, and teach using it to people.
 #. Deriving your version from Git tags. Useful since you do those anyway.
 
-Solutions for alternative 2 are plentiful.
-I recommend ``setuptools_scm`` (even when not using setuptools).
+Solutions for alternative 2 are plentiful. I recommend:
+
+- ``poetry-dynamic-versioning`` for … Poetry_.
+- ``setuptools_scm`` for everything else (also when not using setuptools).
 
 
 Packaging tools
 ---------------
+
+All mentioned tools come with a build backend supporting :pep:`660`, i.e. ``pip install -e .``
 
 Setuptools
 ~~~~~~~~~~
@@ -135,6 +139,26 @@ Cons:
         you need to bribe the wizard who initially set it all up to come out of hiding.
     - Nonstandard: Dependencies are specified in ``requirements.txt``, package metadata in ``setup.cfg``, …
 
+Poetry
+~~~~~~
+Poetry_’s like its webpage: Polished and opinionated.
+
+.. _poetry: https://python-poetry.org/
+
+Pros:
+    - Can manage your dependencies for you:
+      Instead of editing ``pyproject.toml``, you run ``poetry add package``.
+    - Has its own dependency resolver which (for now) seems to be more robust than ``pip``’s.
+    - Popular: It’ll stay well-supported even if the maintainer steps down.
+    - Flexible: Has support for reusable plugins enhancing functionality.
+Cons:
+    - Maintenance-heavy: ``tomlkit`` and the dependency resolver both exist just for poetry.
+      This is more bug prone unless the components are re-used elsewhere.
+    - No obvious way to co-develop packages.
+      I read the docs and `this issue`_ and couldn’t find out how, please help!
+
+.. _this issue: https://github.com/python-poetry/poetry/issues/1579
+
 Flit
 ~~~~
 Flit_’s hummingbird is a fitting logo: small, simple, and easy to overlook.
@@ -142,17 +166,13 @@ Flit_’s hummingbird is a fitting logo: small, simple, and easy to overlook.
 .. _flit: https://flit.readthedocs.io/en/latest/
 
 Pros:
-    - Simple:
-      - Manage your venv yourself, easily co-developing packages
-        as described in `editable installs`_.
-      - Use its super easy CLI to publish.
+    - Use its super easy CLI to publish.
+    - Simple: Relies on other tools wherever possible:
+      - Reduced bug potential.
+      - Easy integration in any workflow including co-developing multiple packages.
 Cons:
-    - Simple: Unlike poetry, it doesn’t manage dependencies for you.
-    - No plugin or build step support, 
+    - Undermaintained: One busy person does not always find enough time.
+    - No plugin or build step support,
+      so you need `a hack`_ for Git tag derived versioning.
 
-Poetry
-~~~~~~
-Poetry_’s like its webpage: Polished and opinionated.
-
-.. _poetry: https://python-poetry.org/
-
+.. _a hack: https://github.com/takluyver/flit/issues/253#issuecomment-734426672
