@@ -1,14 +1,13 @@
-import * as replace from '@rollup/plugin-replace'
+import replace from '@rollup/plugin-replace'
 import nodeResolve from '@rollup/plugin-node-resolve'
-import * as commonjs from '@rollup/plugin-commonjs'
-import * as json from '@rollup/plugin-json'
-import * as copy from 'rollup-plugin-copy'
+import commonjs from '@rollup/plugin-commonjs'
+import json from '@rollup/plugin-json'
+import copy from 'rollup-plugin-copy'
 import analyze from 'rollup-plugin-analyzer'
-import * as builtins from 'rollup-plugin-node-builtins'
-// import * as typescript from '@wessberg/rollup-plugin-ts'
-import * as typescript from '@rollup/plugin-typescript'
+import builtins from 'rollup-plugin-node-builtins'
+import typescript from '@rollup/plugin-typescript'
 import postcss from 'rollup-plugin-postcss-modules'
-import * as serve from 'rollup-plugin-serve'
+import serve from 'rollup-plugin-serve'
 import html, { makeHtmlAttributes, RollupHtmlTemplateOptions } from '@rollup/plugin-html'
 
 // import * as autoprefixer from 'autoprefixer'
@@ -25,24 +24,26 @@ function getNodeEnv(): 'production' | 'development' {
 const isDev = getNodeEnv() === 'development'
 const isWatching = process.env.ROLLUP_WATCH === 'true'
 
-function template({
-	title,
-	meta,
-	attributes,
-	// bundle,
-	files,
-	publicPath,
-}: RollupHtmlTemplateOptions) {
-	const scripts = (files.js || [])
+function template(options?: RollupHtmlTemplateOptions | undefined): string {
+	const {
+		title = null,
+		meta = [],
+		attributes: { script = {}, link = {}, html = {} } = {},
+		// bundle,
+		files: { js = [], css = [] } = {},
+		publicPath,
+	} = options ?? {}
+	
+	const scripts = js
 		.map(({ fileName }) => {
-			const attrs = makeHtmlAttributes(attributes.script)
+			const attrs = makeHtmlAttributes(script)
 			return `<script src="${publicPath}${fileName}"${attrs}></script>`
 		})
 		.join('\n')
 
-	const links = (files.css || [])
+	const links = css
 		.map(({ fileName }) => {
-			const attrs = makeHtmlAttributes(attributes.link)
+			const attrs = makeHtmlAttributes(link)
 			return `<link href="${publicPath}${fileName}" rel="stylesheet"${attrs}>`
 		})
 		.join('\n')
@@ -58,7 +59,7 @@ function template({
 
 	return `\
 <!doctype html>
-<html${makeHtmlAttributes(attributes.html)}>
+<html${makeHtmlAttributes(html)}>
 <head>
 
 ${metas}
@@ -117,15 +118,16 @@ export default {
 				// autoprefixer(),
 			],
 		}),
-		(replace as unknown as (options?: replace.RollupReplaceOptions) => Plugin)({
+		replace({
 			'process.env.NODE_ENV': JSON.stringify(getNodeEnv()),
 			'process.env.MUI_SUPPRESS_DEPRECATION_WARNINGS': JSON.stringify(false),
+			preventAssignment: true,
 		}),
-		(typescript as unknown as (options?: typescript.RollupTypescriptOptions) => Plugin)(),
+		typescript(),
 		nodeResolve({
 			preferBuiltins: true,
 		}),
-		(commonjs as unknown as (o?: commonjs.RollupCommonJSOptions) => Plugin)(),
+		commonjs(),
 		builtins(),
 		(json as unknown as () => Plugin)(),
 		renderdoc({
@@ -142,14 +144,14 @@ export default {
 			],
 			publicPath: '/',
 		}),
-		(copy as unknown as (o: copy.CopyOptions) => Plugin)({
+		copy({
 			targets: [
 				{ src: 'lighttpd.conf', dest: 'dist' },
 				{ src: 'static', dest: 'dist' },
 			],
 		}),
 		...(isDev && isWatching) ? [
-			(serve as unknown as (o?: any) => Plugin)({
+			serve({
 				contentBase: '.',
 				historyApiFallback: true,
 			}),

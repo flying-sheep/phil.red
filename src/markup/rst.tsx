@@ -1,5 +1,6 @@
 /** @jsx markupElement */
 import * as rst from 'restructured'
+import { SyntaxError } from 'restructured/lib/Parser.js'
 import { Language } from 'prism-react-renderer'
 
 import * as m from './MarkupDocument'
@@ -253,8 +254,8 @@ export default function rstConvert(code: string): m.Document {
 		parsed = rst.default.parse(code, { position: true, blanklines: true, indent: true })
 	} catch (e) {
 		// message, expected, found, location, name="SyntaxError"
-		if ('name' in e && e.name === 'SyntaxError' && 'location' in e) {
-			throw new ParseError(e, e.location)
+		if (e instanceof SyntaxError) {
+			throw new ParseError(e, e.location.start) // TODO: capture end too
 		} else {
 			throw e
 		}
