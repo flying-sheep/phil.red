@@ -1,5 +1,5 @@
 import * as React from 'react'
-import red from '@material-ui/core/colors/red'
+import red from '@mui/material/colors/red'
 import { Node } from '../../markup/MarkupDocument'
 
 export interface ASTErrorMessageProps {
