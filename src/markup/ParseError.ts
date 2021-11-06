@@ -1,8 +1,10 @@
+import { Positon } from 'restructured'
+
 export default class ParseError extends Error {
 	orig: Error
-	pos: number
+	pos: Positon
 
-	constructor(orig: Error, pos: number) {
+	constructor(orig: Error, pos: Positon) {
 		super()
 		this.message = orig.message
 		this.orig = orig

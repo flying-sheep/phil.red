@@ -24,7 +24,7 @@ declare module 'restructured' {
 		'term' |
 		'definition'
 	)
-	export type RoleType = null | 'math'
+	export type RoleType = null | 'math' | 'pep'
 	export type BulletType = '*' | '+' | '-' | '•' | '‣' | '⁃'
 	export type DirectiveType = (
 		'code' | 'code-block' |
@@ -74,4 +74,17 @@ declare module 'restructured' {
     }
     const rst: RST
     export default rst
+}
+
+declare module 'restructured/lib/Parser.js' {
+	import { Positon } from 'restructured'
+
+	export class SyntaxError extends Error {
+		message: string
+		expected: string | null
+		found: string | null
+		location: { start: Positon, end: Positon }
+	}
+	const exports: { SyntaxError: typeof SyntaxError }
+	export default exports
 }

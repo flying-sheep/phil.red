@@ -1,7 +1,7 @@
 /** @jsx data */
 import { data } from 'typed-jsx'
-import * as MarkdownIt from 'markdown-it'
-import * as Token from 'markdown-it/lib/token'
+import MarkdownIt from 'markdown-it'
+import Token from 'markdown-it/lib/token'
 
 import { rsplit } from '../utils'
 import * as m from './MarkupDocument'
@@ -50,8 +50,9 @@ function convertNode(token: Token): m.Node[] {
 	case 'heading': {
 		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.level
 		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
+		const anchor = undefined // TODO
 		return [
-			<m.Title level={parseInt(level, 10)} pos={pos(token)}>
+			<m.Title level={parseInt(level, 10)} anchor={anchor} pos={pos(token)}>
 				{convertChildren(token)}
 			</m.Title>,
 		]

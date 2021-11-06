@@ -2,7 +2,7 @@
 
 import * as path from 'path'
 import { promises as fs } from 'fs'
-import * as glob from 'globby'
+import glob from 'globby'
 import { PluginImpl } from 'rollup'
 
 import {
@@ -47,7 +47,7 @@ export const renderdoc: PluginImpl<Partial<Config>> = (config: Partial<Config> =
 	return {
 		name: 'renderdoc',
 		async resolveId(id: string, importer?: string) {
-			const rel = importer === undefined
+			const rel = importer === undefined || id.startsWith('/')
 				? id
 				: path.join(path.dirname(importer), id)
 			if ((await doGlob(rel)).length === 0) return null
@@ -64,16 +64,23 @@ export const renderdoc: PluginImpl<Partial<Config>> = (config: Partial<Config> =
 				const convert = converters[path.extname(p)]
 				try {
 					return convert(code)
-				} catch (e) {
-					e.id = p
-					if (e instanceof ParseError) {
-						e.message = `Error parsing ${ext} file: ${e.orig.message}`
-					} else if (e instanceof ASTError) {
-						e.message = `Error converting the ${ext} AST: ${e.message}`
+				} catch (eOrig) {
+					let e: Error
+					let pos: { line: number; column: number } | number | undefined
+					if (eOrig instanceof ParseError) {
+						e = eOrig
+						e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
+						pos = eOrig.pos
+					} else if (eOrig instanceof ASTError) {
+						e = eOrig
+						e.message = `Error converting the ${ext} AST: ${eOrig.message}`
+						pos = eOrig.loc || eOrig.pos
 					} else {
+						e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
 						e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 					}
-					this.error(e, e.loc || e.pos)
+					(e as any).id = p // TODO: why?
+					this.error(e, pos)
 				}
 			}))
 			

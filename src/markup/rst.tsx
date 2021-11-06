@@ -1,5 +1,6 @@
 /** @jsx markupElement */
 import * as rst from 'restructured'
+import { SyntaxError } from 'restructured/lib/Parser.js'
 import { Language } from 'prism-react-renderer'
 
 import * as m from './MarkupDocument'
@@ -55,7 +56,12 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	case 'title': {
 		if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 		const hLevel = Math.min(level, 6)
-		return [<m.Title level={hLevel} pos={pos(node)}>{convertChildren(node, level)}</m.Title>]
+		const { anchor } = titleAnchor(node)
+		return [
+			<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
+				{convertChildren(node, level)}
+			</m.Title>,
+		]
 	}
 	case 'paragraph':
 		return [<m.Paragraph pos={pos(node)}>{convertChildren(node, level)}</m.Paragraph>]
@@ -101,6 +107,10 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		switch (node.role) {
 		case 'math':
 			return [<m.InlineMath math={node.children.map((text) => (text as RSTInlineNode).value).join('')} pos={pos(node)}/>]
+		case 'pep': {
+			const num = node.children.map((text) => (text as RSTInlineNode).value).join('')
+			return [<m.Link ref={{ href: `https://www.python.org/dev/peps/pep-${num.padStart(4, '0')}/` }} pos={pos(node)}/>]
+		}
 		case null:
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		default:
@@ -172,13 +182,26 @@ function convertChildren(node: RSTNode, level: number): m.Node[] {
 	)
 }
 
+function innerText(node: RSTNode): string {
+	return 'value' in node ? node.value : node.children.map(innerText).join('')
+}
+
+function titleAnchor(node: RSTNode) {
+	const name = innerText(node).toLocaleLowerCase()
+	const anchor = name.replace(' ', '-')
+	return { name, anchor }
+}
+
 function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]> {
 	for (const child of 'children' in node ? node.children : []) {
 		if (typeof child === 'string') continue
-		if (child.type === 'comment') {
+		if (child.type === 'title') {
+			const { name, anchor } = titleAnchor(child)
+			yield [name, `#${anchor}`]
+		} else if (child.type === 'comment') {
 			const comment = (child.children as [RSTInlineNode])[0].value as string
 			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
-			if (name !== null && href !== null) yield [name, href]
+			if (name !== null && href !== null) yield [name.toLocaleLowerCase(), href]
 		} else if ('children' in child) {
 			yield* extractTargetsInner(child)
 		}
@@ -186,6 +209,7 @@ function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]>
 }
 
 const URL_SCHEMA = /^https?:.*$/
+const ANCHOR_SCHEMA = /^#.*$/
 
 function extractTargets(node: RSTNode): {[key: string]: string} {
 	const pending = Object.fromEntries(extractTargetsInner(node))
@@ -197,7 +221,7 @@ function extractTargets(node: RSTNode): {[key: string]: string} {
 			const k = entry[0]
 			const v = entry[1] in resolved ? resolved[entry[1]] : entry[1] // if so the match will be true
 			// TODO: more schemas
-			if (v.match(URL_SCHEMA)) {
+			if (v.match(URL_SCHEMA) || v.match(ANCHOR_SCHEMA)) {
 				resolved[k] = v
 				delete pending[k]
 				newResolvable = true
@@ -215,8 +239,8 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 	return nodes.map((node) => {
 		if (typeof node === 'string') return node
 		const elem = { ...node }
-		if (elem.type === m.Type.Link && 'name' in elem.ref && elem.ref.name in targets) {
-			elem.ref = { href: targets[elem.ref.name] }
+		if (elem.type === m.Type.Link && 'name' in elem.ref && elem.ref.name.toLocaleLowerCase() in targets) {
+			elem.ref = { href: targets[elem.ref.name.toLocaleLowerCase()] }
 		}
 		elem.children = resolveTargets(elem.children, targets)
 		return elem
@@ -252,9 +276,8 @@ export default function rstConvert(code: string): m.Document {
 	try {
 		parsed = rst.default.parse(code, { position: true, blanklines: true, indent: true })
 	} catch (e) {
-		// message, expected, found, location, name="SyntaxError"
-		if ('name' in e && e.name === 'SyntaxError' && 'location' in e) {
-			throw new ParseError(e, e.location)
+		if (e instanceof SyntaxError) {
+			throw new ParseError(e, e.location.start) // TODO: capture end too
 		} else {
 			throw e
 		}
