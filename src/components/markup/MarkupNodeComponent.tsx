@@ -57,7 +57,11 @@ export default class MarkupNodeComponent extends React.Component
 		case Type.Title: {
 			if (node.level < 1) throw new ASTError(`Header with level ${node.level} < 1`, node)
 			const hLevel = Math.min(node.level, 6)
-			return <Typography variant={`h${hLevel}` as Variant}>{convertChildren(node, level)}</Typography>
+			return (
+				<Typography id={node.anchor} variant={`h${hLevel}` as Variant}>
+					{convertChildren(node, level)}
+				</Typography>
+			)
 		}
 		case Type.Paragraph:
 			return <Typography paragraph>{convertChildren(node, level)}</Typography>

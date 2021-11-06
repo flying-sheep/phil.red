@@ -56,7 +56,12 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	case 'title': {
 		if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 		const hLevel = Math.min(level, 6)
-		return [<m.Title level={hLevel} pos={pos(node)}>{convertChildren(node, level)}</m.Title>]
+		const { anchor } = titleAnchor(node)
+		return [
+			<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
+				{convertChildren(node, level)}
+			</m.Title>,
+		]
 	}
 	case 'paragraph':
 		return [<m.Paragraph pos={pos(node)}>{convertChildren(node, level)}</m.Paragraph>]
@@ -177,19 +182,22 @@ function convertChildren(node: RSTNode, level: number): m.Node[] {
 	)
 }
 
+function innerText(node: RSTNode): string {
+	return 'value' in node ? node.value : node.children.map(innerText).join('')
+}
+
+function titleAnchor(node: RSTNode) {
+	const name = innerText(node).toLocaleLowerCase()
+	const anchor = name.replace(' ', '-')
+	return { name, anchor }
+}
+
 function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]> {
 	for (const child of 'children' in node ? node.children : []) {
 		if (typeof child === 'string') continue
 		if (child.type === 'title') {
-			const [fst, ...more] = child.children
-			if (fst && fst.type === 'text') {
-				const anchor = fst.value.toLocaleLowerCase()
-				yield [anchor, `#${anchor.replace(' ', '-')}`]
-			}
-			if (!fst || more.length > 0) {
-				// eslint-disable-next-line no-console
-				console.warn('TODO: convert complex titles to anchors')
-			}
+			const { name, anchor } = titleAnchor(child)
+			yield [name, `#${anchor}`]
 		} else if (child.type === 'comment') {
 			const comment = (child.children as [RSTInlineNode])[0].value as string
 			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []

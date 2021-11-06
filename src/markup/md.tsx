@@ -50,8 +50,9 @@ function convertNode(token: Token): m.Node[] {
 	case 'heading': {
 		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.level
 		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
+		const anchor = undefined // TODO
 		return [
-			<m.Title level={parseInt(level, 10)} pos={pos(token)}>
+			<m.Title level={parseInt(level, 10)} anchor={anchor} pos={pos(token)}>
 				{convertChildren(token)}
 			</m.Title>,
 		]
