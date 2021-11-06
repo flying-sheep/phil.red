@@ -39,7 +39,7 @@ function App({ location, history }: RouteComponentProps) {
 			<ElevationScroll>
 				<AppBar
 					position="sticky"
-					style={{
+					sx={{
 						color: theme.palette.text.primary,
 						background: theme.palette.background.default,
 					}}
