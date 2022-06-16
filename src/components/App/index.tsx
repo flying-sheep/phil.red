@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
 import {
 	Route, Routes,
-	Link,
-	useLocation,
 	Navigate,
+	useLocation,
 	useNavigate,
 } from 'react-router-dom'
 
@@ -55,9 +54,9 @@ function App() {
 							value={currentTab}
 							onChange={(e, value) => navigate(value)}
 						>
-							<Tab label="Blog" component={Link} to="/blog" value="/blog"/>
-							<Tab label="Home" component={Link} to="/" value="/"/>
-							<Tab label="Code" component={Link} to="/code" value="/code"/>
+							<Tab label="Blog" value="/blog"/>
+							<Tab label="Home" value="/"/>
+							<Tab label="Code" value="/code"/>
 						</Tabs>
 					</Toolbar>
 				</AppBar>
