@@ -4,7 +4,7 @@
 		"moduleResolution": "node",
 		"target": "ES2017",
 		"lib": ["es2019", "dom", "dom.iterable"],
-		"jsx": "react",
+		"jsx": "react-jsx",
 		//stronger types
 		"strict": true,
 		"preserveConstEnums": true,

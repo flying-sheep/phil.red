@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Margin } from 'plotly.js'
+import { Component } from 'react'
 import Plot, { PlotParams, Figure } from 'react-plotly.js'
 
 export interface PlotlyProps extends Partial<PlotParams> {
@@ -23,7 +23,7 @@ const DEFAULT_OVERRIDE: Partial<PlotParams> = {
 	},
 }
 
-export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>> {
+export default class Plotly extends Component<PlotlyProps, Partial<Figure>> {
 	constructor(props: PlotlyProps) {
 		super(props)
 		this.state = {}
@@ -47,7 +47,7 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 		const { data, layout } = this.state
 		if (!data) return null
 		const {
-			url, children, onClickLink, onClick: onClickExplicit,
+			url, onClickLink, onClick: onClickExplicit,
 			...rest
 		} = this.props
 		// TODO: deep merge everything
@@ -58,6 +58,6 @@ export default class Plotly extends React.Component<PlotlyProps, Partial<Figure>
 			...rest,
 		}
 		// TODO: resize plot on window resize
-		return <Plot {...props}>{children}</Plot>
+		return <Plot {...props}/>
 	}
 }

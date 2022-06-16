@@ -1,10 +1,10 @@
-/** @jsx markupElement */
+/** @jsxImportSource . */
+
 import * as rst from 'restructured'
 import { SyntaxError } from 'restructured/lib/Parser.js'
 import { Language } from 'prism-react-renderer'
 
 import * as m from './MarkupDocument'
-import { markupElement } from './MarkupDocument'
 import ASTError from './ASTError'
 import ParseError from './ParseError'
 

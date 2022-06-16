@@ -65,8 +65,8 @@ function template(options?: RollupHtmlTemplateOptions | undefined): string {
 ${metas}
 <title>${title}</title>
 
-<script src="https://unpkg.com/react@16/umd/react.${reactTag}.js"></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.${reactTag}.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.${reactTag}.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.${reactTag}.js"></script>
 <script src="https://unpkg.com/plotly.js@1/dist/plotly.min.js"></script>
 <script src="https://unpkg.com/prismjs@1.22.0/prism.js"></script>
 <script src="https://unpkg.com/katex@0.12/dist/katex.min.js"></script>

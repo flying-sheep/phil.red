@@ -1,9 +1,10 @@
-import * as React from 'react'
+import { useMemo } from 'react'
 import {
-	RouteComponentProps,
-	Route, Switch,
-	withRouter,
-	Redirect,
+	Route, Routes,
+	Link,
+	useLocation,
+	Navigate,
+	useNavigate,
 } from 'react-router-dom'
 
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -22,9 +23,9 @@ import ElevationScroll from './ElevationScroll'
 
 import styles from './style.css'
 
-function App({ location, history }: RouteComponentProps) {
+function App() {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
-	const theme = React.useMemo(
+	const theme = useMemo(
 		() => createTheme({
 			palette: {
 				mode: dark ? 'dark' : 'light',
@@ -33,7 +34,9 @@ function App({ location, history }: RouteComponentProps) {
 		}),
 		[dark],
 	)
-	
+	const location = useLocation()
+	const navigate = useNavigate()
+
 	const currentTab = `/${location.pathname.split('/')[1]}`
 	return (
 		<ThemeProvider theme={theme}>
@@ -50,25 +53,25 @@ function App({ location, history }: RouteComponentProps) {
 						<Tabs
 							centered
 							value={currentTab}
-							onChange={(e, value) => history.push(value)}
+							onChange={(e, value) => navigate(value)}
 						>
-							<Tab label="Blog" value="/blog"/>
-							<Tab label="Home" value="/"/>
-							<Tab label="Code" value="/code"/>
+							<Tab label="Blog" component={Link} to="/blog" value="/blog"/>
+							<Tab label="Home" component={Link} to="/" value="/"/>
+							<Tab label="Code" component={Link} to="/code" value="/code"/>
 						</Tabs>
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
 			<main className={styles.layout}>
-				<Switch>
-					<Route path="/" exact component={Home}/>
-					<Route path="/blog" component={Blog}/>
-					<Route path="/code" component={Code}/>
-					<Redirect to="/"/>
-				</Switch>
+				<Routes>
+					<Route index element={<Home/>}/>
+					<Route path="blog/*" element={<Blog/>}/>
+					<Route path="code" element={<Code/>}/>
+					<Route path="*" element={<Navigate replace to="/"/>}/>
+				</Routes>
 			</main>
 		</ThemeProvider>
 	)
 }
 
-export default withRouter(App)
+export default App

@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -9,6 +7,7 @@ import Typography from '@mui/material/Typography'
 import { Variant } from '@mui/material/styles/createTypography'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/vsDark'
+import { Children, Component } from 'react'
 import { InlineMath } from 'react-katex'
 
 import {
@@ -29,10 +28,10 @@ export interface MarkupElementState {
 
 function convertChildren(elem: Elem, level: number): React.ReactNode[] {
 	const children = elem.children.map((e) => <MarkupNodeComponent node={e} level={level}/>)
-	return React.Children.toArray(children)
+	return Children.toArray(children)
 }
 
-export default class MarkupNodeComponent extends React.Component
+export default class MarkupNodeComponent extends Component
 	<MarkupElementProps, MarkupElementState> {
 	constructor(props: MarkupElementProps) {
 		super(props)
