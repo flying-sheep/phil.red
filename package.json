@@ -11,7 +11,7 @@
 		"start": "rollup --configPlugin=typescript --config=rollup.config.ts --watch",
 		"build": "rollup --configPlugin=typescript --config=rollup.config.ts",
 		"init-css": "./init-css.js",
-		"test": "eslint *.js src/**/*.ts*",
+		"test": "eslint '{*.js,src/**/*.ts*'}",
 		"deploy": "npm run build && rsync --progress --compress --archive dist/ root@phil.red:/srv/http/phil.red"
 	},
 	"files": [

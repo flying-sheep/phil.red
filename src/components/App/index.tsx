@@ -13,7 +13,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { deepPurple } from '@mui/material/colors';
+import { deepPurple } from '@mui/material/colors'
 
 import Home from '../Home'
 import Blog from '../Blog'
