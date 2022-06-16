@@ -63,7 +63,7 @@
 		"eslint-plugin-no-foreach": "^1.0.0",
 		"eslint-plugin-react": "^7.21.4",
 		"globby": "^11.0.1",
-		"markdown-it": "^12.0.0",
+		"markdown-it": "^12.3.2",
 		"restructured": "^0.0.11",
 		"rollup": "^2.68.0",
 		"rollup-plugin-analyzer": "^4.0.0",
