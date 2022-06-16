@@ -1,25 +1,16 @@
 import * as React from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 
-import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
+import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography'
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-	box: {
-		marginBlock: `${theme.spacing(4)}px`,
-	},
-}))
-
-export default function Home({ match, ...props }: RouteComponentProps) {
-	const classes = useStyles(props)
+export default function Home() {
 	return (
 		// TODO: fix route
 		<Container maxWidth="sm">
 			<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
 				phil.red
 			</Typography>
-			<Typography variant="h5" align="center" color="textSecondary" paragraph className={classes.box}>
+			<Typography variant="h5" align="center" color="textSecondary" paragraph sx={{ marginBlock: 4 }}>
 				programming, science, emancipation
 			</Typography>
 			<Typography variant="h6" align="center" paragraph>

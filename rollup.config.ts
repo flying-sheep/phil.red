@@ -126,10 +126,12 @@ export default {
 		typescript(),
 		nodeResolve({
 			preferBuiltins: true,
+			mainFields: ['module', 'main'],
+			// 'node_modules/@emotion/unitless/dist/unitless.cjs.dev.js'
 		}),
 		commonjs(),
 		builtins(),
-		(json as unknown as () => Plugin)(),
+		json(),
 		renderdoc({
 			include: '*.@(md|rst)',
 		}),

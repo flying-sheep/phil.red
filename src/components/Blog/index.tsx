@@ -4,7 +4,7 @@ import {
 	Route, Switch, Redirect,
 } from 'react-router-dom'
 
-import List from '@material-ui/core/List'
+import List from '@mui/material/List'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
@@ -30,6 +30,7 @@ function Index({ match }: RouteComponentProps) {
 		<List component="nav">
 			{sorted.map(({ post, date, url }) => (
 				<ListItemLink
+					key={url}
 					to={`${match.url}/${url}`}
 					primary={post.document.title}
 					secondary={date.toISOString().substr(0, 10)}

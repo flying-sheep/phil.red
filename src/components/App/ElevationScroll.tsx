@@ -1,5 +1,5 @@
 import * as React from 'react'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
 
 interface Props {
 	children: React.ReactElement;

@@ -6,13 +6,14 @@ import {
 	Redirect,
 } from 'react-router-dom'
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import CssBaseline from '@mui/material/CssBaseline'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { deepPurple } from '@mui/material/colors'
 
 import Home from '../Home'
 import Blog from '../Blog'
@@ -24,9 +25,10 @@ import styles from './style.css'
 function App({ location, history }: RouteComponentProps) {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = React.useMemo(
-		() => createMuiTheme({
+		() => createTheme({
 			palette: {
-				type: dark ? 'dark' : 'light',
+				mode: dark ? 'dark' : 'light',
+				primary: deepPurple,
 			},
 		}),
 		[dark],
@@ -39,7 +41,7 @@ function App({ location, history }: RouteComponentProps) {
 			<ElevationScroll>
 				<AppBar
 					position="sticky"
-					style={{
+					sx={{
 						color: theme.palette.text.primary,
 						background: theme.palette.background.default,
 					}}

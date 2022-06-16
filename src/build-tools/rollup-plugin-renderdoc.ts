@@ -47,7 +47,8 @@ export const renderdoc: PluginImpl<Partial<Config>> = (config: Partial<Config> =
 	return {
 		name: 'renderdoc',
 		async resolveId(id: string, importer?: string) {
-			const rel = importer === undefined || id.startsWith('/')
+			if (!id.startsWith('./') && !id.startsWith('../')) return null
+			const rel = importer === undefined
 				? id
 				: path.join(path.dirname(importer), id)
 			if ((await doGlob(rel)).length === 0) return null

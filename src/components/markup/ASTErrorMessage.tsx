@@ -1,5 +1,6 @@
 import * as React from 'react'
-import red from '@material-ui/core/colors/red'
+import red from '@mui/material/colors/red'
+import Box from '@mui/material/Box'
 import { Node } from '../../markup/MarkupDocument'
 
 export interface ASTErrorMessageProps {
@@ -10,9 +11,9 @@ export default function ASTErrorMessage(
 	{ node, children }: ASTErrorMessageProps & { children: React.ReactNode },
 ) {
 	return (
-		<span style={{ color: red.A400 }}>
+		<Box sx={{ color: red.A400 }}>
 			{children}
 			{node && <pre>{JSON.stringify(node, undefined, 2)}</pre>}
-		</span>
+		</Box>
 	)
 }

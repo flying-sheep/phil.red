@@ -1,22 +1,23 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 
-import Link from '@material-ui/core/Link'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import Avatar from '@material-ui/core/Avatar'
-import ListItemText from '@material-ui/core/ListItemText'
-import List from '@material-ui/core/List'
+import Link from '@mui/material/Link'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
+import ListItemText from '@mui/material/ListItemText'
+import List from '@mui/material/List'
 
-import GitHub from '@material-ui/icons/GitHub'
-import AllInclusive from '@material-ui/icons/AllInclusive'
-import ViewComfy from '@material-ui/icons/ViewComfy'
-import SwapCalls from '@material-ui/icons/SwapCalls'
-import BlurOn from '@material-ui/icons/BlurOn'
-import BubbleChart from '@material-ui/icons/BubbleChart'
-import EmojiSymbols from '@material-ui/icons/EmojiSymbols'
-import Settings from '@material-ui/icons/Settings'
-import Web from '@material-ui/icons/Web'
+import GitHub from '@mui/icons-material/GitHub'
+import AllInclusive from '@mui/icons-material/AllInclusive'
+import ViewComfy from '@mui/icons-material/ViewComfy'
+import SwapCalls from '@mui/icons-material/SwapCalls'
+import BlurOn from '@mui/icons-material/BlurOn'
+import BubbleChart from '@mui/icons-material/BubbleChart'
+import EmojiSymbols from '@mui/icons-material/EmojiSymbols'
+import Settings from '@mui/icons-material/Settings'
+import Web from '@mui/icons-material/Web'
 
 import PythonIcon from './python-icon'
 import ArchIcon from './arch-icon'
@@ -31,13 +32,17 @@ type ListItemLinkProps = {
 const ListItemLink = ({
 	href, icon, text, sub,
 }: ListItemLinkProps = {}) => (
-	<ListItem button component={Link} href={href}>
-		<ListItemAvatar>
-			<Avatar>
-				{React.isValidElement(icon) ? icon : icon && React.createElement(icon as React.ElementType)}
-			</Avatar>
-		</ListItemAvatar>
-		<ListItemText primary={text} secondary={sub}/>
+	<ListItem disablePadding>
+		<ListItemButton component={Link} href={href}>
+			<ListItemAvatar>
+				<Avatar>
+					{React.isValidElement(icon)
+						? icon
+						: icon && React.createElement(icon as React.ElementType)}
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText primary={text} secondary={sub}/>
+		</ListItemButton>
 	</ListItem>
 )
 
