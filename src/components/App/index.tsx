@@ -21,6 +21,7 @@ import Code from '../Code'
 import ElevationScroll from './ElevationScroll'
 
 import styles from './style.css'
+import { Helmet } from 'react-helmet'
 
 function App() {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
@@ -39,6 +40,9 @@ function App() {
 	const currentTab = `/${location.pathname.split('/')[1]}`
 	return (
 		<ThemeProvider theme={theme}>
+			<Helmet>
+				<title>phil.red</title>
+			</Helmet>
 			<CssBaseline/>
 			<ElevationScroll>
 				<AppBar

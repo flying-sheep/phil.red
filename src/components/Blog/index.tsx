@@ -1,6 +1,7 @@
 import {
 	Route, Routes, Navigate, useParams,
 } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import List from '@mui/material/List'
 
@@ -53,15 +54,31 @@ function RoutedPost(): React.ReactElement<any> {
 	) {
 		return <Navigate replace to={`./../../../../${date2url(date)}/${id}`}/>
 	}
-	return <Markup doc={document}/>
+	return (
+		<>
+			<Helmet>
+				<title>
+					{document.title}
+					{' – '}
+					Blog – phil.red
+				</title>
+			</Helmet>
+			<Markup doc={document}/>
+		</>
+	)
 }
 
 export default function Blog() {
 	return (
-		<Routes>
-			<Route index element={<Index/>}/>
-			<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
-			<Route path="*" element={<Navigate replace to="."/>}/>
-		</Routes>
+		<>
+			<Helmet>
+				<title>Blog – phil.red</title>
+			</Helmet>
+			<Routes>
+				<Route index element={<Index/>}/>
+				<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
+				<Route path="*" element={<Navigate replace to="."/>}/>
+			</Routes>
+		</>
 	)
 }

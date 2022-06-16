@@ -1,4 +1,5 @@
 import { createElement, isValidElement } from 'react'
+import { Helmet } from 'react-helmet'
 
 import Link from '@mui/material/Link'
 import ListItem from '@mui/material/ListItem'
@@ -100,28 +101,33 @@ const GitHubItems = () => (
 	</>
 )
 
-export default function Blog() {
+export default function Code() {
 	return (
-		<List>
-			<ListItemLink
-				href="https://github.com/flying-sheep"
-				icon={GitHub}
-				text="GitHub"
-				sub="flying-sheep"
-			/>
-			<ListItemLink
-				href="https://pypi.org/user/flyingsheep/"
-				icon={PythonIcon}
-				text="PyPI"
-				sub="My Python packages (me=author)"
-			/>
-			<ListItemLink
-				href="https://aur.archlinux.org/packages/?K=flying-sheep&amp;SeB=m"
-				icon={ArchIcon}
-				text="AUR"
-				sub="My Arch Linux packages (me=packager)"
-			/>
-			<GitHubItems/>
-		</List>
+		<>
+			<Helmet>
+				<title>Code – phil.red</title>
+			</Helmet>
+			<List>
+				<ListItemLink
+					href="https://github.com/flying-sheep"
+					icon={GitHub}
+					text="GitHub"
+					sub="flying-sheep"
+				/>
+				<ListItemLink
+					href="https://pypi.org/user/flyingsheep/"
+					icon={PythonIcon}
+					text="PyPI"
+					sub="My Python packages (me=author)"
+				/>
+				<ListItemLink
+					href="https://aur.archlinux.org/packages/?K=flying-sheep&amp;SeB=m"
+					icon={ArchIcon}
+					text="AUR"
+					sub="My Arch Linux packages (me=packager)"
+				/>
+				<GitHubItems/>
+			</List>
+		</>
 	)
 }
