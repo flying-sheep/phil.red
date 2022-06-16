@@ -2,11 +2,6 @@ import * as React from 'react'
 
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
-import { Theme } from '@mui/material/styles'
-
-const addMargin = (theme: Theme) => ({
-	marginBlock: `${theme.spacing(4)}px`,
-})
 
 export default function Home() {
 	return (
@@ -15,7 +10,7 @@ export default function Home() {
 			<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
 				phil.red
 			</Typography>
-			<Typography variant="h5" align="center" color="textSecondary" paragraph sx={addMargin}>
+			<Typography variant="h5" align="center" color="textSecondary" paragraph sx={{ marginBlock: 4 }}>
 				programming, science, emancipation
 			</Typography>
 			<Typography variant="h6" align="center" paragraph>

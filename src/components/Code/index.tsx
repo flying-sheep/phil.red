@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router'
 
 import Link from '@mui/material/Link'
 import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
@@ -31,13 +32,17 @@ type ListItemLinkProps = {
 const ListItemLink = ({
 	href, icon, text, sub,
 }: ListItemLinkProps = {}) => (
-	<ListItem button component={Link} href={href}>
-		<ListItemAvatar>
-			<Avatar>
-				{React.isValidElement(icon) ? icon : icon && React.createElement(icon as React.ElementType)}
-			</Avatar>
-		</ListItemAvatar>
-		<ListItemText primary={text} secondary={sub}/>
+	<ListItem disablePadding>
+		<ListItemButton component={Link} href={href}>
+			<ListItemAvatar>
+				<Avatar>
+					{React.isValidElement(icon)
+						? icon
+						: icon && React.createElement(icon as React.ElementType)}
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText primary={text} secondary={sub}/>
+		</ListItemButton>
 	</ListItem>
 )
 

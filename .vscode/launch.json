@@ -1,7 +1,4 @@
 {
-    // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
-    // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
-    // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -12,7 +9,7 @@
                 "<node_internals>/**"
             ],
 			"program": "${workspaceFolder}/node_modules/.bin/rollup",
-			"args": ["-c"],
+			"args": ["--configPlugin=typescript", "--config=rollup.config.ts"],
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]

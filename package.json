@@ -36,7 +36,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^21.0.1",
+		"@rollup/plugin-commonjs": "^22.0.0",
 		"@rollup/plugin-html": "^0.2.3",
 		"@rollup/plugin-json": "^4.1.0",
 		"@rollup/plugin-node-resolve": "^13.0.6",
@@ -65,7 +65,7 @@
 		"globby": "^11.0.1",
 		"markdown-it": "^12.0.0",
 		"restructured": "^0.0.11",
-		"rollup": "^2.59.0",
+		"rollup": "^2.68.0",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"rollup-plugin-copy": "^3.3.0",
 		"rollup-plugin-node-builtins": "^2.1.2",

@@ -30,6 +30,7 @@ function Index({ match }: RouteComponentProps) {
 		<List component="nav">
 			{sorted.map(({ post, date, url }) => (
 				<ListItemLink
+					key={url}
 					to={`${match.url}/${url}`}
 					primary={post.document.title}
 					secondary={date.toISOString().substr(0, 10)}
