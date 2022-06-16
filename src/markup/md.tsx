@@ -1,5 +1,5 @@
-/** @jsx data */
-import { data } from 'typed-jsx'
+/** @jsxImportSource . */
+
 import MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token'
 

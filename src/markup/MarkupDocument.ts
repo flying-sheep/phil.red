@@ -1,20 +1,5 @@
-import {
-	FunctionComponent, ComponentInstance, data,
-} from 'typed-jsx'
+import { FunctionComponent } from 'typed-jsx'
 import { Language } from 'prism-react-renderer'
-
-namespace markupElement {
-	export declare namespace JSX {
-		type Element = Elem
-		type IntrinsicElements = {}
-		type ElementClass = ComponentInstance
-		interface IntrinsicAttributes {}
-		interface IntrinsicClassAttributes<T> {}
-		interface ElementChildrenAttribute { children: {} }
-	}
-}
-const markupElement = data
-export { markupElement }
 
 export enum Type {
 	// block

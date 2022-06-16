@@ -1,5 +1,8 @@
 {
-    "extends": "flying-sheep",
+    "extends": [
+		"flying-sheep",
+		"plugin:react/jsx-runtime"
+	],
     "env": {
         "browser": true,
         "es6": true

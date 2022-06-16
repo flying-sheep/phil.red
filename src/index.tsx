@@ -1,15 +1,10 @@
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './components/App'
 
 document.addEventListener('DOMContentLoaded', () => {
-	(window as any).__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
-	ReactDOM.render(
-		<Router>
-			<App/>
-		</Router>,
-		document.querySelector('#main'),
-	)
+	const root = createRoot(document.querySelector('#main')!)
+	root.render(<StrictMode><Router><App/></Router></StrictMode>)
 })

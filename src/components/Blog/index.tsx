@@ -1,7 +1,5 @@
-import * as React from 'react'
 import {
-	RouteComponentProps,
-	Route, Switch, Redirect,
+	Route, Routes, Navigate, useParams,
 } from 'react-router-dom'
 
 import List from '@mui/material/List'
@@ -18,7 +16,7 @@ export function postURL(date: Date, slug: string) {
 	return `${date2url(date)}/${slug}`
 }
 
-function Index({ match }: RouteComponentProps) {
+function Index() {
 	const sorted = (
 		Object.entries(posts)
 			.map(([slug, post]) => ({
@@ -31,44 +29,39 @@ function Index({ match }: RouteComponentProps) {
 			{sorted.map(({ post, date, url }) => (
 				<ListItemLink
 					key={url}
-					to={`${match.url}/${url}`}
+					to={url}
 					primary={post.document.title}
-					secondary={date.toISOString().substr(0, 10)}
+					secondary={date.toISOString().slice(0, 10)}
 				/>
 			))}
 		</List>
 	)
 }
 
-interface PostProps {
-	id: string
-	year: string
-	month: string
-	day: string
-}
-
-function RoutedPost({ match }: RouteComponentProps<PostProps>): React.ReactElement<any> {
+function RoutedPost(): React.ReactElement<any> {
+	const match = useParams<'id' | 'year' | 'month' | 'day'>()
 	const {
 		id,
 		year, month, day,
-	} = match.params
-	if (!(id in posts)) {
+	} = match
+	if (!(id! in posts)) {
 		return <div>{`404 – post ${id} not found`}</div>
 	}
-	const { date, document } = posts[id]
-	if (+year !== date.getFullYear() || +month !== date.getMonth() + 1 || +day !== date.getDate()) {
-		// TODO: after redirect, match.params stay the same!
-		return <Redirect to={`${match.url}/../../../../${date2url(date)}/${id}`}/>
+	const { date, document } = posts[id!]
+	if (
+		+year! !== date.getFullYear() || +month! !== date.getMonth() + 1 || +day! !== date.getDate()
+	) {
+		return <Navigate replace to={`./../../../../${date2url(date)}/${id}`}/>
 	}
 	return <Markup doc={document}/>
 }
 
-export default function Blog({ match }: RouteComponentProps) {
+export default function Blog() {
 	return (
-		<Switch>
-			<Route path={match.url} exact component={Index}/>
-			<Route path={`${match.url}/:year/:month/:day/:id`} component={RoutedPost}/>
-			<Redirect to={match.url}/>
-		</Switch>
+		<Routes>
+			<Route index element={<Index/>}/>
+			<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
+			<Route path="*" element={<Navigate replace to="."/>}/>
+		</Routes>
 	)
 }

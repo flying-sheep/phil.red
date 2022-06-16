@@ -1,5 +1,4 @@
-import React from 'react'
-import { RouteComponentProps } from 'react-router'
+import { createElement, isValidElement } from 'react'
 
 import Link from '@mui/material/Link'
 import ListItem from '@mui/material/ListItem'
@@ -36,9 +35,9 @@ const ListItemLink = ({
 		<ListItemButton component={Link} href={href}>
 			<ListItemAvatar>
 				<Avatar>
-					{React.isValidElement(icon)
+					{isValidElement(icon)
 						? icon
-						: icon && React.createElement(icon as React.ElementType)}
+						: icon && createElement(icon as React.ElementType)}
 				</Avatar>
 			</ListItemAvatar>
 			<ListItemText primary={text} secondary={sub}/>
@@ -101,7 +100,7 @@ const GitHubItems = () => (
 	</>
 )
 
-export default function Blog({ match }: RouteComponentProps) {
+export default function Blog() {
 	return (
 		<List>
 			<ListItemLink
