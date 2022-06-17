@@ -73,7 +73,7 @@
 		"tslib": "^2.4.0",
 		"typescript": "^4.7.3"
 	},
-  "resolutions": {
-    "@types/rollup-plugin-node-builtins/rollup": "^2.68.0"
-  }
+	"resolutions": {
+		"@types/rollup-plugin-node-builtins/rollup": "^2.68.0"
+	}
 }
