@@ -4,6 +4,7 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import copy from 'rollup-plugin-copy'
+import esmImportToUrl from 'rollup-plugin-esm-import-to-url'
 import analyze from 'rollup-plugin-analyzer'
 import builtins from 'rollup-plugin-node-builtins'
 import typescript from '@rollup/plugin-typescript'
@@ -54,11 +55,6 @@ function template(options?: RollupHtmlTemplateOptions | undefined): string {
 		.map((input) => `<meta${makeHtmlAttributes(input)}>`)
 		.join('\n')
 
-	const reactTag = {
-		production: 'production.min',
-		development: 'development',
-	}[getNodeEnv()]
-
 	return `\
 <!doctype html>
 <html${makeHtmlAttributes(html)}>
@@ -67,11 +63,6 @@ function template(options?: RollupHtmlTemplateOptions | undefined): string {
 ${metas}
 <title>${title}</title>
 
-<script src="https://unpkg.com/react@18/umd/react.${reactTag}.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.${reactTag}.js"></script>
-<script src="https://unpkg.com/plotly.js@1/dist/plotly.min.js"></script>
-<script src="https://unpkg.com/prismjs@1.22.0/prism.js"></script>
-<script src="https://unpkg.com/katex@0.12/dist/katex.min.js"></script>
 ${scripts}
 
 <link rel=stylesheet href="https://unpkg.com/katex@0.10/dist/katex.min.css">
@@ -86,30 +77,36 @@ ${links}
 `
 }
 
+const reactTag = {
+	production: 'production.min',
+	development: 'development',
+}[getNodeEnv()]
+
 const conf: RollupOptions = {
 	input: 'src/index.tsx',
 	output: {
 		file: 'dist/bundle.js',
-		format: 'iife',
+		format: 'es',
 		sourcemap: true,
-		globals: {
-			react: 'React',
-			'react-dom': 'ReactDOM',
-			'plotly.js': 'Plotly',
-			'plotly.js/dist/plotly': 'Plotly',
-			katex: 'katex',
-		},
 	},
 	treeshake: { moduleSideEffects: false },
 	watch: {
 		include: ['src/**'],
 	},
-	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'katex'],
 	plugins: [
 		analyze({
 			writeTo(formatted) {
 				// eslint-disable-next-line global-require,no-console
 				require('fs').writeFile('dist/bundle.log', formatted, (e: Error) => (e !== null ? console.error(e) : {}))
+			},
+		}),
+		esmImportToUrl({
+			imports: {
+				react: `https://unpkg.com/react@18/umd/react.${reactTag}.js`,
+				'react-dom': `https://unpkg.com/react-dom@18/umd/react-dom.${reactTag}.js`,
+				'plotly.js': 'https://unpkg.com/plotly.js@1/dist/plotly.min.js',
+				'plotly.js/dist/plotly': 'https://unpkg.com/plotly.js@1/dist/plotly.min.js',
+				katex: 'https://unpkg.com/katex@0.12/dist/katex.min.js',
 			},
 		}),
 		postcss({

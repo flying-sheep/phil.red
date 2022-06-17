@@ -6843,6 +6843,11 @@ rollup-plugin-copy@^3.3.0:
     globby "10.0.1"
     is-plain-object "^3.0.0"
 
+rollup-plugin-esm-import-to-url@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-esm-import-to-url/-/rollup-plugin-esm-import-to-url-2.1.0.tgz#b54519ead4244401a7dd6d21af97c064fc1f2676"
+  integrity sha512-/OSuqqZTrztz0NC9pcQcsEqEn5iQXYauFluh6CBSkRtNW4q6CTCxEsOAZFWTxizF2RKk9ZvaztlBBr/FuuWbwg==
+
 rollup-plugin-node-builtins@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/rollup-plugin-node-builtins/-/rollup-plugin-node-builtins-2.1.2.tgz"
