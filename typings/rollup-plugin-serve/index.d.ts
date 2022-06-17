@@ -1,4 +1,6 @@
 declare module 'rollup-plugin-serve' {
+	import { Plugin } from 'rollup'
+
 	interface Config {
 		/** Launch in browser (default: false) */
 		open?: boolean
@@ -24,5 +26,6 @@ declare module 'rollup-plugin-serve' {
 		/** set headers */
 		headers?: { [httpHeader: string]: string}
 	}
-	export default function serve(config: Config): void
+
+	export default function serve(config: Config): Plugin
 }

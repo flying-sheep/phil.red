@@ -11,7 +11,7 @@
 		"start": "rollup --configPlugin=typescript --config=rollup.config.ts --watch",
 		"build": "rollup --configPlugin=typescript --config=rollup.config.ts",
 		"init-css": "./init-css.js",
-		"test": "eslint '{*.js,src/**/*.ts*'}",
+		"test": "eslint '{*.js,*.ts,src/**/*.ts*'}",
 		"deploy": "npm run build && rsync --progress --compress --archive dist/ root@phil.red:/srv/http/phil.red"
 	},
 	"files": [
@@ -49,7 +49,7 @@
 		"@types/react-helmet": "^6.1.5",
 		"@types/react-plotly.js": "^2.2.4",
 		"@types/rollup-plugin-json": "^3.0.2",
-		"@types/rollup-plugin-node-builtins": "^2.1.1",
+		"@types/rollup-plugin-node-builtins": "^2.1.2",
 		"@types/rollup-plugin-postcss": "^3.1.4",
 		"@typescript-eslint/parser": "^5.28.0",
 		"autoprefixer": "^10.0.1",
@@ -72,5 +72,8 @@
 		"rollup-plugin-serve": "^1.0.4",
 		"tslib": "^2.4.0",
 		"typescript": "^4.7.3"
-	}
+	},
+  "resolutions": {
+    "@types/rollup-plugin-node-builtins/rollup": "^2.68.0"
+  }
 }

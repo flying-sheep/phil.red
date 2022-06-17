@@ -683,9 +683,9 @@
     "@types/node" "*"
     rollup "^0.63.4"
 
-"@types/rollup-plugin-node-builtins@^2.1.1":
+"@types/rollup-plugin-node-builtins@^2.1.2":
   version "2.1.2"
-  resolved "https://registry.npmjs.org/@types/rollup-plugin-node-builtins/-/rollup-plugin-node-builtins-2.1.2.tgz"
+  resolved "https://registry.yarnpkg.com/@types/rollup-plugin-node-builtins/-/rollup-plugin-node-builtins-2.1.2.tgz#d702de68f4aa7ab072845ab65e51fd7f1c0b4786"
   integrity sha512-R6dkiJk0JaRavDddmE4zddXOkFjCmSXv8RwqIgkX/1MvQ0SjDfo326+yAHy8HL++JWVNa48yB4EjPYyZeISzGQ==
   dependencies:
     "@types/node" "*"
@@ -6917,15 +6917,7 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^0.63.4:
-  version "0.63.5"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-0.63.5.tgz"
-  integrity sha512-dFf8LpUNzIj3oE0vCvobX6rqOzHzLBoblyFp+3znPbjiSmSvOoK2kMKx+Fv9jYduG1rvcCfCveSgEaQHjWRF6g==
-  dependencies:
-    "@types/estree" "0.0.39"
-    "@types/node" "*"
-
-rollup@^2.68.0:
+rollup@^0.63.4, rollup@^2.68.0:
   version "2.75.6"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.75.6.tgz#ac4dc8600f95942a0180f61c7c9d6200e374b439"
   integrity sha512-OEf0TgpC9vU6WGROJIk1JA3LR5vk/yvqlzxqdrE2CzzXnqKXNzbAwlWUXis8RS3ZPe7LAq+YUxsRa0l3r27MLA==

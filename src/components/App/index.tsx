@@ -5,6 +5,7 @@ import {
 	useLocation,
 	useNavigate,
 } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -21,7 +22,6 @@ import Code from '../Code'
 import ElevationScroll from './ElevationScroll'
 
 import styles from './style.css'
-import { Helmet } from 'react-helmet'
 
 function App() {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')

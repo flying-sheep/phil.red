@@ -1,3 +1,4 @@
+import { RollupOptions } from 'rollup'
 import replace from '@rollup/plugin-replace'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
@@ -16,8 +17,9 @@ import renderdoc from './src/build-tools/rollup-plugin-renderdoc'
 
 function getNodeEnv(): 'production' | 'development' {
 	const e = process.env.NODE_ENV || 'development'
-	if (e !== 'production' && e !== 'development')
+	if (e !== 'production' && e !== 'development') {
 		throw new Error(`Unknown environment ${e}`)
+	}
 	return e
 }
 
@@ -84,11 +86,11 @@ ${links}
 `
 }
 
-export default {
+const conf: RollupOptions = {
 	input: 'src/index.tsx',
 	output: {
 		file: 'dist/bundle.js',
-		format: 'iife',
+		format: 'es',
 		sourcemap: true,
 		globals: {
 			react: 'React',
@@ -160,3 +162,5 @@ export default {
 		] : [],
 	],
 }
+
+export default conf
