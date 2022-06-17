@@ -1,5 +1,5 @@
 import { createElement, isValidElement } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import Link from '@mui/material/Link'
 import ListItem from '@mui/material/ListItem'
