@@ -90,7 +90,7 @@ const conf: RollupOptions = {
 	input: 'src/index.tsx',
 	output: {
 		file: 'dist/bundle.js',
-		format: 'es',
+		format: 'iife',
 		sourcemap: true,
 		globals: {
 			react: 'React',
