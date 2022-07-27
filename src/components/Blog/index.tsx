@@ -1,7 +1,7 @@
 import {
 	Route, Routes, Navigate, useParams,
 } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 import List from '@mui/material/List'
 
