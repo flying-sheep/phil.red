@@ -65,7 +65,7 @@ ${metas}
 
 ${scripts}
 
-<link rel=stylesheet href="https://unpkg.com/katex@0.10/dist/katex.min.css">
+<link rel=stylesheet href="https://esm.sh/katex@0.12.0/dist/katex.min.css">
 ${links}
 
 </head>
@@ -77,10 +77,12 @@ ${links}
 `
 }
 
+/*
 const reactTag = {
 	production: 'production.min',
 	development: 'development',
 }[getNodeEnv()]
+*/
 
 const conf: RollupOptions = {
 	input: 'src/index.tsx',
@@ -102,11 +104,11 @@ const conf: RollupOptions = {
 		}),
 		esmImportToUrl({
 			imports: {
-				react: `https://unpkg.com/react@18/umd/react.${reactTag}.js`,
-				'react-dom': `https://unpkg.com/react-dom@18/umd/react-dom.${reactTag}.js`,
-				'plotly.js': 'https://unpkg.com/plotly.js@1/dist/plotly.min.js',
-				'plotly.js/dist/plotly': 'https://unpkg.com/plotly.js@1/dist/plotly.min.js',
-				katex: 'https://unpkg.com/katex@0.12/dist/katex.min.js',
+				react: 'https://esm.sh/react@18?target=es2020',
+				'react-dom': 'https://esm.sh/react-dom@18?target=es2020',
+				'plotly.js': 'https://esm.sh/plotly.js@1?target=es2020',
+				'plotly.js/dist/plotly': 'https://esm.sh/plotly.js@1?target=es2020',
+				katex: 'https://esm.sh/katex@0.12?target=es2020',
 			},
 		}),
 		postcss({
