@@ -75,6 +75,7 @@ ${metas}
 ${scripts}
 
 <link rel=stylesheet href="https://unpkg.com/katex@0.10/dist/katex.min.css">
+<link rel="shortcut icon" href="${publicPath}static/gooball.svg">
 ${links}
 
 </head>
