@@ -268,6 +268,11 @@
   resolved "https://registry.npmjs.org/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz"
   integrity sha512-Es6WcD0nO5l+2BOQS4uLfNPYQaNDfbot3X1XUoloz+x0mPDS3eeORZJl06HXjwBG1fOGwCRnzK88LMdxKRrd6Q==
 
+"@matejmazur/react-katex@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@matejmazur/react-katex/-/react-katex-3.1.3.tgz#f07404c848b93bfef9ed9653a4bb080dc8bf2bf0"
+  integrity sha512-rBp7mJ9An7ktNoU653BWOYdO4FoR4YNwofHZi+vaytX/nWbIlmHVIF+X8VFOn6c3WYmrLT5FFBjKqCZ1sjR5uQ==
+
 "@mui/core@5.0.0-alpha.53":
   version "5.0.0-alpha.53"
   resolved "https://registry.yarnpkg.com/@mui/core/-/core-5.0.0-alpha.53.tgz#ede1445be3bf5a93d25bdd8ead23afdfb1b68f8b"
@@ -1547,7 +1552,7 @@ colormap@^2.3.1:
   dependencies:
     lerp "^1.0.3"
 
-commander@2, commander@^2.15.1, commander@^2.19.0, commander@^2.9.0:
+commander@2, commander@^2.15.1, commander@^2.9.0:
   version "2.20.3"
   resolved "https://registry.npmjs.org/commander/-/commander-2.20.3.tgz"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -4423,20 +4428,6 @@ jsx-ast-utils@^3.2.1:
     array-includes "^3.1.4"
     object.assign "^4.1.2"
 
-katex@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.npmjs.org/katex/-/katex-0.12.0.tgz"
-  integrity sha512-y+8btoc/CK70XqcHqjxiGWBOeIL8upbS0peTPXTvgrh21n1RiWWcIpSWM+4uXq+IAgNh9YYQWdc7LVDPDAEEAg==
-  dependencies:
-    commander "^2.19.0"
-
-katex@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.npmjs.org/katex/-/katex-0.9.0.tgz"
-  integrity sha512-lp3x90LT1tDZBW2tjLheJ98wmRMRjUHwk4QpaswT9bhqoQZ+XA4cPcjcQBxgOQNwaOSt6ZeL/a6GKQ1of3LFxQ==
-  dependencies:
-    match-at "^0.1.1"
-
 kdbush@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/kdbush/-/kdbush-3.0.0.tgz"
@@ -4729,11 +4720,6 @@ mat4-recompose@^1.0.3:
   integrity sha1-OVPCMP8kc9x3LuAUpSySXPgbDk0=
   dependencies:
     gl-mat4 "^1.0.1"
-
-match-at@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/match-at/-/match-at-0.1.1.tgz"
-  integrity sha512-h4Yd392z9mST+dzc+yjuybOGFNOZjmXIPKWjxBd1Bb23r4SmDOsk2NYCU2BMUBGbSpZqwVsZYNq26QS3xfaT3Q==
 
 math-log2@^1.0.1:
   version "1.0.1"
@@ -6435,13 +6421,6 @@ react-is@^17.0.2:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-katex@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/react-katex/-/react-katex-2.0.2.tgz"
-  integrity sha512-mk1ezfUF4mBIstjvpfELf9g1rWF1Y1+idXMiOvkFvCLi0JFZDCQdui59VqQcI2ynOpb0jj52TM4kyBjKG+qEBg==
-  dependencies:
-    katex "^0.9.0"
-
 react-plotly.js@^2.5.0:
   version "2.5.1"
   resolved "https://registry.npmjs.org/react-plotly.js/-/react-plotly.js-2.5.1.tgz"
@@ -6898,10 +6877,10 @@ rollup-plugin-postcss@^3.1.5:
     safe-identifier "^0.4.1"
     style-inject "^0.3.0"
 
-rollup-plugin-serve@^1.0.4:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/rollup-plugin-serve/-/rollup-plugin-serve-1.1.0.tgz"
-  integrity sha512-pYkSsuA0/psKqhhictkJw1c2klya5b+LlCvipWqI9OE1aG2M97mRumZCbBlry5CMEOzYBBgSDgd1694sNbmyIw==
+rollup-plugin-serve@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-serve/-/rollup-plugin-serve-2.0.1.tgz#79d2813baeae48888ebbc608418afc68f938eab8"
+  integrity sha512-/9lnzylTMwbXNQUwWAO0DIxW145wl+rmikwFXgujLJ5N9bRfWcjP+qd1XM5wxSiw8ZlBAlFy/n2zRvzcG21bBw==
   dependencies:
     mime ">=2.4.6"
     opener "1"

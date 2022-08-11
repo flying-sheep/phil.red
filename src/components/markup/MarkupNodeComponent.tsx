@@ -8,7 +8,7 @@ import { Variant } from '@mui/material/styles/createTypography'
 import Highlight, { defaultProps, Language } from 'prism-react-renderer'
 import theme from 'prism-react-renderer/themes/vsDark'
 import { Children, Component } from 'react'
-import { InlineMath } from 'react-katex'
+import TeX from '@matejmazur/react-katex'
 
 import {
 	Node, Elem, Type, Bullet,
@@ -107,7 +107,7 @@ export default class MarkupNodeComponent extends Component
 		case Type.Table:
 			return (
 				<figure>
-					<table>{convertChildren(node, level)}</table>
+					<table><tbody>{convertChildren(node, level)}</tbody></table>
 					{node.caption && <figcaption>{node.caption}</figcaption>}
 				</figure>
 			)
@@ -129,7 +129,7 @@ export default class MarkupNodeComponent extends Component
 		case Type.Code:
 			return <code>{convertChildren(node, level)}</code>
 		case Type.InlineMath:
-			return <InlineMath math={node.math}/>
+			return <TeX math={node.math}/>
 		// custom
 		case Type.Plotly: {
 			const { type, ...props } = node
