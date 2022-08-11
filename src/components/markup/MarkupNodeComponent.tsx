@@ -107,7 +107,7 @@ export default class MarkupNodeComponent extends Component
 		case Type.Table:
 			return (
 				<figure>
-					<table>{convertChildren(node, level)}</table>
+					<table><tbody>{convertChildren(node, level)}</tbody></table>
 					{node.caption && <figcaption>{node.caption}</figcaption>}
 				</figure>
 			)
