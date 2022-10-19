@@ -1,0 +1,11 @@
+The zen of phil
+===============
+
+Inspired by the `zen of Python`_.
+
+.. _zen of python: https://peps.python.org/pep-0020/
+
+#. An automated workflow is a documented workflow
+#. but documentation is not automatically good 
+#. Sometimes repetition is better to understand than DRY
+#. but you only need to hear that once you years after you stopped copying code snippets
