@@ -8,4 +8,4 @@ Inspired by the `zen of Python`_.
 #. An automated workflow is a documented workflow
 #. but documentation is not automatically good 
 #. Sometimes repetition is better to understand than DRY
-#. but you only need to hear that once you years after you stopped copying code snippets
+#. but you only need to hear that years after you stopped copying code snippets
