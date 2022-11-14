@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import {
-	Route, Routes,
+	Route,
 	Navigate,
 	useLocation,
 	useNavigate,
@@ -16,6 +16,7 @@ import Tab from '@mui/material/Tab'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { deepPurple } from '@mui/material/colors'
 
+import SlideRoutes from 'react-slide-routes'
 import Home from '../Home'
 import Blog from '../Blog'
 import Code from '../Code'
@@ -66,12 +67,12 @@ function App() {
 				</AppBar>
 			</ElevationScroll>
 			<main className={styles.layout}>
-				<Routes>
-					<Route index element={<Home/>}/>
+				<SlideRoutes>
 					<Route path="blog/*" element={<Blog/>}/>
+					<Route index element={<Home/>}/>
 					<Route path="code" element={<Code/>}/>
 					<Route path="*" element={<Navigate replace to="/"/>}/>
-				</Routes>
+				</SlideRoutes>
 			</main>
 		</ThemeProvider>
 	)
