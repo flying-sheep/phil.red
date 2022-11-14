@@ -14,5 +14,6 @@
         "restructuredtext",
         "plaintext"
     ],
-    "restructuredtext.confPath": ""
+    "restructuredtext.confPath": "",
+    "typescript.tsdk": "node_modules/typescript/lib",
 }

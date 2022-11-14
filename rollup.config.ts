@@ -157,7 +157,7 @@ const conf: RollupOptions = {
 		}),
 		...(isDev && isWatching) ? [
 			serve({
-				contentBase: './dist',
+				contentBase: ['./dist', '.'],
 				historyApiFallback: true,
 			}),
 		] : [],
