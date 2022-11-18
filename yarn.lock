@@ -7398,7 +7398,7 @@ __metadata:
     react-plotly.js: ^2.5.0
     react-router: ^6.3.0
     react-router-dom: ^6.3.0
-    react-slide-routes: ^2.0.0
+    react-slide-routes: "flying-sheep/react-slide-routes#match-routes"
     restructured: ^0.0.11
     rollup: ^2.68.0
     rollup-plugin-analyzer: ^4.0.0
@@ -8874,19 +8874,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slide-routes@npm:^2.0.0":
+"react-slide-routes@flying-sheep/react-slide-routes#match-routes":
   version: 2.0.0
-  resolution: "react-slide-routes@npm:2.0.0"
+  resolution: "react-slide-routes@https://github.com/flying-sheep/react-slide-routes.git#commit=cebcbe98b0f0a7a341951e0f70b6596bf9ee780a"
   dependencies:
     "@emotion/react": ^11.6.0
-    react-transition-group: ^4.4.2
+    react-transition-group: ^4.4.5
   peerDependencies:
     prop-types: ^15.7.2
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
     react-router: ">=6.0.0"
     react-router-dom: ">=6.0.0"
-  checksum: f9c06858b9492281552f4881aa0eb5cb8ab1429edb79309ce871d641d0ed2b7682eb06143f8e234c13b22dd1edd5c2179d15a1078daf50e3ba135f262c0d40d5
+  checksum: 7b7258deea480260e04035a1838031cfb1ccc11d5a62bd1bf71717706011747792d2654ecaa9e8c7f3b63b60727f6b88cc540bbf9d249c9a5db0ee0276878c43
   languageName: node
   linkType: hard
 
@@ -8902,6 +8902,21 @@ __metadata:
     react: ">=16.6.0"
     react-dom: ">=16.6.0"
   checksum: b67bf5b3e86dbab72d658b9a52a3589e5960583ab28c7c66272427d8fe30d4c7de422d5046ae96bd2683cdf80cc3264b2516f5ce80cae1dbe6cf3ca6dda392c5
+  languageName: node
+  linkType: hard
+
+"react-transition-group@npm:^4.4.5":
+  version: 4.4.5
+  resolution: "react-transition-group@npm:4.4.5"
+  dependencies:
+    "@babel/runtime": ^7.5.5
+    dom-helpers: ^5.0.1
+    loose-envify: ^1.4.0
+    prop-types: ^15.6.2
+  peerDependencies:
+    react: ">=16.6.0"
+    react-dom: ">=16.6.0"
+  checksum: 75602840106aa9c6545149d6d7ae1502fb7b7abadcce70a6954c4b64a438ff1cd16fc77a0a1e5197cdd72da398f39eb929ea06f9005c45b132ed34e056ebdeb1
   languageName: node
   linkType: hard
 
