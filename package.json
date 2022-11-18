@@ -74,5 +74,6 @@
 	},
 	"resolutions": {
 		"@types/rollup-plugin-node-builtins/rollup": "^2.68.0"
-	}
+	},
+	"packageManager": "yarn@3.3.0"
 }
