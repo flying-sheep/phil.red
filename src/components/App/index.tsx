@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import {
+	Link,
 	Route,
 	Navigate,
 	useLocation,
-	useNavigate,
+	matchPath,
 } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
@@ -24,6 +25,25 @@ import ElevationScroll from './ElevationScroll'
 
 import styles from './style.css'
 
+const ROUTE_LINKS = [
+	{ label: 'Blog', href: '/blog', pattern: '/blog/*' },
+	{ label: 'Home', href: '/', pattern: '/' },
+	{ label: 'Code', href: '/code', pattern: '/code' },
+]
+
+function useRouteMatch(patterns: readonly string[]) {
+	const { pathname } = useLocation()
+
+	for (const pattern of patterns) {
+		const possibleMatch = matchPath(pattern, pathname)
+		if (possibleMatch !== null) {
+			return possibleMatch
+		}
+	}
+
+	return null
+}
+
 function App() {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(
@@ -35,10 +55,8 @@ function App() {
 		}),
 		[dark],
 	)
-	const location = useLocation()
-	const navigate = useNavigate()
+	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))?.pattern.path
 
-	const currentTab = `/${location.pathname.split('/')[1]}`
 	return (
 		<ThemeProvider theme={theme}>
 			<Helmet>
@@ -54,14 +72,16 @@ function App() {
 					}}
 				>
 					<Toolbar component="nav" classes={{ root: styles.toolbar }}>
-						<Tabs
-							centered
-							value={currentTab}
-							onChange={(e, value) => navigate(value)}
-						>
-							<Tab label="Blog" value="/blog"/>
-							<Tab label="Home" value="/"/>
-							<Tab label="Code" value="/code"/>
+						<Tabs centered value={currentTab}>
+							{ROUTE_LINKS.map(({ label, href, pattern }) => (
+								<Tab
+									key={label}
+									label={label}
+									value={pattern}
+									component={Link}
+									to={href}
+								/>
+							))}
 						</Tabs>
 					</Toolbar>
 				</AppBar>
