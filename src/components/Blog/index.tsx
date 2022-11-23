@@ -1,5 +1,5 @@
 import {
-	Route, Routes, Navigate, useParams,
+	Route, Navigate, useParams,
 } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
@@ -8,6 +8,7 @@ import List from '@mui/material/List'
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
 import { Markup } from '../markup'
+import SlideRoutes from 'react-slide-routes'
 
 function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
@@ -74,11 +75,11 @@ export default function Blog() {
 			<Helmet>
 				<title>Blog – phil.red</title>
 			</Helmet>
-			<Routes>
+			<SlideRoutes animation="vertical-slide">
 				<Route index element={<Index/>}/>
 				<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
 				<Route path="*" element={<Navigate replace to="."/>}/>
-			</Routes>
+			</SlideRoutes>
 		</>
 	)
 }
