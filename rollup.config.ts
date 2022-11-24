@@ -67,11 +67,11 @@ function template(options?: RollupHtmlTemplateOptions | undefined): string {
 ${metas}
 <title>${title}</title>
 
-<script src="https://unpkg.com/react@18/umd/react.${reactTag}.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.${reactTag}.js"></script>
-<script src="https://unpkg.com/plotly.js@1/dist/plotly.min.js"></script>
-<script src="https://unpkg.com/prismjs@1.22.0/prism.js"></script>
-<script src="https://unpkg.com/katex@0.12/dist/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.${reactTag}.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.${reactTag}.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.16.3/plotly.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.3/katex.min.js"></script>
 ${scripts}
 
 <link rel=stylesheet href="https://unpkg.com/katex@0.10/dist/katex.min.css">
