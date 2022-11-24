@@ -2,7 +2,7 @@
 
 import * as path from 'path'
 import { promises as fs } from 'fs'
-import glob from 'globby'
+import { globby } from 'globby'
 import { PluginImpl } from 'rollup'
 
 import {
@@ -38,9 +38,9 @@ export const renderdoc: PluginImpl<Partial<Config>> = (config: Partial<Config> =
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 	
 	async function doGlob(id: string): Promise<string[]> {
-		const stats = await fs.stat(id)
-		if (!stats.isDirectory()) return []
-		const paths = await glob(patterns, { cwd: id, absolute: true })
+		const isDir = await fs.stat(id).then((s) => s.isDirectory()).catch(() => false)
+		if (!isDir) return []
+		const paths = await globby(patterns, { cwd: id, absolute: true })
 		return paths
 	}
 	

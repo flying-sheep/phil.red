@@ -1,3 +1,4 @@
+import * as fs from 'node:fs'
 import { RollupOptions } from 'rollup'
 import replace from '@rollup/plugin-replace'
 import nodeResolve from '@rollup/plugin-node-resolve'
@@ -5,7 +6,6 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import copy from 'rollup-plugin-copy'
 import analyze from 'rollup-plugin-analyzer'
-import builtins from 'rollup-plugin-node-builtins'
 import typescript from '@rollup/plugin-typescript'
 import postcss from 'rollup-plugin-postcss-modules'
 import serve from 'rollup-plugin-serve'
@@ -109,8 +109,8 @@ const conf: RollupOptions = {
 	plugins: [
 		analyze({
 			writeTo(formatted) {
-				// eslint-disable-next-line global-require,no-console
-				require('fs').writeFile('dist/bundle.log', formatted, (e: Error) => (e !== null ? console.error(e) : {}))
+				// eslint-disable-next-line no-console
+				fs.writeFile('dist/bundle.log', formatted, (e) => e !== null && console.error(e))
 			},
 		}),
 		postcss({
@@ -133,7 +133,6 @@ const conf: RollupOptions = {
 			// 'node_modules/@emotion/unitless/dist/unitless.cjs.dev.js'
 		}),
 		commonjs(),
-		builtins(),
 		json(),
 		renderdoc({
 			include: '*.@(md|rst)',

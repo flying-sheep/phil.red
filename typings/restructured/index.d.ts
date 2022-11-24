@@ -72,8 +72,8 @@ declare module 'restructured' {
         parse(code: string, options?: Options<true>): Node<true>
         parse(code: string, options?: Options<false>): Node<false>
     }
-    const rst: RST
-    export default rst
+	const weird: { default: RST }
+    export default weird
 }
 
 declare module 'restructured/lib/Parser.js' {

@@ -275,7 +275,7 @@ function getMeta(fieldLists: m.Elem) {
 export default function rstConvert(code: string): m.Document {
 	let parsed
 	try {
-		parsed = rst.default.parse(code, { position: true, blanklines: true, indent: true })
+		parsed = rst.default.default.parse(code, { position: true, blanklines: true, indent: true })
 	} catch (e) {
 		if (e instanceof SyntaxError) {
 			throw new ParseError(e, e.location.start) // TODO: capture end too

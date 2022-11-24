@@ -1,7 +1,7 @@
 /** @jsxImportSource . */
 
 import MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token'
+import Token from 'markdown-it/lib/token.js'
 
 import { rsplit } from '../utils'
 import * as m from './MarkupDocument'
