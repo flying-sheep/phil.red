@@ -44,7 +44,7 @@ function useRouteMatch(patterns: readonly string[]) {
 	return null
 }
 
-function App() {
+const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(
 		() => createTheme({

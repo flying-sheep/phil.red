@@ -1,3 +1,5 @@
+import SlideRoutes from 'react-slide-routes'
+import { FC } from 'react'
 import {
 	Route, Navigate, useParams,
 } from 'react-router-dom'
@@ -5,7 +7,6 @@ import { Helmet } from 'react-helmet-async'
 
 import List from '@mui/material/List'
 
-import SlideRoutes from 'react-slide-routes'
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
 import { Markup } from '../markup'
@@ -18,7 +19,7 @@ export function postURL(date: Date, slug: string) {
 	return `${date2url(date)}/${slug}`
 }
 
-function Index() {
+const Index = () => {
 	const sorted = (
 		Object.entries(posts)
 			.map(([slug, post]) => ({
@@ -40,7 +41,7 @@ function Index() {
 	)
 }
 
-function RoutedPost(): React.ReactElement<any> {
+const RoutedPost: FC = () => {
 	const match = useParams<'id' | 'year' | 'month' | 'day'>()
 	const {
 		id,
@@ -69,17 +70,17 @@ function RoutedPost(): React.ReactElement<any> {
 	)
 }
 
-export default function Blog() {
-	return (
-		<>
-			<Helmet>
-				<title>Blog – phil.red</title>
-			</Helmet>
-			<SlideRoutes animation="vertical-slide">
-				<Route index element={<Index/>}/>
-				<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
-				<Route path="*" element={<Navigate replace to="."/>}/>
-			</SlideRoutes>
-		</>
-	)
-}
+const Blog = () => (
+	<>
+		<Helmet>
+			<title>Blog – phil.red</title>
+		</Helmet>
+		<SlideRoutes animation="vertical-slide">
+			<Route index element={<Index/>}/>
+			<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
+			<Route path="*" element={<Navigate replace to="."/>}/>
+		</SlideRoutes>
+	</>
+)
+
+export default Blog
