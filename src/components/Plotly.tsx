@@ -1,16 +1,20 @@
-import { Margin } from 'plotly.js'
-import { Component } from 'react'
-import Plot, { PlotParams, Figure } from 'react-plotly.js'
+import { Theme, useTheme } from '@mui/material'
+import { Data, Layout, Margin } from 'plotly.js'
+import {
+	FC, useCallback, useEffect, useState,
+} from 'react'
+import Plot, { PlotParams } from 'react-plotly.js'
 
 export interface PlotlyProps extends Partial<PlotParams> {
 	url: string
 	onClickLink?: string
 }
 
-const DEFAULT_OVERRIDE: Partial<PlotParams> = {
+const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
 	layout: {
 		paper_bgcolor: 'transparent',
 		plot_bgcolor: 'transparent',
+		font: { color: theme.palette.text.primary },
 		xaxis: { automargin: true },
 		yaxis: { automargin: true },
 		margin: {
@@ -21,43 +25,40 @@ const DEFAULT_OVERRIDE: Partial<PlotParams> = {
 			pad: 0,
 		} as Margin & { pad: number },
 	},
-}
+})
 
-export default class Plotly extends Component<PlotlyProps, Partial<Figure>> {
-	constructor(props: PlotlyProps) {
-		super(props)
-		this.state = {}
-		fetch(props.url).then((r) => {
+const Plotly: FC<PlotlyProps> = ({
+	url, onClickLink, onClick, ...rest
+}) => {
+	const theme = useTheme()
+	const [layout, setLayout] = useState<Layout>()
+	const [data, setData] = useState<Data[]>()
+	
+	useEffect(() => {
+		fetch(url).then((r) => {
 			if (r.ok) return r.json()
 			throw new Error(r.statusText)
 		}).then(({ layout, data }) => {
-			this.setState({ layout, data })
+			setLayout(layout)
+			setData(data)
 		}).catch((e) => console.error(e)) // eslint-disable-line no-console
-		this.handleOnClickLink = this.handleOnClickLink.bind(this)
-	}
+	}, [url])
 	
-	handleOnClickLink(e: Readonly<Plotly.PlotMouseEvent>) {
-		const { onClickLink = '{}' } = this.props
+	const handleOnClickLink = useCallback((e: Readonly<Plotly.PlotMouseEvent>) => {
 		const point = e.points[0] as { [key: string]: any }
-		const url = onClickLink.replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key] : `{${key}}`))
+		const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key] : `{${key}}`))
 		window.open(url)
+	}, [onClickLink])
+
+	if (!data) return null
+	// TODO: deep merge everything
+	const props: PlotParams = {
+		layout: { ...defaultOverride(theme).layout, ...layout, ...rest.layout },
+		data: [...(data || []), ...(rest.data || [])],
+		onClick: onClickLink ? handleOnClickLink : onClick,
+		...rest,
 	}
-	
-	render(): React.ReactNode {
-		const { data, layout } = this.state
-		if (!data) return null
-		const {
-			url, onClickLink, onClick: onClickExplicit,
-			...rest
-		} = this.props
-		// TODO: deep merge everything
-		const props: PlotParams = {
-			layout: { ...DEFAULT_OVERRIDE.layout, ...layout, ...rest.layout },
-			data: [...(data || []), ...(rest.data || [])],
-			onClick: onClickLink ? this.handleOnClickLink : onClickExplicit,
-			...rest,
-		}
-		// TODO: resize plot on window resize
-		return <Plot {...props}/>
-	}
+	return <Plot useResizeHandler {...props}/>
 }
+
+export default Plotly
