@@ -101,33 +101,33 @@ const GitHubItems = () => (
 	</>
 )
 
-export default function Code() {
-	return (
-		<>
-			<Helmet>
-				<title>Code – phil.red</title>
-			</Helmet>
-			<List>
-				<ListItemLink
-					href="https://github.com/flying-sheep"
-					icon={GitHub}
-					text="GitHub"
-					sub="flying-sheep"
-				/>
-				<ListItemLink
-					href="https://pypi.org/user/flyingsheep/"
-					icon={PythonIcon}
-					text="PyPI"
-					sub="My Python packages (me=author)"
-				/>
-				<ListItemLink
-					href="https://aur.archlinux.org/packages/?K=flying-sheep&amp;SeB=m"
-					icon={ArchIcon}
-					text="AUR"
-					sub="My Arch Linux packages (me=packager)"
-				/>
-				<GitHubItems/>
-			</List>
-		</>
-	)
-}
+const Code = () => (
+	<>
+		<Helmet>
+			<title>Code – phil.red</title>
+		</Helmet>
+		<List>
+			<ListItemLink
+				href="https://github.com/flying-sheep"
+				icon={GitHub}
+				text="GitHub"
+				sub="flying-sheep"
+			/>
+			<ListItemLink
+				href="https://pypi.org/user/flyingsheep/"
+				icon={PythonIcon}
+				text="PyPI"
+				sub="My Python packages (me=author)"
+			/>
+			<ListItemLink
+				href="https://aur.archlinux.org/packages/?K=flying-sheep&amp;SeB=m"
+				icon={ArchIcon}
+				text="AUR"
+				sub="My Arch Linux packages (me=packager)"
+			/>
+			<GitHubItems/>
+		</List>
+	</>
+)
+
+export default Code

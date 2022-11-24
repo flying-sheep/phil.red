@@ -1,6 +1,5 @@
 import { Children, Component } from 'react'
 import { Document, Node } from '../../markup/MarkupDocument'
-import { ASTErrorMessageProps } from './ASTErrorMessage'
 import MarkupNodeComponent, { High } from './MarkupNodeComponent'
 
 export interface MarkupProps {
@@ -12,13 +11,12 @@ export interface MarkupState {
 }
 
 export default class Markup extends Component<MarkupProps, MarkupState> {
-	title: string | React.ReactElement<ASTErrorMessageProps>
 	children: Node[]
 
 	constructor(props: MarkupProps) {
 		super(props)
 		const { doc } = props
-		this.title = doc.title
+		// this.title = doc.title
 		this.children = doc.children // DEBUG
 	}
 	

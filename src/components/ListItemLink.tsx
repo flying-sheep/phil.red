@@ -11,15 +11,15 @@ interface LilProps extends LinkProps {
 	secondary?: React.ReactNode,
 }
 
-export default function ListItemLink({
+const ListItemLink = ({
 	icon, primary, secondary, ...props
-}: LilProps) {
-	return (
-		<ListItem disablePadding>
-			<ListItemButton component={Link} {...props}>
-				{icon && <ListItemIcon>{icon}</ListItemIcon>}
-				<ListItemText inset primary={primary} secondary={secondary}/>
-			</ListItemButton>
-		</ListItem>
-	)
-}
+}: LilProps) => (
+	<ListItem disablePadding>
+		<ListItemButton component={Link} {...props}>
+			{icon && <ListItemIcon>{icon}</ListItemIcon>}
+			<ListItemText inset primary={primary} secondary={secondary}/>
+		</ListItemButton>
+	</ListItem>
+)
+
+export default ListItemLink
