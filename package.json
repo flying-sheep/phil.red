@@ -33,7 +33,7 @@
 		"react-plotly.js": "^2.6.0",
 		"react-router": "^6.4.3",
 		"react-router-dom": "^6.4.3",
-		"react-slide-routes": "flying-sheep/react-slide-routes#match-routes-2",
+		"react-slide-routes": "nanxiaobei/react-slide-routes#39264adeb1a68fbf3d51a845d4f70cf92338373b",
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
