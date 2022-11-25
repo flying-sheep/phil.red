@@ -43,7 +43,7 @@ const High: FC<HighProps> = ({ code, language, style }) => {
 	const theme = mode === 'dark' ? darkTheme : lightTheme
 	useEffect(() => {
 		loadLang(language).then(() => setLoaded(true)).catch((e) => setErr(e))
-	}, [loaded])
+	}, [language, loaded])
 	if (err) throw err
 	return (
 		<Highlight Prism={Prism as PrismLib} code={code} language={loaded ? language : ('text' as Language)} theme={theme}>

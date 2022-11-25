@@ -1,6 +1,7 @@
 {
     "extends": [
 		"flying-sheep",
+		"eslint-config-airbnb/hooks",
 		"plugin:react/jsx-runtime"
 	],
     "env": {
