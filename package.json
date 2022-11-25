@@ -26,13 +26,14 @@
 		"katex": "^0.16.3",
 		"plotly.js": "^2.16.3",
 		"prism-react-renderer": "^1.3.5",
+		"prismjs": "^1.29.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-helmet-async": "^1.3.0",
 		"react-plotly.js": "^2.6.0",
 		"react-router": "^6.4.3",
 		"react-router-dom": "^6.4.3",
-		"react-slide-routes": "flying-sheep/react-slide-routes#match-routes-2",
+		"react-slide-routes": "nanxiaobei/react-slide-routes#39264adeb1a68fbf3d51a845d4f70cf92338373b",
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
@@ -44,6 +45,7 @@
 		"@rollup/plugin-typescript": "^9.0.2",
 		"@types/markdown-it": "^12.2.3",
 		"@types/node": "^18.11.9",
+		"@types/prismjs": "^1.26.0",
 		"@types/react": "^18.0.25",
 		"@types/react-dom": "^18.0.9",
 		"@types/react-plotly.js": "^2.5.2",

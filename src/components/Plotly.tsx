@@ -1,4 +1,5 @@
-import { Theme, useTheme } from '@mui/material'
+import useTheme from '@mui/material/styles/useTheme'
+import { Theme } from '@mui/material/styles/createTheme'
 import { Data, Layout, Margin } from 'plotly.js'
 import {
 	FC, useCallback, useEffect, useState,

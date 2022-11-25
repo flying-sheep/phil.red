@@ -14,6 +14,7 @@ import html, { makeHtmlAttributes, RollupHtmlTemplateOptions } from '@rollup/plu
 // import * as autoprefixer from 'autoprefixer'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc'
+import * as urls from './src/build-tools/urls.js'
 
 function getNodeEnv(): 'production' | 'development' {
 	const e = process.env.NODE_ENV || 'development'
@@ -67,11 +68,11 @@ function template(options?: RollupHtmlTemplateOptions | undefined): string {
 ${metas}
 <title>${title}</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.${reactTag}.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.${reactTag}.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.16.3/plotly.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.3/katex.min.js"></script>
+<script src="${urls.get('react', '18.2.0', `umd/react.${reactTag}.js`)}"></script>
+<script src="${urls.get('react-dom', '18.2.0', `umd/react-dom.${reactTag}.js`)}"></script>
+<script src="${urls.get('plotly.js', '2.16.3', 'plotly.min.js')}"></script>
+<script src="${urls.prism('prism.min.js')}"></script>
+<script src="${urls.get('KaTeX', '0.16.3', 'katex.min.js')}"></script>
 ${scripts}
 
 <link rel=stylesheet href="https://unpkg.com/katex@0.10/dist/katex.min.css">
@@ -98,6 +99,7 @@ const conf: RollupOptions = {
 			'react-dom': 'ReactDOM',
 			'plotly.js': 'Plotly',
 			'plotly.js/dist/plotly': 'Plotly',
+			prismjs: 'Prism',
 			katex: 'katex',
 		},
 	},
@@ -105,7 +107,7 @@ const conf: RollupOptions = {
 	watch: {
 		include: ['src/**'],
 	},
-	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'katex'],
+	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'prismjs', 'katex'],
 	plugins: [
 		analyze({
 			writeTo(formatted) {
