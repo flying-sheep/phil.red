@@ -106,7 +106,7 @@ const conf: RollupOptions = {
 	watch: {
 		include: ['src/**'],
 	},
-	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'Prism', 'katex'],
+	external: ['react', 'react-dom', 'plotly.js', 'plotly.js/dist/plotly', 'prismjs', 'katex'],
 	plugins: [
 		analyze({
 			writeTo(formatted) {
