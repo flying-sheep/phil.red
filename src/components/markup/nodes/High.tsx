@@ -6,6 +6,8 @@ import type { Prism as PrismRR } from 'prism-react-renderer'
 import darkTheme from 'prism-react-renderer/themes/vsDark'
 import lightTheme from 'prism-react-renderer/themes/vsLight'
 
+import * as urls from '../../../build-tools/urls.js'
+
 type PrismLib = typeof PrismRR & typeof Prism
 
 const loadScriptNoCache = (url: string) => new Promise<HTMLScriptElement>((resolve, reject) => {
@@ -30,9 +32,7 @@ const loadScript = async (url: string) => {
 	return scriptPromise
 }
 
-const loadLang = (lang: string) => loadScript(
-	`https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-${lang}.min.js`,
-)
+const loadLang = (lang: string) => loadScript(urls.prism(`components/prism-${lang}.min.js`))
 
 export interface HighProps { code: string, language: Language, style?: React.CSSProperties }
 
