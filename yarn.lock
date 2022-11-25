@@ -956,7 +956,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prismjs@npm:^1":
+"@types/prismjs@npm:^1.26.0":
   version: 1.26.0
   resolution: "@types/prismjs@npm:1.26.0"
   checksum: cd5e7a6214c1f4213ec512a5fcf6d8fe37a56b813fc57ac95b5ff5ee074742bfdbd2f2730d9fd985205bf4586728e09baa97023f739e5aa1c9735a7c1ecbd11a
@@ -5635,7 +5635,7 @@ __metadata:
     "@rollup/plugin-typescript": ^9.0.2
     "@types/markdown-it": ^12.2.3
     "@types/node": ^18.11.9
-    "@types/prismjs": ^1
+    "@types/prismjs": ^1.26.0
     "@types/react": ^18.0.25
     "@types/react-dom": ^18.0.9
     "@types/react-plotly.js": ^2.5.2
