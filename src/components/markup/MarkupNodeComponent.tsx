@@ -5,8 +5,6 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import { Variant } from '@mui/material/styles/createTypography'
-import Highlight, { defaultProps, Language } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/vsDark'
 import { Children, Component } from 'react'
 import TeX from '@matejmazur/react-katex'
 
@@ -15,7 +13,8 @@ import {
 } from '../../markup/MarkupDocument'
 import { ASTError } from '../../markup'
 import Plotly from '../Plotly'
-import ASTErrorMessage from './ASTErrorMessage'
+import ASTErrorMessage from './nodes/ASTErrorMessage'
+import High from './nodes/High'
 
 export interface MarkupElementProps {
 	node: Node
@@ -140,23 +139,3 @@ export default class MarkupNodeComponent extends Component
 		}
 	}
 }
-
-export const High = (
-	{ code, language, style }: { code: string, language: Language, style?: React.CSSProperties },
-) => (
-	<Highlight {...defaultProps} code={code} language={language} theme={theme}>
-		{({
-			className, style: defaultStyle, tokens, getLineProps, getTokenProps,
-		}) => (
-			<pre className={className} style={{ ...defaultStyle, ...style, padding: '5px' }}>
-				{tokens.map((line, i) => (
-					<div {...getLineProps({ line, key: i })}>
-						{line.map((token, key) => (
-							<span {...getTokenProps({ token, key })}/>
-						))}
-					</div>
-				))}
-			</pre>
-		)}
-	</Highlight>
-)

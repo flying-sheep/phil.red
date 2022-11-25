@@ -3,7 +3,7 @@ import { FC } from 'react'
 import red from '@mui/material/colors/red'
 import Box from '@mui/material/Box'
 
-import { Node } from '../../markup/MarkupDocument'
+import { Node } from '../../../markup/MarkupDocument'
 
 export interface ASTErrorMessageProps {
 	node?: Node

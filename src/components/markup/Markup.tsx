@@ -1,6 +1,7 @@
 import { Children, Component } from 'react'
 import { Document, Node } from '../../markup/MarkupDocument'
-import MarkupNodeComponent, { High } from './MarkupNodeComponent'
+import MarkupNodeComponent from './MarkupNodeComponent'
+import High from './nodes/High'
 
 export interface MarkupProps {
 	doc: Document
