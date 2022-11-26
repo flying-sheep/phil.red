@@ -1,5 +1,5 @@
-import { Children, Component } from 'react'
-import { Document, Node } from '../../markup/MarkupDocument'
+import { Children, FC } from 'react'
+import { Document } from '../../markup/MarkupDocument'
 import MarkupNodeComponent from './MarkupNodeComponent'
 import High from './nodes/High'
 
@@ -7,43 +7,26 @@ export interface MarkupProps {
 	doc: Document
 }
 
-export interface MarkupState {
-	errorMessage: string
+const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
+	const nodes = children.map((e) => <MarkupNodeComponent node={e} level={0}/>)
+	const article = <article>{Children.toArray(nodes)}</article>
+	if (process.env.NODE_ENV === 'development') {
+		return (
+			<>
+				{article}
+				<High
+					language="json"
+					code={JSON.stringify(children, undefined, '\t')}
+					style={{
+						marginLeft: 'calc(50% - 50vw + 1em)',
+						marginRight: 'calc(50% - 50vw + 1em)',
+						overflowY: 'auto',
+					}}
+				/>
+			</>
+		)
+	}
+	return article
 }
 
-export default class Markup extends Component<MarkupProps, MarkupState> {
-	children: Node[]
-
-	constructor(props: MarkupProps) {
-		super(props)
-		const { doc } = props
-		// this.title = doc.title
-		this.children = doc.children // DEBUG
-	}
-	
-	static getDerivedStateFromError(error: Error) {
-		return { errorMessage: error.message }
-	}
-	
-	render(): React.ReactElement<any> {
-		const nodes = this.children.map((e) => <MarkupNodeComponent node={e} level={0}/>)
-		const article = <article>{Children.toArray(nodes)}</article>
-		if (process.env.NODE_ENV === 'development') {
-			return (
-				<>
-					{article}
-					<High
-						language="json"
-						code={JSON.stringify(this.children, undefined, '\t')}
-						style={{
-							marginLeft: 'calc(50% - 50vw + 1em)',
-							marginRight: 'calc(50% - 50vw + 1em)',
-							overflowY: 'auto',
-						}}
-					/>
-				</>
-			)
-		}
-		return article
-	}
-}
+export default Markup

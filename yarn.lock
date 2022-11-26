@@ -3022,6 +3022,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-react-prefer-function-component@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "eslint-plugin-react-prefer-function-component@npm:3.1.0"
+  checksum: 4a82ec1686f619766e698b66f59d35b7b7bc525a8246da8bda76af82662277f3b0fedc0719d20340eaaa1cd9b731d95ebe16e804005d20fc2814142c0b2f835d
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-react@npm:^7.31.11":
   version: 7.31.11
   resolution: "eslint-plugin-react@npm:7.31.11"
@@ -5650,6 +5657,7 @@ __metadata:
     eslint-plugin-no-foreach: ^1.0.0
     eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
+    eslint-plugin-react-prefer-function-component: ^3.1.0
     globby: ^13.1.2
     katex: ^0.16.3
     markdown-it: ^13.0.1
