@@ -1,7 +1,9 @@
 {
+	"plugins": ["react-prefer-function-component"],
     "extends": [
 		"flying-sheep",
 		"eslint-config-airbnb/hooks",
+		"plugin:react-prefer-function-component/recommended",
 		"plugin:react/jsx-runtime"
 	],
     "env": {
@@ -37,29 +39,6 @@
 		"react/prop-types": 0,
 		"react/function-component-definition": [2, {"namedComponents": "arrow-function"}],
 		"react/require-default-props": 0,
-		"react/jsx-props-no-spreading": 0,
-        "react/sort-comp": [2, {
-            "order": [
-                "displayName",
-                "mixins",
-                "statics",
-                "contextTypes",
-                "propTypes",
-                "constructor",
-                "getDefaultProps",
-                "getInitialState",
-                "componentWillMount",
-                "componentDidMount",
-                "componentWillReceiveProps",
-                "shouldComponentUpdate",
-                "componentWillUpdate",
-                "componentWillUnmount",
-                "/^(on|handle).+$/",
-                "/^get.+$/",
-                "/^(?!render).+$/",
-                "/^render.+$/",
-                "render"
-            ]
-		}]
+		"react/jsx-props-no-spreading": 0
     }
 }
