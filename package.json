@@ -12,7 +12,7 @@
 		"build": "rollup --configPlugin=typescript --config=rollup.config.ts",
 		"init-css": "./init-css.js",
 		"lint": "eslint '{*.js,*.ts,src/**/*.ts*}'",
-		"deploy": "$npm_execpath run build && rsync --progress --compress --archive dist/ root@phil.red:/srv/http/phil.red"
+		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red"
 	},
 	"files": [
 		"dist"
