@@ -22,4 +22,5 @@ jobs:
         remote_path: /srv/http/phil.red
         remote_host: phil.red
         remote_user: root
+        remote_port: 1988
         remote_key: ${{ secrets.DEPLOY_KEY }}
