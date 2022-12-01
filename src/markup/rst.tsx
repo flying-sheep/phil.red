@@ -201,7 +201,8 @@ function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]>
 			yield [name, `#${anchor}`]
 		} else if (child.type === 'comment') {
 			const comment = (child.children as [RSTInlineNode])[0].value as string
-			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
+			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) ?? []
+			// TODO: “_`name with backticks`: ...”
 			if (name !== null && href !== null) yield [name.toLocaleLowerCase(), href]
 		} else if ('children' in child) {
 			yield* extractTargetsInner(child)
@@ -240,8 +241,19 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 	return nodes.map((node) => {
 		if (typeof node === 'string') return node
 		const elem = { ...node }
-		if (elem.type === m.Type.Link && 'name' in elem.ref && elem.ref.name.toLocaleLowerCase() in targets) {
-			elem.ref = { href: targets[elem.ref.name.toLocaleLowerCase()] }
+		if (elem.type === m.Type.Link && 'name' in elem.ref) {
+			if (elem.ref.name.toLocaleLowerCase() in targets) {
+				elem.ref = { href: targets[elem.ref.name.toLocaleLowerCase()] }
+			} else { // maybe inline syntax
+				const [, text = null, href = null] = /^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
+				if (text && href) {
+					elem.ref = { href }
+					elem.children = [text]
+				} else {
+					// eslint-disable-next-line no-console
+					console.warn(`Unmatched link target ${elem.ref.name}`)
+				}
+			}
 		}
 		elem.children = resolveTargets(elem.children, targets)
 		return elem

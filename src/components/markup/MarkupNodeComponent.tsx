@@ -5,8 +5,9 @@ import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import { Variant } from '@mui/material/styles/createTypography'
-import { Children, FC } from 'react'
+import { Children, FC, useCallback } from 'react'
 import TeX from '@matejmazur/react-katex'
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
 import {
 	Node, Elem, Type, Bullet,
@@ -125,12 +126,15 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 }
 
 const MarkupNodeComponent: FC<MarkupElementProps> = ({ node, level }) => {
-	try {
-		return <MarkupNodeComponentInner node={node} level={level}/>
-	} catch (error) {
+	const fallback = useCallback(({ error }: FallbackProps) => {
 		const errorMessage = error instanceof Error ? error.message : `${error}`
 		return <ASTErrorMessage node={node}>{errorMessage}</ASTErrorMessage>
-	}
+	}, [node])
+	return (
+		<ErrorBoundary fallbackRender={fallback}>
+			<MarkupNodeComponentInner node={node} level={level}/>
+		</ErrorBoundary>
+	)
 }
 
 export default MarkupNodeComponent
