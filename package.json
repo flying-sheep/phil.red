@@ -35,7 +35,7 @@
 		"react-plotly.js": "^2.6.0",
 		"react-router": "^6.4.3",
 		"react-router-dom": "^6.4.3",
-		"react-slide-routes": "^3.0.0",
+		"react-slide-routes": "^3.0.3",
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {

@@ -5716,7 +5716,7 @@ __metadata:
     react-plotly.js: ^2.6.0
     react-router: ^6.4.3
     react-router-dom: ^6.4.3
-    react-slide-routes: ^3.0.0
+    react-slide-routes: ^3.0.3
     restructured: ^0.0.11
     rollup: ^3.5.0
     rollup-plugin-analyzer: ^4.0.0
@@ -6624,9 +6624,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slide-routes@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "react-slide-routes@npm:3.0.0"
+"react-slide-routes@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "react-slide-routes@npm:3.0.3"
   dependencies:
     "@emotion/react": ^11.10.5
     react-transition-group: ^4.4.5
@@ -6635,7 +6635,7 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
     react-router-dom: ">=6.0.0"
-  checksum: 48bbdf3412140bdddfca97bd68558de4001c36ca61ae50748657db7f0da5aee192b852447e76d3a00469c3de1a095251ef82891fcc8e5d9094d77d1dd73214b5
+  checksum: 2999968bdb301923f5a6b501257a0a12635c6ca8a49038a4a9d84138ed3227733cc171c3ae352abdcf0050d693b86e05ccb7247099952d7d4ea5b53b13a68e72
   languageName: node
   linkType: hard
 
