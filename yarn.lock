@@ -432,11 +432,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.10.16":
-  version: 5.10.16
-  resolution: "@mui/icons-material@npm:5.10.16"
+"@mui/icons-material@npm:^5.11.0":
+  version: 5.11.0
+  resolution: "@mui/icons-material@npm:5.11.0"
   dependencies:
-    "@babel/runtime": ^7.20.1
+    "@babel/runtime": ^7.20.6
   peerDependencies:
     "@mui/material": ^5.0.0
     "@types/react": ^17.0.0 || ^18.0.0
@@ -444,7 +444,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 00cf9cdbb76a5806307d9cccb647cbd8e45d18a1be7e252727c789cd5a29103abf7fdbe724553425bcdff8daf58ec612e5a8c08c3c7a5a6e28efb14b86507687
+  checksum: 764c1185b3432f0228f3c5217b0e218b10f106fa96d305dfc62c0ef5afd2a7a087b0d664fd0a8171282e195c18d3ee073d5f037901a2bed1a1519a70fbb0501c
   languageName: node
   linkType: hard
 
@@ -942,10 +942,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.9":
-  version: 18.11.9
-  resolution: "@types/node@npm:18.11.9"
-  checksum: cc0aae109e9b7adefc32eecb838d6fad931663bb06484b5e9cbbbf74865c721b03d16fd8d74ad90e31dbe093d956a7c2c306ba5429ba0c00f3f7505103d7a496
+"@types/node@npm:^18.11.15":
+  version: 18.11.15
+  resolution: "@types/node@npm:18.11.15"
+  checksum: cae8692a5cee0316f93ee0342237eb921f70c51afb37c661c711a925a4642654ae7e404c5a80899d481c0cfaff3a6891ef04bacd330a2e72734192bfc91dc2d8
   languageName: node
   linkType: hard
 
@@ -3760,16 +3760,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^13.1.2":
-  version: 13.1.2
-  resolution: "globby@npm:13.1.2"
+"globby@npm:^13.1.3":
+  version: 13.1.3
+  resolution: "globby@npm:13.1.3"
   dependencies:
     dir-glob: ^3.0.1
     fast-glob: ^3.2.11
     ignore: ^5.2.0
     merge2: ^1.4.1
     slash: ^4.0.0
-  checksum: c148fcda0c981f00fb434bb94ca258f0a9d23cedbde6fb3f37098e1abde5b065019e2c63fe2aa2fad4daf2b54bf360b4d0423d85fb3a63d09ed75a2837d4de0f
+  checksum: 93f06e02002cdf368f7e3d55bd59e7b00784c7cc8fe92c7ee5082cc7171ff6109fda45e1c97a80bb48bc811dedaf7843c7c9186f5f84bde4883ab630e13c43df
   languageName: node
   linkType: hard
 
@@ -5685,7 +5685,7 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@matejmazur/react-katex": ^3.1.3
     "@mui/icons-material": ^5.10.16
-    "@mui/material": ^5.11.0
+    "@mui/material": ^5.10.16
     "@rollup/plugin-commonjs": ^23.0.3
     "@rollup/plugin-html": ^1.0.1
     "@rollup/plugin-json": ^5.0.2
@@ -5693,7 +5693,7 @@ __metadata:
     "@rollup/plugin-replace": ^5.0.1
     "@rollup/plugin-typescript": ^10.0.1
     "@types/markdown-it": ^12.2.3
-    "@types/node": ^18.11.9
+    "@types/node": ^18.11.15
     "@types/prismjs": ^1.26.0
     "@types/react": ^18.0.25
     "@types/react-dom": ^18.0.9
@@ -5711,7 +5711,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-react-prefer-function-component: ^3.1.0
     fetch-suspense: ^1.2.2
-    globby: ^13.1.2
+    globby: ^13.1.3
     katex: ^0.16.3
     markdown-it: ^13.0.1
     plotly.js: ^2.16.3
@@ -5725,7 +5725,7 @@ __metadata:
     react-plotly.js: ^2.6.0
     react-router: ^6.4.3
     react-router-dom: ^6.4.3
-    react-slide-routes: ^3.0.0
+    react-slide-routes: ^3.0.3
     restructured: ^0.0.11
     rollup: ^3.5.0
     rollup-plugin-analyzer: ^4.0.0
@@ -6633,9 +6633,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slide-routes@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "react-slide-routes@npm:3.0.0"
+"react-slide-routes@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "react-slide-routes@npm:3.0.3"
   dependencies:
     "@emotion/react": ^11.10.5
     react-transition-group: ^4.4.5
@@ -6644,7 +6644,7 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
     react-router-dom: ">=6.0.0"
-  checksum: 48bbdf3412140bdddfca97bd68558de4001c36ca61ae50748657db7f0da5aee192b852447e76d3a00469c3de1a095251ef82891fcc8e5d9094d77d1dd73214b5
+  checksum: 2999968bdb301923f5a6b501257a0a12635c6ca8a49038a4a9d84138ed3227733cc171c3ae352abdcf0050d693b86e05ccb7247099952d7d4ea5b53b13a68e72
   languageName: node
   linkType: hard
 
