@@ -39,7 +39,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
-		"@rollup/plugin-commonjs": "^23.0.3",
+		"@rollup/plugin-commonjs": "^24.0.0",
 		"@rollup/plugin-html": "^1.0.1",
 		"@rollup/plugin-json": "^6.0.0",
 		"@rollup/plugin-node-resolve": "^15.0.1",
