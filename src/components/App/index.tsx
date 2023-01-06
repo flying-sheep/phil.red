@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { deepPurple } from '@mui/material/colors'
 
 import SlideRoutes from 'react-slide-routes'
+import { PortalTarget } from 'react-portal-target'
 import Home from '../Home'
 import Blog from '../Blog'
 import Code from '../Code'
@@ -94,6 +95,7 @@ const App = () => {
 					<Route path="*" element={<Navigate replace to="/"/>}/>
 				</SlideRoutes>
 			</main>
+			<PortalTarget name="page-source"/>
 		</ThemeProvider>
 	)
 }
