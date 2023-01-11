@@ -6152,7 +6152,7 @@ __metadata:
     globby: ^13.1.3
     katex: ^0.16.4
     markdown-it: ^13.0.1
-    plotly.js: ^2.17.0
+    plotly.js: ^2.17.1
     postcss: ^8.4.20
     prism-react-renderer: ^1.3.5
     prismjs: ^1.29.0
@@ -6214,9 +6214,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plotly.js@npm:^2.17.0":
-  version: 2.17.0
-  resolution: "plotly.js@npm:2.17.0"
+"plotly.js@npm:^2.17.1":
+  version: 2.17.1
+  resolution: "plotly.js@npm:2.17.1"
   dependencies:
     "@plotly/d3": 3.8.0
     "@plotly/d3-sankey": 0.7.2
@@ -6267,7 +6267,7 @@ __metadata:
     topojson-client: ^3.1.0
     webgl-context: ^2.2.0
     world-calendars: ^1.0.3
-  checksum: 433553efd4304f434c7c0a0b5ad59667594d5681a81bab5f56eabe07ece15f6b7dc5ab304ff9052dabde62d483d225a8a768895416ea6f0702b4a606ac2c4a8d
+  checksum: d1de2b167909d95a0b6cbf619df22b6332fd9da0488d3845942acd3ea6fb2daf9a9f0c828ce70f1dbe0596c7b8910a19ec8566ab9f47582a64718f006d546a20
   languageName: node
   linkType: hard
 
