@@ -23,5 +23,5 @@
 			"./typings"
 		]
 	},
-	"include": ["rollup.config.ts", "src"]
+	"include": ["rollup.config.ts", "src", "__tests__"]
 }
