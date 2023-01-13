@@ -1,5 +1,6 @@
 {
 	"compilerOptions": {
+		"plugins": [{ "name": "typescript-plugin-css-modules" }],
 		"module": "ES2015",
 		"moduleResolution": "node",
 		"target": "ES2017",
@@ -23,5 +24,5 @@
 			"./typings"
 		]
 	},
-	"include": ["rollup.config.ts", "src"]
+	"include": ["rollup.config.ts", "src", "typings"]
 }

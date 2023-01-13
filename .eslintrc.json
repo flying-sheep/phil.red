@@ -17,10 +17,7 @@
             "jsx": true
         }
 	},
-	"ignorePatterns": [
-		"/dist/*",
-		"/**/*.css.d.ts"
-	],
+	"ignorePatterns": ["/dist/*"],
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
         "import/no-unresolved": 0,

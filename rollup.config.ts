@@ -118,7 +118,6 @@ const conf: RollupOptions = {
 		postcss({
 			extract: true,
 			sourceMap: true,
-			writeDefinitions: true,
 			plugins: [
 				// autoprefixer(),
 			],

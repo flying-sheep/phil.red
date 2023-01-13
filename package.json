@@ -75,7 +75,8 @@
 		"rollup-plugin-copy": "^3.4.0",
 		"rollup-plugin-postcss-modules": "^2.1.1",
 		"rollup-plugin-serve": "^2.0.2",
-		"typescript": "^4.9.4"
+		"typescript": "^4.9.4",
+		"typescript-plugin-css-modules": "^4.1.1"
 	},
 	"packageManager": "yarn@3.3.0"
 }
