@@ -1,5 +1,7 @@
-import rawPosts from './rawPosts'
+// import rawPosts from './rawPosts'
 import { Document } from '../markup'
+
+const rawPosts: {[k: string]: Document} = {}
 
 export class Post {
 	date: Date

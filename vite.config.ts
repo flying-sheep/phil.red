@@ -7,8 +7,10 @@ import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
 export default defineConfig({
 	plugins: [
 		react(),
+		/*
 		renderdoc({
 			include: '*.@(md|rst)',
 		}),
+		*/
 	],
 })

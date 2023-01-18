@@ -8,7 +8,6 @@ import { Plugin } from 'vite'
 import {
 	mdConvert, rstConvert, Document, ParseError, ASTError,
 } from '../markup'
-import { Server } from 'http'
 
 function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 	if (keys.length !== values.length) {
@@ -32,33 +31,30 @@ export const DEFAULT_CONVERTERS: {[ext: string]: Converter} = {
 	'.rst': rstConvert,
 }
 
+type Pos = { line: number; column: number } | number | undefined
+type OnError = (e: { id: string, message: string } | Error, pos?: Pos) => never
+
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
 	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include || []
 	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude || []
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
-	
-	async function doGlob(id: string): Promise<string[]> {
-		const isDir = await fs.stat(id).then((s) => s.isDirectory()).catch(() => false)
-		if (!isDir) return []
-		const paths = await globby(patterns, { cwd: id, absolute: true })
-		return paths
-	}
-	
-	const load = async (id: string) => {
-		const paths = await doGlob(id)
+
+	async function loadPosts(dir: string, onError: OnError = (e) => {
+		throw new Error(e.message)
+	}) {
+		const paths = await doGlob(dir)
 		if (paths.length === 0) return null
 		const contents = await Promise.all(paths.map(async (p) => {
-			this.addWatchFile(p)
 			const code = await fs.readFile(p, { encoding: 'utf-8' })
 			const ext = path.extname(p)
-			if (!(ext in converters)) this.error({ id: p, message: `No converter for ${ext} registered` })
+			if (!(ext in converters)) onError({ id: p, message: `No converter for ${ext} registered` })
 			const convert = converters[path.extname(p)]
 			try {
 				return convert(code)
 			} catch (eOrig) {
 				let e: Error
-				let pos: { line: number; column: number } | number | undefined
+				let pos: Pos
 				if (eOrig instanceof ParseError) {
 					e = eOrig
 					e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
@@ -72,7 +68,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 				}
 				(e as any).id = p // TODO: why?
-				this.error(e, pos)
+				onError(e, pos)
 			}
 		}))
 		
@@ -86,7 +82,14 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				delete map[p]
 			}
 		}
-		return `export default ${JSON.stringify(map)}`
+		return map
+	}
+	
+	async function doGlob(id: string): Promise<string[]> {
+		const isDir = await fs.stat(id).then((s) => s.isDirectory()).catch(() => false)
+		if (!isDir) return []
+		const paths = await globby(patterns, { cwd: id, absolute: true })
+		return paths
 	}
 	
 	return {
@@ -99,12 +102,16 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			if ((await doGlob(rel)).length === 0) return null
 			return rel
 		},
-		load,
+		async load(id: string) {
+			const paths = await doGlob(id)
+			for (const p of paths) this.addWatchFile(p)
+			const map = await loadPosts(id, this.error)
+			return `export default ${JSON.stringify(map)}`
+		},
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				if (req.url === '/src/posts/rawPosts') {
-					const code = await load('posts/rawPosts')
-					console.log(code)
+					const code = await loadPosts('posts/rawPosts')
 					res.setHeader('Content-Type', 'application/javascript')
 					res.end(code)
 					return
