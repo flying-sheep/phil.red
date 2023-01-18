@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './components/App'
 
 document.addEventListener('DOMContentLoaded', () => {
-	const root = createRoot(document.querySelector('#main')!)
+	const root = createRoot(document.querySelector('#root')!)
 	root.render(
 		<StrictMode>
 			<HelmetProvider>

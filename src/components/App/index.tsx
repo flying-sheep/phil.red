@@ -24,7 +24,7 @@ import Blog from '../Blog'
 import Code from '../Code'
 import ElevationScroll from './ElevationScroll'
 
-import styles from './style.css'
+import styles from './style.css?inline'
 
 const ROUTE_LINKS = [
 	{ label: 'Blog', href: '/blog', pattern: '/blog/*' },
