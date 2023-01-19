@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
 
@@ -9,6 +10,11 @@ export default defineConfig({
 		react(),
 		renderdoc({
 			include: '*.@(md|rst)',
+		}),
+		viteStaticCopy({
+			targets: [
+				{ src: 'lighttpd.conf', dest: 'lighttpd.conf' },
+			],
 		}),
 	],
 })
