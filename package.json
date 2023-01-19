@@ -12,6 +12,7 @@
 		"start": "vite",
 		"build": "tsc && vite build",
 		"preview": "vite preview",
+    "bundlesize": "tsc && vite-bundle-visualizer",
 		"init-css": "./init-css.js",
 		"lint": "$npm_execpath run lint:style && $npm_execpath run lint:deps",
 		"lint:style": "eslint '{*.js,*.ts,src/**/*.ts*}'",
