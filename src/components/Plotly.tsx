@@ -1,8 +1,11 @@
 import useTheme from '@mui/material/styles/useTheme'
 import { Theme } from '@mui/material/styles/createTheme'
-import { Data, Layout, Margin } from 'plotly.js'
-import { FC, Suspense, useCallback } from 'react'
-import Plot, { PlotParams } from 'react-plotly.js'
+import type { Data, Layout, Margin } from 'plotly.js-basic-dist-min'
+import {
+	FC, lazy, Suspense, useCallback,
+} from 'react'
+import createPlotlyComponent from 'react-plotly.js/factory'
+import type { PlotParams } from 'react-plotly.js'
 import useFetch from 'fetch-suspense'
 
 export interface PlotlyProps extends Partial<PlotParams> {
@@ -28,6 +31,11 @@ const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
 })
 
 interface ResponseData { layout: Layout, data: Data[] }
+
+const Plot = lazy(async () => {
+	const { default: Plotly } = await import('plotly.js-basic-dist-min')
+	return { default: createPlotlyComponent(Plotly) }
+})
 
 const PlotlyInner: FC<Omit<PlotlyProps, 'onClickLink'>> = ({ url, onClick, ...rest }) => {
 	const theme = useTheme()

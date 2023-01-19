@@ -1,15 +1,13 @@
 import SlideRoutes from 'react-slide-routes'
 import { FC } from 'react'
-import {
-	Route, Navigate, useParams,
-} from 'react-router-dom'
+import { Route, Navigate, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 
 import List from '@mui/material/List'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
-import { Markup } from '../markup'
+import Markup from '../markup'
 
 function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
