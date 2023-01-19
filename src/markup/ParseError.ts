@@ -1,4 +1,4 @@
-import { Positon } from 'restructured'
+import type { Positon } from 'restructured'
 
 export default class ParseError extends Error {
 	orig: Error

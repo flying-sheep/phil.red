@@ -6,9 +6,9 @@ import { globby } from 'globby'
 import { Plugin } from 'vite'
 import { cwd } from 'process'
 
-import {
-	mdConvert, rstConvert, Document, ParseError, ASTError,
-} from '../markup'
+import { Document, ParseError, ASTError } from '../markup'
+import mdConvert from './md'
+import rstConvert from './rst'
 
 function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 	if (keys.length !== values.length) {

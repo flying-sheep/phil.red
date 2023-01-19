@@ -1,11 +1,11 @@
-/** @jsxImportSource . */
+/** @jsxImportSource ../markup */
 
 import MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token.js'
 
 import { rsplit } from '../utils'
-import * as m from './MarkupDocument'
-import ASTError from './ASTError'
+import * as m from '../markup/MarkupDocument'
+import ASTError from '../markup/ASTError'
 
 const NO_END = Symbol('no end')
 
