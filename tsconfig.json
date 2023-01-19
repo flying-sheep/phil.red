@@ -1,27 +1,24 @@
 {
 	"compilerOptions": {
-		"module": "ES2015",
-		"moduleResolution": "node",
-		"target": "ES2017",
-		"lib": ["es2019", "dom", "dom.iterable"],
-		"jsx": "react-jsx",
-		//stronger types
-		"strict": true,
-		"preserveConstEnums": true,
-		"noUnusedLocals": true,
-		//rollup enforced
-		"noEmitHelpers": true,
-		"importHelpers": true,
-		"noResolve": false,
-		//allow importing CJS modules without a namespace in its .d.ts
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"allowJs": false,
+		"skipLibCheck": true,
+		"esModuleInterop": false,
 		"allowSyntheticDefaultImports": true,
-		//more
-		"removeComments": true,
-		"sourceMap": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "ESNext",
+		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
 		"typeRoots": [
 			"./node_modules/@types",
-			"./typings"
-		]
+			"./typings",
+		],
 	},
-	"include": ["rollup.config.ts", "src"]
+	"include": ["vite.config.ts", "src"],
 }
