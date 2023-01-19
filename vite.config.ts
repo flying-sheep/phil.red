@@ -13,7 +13,7 @@ export default defineConfig({
 		}),
 		viteStaticCopy({
 			targets: [
-				{ src: 'lighttpd.conf', dest: 'lighttpd.conf' },
+				{ src: 'lighttpd.conf', dest: '.' },
 			],
 		}),
 	],
