@@ -4,6 +4,7 @@ import * as path from 'path'
 import { promises as fs } from 'fs'
 import { globby } from 'globby'
 import { Plugin } from 'vite'
+import { cwd } from 'process'
 
 import {
 	mdConvert, rstConvert, Document, ParseError, ASTError,
@@ -100,23 +101,26 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				? id
 				: path.join(path.dirname(importer), id)
 			if ((await doGlob(rel)).length === 0) return null
-			return rel
+			return `${rel}/__renderdoc`
 		},
 		async load(id: string) {
-			const paths = await doGlob(id)
+			if (!id.endsWith('/__renderdoc')) return null
+			const dir = path.dirname(id)
+			const paths = await doGlob(dir)
 			for (const p of paths) this.addWatchFile(p)
-			const map = await loadPosts(id, this.error)
+			const map = await loadPosts(dir, this.error)
+			if (map === null) return null
 			return `export default ${JSON.stringify(map)}`
 		},
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
-				if (req.url === '/src/posts/rawPosts') {
-					const code = await loadPosts('posts/rawPosts')
-					res.setHeader('Content-Type', 'application/javascript')
-					res.end(code)
-					return
+				if (!req.url?.endsWith('__renderdoc')) {
+					return next()
 				}
-				next()
+				const map = await loadPosts(`.${path.dirname(req.url)}`)
+				if (map === null) throw new Error(`${req.url} not found from ${cwd()}`)
+				res.setHeader('Content-Type', 'application/javascript')
+				res.end(`export default ${JSON.stringify(map)}`)
 			})
 		},
 	}
