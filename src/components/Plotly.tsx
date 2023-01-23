@@ -6,6 +6,8 @@ import {
 import type { PlotParams } from 'react-plotly.js'
 import createPlotlyComponent from 'react-plotly.js/factory'
 
+import CircularProgress from '@mui/material/CircularProgress'
+import Stack from '@mui/material/Stack'
 import { Theme } from '@mui/material/styles/createTheme'
 import useTheme from '@mui/material/styles/useTheme'
 
@@ -45,7 +47,7 @@ const PlotlyInner: FC<Omit<PlotlyProps, 'onClickLink'>> = ({ url, onClick, ...re
 	// TODO: deep merge everything
 	const props: PlotParams = {
 		layout: { ...defaultOverride(theme).layout, ...resp.layout, ...rest.layout },
-		data: [...(resp.data || []), ...(rest.data || [])],
+		data: [...(resp.data ?? []), ...(rest.data ?? [])],
 		onClick,
 		...rest,
 	}
@@ -62,7 +64,7 @@ const Plotly: FC<PlotlyProps> = ({
 	}, [onClickLink])
 
 	return (
-		<Suspense fallback="Loading…">
+		<Suspense fallback={<Stack alignItems="center"><CircularProgress/></Stack>}>
 			<PlotlyInner onClick={onClickLink ? handleOnClickLink : onClick} {...rest}/>
 		</Suspense>
 	)

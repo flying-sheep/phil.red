@@ -27,7 +27,7 @@ function* tokens2ast(
 			synth.children = Array.from(tokens2ast(tokenIter, openType))
 			yield synth
 		} else if (token.type === 'inline') {
-			token.children = Array.from(tokens2ast(token.children || []))
+			token.children = Array.from(tokens2ast(token.children ?? []))
 			yield token
 		} else {
 			yield token
@@ -80,7 +80,7 @@ function convertNode(token: Token): m.Node[] {
 }
 
 function convertChildren(token: Token): m.Node[] {
-	return convertAll(token.children || [])
+	return convertAll(token.children ?? [])
 }
 function convertAll(tokens: Token[]) {
 	return tokens.reduce((acc: m.Node[], n: Token) => acc.concat(convertNode(n)), [])
@@ -90,7 +90,7 @@ export default function mdConvert(code: string): m.Document {
 	// https://github.com/rollup/rollup-plugin-commonjs/issues/350
 	const md = new MarkdownIt('commonmark', { breaks: false })
 	const ast = Array.from(tokens2ast(md.parse(code, {})))
-	const title = ast[0].children?.[0].content || ''
+	const title = ast[0].children?.[0].content ?? ''
 	const children = convertAll(ast)
 	return { title, children, metadata: {} }
 }

@@ -128,7 +128,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { header, body } = parseDirective(node.children)
 			// TODO: check if in lang dict
 			return [
-				<m.CodeBlock language={header as Language || undefined} pos={pos(node)}>
+				<m.CodeBlock language={header as Language ?? undefined} pos={pos(node)}>
 					{body}
 				</m.CodeBlock>,
 			]
@@ -143,7 +143,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 				}
 			})()
 			return [
-				<m.Table caption={header || undefined} pos={pos(node)}>
+				<m.Table caption={header ?? undefined} pos={pos(node)}>
 					{body.map((r) => (
 						<m.Row pos={pos(node)}>
 							{r.split(delim).map((cell) => (
@@ -159,7 +159,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { header, params } = parseDirective(node.children)
 			return [
 				<m.Plotly
-					url={header || ''}
+					url={header ?? ''}
 					onClickLink={params.onClickLink}
 					style={{ width: '100%' }}
 					config={{ responsive: true } as any} // typing has no responsive
@@ -223,7 +223,7 @@ function extractTargets(node: RSTNode): {[key: string]: string} {
 			const k = entry[0]
 			const v = entry[1] in resolved ? resolved[entry[1]] : entry[1] // if so the match will be true
 			// TODO: more schemas
-			if (v.match(URL_SCHEMA) || v.match(ANCHOR_SCHEMA)) {
+			if (v.match(URL_SCHEMA) ?? v.match(ANCHOR_SCHEMA)) {
 				resolved[k] = v
 				delete pending[k]
 				newResolvable = true

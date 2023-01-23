@@ -39,8 +39,8 @@ type OnError = (e: { id: string, message: string } | Error, pos?: Pos) => never
 
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
-	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include || []
-	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude || []
+	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include ?? []
+	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude ?? []
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
 	async function loadPosts(dir: string, onError: OnError = (e) => {
@@ -65,7 +65,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				} else if (eOrig instanceof ASTError) {
 					e = eOrig
 					e.message = `Error converting the ${ext} AST: ${eOrig.message}`
-					pos = eOrig.loc || eOrig.pos
+					pos = eOrig.loc ?? eOrig.pos
 				} else {
 					e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
 					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
