@@ -1,26 +1,26 @@
 import { createElement, isValidElement } from 'react'
 import { Helmet } from 'react-helmet-async'
 
-import Link from '@mui/material/Link'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
-import ListItemText from '@mui/material/ListItemText'
+import Link from '@mui/material/Link'
 import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
 
-import GitHub from '@mui/icons-material/GitHub'
 import AllInclusive from '@mui/icons-material/AllInclusive'
-import ViewComfy from '@mui/icons-material/ViewComfy'
-import SwapCalls from '@mui/icons-material/SwapCalls'
 import BlurOn from '@mui/icons-material/BlurOn'
 import BubbleChart from '@mui/icons-material/BubbleChart'
 import EmojiSymbols from '@mui/icons-material/EmojiSymbols'
+import GitHub from '@mui/icons-material/GitHub'
 import Settings from '@mui/icons-material/Settings'
+import SwapCalls from '@mui/icons-material/SwapCalls'
+import ViewComfy from '@mui/icons-material/ViewComfy'
 import Web from '@mui/icons-material/Web'
 
-import PythonIcon from './python-icon'
 import ArchIcon from './arch-icon'
+import PythonIcon from './python-icon'
 
 type ListItemLinkProps = {
 	href?: string

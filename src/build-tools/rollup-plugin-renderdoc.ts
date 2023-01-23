@@ -1,12 +1,14 @@
 /* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
 
-import * as path from 'path'
 import { promises as fs } from 'fs'
-import { globby } from 'globby'
-import { Plugin } from 'vite'
+import * as path from 'path'
 import { cwd } from 'process'
 
+import { globby } from 'globby'
+import { Plugin } from 'vite'
+
 import { Document, ParseError, ASTError } from '../markup'
+
 import mdConvert from './md'
 import rstConvert from './rst'
 

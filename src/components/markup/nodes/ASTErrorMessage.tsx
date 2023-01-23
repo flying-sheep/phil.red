@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-import red from '@mui/material/colors/red'
 import Box from '@mui/material/Box'
+import red from '@mui/material/colors/red'
 
 import { Node } from '../../../markup/MarkupDocument'
 

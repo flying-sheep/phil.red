@@ -1,12 +1,13 @@
-import useTheme from '@mui/material/styles/useTheme'
-import { Theme } from '@mui/material/styles/createTheme'
+import useFetch from 'fetch-suspense'
 import type { Data, Layout, Margin } from 'plotly.js-basic-dist-min'
 import {
 	FC, lazy, Suspense, useCallback,
 } from 'react'
-import createPlotlyComponent from 'react-plotly.js/factory'
 import type { PlotParams } from 'react-plotly.js'
-import useFetch from 'fetch-suspense'
+import createPlotlyComponent from 'react-plotly.js/factory'
+
+import { Theme } from '@mui/material/styles/createTheme'
+import useTheme from '@mui/material/styles/useTheme'
 
 export interface PlotlyProps extends Partial<PlotParams> {
 	url: string

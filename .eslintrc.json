@@ -26,6 +26,15 @@
         "import/no-unresolved": 0,
 		"import/extensions": 0,
 		"import/no-extraneous-dependencies": 0,
+		"import/order": [2, {
+			"alphabetize": { "order": "asc" },
+			"newlines-between": "always",
+			"pathGroups": [
+				{ "pattern": "@mui/material/**/*", "group": "external", "position": "after" },
+				{ "pattern": "@mui/icons-material/**/*", "group": "external", "position": "after" }
+			],
+			"pathGroupsExcludedImportTypes": []
+		}],
 		"no-continue": 0,
         "no-dupe-args": 0,
 		"no-undef": 0,

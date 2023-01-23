@@ -1,10 +1,13 @@
-import useTheme from '@mui/material/styles/useTheme'
 import {
 	Children, FC, useCallback, useMemo,
 } from 'react'
 import { JSONTree, ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
+
+import useTheme from '@mui/material/styles/useTheme'
+
 import { Document } from '../../markup/MarkupDocument'
+
 import MarkupNodeComponent from './MarkupNodeComponent'
 
 export interface MarkupProps {

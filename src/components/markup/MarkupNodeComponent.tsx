@@ -1,19 +1,21 @@
+import TeX from '@matejmazur/react-katex'
+import { Children, FC, useCallback } from 'react'
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
-import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
+import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 import { Variant } from '@mui/material/styles/createTypography'
-import { Children, FC, useCallback } from 'react'
-import TeX from '@matejmazur/react-katex'
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
+import { ASTError } from '../../markup'
 import {
 	Node, Elem, Type, Bullet,
 } from '../../markup/MarkupDocument'
-import { ASTError } from '../../markup'
 import Plotly from '../Plotly'
+
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
 
