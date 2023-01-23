@@ -994,6 +994,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@portabletext/react@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@portabletext/react@npm:2.0.0"
+  dependencies:
+    "@portabletext/toolkit": ^2.0.0
+    "@portabletext/types": ^2.0.0
+  peerDependencies:
+    react: ^17 || ^18
+  checksum: 50569a4dacd6cc77190d1bdf53eda8096373a4ce89e14107d1e0f816e396893f2e6759764239c981328827ee26d389a6245d0e9d601554a61a1e87246b7c89d7
+  languageName: node
+  linkType: hard
+
+"@portabletext/toolkit@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@portabletext/toolkit@npm:2.0.0"
+  dependencies:
+    "@portabletext/types": ^2.0.0
+  checksum: 0f126d50e0a4bee38cbc4d32d82d2d5ec19c0795c48c51e75d4e0e1aaddd63cbf93b9bb5e2e06e8982d411b079fa94bc9bf163c97365204393205b98ad9878a9
+  languageName: node
+  linkType: hard
+
+"@portabletext/types@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@portabletext/types@npm:2.0.0"
+  checksum: 6bacbba969297e4e479326eb55ce044c0339df046fa2ae62d3fefb4bacab316b48676a46a9b34102c5177e1f85d2778981c2d990b2dc367fc33936587ffde78e
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.2.1":
   version: 1.2.1
   resolution: "@remix-run/router@npm:1.2.1"
@@ -4473,6 +4501,9 @@ __metadata:
     "@matejmazur/react-katex": ^3.1.3
     "@mui/icons-material": ^5.11.0
     "@mui/material": ^5.11.4
+    "@portabletext/react": ^2.0.0
+    "@portabletext/toolkit": ^2.0.0
+    "@portabletext/types": ^2.0.0
     "@types/markdown-it": ^12.2.3
     "@types/node": ^18.11.18
     "@types/plotly.js-basic-dist-min": ^2.12.1

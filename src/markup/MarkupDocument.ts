@@ -1,26 +1,28 @@
 import { FunctionComponent } from 'typed-jsx'
 import { Language } from 'prism-react-renderer'
 
+import { TypedObject } from '@portabletext/types'
+
 export enum Type {
 	// block
-	Section,
-	Title,
-	Paragraph,
-	BlockQuote,
-	BulletList, EnumList, ListItem,
-	DefList, DefItem, DefTerm, Def,
-	FieldList, Field,
-	CodeBlock,
-	Table, Row, Cell,
+	Section = 'section',
+	Title = 'h',
+	Paragraph = 'p',
+	BlockQuote = 'blockquote',
+	BulletList = 'ul', EnumList = 'ol', ListItem = 'li',
+	DefList = 'dl', DefItem = 'di', DefTerm ='dt', Def = 'dd',
+	FieldList = 'fl', Field = 'fi',
+	CodeBlock = 'codeblock',
+	Table = 'table', Row = 'tr', Cell = 'td',
 	// inline
-	LineBreak,
-	Emph,
-	Strong,
-	Link,
-	Code,
-	InlineMath,
+	LineBreak = 'br',
+	Emph = 'em',
+	Strong = 'strong',
+	Link = 'a',
+	Code = 'code',
+	InlineMath = 'math',
 	// custom
-	Plotly,
+	Plotly = 'plotly',
 }
 
 /// this doesn’t use HTML 4 type (circle, disc, square),
@@ -82,8 +84,8 @@ export type Elem =
 	// Custom
 	Plotly
 
-interface Element {
-	type: Type
+interface Element extends TypedObject {
+	_type: Type
 	children: Node[]
 	pos: number | { line: number, column: number } | undefined
 }
@@ -115,9 +117,9 @@ function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
 
 type Nodes = Node | Nodes[]
 type Props<P> = Omit<P, 'type' | 'children'> & { children?: Nodes }
-function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
+function mkFun<P>(_type: Type): FunctionComponent<Props<P>, P> {
 	return ({ children: nested, ...props }) => ({
-		type, children: arrayify(nested), ...props,
+		_type, children: arrayify(nested), ...props,
 	} as unknown as P)
 }
 
