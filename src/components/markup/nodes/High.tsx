@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from 'react'
-import useTheme from '@mui/material/styles/useTheme'
 import Prism from 'prismjs'
 import Highlight, { Language } from 'prism-react-renderer'
 import type { Prism as PrismRR } from 'prism-react-renderer'
 import darkTheme from 'prism-react-renderer/themes/vsDark'
 import lightTheme from 'prism-react-renderer/themes/vsLight'
+
+import useTheme from '@mui/material/styles/useTheme'
 
 import * as urls from '../../../build-tools/urls.js'
 

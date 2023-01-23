@@ -2,6 +2,7 @@ import SlideRoutes from 'react-slide-routes'
 import { FC } from 'react'
 import { Route, Navigate, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+
 import List from '@mui/material/List'
 
 import posts from '../../posts'
