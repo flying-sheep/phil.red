@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import { useMemo } from 'react'
 import {
 	Link,
 	Route,
@@ -6,7 +6,7 @@ import {
 	useLocation,
 	matchPath,
 } from 'react-router-dom'
-import { useMemo } from 'react'
+import { Helmet } from 'react-helmet-async'
 import SlideRoutes from 'react-slide-routes'
 import { PortalTarget } from 'react-portal-target'
 
