@@ -16,7 +16,7 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import { deepPurple } from '@mui/material/colors'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { alpha, createTheme, ThemeProvider } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Blog from '../Blog'
@@ -69,7 +69,8 @@ const App = () => {
 					position="sticky"
 					sx={{
 						color: theme.palette.text.primary,
-						background: theme.palette.background.default,
+						background: alpha(theme.palette.background.default, 0.7),
+						backdropFilter: 'blur(10px)',
 					}}
 				>
 					<Toolbar component="nav" classes={{ root: styles.toolbar }}>
