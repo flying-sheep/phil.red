@@ -3,9 +3,9 @@
 import MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token.js'
 
-import { rsplit } from '../utils'
-import * as m from '../markup/MarkupDocument'
 import ASTError from '../markup/ASTError'
+import * as m from '../markup/MarkupDocument'
+import { rsplit } from '../utils'
 
 const NO_END = Symbol('no end')
 

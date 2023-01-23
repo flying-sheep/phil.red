@@ -1,7 +1,7 @@
 /* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
 
-import * as path from 'path'
 import { promises as fs } from 'fs'
+import * as path from 'path'
 import { cwd } from 'process'
 
 import { globby } from 'globby'

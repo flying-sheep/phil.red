@@ -1,5 +1,5 @@
-import { FunctionComponent } from 'typed-jsx'
 import { Language } from 'prism-react-renderer'
+import { FunctionComponent } from 'typed-jsx'
 
 export enum Type {
 	// block

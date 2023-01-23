@@ -27,6 +27,7 @@
 		"import/extensions": 0,
 		"import/no-extraneous-dependencies": 0,
 		"import/order": [2, {
+			"alphabetize": { "order": "asc" },
 			"newlines-between": "always",
 			"pathGroups": [
 				{ "pattern": "@mui/material/**/*", "group": "external", "position": "after" },

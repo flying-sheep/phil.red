@@ -1,7 +1,7 @@
-import SlideRoutes from 'react-slide-routes'
 import { FC } from 'react'
-import { Route, Navigate, useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import { Route, Navigate, useParams } from 'react-router-dom'
+import SlideRoutes from 'react-slide-routes'
 
 import List from '@mui/material/List'
 
