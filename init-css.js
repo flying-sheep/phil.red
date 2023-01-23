@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 
 const fsp = require('fs').promises
+
 const glob = require('glob') // eslint-disable-line import/no-extraneous-dependencies
 
 const unspecific = `\

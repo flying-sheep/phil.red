@@ -26,6 +26,7 @@
         "import/no-unresolved": 0,
 		"import/extensions": 0,
 		"import/no-extraneous-dependencies": 0,
+		"import/order": [2, { "newlines-between": "always" }],
 		"no-continue": 0,
         "no-dupe-args": 0,
 		"no-undef": 0,

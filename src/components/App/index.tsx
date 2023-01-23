@@ -7,7 +7,6 @@ import {
 	matchPath,
 } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-
 import useMediaQuery from '@mui/material/useMediaQuery'
 import CssBaseline from '@mui/material/CssBaseline'
 import AppBar from '@mui/material/AppBar'
@@ -16,14 +15,14 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { deepPurple } from '@mui/material/colors'
-
 import SlideRoutes from 'react-slide-routes'
 import { PortalTarget } from 'react-portal-target'
+
 import Home from '../Home'
 import Blog from '../Blog'
 import Code from '../Code'
-import ElevationScroll from './ElevationScroll'
 
+import ElevationScroll from './ElevationScroll'
 import styles from './style.module.css'
 
 const ROUTE_LINKS = [

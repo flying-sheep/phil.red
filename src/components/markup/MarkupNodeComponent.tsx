@@ -14,6 +14,7 @@ import {
 } from '../../markup/MarkupDocument'
 import { ASTError } from '../../markup'
 import Plotly from '../Plotly'
+
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
 

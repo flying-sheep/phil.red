@@ -1,4 +1,5 @@
 import { ComponentInstance } from 'typed-jsx'
+
 import { Elem } from './MarkupDocument'
 
 export { data as jsx } from 'typed-jsx'

@@ -1,5 +1,4 @@
 import { FC } from 'react'
-
 import red from '@mui/material/colors/red'
 import Box from '@mui/material/Box'
 

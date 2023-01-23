@@ -4,7 +4,9 @@ import {
 } from 'react'
 import { JSONTree, ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
+
 import { Document } from '../../markup/MarkupDocument'
+
 import MarkupNodeComponent from './MarkupNodeComponent'
 
 export interface MarkupProps {

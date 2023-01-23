@@ -1,5 +1,6 @@
-import rawPosts from './rawPosts'
 import { Document } from '../markup'
+
+import rawPosts from './rawPosts'
 
 export class Post {
 	date: Date
