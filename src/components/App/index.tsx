@@ -70,7 +70,7 @@ const App = () => {
 					sx={{
 						color: theme.palette.text.primary,
 						background: alpha(theme.palette.background.default, 0.7),
-						backdropFilter: 'blur(10px)',
+						backdropFilter: 'contrast(200%) blur(15px)',
 					}}
 				>
 					<Toolbar component="nav" classes={{ root: styles.toolbar }}>

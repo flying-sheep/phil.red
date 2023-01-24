@@ -14,6 +14,7 @@ export default defineConfig({
 		viteStaticCopy({
 			targets: [
 				{ src: 'lighttpd.conf', dest: '.' },
+				{ src: 'static/cellplot.json', dest: 'assets/' },
 			],
 		}),
 	],
