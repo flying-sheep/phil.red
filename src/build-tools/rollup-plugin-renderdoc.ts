@@ -2,6 +2,7 @@
 
 import { promises as fs } from 'fs'
 import * as path from 'path'
+import { cwd } from 'process'
 
 import type { Node, ObjectExpression, Property } from 'estree'
 import { asyncWalk } from 'estree-walker'
@@ -164,19 +165,17 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			for (const p of paths) this.addWatchFile(p)
 			return createCode(this, dir)
 		},
-		/*
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				if (!req.url?.endsWith('__renderdoc')) {
 					return next()
 				}
-				const code = await createCode.bind(this)(`.${path.dirname(req.url)}`)
-				if (code === null) throw new Error(`${req.url} not found from ${cwd()}`)
+				const { default: posts = null } = await server.ssrLoadModule(`.${req.url}`)
+				if (posts === null) throw new Error(`${req.url} not found from ${cwd()}`)
 				res.setHeader('Content-Type', 'application/javascript')
-				res.end(code)
+				res.end(`export default ${JSON.stringify(posts)}`)
 			})
 		},
-		*/
 	}
 }
 
