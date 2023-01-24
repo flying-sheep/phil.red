@@ -1,5 +1,7 @@
 import ASTError from './ASTError'
-import { Document } from './MarkupDocument'
+import { Document, Type } from './MarkupDocument'
 import ParseError from './ParseError'
 
-export { Document, ParseError, ASTError }
+export {
+	Document, Type, ParseError, ASTError,
+}

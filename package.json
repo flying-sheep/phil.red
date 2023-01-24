@@ -45,6 +45,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
+		"@rollup/pluginutils": "^5.0.2",
 		"@types/markdown-it": "^12.2.3",
 		"@types/node": "^18.11.18",
 		"@types/plotly.js-basic-dist-min": "^2.12.1",
@@ -64,10 +65,13 @@
 		"eslint-plugin-react": "^7.31.11",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-prefer-function-component": "^3.1.0",
+		"estree-walker": "^3.0.3",
 		"globby": "^13.1.3",
+		"magic-string": "^0.27.0",
 		"markdown-it": "^13.0.1",
 		"react-json-tree": "^0.18.0",
 		"restructured": "^0.0.11",
+		"rollup": "^3.10.1",
 		"typescript": "^4.9.4",
 		"vite": "^4.0.4",
 		"vite-bundle-visualizer": "^0.4.2",

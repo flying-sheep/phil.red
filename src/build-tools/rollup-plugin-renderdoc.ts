@@ -2,12 +2,17 @@
 
 import { promises as fs } from 'fs'
 import * as path from 'path'
-import { cwd } from 'process'
 
+import { Node, ObjectExpression } from 'estree'
+import { asyncWalk } from 'estree-walker'
 import { globby } from 'globby'
+import MagicString from 'magic-string'
+import type { PluginContext, AcornNode } from 'rollup'
 import { Plugin } from 'vite'
 
-import { Document, ParseError, ASTError } from '../markup'
+import {
+	Document, Type, ParseError, ASTError,
+} from '../markup'
 
 import mdConvert from './md'
 import rstConvert from './rst'
@@ -17,6 +22,16 @@ function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 		throw new Error(`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`)
 	}
 	return keys.reduce((prev, k, i) => ({ ...prev, [k]: values[i] }), {})
+}
+
+function getVal(node: ObjectExpression, key: string) {
+	const [prop = undefined] = node.properties.flatMap((p) => (
+		p.type === 'Property' && p.key.type === 'Literal' && p.key.value === key
+			? [p]
+			: []
+	))
+	if (prop?.type !== 'Property' || prop.value.type !== 'Literal') return undefined
+	return prop.value.value
 }
 
 export interface Converter {
@@ -35,11 +50,6 @@ export const DEFAULT_CONVERTERS: {[ext: string]: Converter} = {
 }
 
 type Pos = { line: number; column: number } | number | undefined
-type OnError = (e: { id: string, message: string } | Error, pos?: Pos) => never
-
-const throwError: OnError = (e) => {
-	throw new Error(e.message)
-}
 
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
@@ -47,13 +57,13 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude ?? []
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
-	async function loadPosts(dir: string, onError: OnError = throwError) {
+	async function loadPosts(ctx: PluginContext, dir: string) {
 		const paths = await doGlob(dir)
 		if (paths.length === 0) return null
 		const contents = await Promise.all(paths.map(async (p) => {
 			const code = await fs.readFile(p, { encoding: 'utf-8' })
 			const ext = path.extname(p)
-			if (!(ext in converters)) onError({ id: p, message: `No converter for ${ext} registered` })
+			if (!(ext in converters)) ctx.error({ id: p, message: `No converter for ${ext} registered` })
 			const convert = converters[path.extname(p)]
 			try {
 				return convert(code)
@@ -73,7 +83,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 				}
 				(e as any).id = p // TODO: why?
-				onError(e, pos)
+				ctx.error(e, pos)
 			}
 		}))
 		
@@ -90,10 +100,38 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		return map
 	}
 	
-	async function createCode(id: string, onError: OnError = throwError) {
-		const map = await loadPosts(id)
+	async function createCode(ctx: PluginContext, id: string) {
+		const map = await loadPosts(ctx, id)
 		if (map === null) return null
-		return `export default ${JSON.stringify(map)}`
+		
+		const code = `export default ${JSON.stringify(map)}`
+		const magicString = new MagicString(code)
+		const ast = ctx.parse(code) as Node
+		const imports = new Map<string, string>()
+
+		// TODO: image
+		const types = new Set([Type.Plotly])
+
+		await asyncWalk(ast, {
+			async enter(node) {
+				if (node.type === 'ObjectExpression') {
+					// Set.has should have type `(any) => bool`
+					if (!types.has(getVal(node, 'type') as any)) return
+					const url = getVal(node, 'url') as string
+					const resolved = await ctx.resolve(url)
+					if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
+					if (!imports.has(resolved.id)) {
+						imports.set(resolved.id, `$${imports.size}`)
+					}
+					magicString.overwrite((node as any).start, (node as any).end, imports.get(resolved.id)!)
+				}
+			},
+		})
+
+		const importBlock = Array.from(imports.entries())
+			.map(([path, name]) => `import ${name} from ${JSON.stringify(path)}`)
+			.join('\n')
+		return `${importBlock}\n${magicString.toString()}`
 	}
 	
 	async function doGlob(id: string): Promise<string[]> {
@@ -118,19 +156,21 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			const dir = path.dirname(id)
 			const paths = await doGlob(dir)
 			for (const p of paths) this.addWatchFile(p)
-			return createCode(dir, this.error)
+			return createCode(this, dir)
 		},
+		/*
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				if (!req.url?.endsWith('__renderdoc')) {
 					return next()
 				}
-				const code = await createCode(`.${path.dirname(req.url)}`)
+				const code = await createCode.bind(this)(`.${path.dirname(req.url)}`)
 				if (code === null) throw new Error(`${req.url} not found from ${cwd()}`)
 				res.setHeader('Content-Type', 'application/javascript')
 				res.end(code)
 			})
 		},
+		*/
 	}
 }
 
