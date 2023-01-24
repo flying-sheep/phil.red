@@ -3,7 +3,7 @@
 import { promises as fs } from 'fs'
 import * as path from 'path'
 
-import { Node, ObjectExpression } from 'estree'
+import type { Node, ObjectExpression, Property } from 'estree'
 import { asyncWalk } from 'estree-walker'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
@@ -24,12 +24,16 @@ function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
 	return keys.reduce((prev, k, i) => ({ ...prev, [k]: values[i] }), {})
 }
 
-function getVal(node: ObjectExpression, key: string) {
-	const [prop = undefined] = node.properties.flatMap((p) => (
-		p.type === 'Property' && p.key.type === 'Literal' && p.key.value === key
-			? [p]
-			: []
-	))
+function getProp(node: ObjectExpression, key: string): Property | undefined {
+	for (const prop of node.properties) {
+		if (prop.type === 'Property' && prop.key.type === 'Literal' && prop.key.value === key) {
+			return prop
+		}
+	}
+	return undefined
+}
+
+function getVal(prop: Property | undefined) {
 	if (prop?.type !== 'Property' || prop.value.type !== 'Literal') return undefined
 	return prop.value.value
 }
@@ -116,20 +120,22 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			async enter(node) {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
-					if (!types.has(getVal(node, 'type') as any)) return
-					const url = getVal(node, 'url') as string
+					if (!types.has(getVal(getProp(node, 'type')) as any)) return
+					const urlProp = getProp(node, 'url')!
+					const url = getVal(urlProp) as string
 					const resolved = await ctx.resolve(url)
 					if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
 					if (!imports.has(resolved.id)) {
 						imports.set(resolved.id, `$${imports.size}`)
 					}
-					magicString.overwrite((node as any).start, (node as any).end, imports.get(resolved.id)!)
+					const urlVal = urlProp.value as AcornNode
+					magicString.overwrite(urlVal.start, urlVal.end, imports.get(resolved.id)!)
 				}
 			},
 		})
 
 		const importBlock = Array.from(imports.entries())
-			.map(([path, name]) => `import ${name} from ${JSON.stringify(path)}`)
+			.map(([path, name]) => `import ${name} from ${JSON.stringify(`${path}?url`)}`)
 			.join('\n')
 		return `${importBlock}\n${magicString.toString()}`
 	}
