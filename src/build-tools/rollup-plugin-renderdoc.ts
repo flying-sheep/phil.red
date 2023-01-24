@@ -37,15 +37,17 @@ export const DEFAULT_CONVERTERS: {[ext: string]: Converter} = {
 type Pos = { line: number; column: number } | number | undefined
 type OnError = (e: { id: string, message: string } | Error, pos?: Pos) => never
 
+const throwError: OnError = (e) => {
+	throw new Error(e.message)
+}
+
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
 	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include ?? []
 	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude ?? []
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
-	async function loadPosts(dir: string, onError: OnError = (e) => {
-		throw new Error(e.message)
-	}) {
+	async function loadPosts(dir: string, onError: OnError = throwError) {
 		const paths = await doGlob(dir)
 		if (paths.length === 0) return null
 		const contents = await Promise.all(paths.map(async (p) => {
@@ -88,6 +90,12 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		return map
 	}
 	
+	async function createCode(id: string, onError: OnError = throwError) {
+		const map = await loadPosts(id)
+		if (map === null) return null
+		return `export default ${JSON.stringify(map)}`
+	}
+	
 	async function doGlob(id: string): Promise<string[]> {
 		const isDir = await fs.stat(id).then((s) => s.isDirectory()).catch(() => false)
 		if (!isDir) return []
@@ -110,19 +118,17 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			const dir = path.dirname(id)
 			const paths = await doGlob(dir)
 			for (const p of paths) this.addWatchFile(p)
-			const map = await loadPosts(dir, this.error)
-			if (map === null) return null
-			return `export default ${JSON.stringify(map)}`
+			return createCode(dir, this.error)
 		},
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				if (!req.url?.endsWith('__renderdoc')) {
 					return next()
 				}
-				const map = await loadPosts(`.${path.dirname(req.url)}`)
-				if (map === null) throw new Error(`${req.url} not found from ${cwd()}`)
+				const code = await createCode(`.${path.dirname(req.url)}`)
+				if (code === null) throw new Error(`${req.url} not found from ${cwd()}`)
 				res.setHeader('Content-Type', 'application/javascript')
-				res.end(`export default ${JSON.stringify(map)}`)
+				res.end(code)
 			})
 		},
 	}
