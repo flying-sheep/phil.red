@@ -45,7 +45,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
-		"@rollup/pluginutils": "^5.0.2",
+		"@types/estree": "^1.0.0",
 		"@types/markdown-it": "^12.2.3",
 		"@types/node": "^18.11.18",
 		"@types/plotly.js-basic-dist-min": "^2.12.1",
