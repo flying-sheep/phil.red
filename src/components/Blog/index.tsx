@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { Route, Navigate, useParams } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
 
+import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 
 import posts from '../../posts'
@@ -26,16 +27,19 @@ const Index = () => {
 			.sort((a, b) => b.date.getTime() - a.date.getTime())
 	)
 	return (
-		<List component="nav">
-			{sorted.map(({ post, date, url }) => (
-				<ListItemLink
-					key={url}
-					to={url}
-					primary={post.document.title}
-					secondary={date.toISOString().slice(0, 10)}
-				/>
-			))}
-		</List>
+		<Grid container justifyContent="center">
+			<List component="nav">
+				{sorted.map(({ post, date, url }) => (
+					<ListItemLink
+						key={url}
+						to={url}
+						primary={post.document.title}
+						secondary={date.toISOString().slice(0, 10)}
+					/>
+				))}
+			</List>
+
+		</Grid>
 	)
 }
 
