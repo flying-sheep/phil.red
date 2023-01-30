@@ -4,6 +4,7 @@ import {
 import { JSONTree, ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
 
+import Box from '@mui/material/Box'
 import useTheme from '@mui/material/styles/useTheme'
 
 import { Document } from '../../markup/MarkupDocument'
@@ -22,7 +23,19 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 		[children],
 	)
 	return (
-		<article>
+		<Box
+			component="article"
+			sx={{
+				// Add space for the header when navigating to anchors
+				':target::before': {
+					content: '""',
+					display: 'block',
+					pointerEvents: 'none',
+					height: '75px',
+					marginTop: '-75px',
+				},
+			}}
+		>
 			{Children.toArray(nodes)}
 			{process.env.NODE_ENV === 'development' && (
 				<PortalSource name="page-source">
@@ -35,7 +48,7 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 					/>
 				</PortalSource>
 			)}
-		</article>
+		</Box>
 	)
 }
 

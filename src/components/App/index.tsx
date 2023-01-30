@@ -11,6 +11,7 @@ import {
 import SlideRoutes from 'react-slide-routes'
 
 import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
@@ -24,7 +25,6 @@ import Code from '../Code'
 import Home from '../Home'
 
 import ElevationScroll from './ElevationScroll'
-import styles from './style.module.css'
 
 const ROUTE_LINKS = [
 	{ label: 'Blog', href: '/blog', pattern: '/blog/*' },
@@ -73,7 +73,7 @@ const App = () => {
 						backdropFilter: 'contrast(200%) blur(15px)',
 					}}
 				>
-					<Toolbar component="nav" classes={{ root: styles.toolbar }}>
+					<Toolbar component="nav" sx={{ justifyContent: 'center' }}>
 						<Tabs centered value={currentTab}>
 							{ROUTE_LINKS.map(({ label, href, pattern }) => (
 								<Tab
@@ -88,14 +88,22 @@ const App = () => {
 					</Toolbar>
 				</AppBar>
 			</ElevationScroll>
-			<main className={styles.layout}>
+			<Box
+				component="main"
+				sx={{
+					maxWidth: '42rem',
+					margin: '0 auto',
+					py: 0,
+					px: 3,
+				}}
+			>
 				<SlideRoutes>
 					<Route path="blog/*" element={<Blog/>}/>
 					<Route index element={<Home/>}/>
 					<Route path="code" element={<Code/>}/>
 					<Route path="*" element={<Navigate replace to="/"/>}/>
 				</SlideRoutes>
-			</main>
+			</Box>
 			<PortalTarget name="page-source"/>
 		</ThemeProvider>
 	)
