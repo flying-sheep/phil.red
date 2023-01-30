@@ -87,7 +87,8 @@ const App = () => {
 					sx={{
 						color: theme.palette.text.primary,
 						background: alpha(theme.palette.background.default, 0.7),
-						backdropFilter: 'contrast(200%) blur(15px)',
+						// TODO re-add contrast(200%) before blur without discoloring dark mode
+						backdropFilter: 'blur(15px)',
 					}}
 				>
 					<Toolbar component="nav" sx={{ justifyContent: 'center' }}>
