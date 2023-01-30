@@ -17,7 +17,7 @@ const ListItemLink = ({
 	<ListItem disablePadding>
 		<ListItemButton component={Link} {...props}>
 			{icon && <ListItemIcon>{icon}</ListItemIcon>}
-			<ListItemText inset primary={primary} secondary={secondary}/>
+			<ListItemText primary={primary} secondary={secondary}/>
 		</ListItemButton>
 	</ListItem>
 )
