@@ -17,7 +17,9 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import { deepPurple } from '@mui/material/colors'
-import { alpha, createTheme, ThemeProvider } from '@mui/material/styles'
+import {
+	alpha, createTheme, responsiveFontSizes, ThemeProvider,
+} from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Blog from '../Blog'
@@ -45,15 +47,30 @@ function useRouteMatch(patterns: readonly string[]) {
 	return null
 }
 
+const linearScale = (d0: number, d1: number, r0: number, r1: number) => {
+	const m = (r1 - r0) / (d1 - d0)
+	const b = r0 - m * d0
+	return (x: number) => m * x + b
+}
+
+const hScale = linearScale(1, 6, 3, 1)
+const hSizes = Object.fromEntries([1, 2, 3, 4, 5, 6].map((n) => (
+	[`h${n}`, { fontSize: `${hScale(n)}rem` }]
+)))
+
 const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(
-		() => createTheme({
-			palette: {
-				mode: dark ? 'dark' : 'light',
-				primary: deepPurple,
-			},
-		}),
+		() => {
+			const theme = createTheme({
+				typography: hSizes,
+				palette: {
+					mode: dark ? 'dark' : 'light',
+					primary: deepPurple,
+				},
+			})
+			return responsiveFontSizes(theme)
+		},
 		[dark],
 	)
 	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))?.pattern.path
