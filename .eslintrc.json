@@ -1,29 +1,26 @@
 {
 	"plugins": ["react-prefer-function-component"],
-    "extends": [
+	"extends": [
 		"flying-sheep",
 		"eslint-config-airbnb/hooks",
 		"plugin:react-prefer-function-component/recommended",
 		"plugin:react/jsx-runtime"
 	],
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true
-        }
+	"env": {
+		"browser": true,
+		"es6": true
 	},
-	"ignorePatterns": [
-		"/dist/*",
-		"/**/*.css.d.ts"
-	],
-    "rules": {
-        "react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
-        "import/no-unresolved": 0,
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaFeatures": {
+			"jsx": true
+		}
+	},
+	"ignorePatterns": ["/dist/*", "/**/*.css.d.ts"],
+	"rules": {
+		"react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
+		"import/no-unresolved": 0,
 		"import/extensions": 0,
 		"import/no-extraneous-dependencies": 0,
 		"import/order": [2, {
@@ -36,7 +33,7 @@
 			"pathGroupsExcludedImportTypes": []
 		}],
 		"no-continue": 0,
-        "no-dupe-args": 0,
+		"no-dupe-args": 0,
 		"no-undef": 0,
 		"no-redeclare": 0,
 		"no-shadow": 0,
@@ -46,8 +43,11 @@
 		"no-empty-function": 0,
 		"consistent-return": 0,
 		"react/prop-types": 0,
-		"react/function-component-definition": [2, {"namedComponents": "arrow-function"}],
+		"react/function-component-definition": [
+			2,
+			{ "namedComponents": "arrow-function" }
+		],
 		"react/require-default-props": 0,
 		"react/jsx-props-no-spreading": 0
-    }
+	}
 }
