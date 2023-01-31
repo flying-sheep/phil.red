@@ -29,7 +29,7 @@ function parseDirective(lines: RSTNode[]): Directive {
 			return true
 		})
 		.reduce((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as string[]
+			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line)!
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
 		}, {} as { [k: string]: string })
