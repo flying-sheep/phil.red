@@ -35,7 +35,7 @@ function convertChildren(elem: Elem, level: number) {
 
 const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 	// eslint-disable-next-line react/jsx-no-useless-fragment
-	if (typeof node === 'string') return <>{`${node}\n`}</>
+	if (typeof node === 'string') return <>{node}</>
 	switch (node.type) {
 	// Block
 	case Type.Section:

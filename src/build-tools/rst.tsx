@@ -29,7 +29,7 @@ function parseDirective(lines: RSTNode[]): Directive {
 			return true
 		})
 		.reduce((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as string[]
+			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line)!
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
 		}, {} as { [k: string]: string })
@@ -48,8 +48,8 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	case 'comment':
 		return []
 	case 'reference': {
-		const name = (node.children[0] as RSTInlineNode).value as string
-		return [<m.Link ref={{ name }} pos={pos(node)}>{[name]}</m.Link>]
+		const name = (node.children[0] as RSTInlineNode).value
+		return [<m.Link ref={{ name }} pos={pos(node)}>{name}</m.Link>]
 	}
 	case 'section':
 		return [<m.Section pos={pos(node)}>{convertChildren(node, level + 1)}</m.Section>]
@@ -110,7 +110,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'pep': {
 			const num = node.children.map((text) => (text as RSTInlineNode).value).join('')
 			const href = `https://www.python.org/dev/peps/pep-${num.padStart(4, '0')}/`
-			return [<m.Link ref={{ href }} pos={pos(node)}>{[`PEP ${num}`]}</m.Link>]
+			return [<m.Link ref={{ href }} pos={pos(node)}>{`PEP ${num}`}</m.Link>]
 		}
 		case null:
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
@@ -200,7 +200,7 @@ function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]>
 			const { name, anchor } = titleAnchor(child)
 			yield [name, `#${anchor}`]
 		} else if (child.type === 'comment') {
-			const comment = (child.children as [RSTInlineNode])[0].value as string
+			const comment = (child.children as [RSTInlineNode])[0].value
 			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) ?? []
 			// TODO: “_`name with backticks`: ...”
 			if (name !== null && href !== null) yield [name.toLocaleLowerCase(), href]
