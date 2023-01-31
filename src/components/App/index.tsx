@@ -47,13 +47,13 @@ function useRouteMatch(patterns: readonly string[]) {
 	return null
 }
 
-const linearScale = (d0: number, d1: number, r0: number, r1: number) => {
-	const m = (r1 - r0) / (d1 - d0)
-	const b = r0 - m * d0
-	return (x: number) => m * x + b
+const scaleLinear = (domain: [number, number], range: [number, number]) => {
+	const slope = (range[1] - range[0]) / (domain[1] - domain[0])
+	const offset = range[0] - slope * domain[0]
+	return (x: number) => slope * x + offset
 }
 
-const hScale = linearScale(1, 6, 3, 1)
+const hScale = scaleLinear([1, 6], [3, 1])
 const hSizes = Object.fromEntries([1, 2, 3, 4, 5, 6].map((n) => (
 	[`h${n}`, { fontSize: `${hScale(n)}rem` }]
 )))
@@ -110,9 +110,8 @@ const App = () => {
 				component="main"
 				sx={{
 					maxWidth: '42rem',
-					margin: '0 auto',
-					py: 0,
-					px: 3,
+					mx: 'auto',
+					p: 3,
 				}}
 			>
 				<SlideRoutes>
