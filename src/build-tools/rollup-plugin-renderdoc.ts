@@ -173,7 +173,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				const { default: posts = null } = await server.ssrLoadModule(`.${req.url}`)
 				if (posts === null) throw new Error(`${req.url} not found from ${cwd()}`)
 				res.setHeader('Content-Type', 'application/javascript')
-				res.end(`export default ${JSON.stringify(posts)}`)
+				res.end(`export default ${JSON.stringify(posts, undefined, '\t')}`)
 			})
 		},
 	}
