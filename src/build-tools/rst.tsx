@@ -69,7 +69,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		return [<m.BlockQuote pos={pos(node)}>{convertChildren(node, level)}</m.BlockQuote>]
 	case 'text': {
 		const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
-		if (!fieldList) return [`${node.value}\n`]
+		if (!fieldList) return [node.value]
 		const [, fieldName, fieldValue] = fieldList
 		return [ // TODO: convert runs to single lists, not multiple
 			<m.FieldList pos={pos(node)}>
