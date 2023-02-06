@@ -47,7 +47,7 @@
 	"devDependencies": {
 		"@types/estree": "^1.0.0",
 		"@types/markdown-it": "^12.2.3",
-		"@types/node": "^18.11.18",
+		"@types/node": "^18.11.19",
 		"@types/plotly.js-basic-dist-min": "^2.12.1",
 		"@types/prismjs": "^1.26.0",
 		"@types/react": "^18.0.27",
