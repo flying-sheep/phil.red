@@ -54,7 +54,7 @@
 		"@types/react-dom": "^18.0.10",
 		"@types/react-plotly.js": "^2.6.0",
 		"@typescript-eslint/parser": "^5.51.0",
-		"@vitejs/plugin-react": "^3.0.1",
+		"@vitejs/plugin-react": "^3.1.0",
 		"depcheck": "^1.4.3",
 		"eslint": "^8.33.0",
 		"eslint-config-airbnb": "^19.0.4",
