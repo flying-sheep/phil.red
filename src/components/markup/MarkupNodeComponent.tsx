@@ -2,6 +2,8 @@ import TeX from '@matejmazur/react-katex'
 import { Children, FC, useCallback } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
+import 'katex/dist/katex.min.css'
+
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
