@@ -1,8 +1,9 @@
+import 'katex/dist/katex.min.css'
+
 import TeX from '@matejmazur/react-katex'
+import { KatexOptions } from 'katex'
 import { Children, FC, useCallback } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
-
-import 'katex/dist/katex.min.css'
 
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
@@ -20,6 +21,10 @@ import Plotly from '../Plotly'
 
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
+
+const KATEX_SETTINGS: KatexOptions = {
+	output: 'mathml',
+}
 
 export interface MarkupElementProps {
 	node: Node
@@ -118,7 +123,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 	case Type.Code:
 		return <code>{convertChildren(node, level)}</code>
 	case Type.InlineMath:
-		return <TeX math={node.math}/>
+		return <TeX math={node.math} settings={KATEX_SETTINGS}/>
 	// custom
 	case Type.Plotly: {
 		const { type, ...props } = node
