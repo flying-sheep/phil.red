@@ -1744,7 +1744,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cac@npm:^6.7.12":
+"cac@npm:^6.7.14":
   version: 6.7.14
   resolution: "cac@npm:6.7.14"
   checksum: 45a2496a9443abbe7f52a49b22fbe51b1905eff46e03fd5e6c98e3f85077be3f8949685a1849b1a9cd2bc3e5567dfebcf64f01ce01847baf918f1b37c839791a
@@ -4599,7 +4599,7 @@ __metadata:
     typed-jsx: ^0.1.1
     typescript: ^4.9.5
     vite: ^4.0.4
-    vite-bundle-visualizer: ^0.4.2
+    vite-bundle-visualizer: ^0.6.0
     vite-plugin-static-copy: ^0.13.0
   languageName: unknown
   linkType: soft
@@ -5211,7 +5211,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup-plugin-visualizer@npm:^5.7.1":
+"rollup-plugin-visualizer@npm:^5.9.0":
   version: 5.9.0
   resolution: "rollup-plugin-visualizer@npm:5.9.0"
   dependencies:
@@ -5886,15 +5886,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-bundle-visualizer@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "vite-bundle-visualizer@npm:0.4.2"
+"vite-bundle-visualizer@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "vite-bundle-visualizer@npm:0.6.0"
   dependencies:
-    cac: ^6.7.12
-    rollup-plugin-visualizer: ^5.7.1
+    cac: ^6.7.14
+    rollup-plugin-visualizer: ^5.9.0
   bin:
     vite-bundle-visualizer: bin.js
-  checksum: 5bffcbd8e626bbafaa0656f6e871babb506de95658a155d39f79017901bdc978a5a819005e36efcf1ec62d629f20053dbfa7d1d8e45316ed3535504749886404
+  checksum: 65708bc90f06aa014b2ced6c35dae97fa15861e6477c914b510d0cde2af41936904ba77ad60d556dde4606bb6e7cd7269fd79df9e48ce7a6d4499cc09b449317
   languageName: node
   linkType: hard
 
