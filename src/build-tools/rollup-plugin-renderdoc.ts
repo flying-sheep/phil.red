@@ -9,7 +9,7 @@ import { asyncWalk } from 'estree-walker'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
 import type { PluginContext, AcornNode } from 'rollup'
-import { Plugin } from 'vite'
+import type { Plugin } from 'vite'
 
 import {
 	Document, Type, ParseError, ASTError,

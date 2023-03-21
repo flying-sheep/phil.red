@@ -1,6 +1,7 @@
 /** @jsxImportSource ../markup */
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
-import { Language } from 'prism-react-renderer'
+import type { Language } from 'prism-react-renderer'
 import * as rst from 'restructured'
 import { SyntaxError } from 'restructured/lib/Parser.js'
 
@@ -29,7 +30,7 @@ function parseDirective(lines: RSTNode[]): Directive {
 			return true
 		})
 		.reduce((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line)!
+			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [string, string, string]
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
 		}, {} as { [k: string]: string })
@@ -70,7 +71,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	case 'text': {
 		const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
 		if (!fieldList) return [node.value]
-		const [, fieldName, fieldValue] = fieldList
+		const [, fieldName, fieldValue] = fieldList as unknown as [string, string, string]
 		return [ // TODO: convert runs to single lists, not multiple
 			<m.FieldList pos={pos(node)}>
 				<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field>
@@ -115,6 +116,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case null:
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		default:
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 		}
 	case 'literal_block': {
@@ -136,10 +138,10 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children)
 			const delim = (() => {
-				switch (params.delim) {
+				switch (params['delim']) {
 				case 'tab': return '\t'
 				case 'space': return ' '
-				default: return params.delim
+				default: return params['delim']
 				}
 			})()
 			return [
@@ -160,9 +162,9 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			return [
 				<m.Plotly
 					url={header ?? ''}
-					onClickLink={params.onClickLink}
+					onClickLink={params['onClickLink']}
 					style={{ width: '100%' }}
-					config={{ responsive: true } as any} // typing has no responsive
+					config={{ responsive: true }}
 					pos={pos(node)}
 				/>,
 			]

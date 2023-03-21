@@ -1,4 +1,4 @@
-export function rsplit(string: string, sep: string, limit: number = Infinity): string[] {
+export function rsplit(string: string, sep: string, limit = Infinity): string[] {
 	if (!Number.isFinite(limit)) return string.split(sep)
 	let prefix = string
 	const suffixes = []

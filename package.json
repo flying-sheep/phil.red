@@ -45,6 +45,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
+		"@tsconfig/strictest": "^1.0.2",
 		"@types/estree": "^1.0.0",
 		"@types/katex": "^0.16.0",
 		"@types/markdown-it": "^12.2.3",
@@ -54,6 +55,7 @@
 		"@types/react": "^18.0.28",
 		"@types/react-dom": "^18.0.11",
 		"@types/react-plotly.js": "^2.6.0",
+		"@typescript-eslint/eslint-plugin": "^5.56.0",
 		"@typescript-eslint/parser": "^5.54.1",
 		"@vitejs/plugin-react": "^3.1.0",
 		"depcheck": "^1.4.3",

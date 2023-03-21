@@ -1,3 +1,4 @@
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'

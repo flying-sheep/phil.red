@@ -62,14 +62,14 @@ const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(
 		() => {
-			const theme = createTheme({
+			const baseTheme = createTheme({
 				typography: hSizes,
 				palette: {
 					mode: dark ? 'dark' : 'light',
 					primary: deepPurple,
 				},
 			})
-			return responsiveFontSizes(theme)
+			return responsiveFontSizes(baseTheme)
 		},
 		[dark],
 	)

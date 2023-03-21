@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './components/App'
 
 document.addEventListener('DOMContentLoaded', () => {
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const root = createRoot(document.querySelector('#root')!)
 	root.render(
 		<StrictMode>

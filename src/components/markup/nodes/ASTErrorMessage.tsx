@@ -1,9 +1,9 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 
 import Box from '@mui/material/Box'
 import red from '@mui/material/colors/red'
 
-import { Node } from '../../../markup/MarkupDocument'
+import type { Node } from '../../../markup/MarkupDocument'
 
 export interface ASTErrorMessageProps {
 	node?: Node
