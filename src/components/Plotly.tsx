@@ -59,7 +59,6 @@ const Plotly: FC<PlotlyProps> = ({
 }) => {
 	const handleOnClickLink = useCallback((e: Readonly<Plotly.PlotMouseEvent>) => {
 		const point = e.points[0] as unknown as Record<string, string>
-		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 		const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key as string]! : `{${key as string}}`))
 		window.open(url)
 	}, [onClickLink])

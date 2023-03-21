@@ -52,7 +52,6 @@ const RoutedPost: FC = () => {
 	if (!(id in posts)) {
 		return <div>{`404 – post ${id} not found`}</div>
 	}
-	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const { date, document } = posts[id]!
 	if (
 		+year !== date.getFullYear() || +month !== date.getMonth() + 1 || +day !== date.getDate()

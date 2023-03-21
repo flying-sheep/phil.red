@@ -65,11 +65,11 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	async function loadPosts(ctx: PluginContext, dir: string) {
 		const paths = await doGlob(dir)
 		if (paths.length === 0) return null
+		// eslint-disable-next-line consistent-return
 		const contents = await Promise.all(paths.map(async (p) => {
 			const code = await fs.readFile(p, { encoding: 'utf-8' })
 			const ext = path.extname(p)
-			if (!(ext in converters)) ctx.error({ id: p, message: `No converter for ${ext} registered` })
-			const convert = converters[path.extname(p)]
+			const convert = converters[path.extname(p)] ?? ctx.error({ id: p, message: `No converter for ${ext} registered` })
 			try {
 				return convert(code)
 			} catch (eOrig) {
@@ -87,7 +87,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
 					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 				}
-				(e as any).id = p // TODO: why?
+				(e as Error & { id: string }).id = p // TODO: why?
 				ctx.error(e, pos)
 			}
 		}))
@@ -97,7 +97,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			if (!content) {
 				console.log(`Skipped ${p}`)
 				delete map[p]
-			} else if (content.metadata.draft) {
+			} else if (content.metadata['draft']) {
 				console.log(`Skipped ${p} (“${content.title}” is a draft)`)
 				delete map[p]
 			}
@@ -121,7 +121,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			async enter(node) {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
-					if (!types.has(getVal(getProp(node, 'type')) as any)) return
+					if (!types.has(getVal(getProp(node, 'type')) as Type)) return
 					const urlProp = getProp(node, 'url')!
 					const url = getVal(urlProp) as string
 					const resolved = await ctx.resolve(url)
@@ -136,7 +136,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		})
 
 		const importBlock = Array.from(imports.entries())
-			.map(([path, name]) => `import ${name} from ${JSON.stringify(`${path}?url`)}`)
+			.map(([p, name]) => `import ${name} from ${JSON.stringify(`${p}?url`)}`)
 			.join('\n')
 		return `${importBlock}\n${magicString.toString()}`
 	}
@@ -166,9 +166,11 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			return createCode(this, dir)
 		},
 		configureServer(server) {
+			// eslint-disable-next-line @typescript-eslint/no-misused-promises
 			server.middlewares.use(async (req, res, next) => {
 				if (!req.url?.endsWith('__renderdoc')) {
-					return next()
+					next()
+					return
 				}
 				const { default: posts = null } = await server.ssrLoadModule(`.${req.url}`)
 				if (posts === null) throw new Error(`${req.url} not found from ${cwd()}`)
