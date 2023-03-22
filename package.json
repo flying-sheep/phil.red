@@ -13,10 +13,9 @@
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"bundlesize": "tsc && vite-bundle-visualizer",
-		"init-css": "./init-css.js",
 		"lint": "$npm_execpath run lint:style && $npm_execpath run lint:deps",
 		"lint:style": "eslint '{*.js,*.ts,src/**/*.ts*}'",
-		"lint:deps": "depcheck --ignores=typescript --ignore-patterns=init-css.js",
+		"lint:deps": "depcheck --ignores=typescript,@tsconfig/strictest",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red"
 	},
 	"files": [

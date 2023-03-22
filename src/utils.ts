@@ -1,5 +1,6 @@
-export function rsplit(string: string, sep: string, limit = Infinity): string[] {
-	if (!Number.isFinite(limit)) return string.split(sep)
+export function rsplit(string: string, sep: string, limit = Infinity): [string, ...string[]] {
+	if (sep === '') throw new Error('Char split not supported')
+	if (!Number.isFinite(limit)) return string.split(sep) as [string, ...string[]]
 	let prefix = string
 	const suffixes = []
 	for (let split = limit - 1; split > 0; split -= 1) {

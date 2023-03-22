@@ -126,7 +126,9 @@ function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
 export interface Section extends Element { type: Type.Section }
 export const Section = mkFun<Section>(Type.Section)
 
-export interface Title extends Element { type: Type.Title, level: number, anchor?: string }
+export interface Title extends Element {
+	type: Type.Title, level: number, anchor?: string | undefined
+}
 export const Title = mkFun<Title>(Type.Title)
 
 export interface Paragraph extends Element { type: Type.Paragraph }
