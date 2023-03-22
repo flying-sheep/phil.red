@@ -1,6 +1,7 @@
 /** @jsxImportSource ../markup */
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
-import { Language } from 'prism-react-renderer'
+import type { Language } from 'prism-react-renderer'
 import * as rst from 'restructured'
 import { SyntaxError } from 'restructured/lib/Parser.js'
 
@@ -29,7 +30,7 @@ function parseDirective(lines: RSTNode[]): Directive {
 			return true
 		})
 		.reduce((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line)!
+			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [string, string, string]
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
 		}, {} as { [k: string]: string })
@@ -70,7 +71,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	case 'text': {
 		const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
 		if (!fieldList) return [node.value]
-		const [, fieldName, fieldValue] = fieldList
+		const [, fieldName, fieldValue] = fieldList as unknown as [string, string, string]
 		return [ // TODO: convert runs to single lists, not multiple
 			<m.FieldList pos={pos(node)}>
 				<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field>
@@ -115,6 +116,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case null:
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		default:
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 		}
 	case 'literal_block': {
@@ -136,10 +138,10 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children)
 			const delim = (() => {
-				switch (params.delim) {
+				switch (params['delim']) {
 				case 'tab': return '\t'
 				case 'space': return ' '
-				default: return params.delim
+				default: return params['delim'] ?? ','
 				}
 			})()
 			return [
@@ -160,9 +162,9 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			return [
 				<m.Plotly
 					url={header ?? ''}
-					onClickLink={params.onClickLink}
+					onClickLink={params['onClickLink']}
 					style={{ width: '100%' }}
-					config={{ responsive: true } as any} // typing has no responsive
+					config={{ responsive: true }}
 					pos={pos(node)}
 				/>,
 			]
@@ -219,9 +221,8 @@ function extractTargets(node: RSTNode): {[key: string]: string} {
 	let newResolvable = true
 	while (newResolvable) {
 		newResolvable = false
-		for (const entry of Object.entries(pending)) {
-			const k = entry[0]
-			const v = entry[1] in resolved ? resolved[entry[1]] : entry[1] // if so the match will be true
+		for (const [k, maybeV] of Object.entries(pending)) {
+			const v = resolved[maybeV] ?? maybeV // if so the match will be true
 			// TODO: more schemas
 			if (v.match(URL_SCHEMA) ?? v.match(ANCHOR_SCHEMA)) {
 				resolved[k] = v
@@ -242,10 +243,11 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 		if (typeof node === 'string') return node
 		const elem = { ...node }
 		if (elem.type === m.Type.Link && 'name' in elem.ref) {
-			if (elem.ref.name.toLocaleLowerCase() in targets) {
-				elem.ref = { href: targets[elem.ref.name.toLocaleLowerCase()] }
+			const maybeHref = targets[elem.ref.name.toLocaleLowerCase()]
+			if (maybeHref) {
+				elem.ref = { href: maybeHref }
 			} else { // maybe inline syntax
-				const [, text = null, href = null] = /^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
+				const [, text, href] = /^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
 				if (text && href) {
 					elem.ref = { href }
 					elem.children = [text]
@@ -262,11 +264,11 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 
 function getTitle(body: m.Node[]): string {
 	if (body.length === 0) throw new ASTError('Empty body', undefined)
-	const section = body[0]
+	const section = body[0]!
 	if (typeof section === 'string') throw new ASTError(`Body starts with string: ${section}`, section)
 	if (section.type !== m.Type.Section) throw new ASTError('No section!', section, section.pos)
 	if (section.children.length === 0) throw new ASTError('Empty Section', section, section.pos)
-	const title = section.children[0]
+	const title = section.children[0]!
 	if (typeof title === 'string') throw new ASTError(`Section starts with string: ${title}`, section.pos)
 	if (title.type !== m.Type.Title) throw new ASTError('No title!', title, title.pos)
 	const text = title.children[0]
@@ -280,7 +282,7 @@ function getMeta(fieldLists: m.Elem) {
 		fieldLists.children
 			.filter(check)
 			.flatMap((fl) => fl.children as m.Field[])
-			.map((f) => [f.name, f.children[0].toString()]),
+			.map((f) => [f.name, f.children[0]?.toString()]),
 	)
 }
 

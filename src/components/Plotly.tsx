@@ -8,12 +8,12 @@ import createPlotlyComponent from 'react-plotly.js/factory'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import Stack from '@mui/material/Stack'
-import { Theme } from '@mui/material/styles/createTheme'
+import type { Theme } from '@mui/material/styles/createTheme'
 import useTheme from '@mui/material/styles/useTheme'
 
 export interface PlotlyProps extends Partial<PlotParams> {
 	url: string
-	onClickLink?: string
+	onClickLink?: string | undefined
 }
 
 const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
@@ -58,8 +58,8 @@ const Plotly: FC<PlotlyProps> = ({
 	onClickLink, onClick, ...rest
 }) => {
 	const handleOnClickLink = useCallback((e: Readonly<Plotly.PlotMouseEvent>) => {
-		const point = e.points[0] as { [key: string]: any }
-		const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key] : `{${key}}`))
+		const point = e.points[0] as unknown as Record<string, string>
+		const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key as string]! : `{${key as string}}`))
 		window.open(url)
 	}, [onClickLink])
 

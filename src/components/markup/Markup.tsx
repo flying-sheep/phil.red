@@ -1,3 +1,4 @@
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 import {
 	Children, FC, useCallback, useMemo,
 } from 'react'
@@ -7,7 +8,7 @@ import { PortalSource } from 'react-portal-target'
 import Box from '@mui/material/Box'
 import useTheme from '@mui/material/styles/useTheme'
 
-import { Document } from '../../markup/MarkupDocument'
+import type { Document } from '../../markup/MarkupDocument'
 
 import MarkupNodeComponent from './MarkupNodeComponent'
 
@@ -37,7 +38,7 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 			}}
 		>
 			{Children.toArray(nodes)}
-			{process.env.NODE_ENV === 'development' && (
+			{process.env['NODE_ENV'] === 'development' && (
 				<PortalSource name="page-source">
 					<JSONTree
 						data={children}

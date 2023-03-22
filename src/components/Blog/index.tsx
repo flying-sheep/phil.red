@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Route, Navigate, useParams } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
@@ -48,13 +48,13 @@ const RoutedPost: FC = () => {
 	const {
 		id,
 		year, month, day,
-	} = match
-	if (!(id! in posts)) {
+	} = match as Record<keyof typeof match, string>
+	if (!(id in posts)) {
 		return <div>{`404 – post ${id} not found`}</div>
 	}
-	const { date, document } = posts[id!]
+	const { date, document } = posts[id]!
 	if (
-		+year! !== date.getFullYear() || +month! !== date.getMonth() + 1 || +day! !== date.getDate()
+		+year !== date.getFullYear() || +month !== date.getMonth() + 1 || +day !== date.getDate()
 	) {
 		return <Navigate replace to={`./../../../../${date2url(date)}/${id}`}/>
 	}

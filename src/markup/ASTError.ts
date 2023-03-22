@@ -1,11 +1,11 @@
 export default class ASTError extends Error {
-	message: string
-	node: any
+	override message: string
+	node: unknown
 	pos: number | undefined
 	loc: { line: number, column: number } | undefined
 	constructor(
 		message: string,
-		node: any,
+		node: unknown,
 		pos?: number | { line: number, column: number, offset?: number },
 	) {
 		super()

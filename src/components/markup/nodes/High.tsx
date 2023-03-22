@@ -43,7 +43,7 @@ const High: FC<HighProps> = ({ code, language, style }) => {
 	const { palette: { mode } } = useTheme()
 	const theme = mode === 'dark' ? darkTheme : lightTheme
 	useEffect(() => {
-		loadLang(language).then(() => setLoaded(true)).catch((e) => setErr(e))
+		loadLang(language).then(() => setLoaded(true)).catch((e) => setErr(e as Error))
 	}, [language, loaded])
 	if (err) throw err
 	return (

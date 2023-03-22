@@ -1,7 +1,7 @@
 import 'katex/dist/katex.min.css'
 
 import TeX from '@matejmazur/react-katex'
-import { KatexOptions } from 'katex'
+import type { KatexOptions } from 'katex'
 import { Children, FC, useCallback } from 'react'
 import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
 
@@ -11,7 +11,7 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-import { Variant } from '@mui/material/styles/createTypography'
+import type { Variant } from '@mui/material/styles/createTypography'
 
 import { ASTError } from '../../markup'
 import {
@@ -136,7 +136,8 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 
 const MarkupNodeComponent: FC<MarkupElementProps> = ({ node, level }) => {
 	const fallback = useCallback(({ error }: FallbackProps) => {
-		const errorMessage = error instanceof Error ? error.message : `${error}`
+		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+		const errorMessage = error instanceof Error ? error.message : `${error as unknown}`
 		return <ASTErrorMessage node={node}>{errorMessage}</ASTErrorMessage>
 	}, [node])
 	return (
