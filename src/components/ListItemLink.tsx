@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Link, LinkProps } from 'react-router-dom'
 
 import ListItem from '@mui/material/ListItem'
@@ -9,6 +10,10 @@ interface LilProps extends LinkProps {
 	icon?: React.ReactElement<unknown> | undefined
 	primary?: React.ReactNode
 	secondary?: React.ReactNode
+	// TODO: these should be fixed in mui
+	tabIndex?: number
+	className?: string
+	style?: CSSProperties
 }
 
 const ListItemLink = ({
