@@ -6,9 +6,9 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 
 interface LilProps extends LinkProps {
-	icon?: React.ReactElement<unknown> | undefined,
-	primary?: React.ReactNode,
-	secondary?: React.ReactNode,
+	icon?: React.ReactElement<unknown> | undefined
+	primary?: React.ReactNode
+	secondary?: React.ReactNode
 }
 
 const ListItemLink = ({

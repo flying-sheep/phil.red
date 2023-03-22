@@ -54,7 +54,7 @@ export const DEFAULT_CONVERTERS: {[ext: string]: Converter} = {
 	'.rst': rstConvert,
 }
 
-type Pos = { line: number; column: number } | number | undefined
+type Pos = { line: number, column: number } | number | undefined
 
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS

@@ -127,7 +127,9 @@ export interface Section extends Element { type: Type.Section }
 export const Section = mkFun<Section>(Type.Section)
 
 export interface Title extends Element {
-	type: Type.Title, level: number, anchor?: string | undefined
+	type: Type.Title
+	level: number
+	anchor?: string | undefined
 }
 export const Title = mkFun<Title>(Type.Title)
 
@@ -138,7 +140,9 @@ export interface BlockQuote extends Element { type: Type.BlockQuote }
 export const BlockQuote = mkFun<Paragraph>(Type.BlockQuote)
 
 export interface BulletList extends Element {
-	type: Type.BulletList, bullet?: Bullet, text?: string
+	type: Type.BulletList
+	bullet?: Bullet
+	text?: string
 }
 export const BulletList = mkFun<BulletList>(Type.BulletList)
 // TODO: rst also has prefix/suffix
@@ -194,10 +198,10 @@ export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
 // Custom
 
 export interface Plotly extends Element {
-	type: Type.Plotly,
-	url: string,
-	onClickLink?: string | undefined,
-	style?: Partial<React.CSSProperties> | undefined,
-	config?: Partial<Plotly.Config> | undefined,
+	type: Type.Plotly
+	url: string
+	onClickLink?: string | undefined
+	style?: Partial<React.CSSProperties> | undefined
+	config?: Partial<Plotly.Config> | undefined
 }
 export const Plotly = mkFun<Plotly>(Type.Plotly)

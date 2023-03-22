@@ -42,6 +42,10 @@
 		"@typescript-eslint/dot-notation": ["error", { "allowIndexSignaturePropertyAccess": false }],
 		"@typescript-eslint/no-unused-vars": ["error", { "ignoreRestSiblings": true }],
 		"@typescript-eslint/no-non-null-assertion": 0,
+		"@typescript-eslint/member-delimiter-style": ["error", {
+			"singleline": { "delimiter": "comma" },
+			"multiline": { "delimiter": "none" }
+		}],
 		"react/function-component-definition": [
 			2,
 			{ "namedComponents": "arrow-function" }
