@@ -14,6 +14,7 @@ interface LilProps extends LinkProps {
 	tabIndex?: number
 	className?: string
 	style?: CSSProperties
+	autoFocus?: boolean
 }
 
 const ListItemLink = ({
