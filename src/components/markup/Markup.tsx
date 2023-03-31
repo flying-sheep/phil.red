@@ -38,7 +38,7 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 			}}
 		>
 			{Children.toArray(nodes)}
-			{process.env['NODE_ENV'] === 'development' && (
+			{import.meta.env.DEV && (
 				<PortalSource name="page-source">
 					<JSONTree
 						data={children}
