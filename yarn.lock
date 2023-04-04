@@ -1079,10 +1079,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/strictest@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@tsconfig/strictest@npm:1.0.2"
-  checksum: 2ebf63d6507d3642f360798ef5c3247bf61d338a4d89cee703e6d75ce6007fa4ac0ccad5066a4e8840bec1503bef01454d4b75c0cc6678f31fa554d7175122ac
+"@tsconfig/strictest@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@tsconfig/strictest@npm:2.0.0"
+  checksum: a21d79fb3eb587e3e61b5bf3e4f52bc2a4f471ca4f3b1effe93849b97a36723cecfbef8181bac2c68cba9b44ef6b220cbe64194d17826622402de144383440f3
   languageName: node
   linkType: hard
 
@@ -4718,7 +4718,7 @@ __metadata:
     "@matejmazur/react-katex": ^3.1.3
     "@mui/icons-material": ^5.11.11
     "@mui/material": ^5.11.15
-    "@tsconfig/strictest": ^1.0.2
+    "@tsconfig/strictest": ^2.0.0
     "@types/estree": ^1.0.0
     "@types/katex": ^0.16.0
     "@types/markdown-it": ^12.2.3
