@@ -1,9 +1,8 @@
-import Highlight, { Language } from 'prism-react-renderer'
-import type { Prism as PrismRR } from 'prism-react-renderer'
+import Highlight, { type Language, Prism as PrismRR } from 'prism-react-renderer'
 import darkTheme from 'prism-react-renderer/themes/vsDark'
 import lightTheme from 'prism-react-renderer/themes/vsLight'
 import Prism from 'prismjs'
-import { FC, useEffect, useState } from 'react'
+import { type FC, useEffect, useState } from 'react'
 
 import useTheme from '@mui/material/styles/useTheme'
 

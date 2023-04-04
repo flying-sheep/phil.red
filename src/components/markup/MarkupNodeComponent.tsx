@@ -2,8 +2,8 @@ import 'katex/dist/katex.min.css'
 
 import TeX from '@matejmazur/react-katex'
 import type { KatexOptions } from 'katex'
-import { Children, FC, useCallback } from 'react'
-import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+import { Children, type FC, useCallback } from 'react'
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
@@ -15,7 +15,7 @@ import type { Variant } from '@mui/material/styles/createTypography'
 
 import { ASTError } from '../../markup'
 import {
-	Node, Elem, Type, Bullet,
+	type Node, type Elem, Type, Bullet,
 } from '../../markup/MarkupDocument'
 import Plotly from '../Plotly'
 
