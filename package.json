@@ -44,7 +44,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
-		"@tsconfig/strictest": "^1.0.2",
+		"@tsconfig/strictest": "^2.0.0",
 		"@types/estree": "^1.0.0",
 		"@types/katex": "^0.16.0",
 		"@types/markdown-it": "^12.2.3",
