@@ -1,8 +1,8 @@
 /* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 import {
-	Children, FC, useCallback, useMemo,
+	Children, type FC, useCallback, useMemo,
 } from 'react'
-import { JSONTree, ShouldExpandNodeInitially } from 'react-json-tree'
+import { JSONTree, type ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
 
 import Box from '@mui/material/Box'

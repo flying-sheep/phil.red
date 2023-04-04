@@ -1,7 +1,7 @@
 import useFetch from 'fetch-suspense'
 import type { Data, Layout, Margin } from 'plotly.js-basic-dist-min'
 import {
-	FC, lazy, Suspense, useCallback,
+	type FC, lazy, Suspense, useCallback,
 } from 'react'
 import type { PlotParams } from 'react-plotly.js'
 import createPlotlyComponent from 'react-plotly.js/factory'
