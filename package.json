@@ -45,7 +45,7 @@
 	},
 	"devDependencies": {
 		"@tsconfig/strictest": "^2.0.0",
-		"@types/estree": "^1.0.0",
+		"@types/estree": "^1.0.1",
 		"@types/katex": "^0.16.0",
 		"@types/markdown-it": "^12.2.3",
 		"@types/node": "^18.16.0",

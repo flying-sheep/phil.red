@@ -1200,6 +1200,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/estree@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@types/estree@npm:1.0.1"
+  checksum: e9aa175eacb797216fafce4d41e8202c7a75555bc55232dee0f9903d7171f8f19f0ae7d5191bb1a88cb90e65468be508c0df850a9fb81b4433b293a5a749899d
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
@@ -4799,7 +4806,7 @@ __metadata:
     "@mui/icons-material": ^5.11.16
     "@mui/material": ^5.12.0
     "@tsconfig/strictest": ^2.0.0
-    "@types/estree": ^1.0.0
+    "@types/estree": ^1.0.1
     "@types/katex": ^0.16.0
     "@types/markdown-it": ^12.2.3
     "@types/node": ^18.16.0
