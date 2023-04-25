@@ -69,6 +69,7 @@ export enum Enumeration {
 
 export type Node = string | Elem
 
+/** All existing constructor functions */
 export type Elem =
 	// Block
 	Section | Title | Paragraph | BlockQuote |
@@ -81,6 +82,9 @@ export type Elem =
 	LineBreak | Emph | Strong | Link | Code | InlineMath |
 	// Custom
 	Plotly
+
+/** Type that can be used in a JSX expression */
+export type ElementType = ReturnType<typeof mkFun<Elem>>
 
 interface Element {
 	type: Type
@@ -114,8 +118,8 @@ function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
 }
 
 type Nodes = Node | Nodes[]
-type Props<P> = Omit<P, 'type' | 'children'> & { children?: Nodes | undefined }
-function mkFun<P>(type: Type): FunctionComponent<Props<P>, P> {
+type Props<P extends Elem> = Omit<P, 'type' | 'children'> & { children?: Nodes | undefined }
+function mkFun<P extends Elem>(type: Type): FunctionComponent<Props<P>, P> {
 	return ({ children: nested, ...props }) => ({
 		type, children: arrayify(nested), ...props,
 	} as unknown as P)
