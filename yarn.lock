@@ -4599,7 +4599,7 @@ __metadata:
     typescript: ^5.0.4
     vite: ^4.3.5
     vite-bundle-visualizer: ^0.6.0
-    vite-plugin-static-copy: ^0.13.1
+    vite-plugin-static-copy: ^0.15.0
   languageName: unknown
   linkType: soft
 
@@ -5868,9 +5868,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-static-copy@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "vite-plugin-static-copy@npm:0.13.1"
+"vite-plugin-static-copy@npm:^0.15.0":
+  version: 0.15.0
+  resolution: "vite-plugin-static-copy@npm:0.15.0"
   dependencies:
     chokidar: ^3.5.3
     fast-glob: ^3.2.11
@@ -5878,7 +5878,7 @@ __metadata:
     picocolors: ^1.0.0
   peerDependencies:
     vite: ^3.0.0 || ^4.0.0
-  checksum: dc2281174ac5255740bfdaadd5aac84416fa086a5a6529c6f5a6d4f914cb9b6d8219e3d86df07cbf40a510a6afe385156356f4cb172a0896d5d47e0858f901be
+  checksum: 4ad3dfee158397ae65d03b5b76394a33b8ecad4f24a1b132fa1165409b6a38fc501e6eaf45f7631c976b96d50ea95c963cc873ae03d1f960e29a47a6d2a09bd5
   languageName: node
   linkType: hard
 
