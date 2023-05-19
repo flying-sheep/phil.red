@@ -4594,7 +4594,7 @@ __metadata:
     react-router-dom: ^6.11.1
     react-slide-routes: ^3.0.3
     restructured: ^0.0.11
-    rollup: ^3.21.2
+    rollup: ^3.21.7
     typed-jsx: ^0.1.1
     typescript: ^5.0.4
     vite: ^4.3.5
@@ -5225,9 +5225,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^3.21.2":
-  version: 3.21.2
-  resolution: "rollup@npm:3.21.2"
+"rollup@npm:^3.21.7":
+  version: 3.21.7
+  resolution: "rollup@npm:3.21.7"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -5235,7 +5235,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 1a0261b551ea7846f4ef7514930263c28c67e356ab1cbbe9e69e923a081b571fb483576ea53b69e851df9e58be36ab135057d21635d8bbdb5e63c3ccc34a0419
+  checksum: 44372a1e6fbd1941d6cb230b2a3de6d86861ca7523792757c9fe1d254ae4cd645f5dae27d93c7b1e02c60945d2eadd8c74a99033bd8328eda84949086330d804
   languageName: node
   linkType: hard
 
