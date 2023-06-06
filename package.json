@@ -73,7 +73,7 @@
 		"markdown-it": "^13.0.1",
 		"react-json-tree": "^0.18.0",
 		"restructured": "^0.0.11",
-		"rollup": "^3.21.7",
+		"rollup": "^3.23.1",
 		"typescript": "^5.0.4",
 		"vite": "^4.3.9",
 		"vite-bundle-visualizer": "^0.7.0",
