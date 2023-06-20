@@ -1,7 +1,6 @@
 /** @jsxImportSource ../markup */
 /* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
-import type { Language } from 'prism-react-renderer'
 import * as rst from 'restructured'
 import { SyntaxError } from 'restructured/lib/Parser.js'
 
@@ -130,7 +129,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { header, body } = parseDirective(node.children)
 			// TODO: check if in lang dict
 			return [
-				<m.CodeBlock language={header as Language ?? undefined} pos={pos(node)}>
+				<m.CodeBlock language={header ?? undefined} pos={pos(node)}>
 					{body}
 				</m.CodeBlock>,
 			]

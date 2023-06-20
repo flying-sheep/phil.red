@@ -1,14 +1,10 @@
-import Highlight, { type Language, Prism as PrismRR } from 'prism-react-renderer'
-import darkTheme from 'prism-react-renderer/themes/vsDark'
-import lightTheme from 'prism-react-renderer/themes/vsLight'
+import { Highlight, themes } from 'prism-react-renderer'
 import Prism from 'prismjs'
 import { type FC, useEffect, useState } from 'react'
 
 import useTheme from '@mui/material/styles/useTheme'
 
 import * as urls from '../../../build-tools/urls.js'
-
-type PrismLib = typeof PrismRR & typeof Prism
 
 const loadScriptNoCache = (url: string) => new Promise<HTMLScriptElement>((resolve, reject) => {
 	const script = document.createElement('script')
@@ -34,19 +30,19 @@ const loadScript = async (url: string) => {
 
 const loadLang = (lang: string) => loadScript(urls.prism(`components/prism-${lang}.min.js`))
 
-export interface HighProps { code: string, language: Language, style?: React.CSSProperties }
+export interface HighProps { code: string, language: string, style?: React.CSSProperties }
 
 const High: FC<HighProps> = ({ code, language, style }) => {
 	const [loaded, setLoaded] = useState(false)
 	const [err, setErr] = useState<Error>()
 	const { palette: { mode } } = useTheme()
-	const theme = mode === 'dark' ? darkTheme : lightTheme
+	const theme = mode === 'dark' ? themes.vsDark : themes.vsLight
 	useEffect(() => {
 		loadLang(language).then(() => setLoaded(true)).catch((e) => setErr(e as Error))
 	}, [language, loaded])
 	if (err) throw err
 	return (
-		<Highlight Prism={Prism as PrismLib} code={code} language={loaded ? language : ('text' as Language)} theme={theme}>
+		<Highlight prism={Prism} code={code} language={loaded ? language : 'text'} theme={theme}>
 			{({
 				className, style: defaultStyle, tokens, getLineProps, getTokenProps,
 			}) => (
