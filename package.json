@@ -52,7 +52,7 @@
 		"@types/plotly.js-basic-dist-min": "^2.12.1",
 		"@types/prismjs": "^1.26.0",
 		"@types/react": "^18.2.12",
-		"@types/react-dom": "^18.2.4",
+		"@types/react-dom": "^18.2.6",
 		"@types/react-plotly.js": "^2.6.0",
 		"@typescript-eslint/eslint-plugin": "^5.59.9",
 		"@typescript-eslint/parser": "^5.58.0",
