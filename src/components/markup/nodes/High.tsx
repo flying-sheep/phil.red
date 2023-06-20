@@ -1,4 +1,5 @@
 import { Highlight, themes } from 'prism-react-renderer'
+import Prism from 'prismjs'
 import { type FC, useEffect, useState } from 'react'
 
 import useTheme from '@mui/material/styles/useTheme'
@@ -41,7 +42,7 @@ const High: FC<HighProps> = ({ code, language, style }) => {
 	}, [language, loaded])
 	if (err) throw err
 	return (
-		<Highlight code={code} language={loaded ? language : 'text'} theme={theme}>
+		<Highlight prism={Prism} code={code} language={loaded ? language : 'text'} theme={theme}>
 			{({
 				className, style: defaultStyle, tokens, getLineProps, getTokenProps,
 			}) => (
