@@ -4454,7 +4454,7 @@ __metadata:
     react-json-tree: ^0.18.0
     react-plotly.js: ^2.6.0
     react-portal-target: ^1.0.2
-    react-router: ^6.12.1
+    react-router: ^6.13.0
     react-router-dom: ^6.11.2
     react-slide-routes: ^3.0.3
     restructured: ^0.0.11
@@ -4845,14 +4845,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:^6.12.1":
-  version: 6.12.1
-  resolution: "react-router@npm:6.12.1"
+"react-router@npm:^6.13.0":
+  version: 6.13.0
+  resolution: "react-router@npm:6.13.0"
   dependencies:
     "@remix-run/router": 1.6.3
   peerDependencies:
     react: ">=16.8"
-  checksum: a23a0f2e6635eba19aec8d50b9126f61663d1e6ee6e69d6b2ca6e5dd678496b54d925f0d86a375270646da11cc12be66ac5e6ebf73962957af91ac828b63d10b
+  checksum: 31a187005d05e063c59324564a283cd28052eaf848ad446c87658f4fc48fa9543329fe8a14d7be14d9bbf62410d383f8cf1cf13898a838bf9c1e3201fe93384c
   languageName: node
   linkType: hard
 
