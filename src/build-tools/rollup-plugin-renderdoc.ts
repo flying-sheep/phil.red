@@ -74,21 +74,18 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				return convert(code)
 			} catch (eOrig) {
 				let e: Error
-				let pos: Pos
 				if (eOrig instanceof ParseError) {
 					e = eOrig
 					e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
-					pos = eOrig.pos
 				} else if (eOrig instanceof ASTError) {
 					e = eOrig
 					e.message = `Error converting the ${ext} AST: ${eOrig.message}`
-					pos = eOrig.loc ?? eOrig.pos
 				} else {
 					e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
 					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 				}
 				(e as Error & { id: string }).id = p // TODO: why?
-				ctx.error(e, pos)
+				ctx.error(e)
 			}
 		}))
 		
