@@ -68,7 +68,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-prefer-function-component": "^3.1.0",
 		"estree-walker": "^3.0.3",
-		"globby": "^13.2.0",
+		"globby": "^13.2.1",
 		"magic-string": "^0.30.0",
 		"markdown-it": "^13.0.1",
 		"react-json-tree": "^0.18.0",
