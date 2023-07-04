@@ -14,3 +14,6 @@ updates:
         - '@types/react'
         - '@types/react-dom'
       # exclude-patterns: []
+    ts-eslint:
+      patterns:
+        - '@typescript-eslint/*'
