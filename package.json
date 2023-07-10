@@ -29,7 +29,7 @@
 		"@mui/material": "^5.13.7",
 		"fetch-suspense": "^1.2.2",
 		"katex": "^0.16.8",
-		"plotly.js-basic-dist-min": "^2.24.2",
+		"plotly.js-basic-dist-min": "^2.24.3",
 		"prism-react-renderer": "^2.0.6",
 		"prismjs": "^1.29.0",
 		"react": "^18.2.0",

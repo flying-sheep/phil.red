@@ -4575,7 +4575,7 @@ __metadata:
     katex: ^0.16.8
     magic-string: ^0.30.1
     markdown-it: ^13.0.1
-    plotly.js-basic-dist-min: ^2.24.2
+    plotly.js-basic-dist-min: ^2.24.3
     prism-react-renderer: ^2.0.6
     prismjs: ^1.29.0
     react: ^18.2.0
@@ -4621,10 +4621,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plotly.js-basic-dist-min@npm:^2.24.2":
-  version: 2.24.2
-  resolution: "plotly.js-basic-dist-min@npm:2.24.2"
-  checksum: 780a12d952d5a3acae9782561007ea858b6f5582fd117525ce41154d4bf536239890f655496825de638dd58e8b4eeacc148fdd061da36a05f5abffc42f0f573d
+"plotly.js-basic-dist-min@npm:^2.24.3":
+  version: 2.24.3
+  resolution: "plotly.js-basic-dist-min@npm:2.24.3"
+  checksum: 0989d54d840a602370f85a3cba5e82cdd3e1f4de2b20ba5529d6974f9108c07c694c5b48c0a1e3a69f161033ca70d3a5350de955cc5661fc4160bfba8b2aa87a
   languageName: node
   linkType: hard
 
