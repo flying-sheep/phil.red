@@ -1,5 +1,6 @@
-import { createElement, isValidElement } from 'react'
+import { createElement } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { isValidElementType } from 'react-is'
 
 import Avatar from '@mui/material/Avatar'
 import Link from '@mui/material/Link'
@@ -22,11 +23,17 @@ import Web from '@mui/icons-material/Web'
 import ArchIcon from './arch-icon'
 import PythonIcon from './python-icon'
 
-type ListItemLinkProps = {
+type ListItemLinkProps<P = object> = {
 	href?: string
-	icon?: React.ReactNode | React.ElementType
+	icon?: React.ReactNode | React.ComponentType<P>
 	text?: React.ReactNode
 	sub?: React.ReactNode
+}
+
+function isValidComponentType<P = object>(
+	e: React.ReactNode | React.ComponentType<P>,
+): e is React.ComponentType<P> {
+	return typeof e !== 'string' && isValidElementType(e)
 }
 
 const ListItemLink = ({
@@ -36,9 +43,7 @@ const ListItemLink = ({
 		<ListItemButton component={Link} href={href}>
 			<ListItemAvatar>
 				<Avatar>
-					{isValidElement(icon)
-						? icon
-						: icon && createElement(icon as React.ElementType)}
+					{isValidComponentType(icon) ? createElement(icon) : icon}
 				</Avatar>
 			</ListItemAvatar>
 			<ListItemText primary={text} secondary={sub}/>

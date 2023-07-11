@@ -164,7 +164,11 @@ export const FieldList = mkFun<FieldList>(Type.FieldList)
 export interface Field extends Element { type: Type.Field, name: string }
 export const Field = mkFun<Field>(Type.Field)
 
-export interface CodeBlock extends Element { type: Type.CodeBlock, language?: string | undefined }
+export interface CodeBlock extends Element {
+	type: Type.CodeBlock
+	language?: string | undefined
+	children: string[]
+}
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 
 export interface Table extends Element { type: Type.Table, caption?: string | undefined }
