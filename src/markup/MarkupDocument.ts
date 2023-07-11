@@ -159,7 +159,7 @@ export const DefTerm = mkFun<DefItem>(Type.DefTerm)
 export interface Def extends Element { type: Type.Def }
 export const Def = mkFun<Def>(Type.Def)
 
-export interface FieldList extends Element { type: Type.FieldList }
+export interface FieldList extends Element { type: Type.FieldList, children: Field[] }
 export const FieldList = mkFun<FieldList>(Type.FieldList)
 export interface Field extends Element { type: Type.Field, name: string }
 export const Field = mkFun<Field>(Type.Field)
