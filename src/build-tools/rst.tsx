@@ -276,11 +276,11 @@ function getTitle(body: m.Node[]): string {
 }
 
 function getMeta(fieldLists: m.Elem) {
-	const check = ((n) => typeof n !== 'string' && n.type === m.Type.FieldList) as ((n: m.Node) => n is m.FieldList)
+	// TODO: https://github.com/microsoft/TypeScript/issues/54966
 	return Object.fromEntries(
 		fieldLists.children
-			.filter(check)
-			.flatMap((fl) => fl.children as m.Field[])
+			.filter((n: m.Node): n is m.FieldList => typeof n !== 'string' && n.type === m.Type.FieldList)
+			.flatMap((fl) => (fl as m.FieldList).children)
 			.map((f) => [f.name, f.children[0]?.toString()]),
 	)
 }

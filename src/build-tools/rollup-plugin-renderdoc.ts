@@ -79,6 +79,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					e = eOrig
 					e.message = `Error converting the ${ext} AST: ${eOrig.message}`
 				} else {
+					// eslint-disable-next-line @typescript-eslint/no-base-to-string
 					e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
 					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 				}
