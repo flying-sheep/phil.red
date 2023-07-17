@@ -82,8 +82,9 @@ export type Elem =
 	// Custom
 	Plotly
 
+type ElementMap = { [E in Elem as E['type']]: (props: Props<E>) => E; }
 /** Type that can be used in a JSX expression */
-export type ElementType = ReturnType<typeof mkFun<Elem>>
+export type ElementType = ElementMap[Elem['type']]
 
 interface Element {
 	type: Type
@@ -116,8 +117,7 @@ function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
 	return [obj]
 }
 
-type Nodes = Node | Nodes[]
-type Props<P extends Elem> = Omit<P, 'type' | 'children'> & { children?: Nodes | undefined }
+type Props<P extends Elem> = Omit<P, 'type' | 'children'> & { children?: P['children'] | (P['children'] extends Array<unknown> ? P['children'][0] : object) | undefined }
 function mkFun<P extends Elem>(type: Type): FunctionComponent<Props<P>, P> {
 	return ({ children: nested, ...props }) => ({
 		type, children: arrayify(nested), ...props,
