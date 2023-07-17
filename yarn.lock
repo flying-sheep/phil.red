@@ -1018,10 +1018,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/katex@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "@types/katex@npm:0.16.0"
-  checksum: f93ceb2496621d18a28252264c0b7f5b0bdf125f9dc92d1adfbd9bf00942cd2918de336fae628d3929e615aaf84b7adb1781711c4e4605664be0827b1013ec14
+"@types/katex@npm:^0.16.1":
+  version: 0.16.1
+  resolution: "@types/katex@npm:0.16.1"
+  checksum: f09c40920dbbc214ec3bb8f0028f5f155002f4fb77316f7b72cbe7ad751ce5ea565772c37ecdb1549611b0d71a2b006be8387e6a871cc49e9b72e0fe2bb9276e
   languageName: node
   linkType: hard
 
@@ -4379,7 +4379,7 @@ __metadata:
     "@mui/material": ^5.13.7
     "@tsconfig/strictest": ^2.0.1
     "@types/estree": ^1.0.1
-    "@types/katex": ^0.16.0
+    "@types/katex": ^0.16.1
     "@types/markdown-it": ^12.2.3
     "@types/node": ^20.4.1
     "@types/plotly.js-basic-dist-min": ^2.12.1
