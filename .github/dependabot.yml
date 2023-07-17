@@ -6,3 +6,17 @@ updates:
   directory: /
   schedule:
     interval: weekly
+  groups:
+    react:
+      patterns:
+        - react
+        - react-dom
+        - '@types/react'
+        - '@types/react-dom'
+      # exclude-patterns: []
+    mui:
+      patterns:
+        - '@mui/*'
+    ts-eslint:
+      patterns:
+        - '@typescript-eslint/*'

@@ -1,7 +1,6 @@
 /** @jsxImportSource ../markup */
 /* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
-import type { Language } from 'prism-react-renderer'
 import * as rst from 'restructured'
 import { SyntaxError } from 'restructured/lib/Parser.js'
 
@@ -130,7 +129,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { header, body } = parseDirective(node.children)
 			// TODO: check if in lang dict
 			return [
-				<m.CodeBlock language={header as Language ?? undefined} pos={pos(node)}>
+				<m.CodeBlock language={header ?? undefined} pos={pos(node)}>
 					{body}
 				</m.CodeBlock>,
 			]
@@ -277,11 +276,11 @@ function getTitle(body: m.Node[]): string {
 }
 
 function getMeta(fieldLists: m.Elem) {
-	const check = ((n) => typeof n !== 'string' && n.type === m.Type.FieldList) as ((n: m.Node) => n is m.FieldList)
+	// TODO: https://github.com/microsoft/TypeScript/issues/54966
 	return Object.fromEntries(
 		fieldLists.children
-			.filter(check)
-			.flatMap((fl) => fl.children as m.Field[])
+			.filter((n: m.Node): n is m.FieldList => typeof n !== 'string' && n.type === m.Type.FieldList)
+			.flatMap((fl) => (fl as m.FieldList).children)
 			.map((f) => [f.name, f.children[0]?.toString()]),
 	)
 }
