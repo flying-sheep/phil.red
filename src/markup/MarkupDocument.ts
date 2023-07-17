@@ -117,7 +117,10 @@ function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
 	return [obj]
 }
 
-type Props<P extends Elem> = Omit<P, 'type' | 'children'> & { children?: P['children'] | (P['children'] extends Array<unknown> ? P['children'][0] : object) | undefined }
+/** Remove `type` and have `children` accept “undefined”
+ * and the arrow element type in addition to the array type.
+ */
+type Props<P extends Elem> = Omit<P, 'type' | 'children'> & { children?: P['children'] | P['children'][number] | undefined }
 function mkFun<P extends Elem>(type: Type): FunctionComponent<Props<P>, P> {
 	return ({ children: nested, ...props }) => ({
 		type, children: arrayify(nested), ...props,
