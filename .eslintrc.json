@@ -21,6 +21,9 @@
 		}
 	},
 	"ignorePatterns": ["/dist/*", "/**/*.css.d.ts"],
+	"settings": {
+		"import/external-module-folders": [".yarn"]
+	},
 	"rules": {
 		"react/jsx-filename-extension": [1, { "extensions": [".jsx", ".tsx"] }],
 		"import/no-unresolved": 0,

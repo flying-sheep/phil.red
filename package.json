@@ -59,7 +59,6 @@
 		"@typescript-eslint/eslint-plugin": "^6.4.0",
 		"@typescript-eslint/parser": "^6.4.0",
 		"@vitejs/plugin-react": "^4.0.3",
-		"@yarnpkg/sdks": "^3.0.0-rc.48",
 		"depcheck": "^1.4.3",
 		"eslint": "^8.46.0",
 		"eslint-config-airbnb": "^19.0.4",
