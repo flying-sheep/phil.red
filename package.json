@@ -15,7 +15,7 @@
 		"bundlesize": "tsc && vite-bundle-visualizer",
 		"lint": "$npm_execpath run lint:style && $npm_execpath run lint:deps",
 		"lint:style": "eslint '{*.js,*.ts,src/**/*.ts*}'",
-		"lint:deps": "depcheck --ignores=@tsconfig/strictest",
+		"lint:deps": "depcheck --ignores=@tsconfig/strictest,@total-typescript/ts-reset",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red"
 	},
 	"files": [
