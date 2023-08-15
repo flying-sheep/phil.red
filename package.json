@@ -59,6 +59,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.4.0",
 		"@typescript-eslint/parser": "^6.4.0",
 		"@vitejs/plugin-react": "^4.0.3",
+		"@yarnpkg/sdks": "^3.0.0-rc.48",
 		"depcheck": "^1.4.3",
 		"eslint": "^8.46.0",
 		"eslint-config-airbnb": "^19.0.4",
@@ -81,5 +82,5 @@
 		"vite-bundle-visualizer": "^0.10.0",
 		"vite-plugin-static-copy": "^0.17.0"
 	},
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.6.1"
 }
