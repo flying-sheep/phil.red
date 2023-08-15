@@ -73,7 +73,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		const [, fieldName, fieldValue] = fieldList as unknown as [string, string, string]
 		return [ // TODO: convert runs to single lists, not multiple
 			<m.FieldList pos={pos(node)}>
-				<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field>
+				{<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field> as m.Field}
 			</m.FieldList>,
 		]
 	}
