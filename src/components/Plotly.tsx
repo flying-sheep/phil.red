@@ -1,5 +1,5 @@
 import useFetch from 'fetch-suspense'
-import type { Data, Layout, Margin } from 'plotly.js-basic-dist-min'
+import type { Data, Layout } from 'plotly.js-basic-dist-min'
 import {
 	type FC, lazy, Suspense, useCallback,
 } from 'react'
@@ -29,7 +29,7 @@ const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
 			b: 70,
 			t: 30, // title
 			pad: 0,
-		} as Margin & { pad: number },
+		},
 	},
 })
 

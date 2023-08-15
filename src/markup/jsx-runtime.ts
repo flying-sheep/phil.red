@@ -1,12 +1,13 @@
 import type { ComponentInstance } from 'typed-jsx'
 
-import type { Elem } from './MarkupDocument'
+import type { Elem, ElementType as ET } from './MarkupDocument'
 
 export { data as jsx } from 'typed-jsx'
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 export declare namespace JSX {
 	type Element = Elem
+	type ElementType = ET
 	type IntrinsicElements = Record<string, never>
 	type ElementClass = ComponentInstance
 	type IntrinsicAttributes = { children?: unknown }
