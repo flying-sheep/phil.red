@@ -82,13 +82,13 @@ export type Elem =
 	// Custom
 	Plotly
 
-type ElementMap = { [E in Elem as E['type']]: (props: Props<E>) => E; }
+type ElementMap = { [E in Elem as E['type']]: FunctionComponent<Props<E>, E>; }
 /** Type that can be used in a JSX expression */
 export type ElementType = ElementMap[Elem['type']]
 
-interface Element {
+interface Element<C extends Node = Node> {
 	type: Type
-	children: Node[]
+	children: C[]
 	pos: number | { line: number, column: number } | undefined
 }
 
@@ -166,15 +166,14 @@ export const DefTerm = mkFun<DefItem>(Type.DefTerm)
 export interface Def extends Element { type: Type.Def }
 export const Def = mkFun<Def>(Type.Def)
 
-export interface FieldList extends Element { type: Type.FieldList, children: Field[] }
+export interface FieldList extends Element<Field> { type: Type.FieldList }
 export const FieldList = mkFun<FieldList>(Type.FieldList)
 export interface Field extends Element { type: Type.Field, name: string }
 export const Field = mkFun<Field>(Type.Field)
 
-export interface CodeBlock extends Element {
+export interface CodeBlock extends Element<string> {
 	type: Type.CodeBlock
 	language?: string | undefined
-	children: string[]
 }
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 
