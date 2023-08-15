@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="@total-typescript/ts-reset" />
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'

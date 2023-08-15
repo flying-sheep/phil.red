@@ -103,7 +103,7 @@ function flatten<E, A extends E | A[]>(nested: A[]): E[] {
 	const cumul: E[] = []
 	for (const elem of nested) {
 		if (Array.isArray(elem)) {
-			cumul.push(...flatten<E, A>(elem))
+			cumul.push(...flatten<E, A>(elem as A[]))
 		} else {
 			cumul.push(elem as E)
 		}
