@@ -81,5 +81,5 @@
 		"vite-bundle-visualizer": "^0.10.0",
 		"vite-plugin-static-copy": "^0.17.0"
 	},
-	"packageManager": "yarn@3.3.0"
+	"packageManager": "yarn@3.6.1"
 }
