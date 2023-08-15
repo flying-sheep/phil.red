@@ -28,11 +28,11 @@ function parseDirective(lines: RSTNode[]): Directive {
 			lastParam = i + 1
 			return true
 		})
-		.reduce((obj, line) => {
+		.reduce<{ [k: string]: string }>((obj, line) => {
 			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [string, string, string]
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
-		}, {} as { [k: string]: string })
+		}, {})
 	const body = rest.slice(lastParam + 1)
 	return { header, params, body }
 }
