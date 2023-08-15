@@ -1,17 +1,18 @@
-/** @jsxImportSource . */
+/** @jsxImportSource ../markup */
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
 import MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token'
+import Token from 'markdown-it/lib/token.js'
 
+import ASTError from '../markup/ASTError'
+import * as m from '../markup/MarkupDocument'
 import { rsplit } from '../utils'
-import * as m from './MarkupDocument'
-import ASTError from './ASTError'
 
 const NO_END = Symbol('no end')
 
 function* tokens2ast(
 	tokens: Token[] | IterableIterator<Token>,
-	end: string | Symbol = NO_END,
+	end: string | typeof NO_END = NO_END,
 ): IterableIterator<Token> {
 	const tokenIter = tokens[Symbol.iterator]()
 	for (const token of tokenIter) {
@@ -27,7 +28,7 @@ function* tokens2ast(
 			synth.children = Array.from(tokens2ast(tokenIter, openType))
 			yield synth
 		} else if (token.type === 'inline') {
-			token.children = Array.from(tokens2ast(token.children || []))
+			token.children = Array.from(tokens2ast(token.children ?? []))
 			yield token
 		} else {
 			yield token
@@ -48,7 +49,7 @@ function convertNode(token: Token): m.Node[] {
 	case 'paragraph':
 		return [<m.Paragraph pos={pos(token)}>{convertChildren(token)}</m.Paragraph>]
 	case 'heading': {
-		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.level
+		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
 		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
 		const anchor = undefined // TODO
 		return [
@@ -58,7 +59,7 @@ function convertNode(token: Token): m.Node[] {
 		]
 	}
 	case 'link': {
-		const href = token.attrs?.filter(([a, v]) => a === 'href')?.[0]?.[1]
+		const [, href] = token.attrs?.find(([name]) => name === 'href') ?? []
 		if (!href) throw new ASTError('Link without href encountered', token)
 		return [<m.Link ref={{ href }} pos={pos(token)}>{convertChildren(token)}</m.Link>]
 	}
@@ -80,7 +81,7 @@ function convertNode(token: Token): m.Node[] {
 }
 
 function convertChildren(token: Token): m.Node[] {
-	return convertAll(token.children || [])
+	return convertAll(token.children ?? [])
 }
 function convertAll(tokens: Token[]) {
 	return tokens.reduce((acc: m.Node[], n: Token) => acc.concat(convertNode(n)), [])
@@ -90,7 +91,7 @@ export default function mdConvert(code: string): m.Document {
 	// https://github.com/rollup/rollup-plugin-commonjs/issues/350
 	const md = new MarkdownIt('commonmark', { breaks: false })
 	const ast = Array.from(tokens2ast(md.parse(code, {})))
-	const title = ast[0].children?.[0].content || ''
+	const title = ast[0]?.children?.[0]?.content ?? ''
 	const children = convertAll(ast)
 	return { title, children, metadata: {} }
 }

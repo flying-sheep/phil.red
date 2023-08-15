@@ -4,15 +4,12 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Rollup",
+            "name": "Vite",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-			"program": "${workspaceFolder}/node_modules/.bin/rollup",
-			"args": ["--configPlugin=typescript", "--config=rollup.config.ts"],
-            "outFiles": [
-                "${workspaceFolder}/**/*.js"
-            ]
+			"program": "${workspaceFolder}/node_modules/.bin/vite",
+			"args": ["build"],
         }
     ]
 }

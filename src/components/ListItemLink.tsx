@@ -1,25 +1,31 @@
-import { Link, LinkProps } from 'react-router-dom'
+import type { CSSProperties } from 'react'
+import { Link, type LinkProps } from 'react-router-dom'
 
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
-import ListItemText from '@mui/material/ListItemText'
 import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemText from '@mui/material/ListItemText'
 
 interface LilProps extends LinkProps {
-	icon?: React.ReactElement<any>,
-	primary?: React.ReactNode,
-	secondary?: React.ReactNode,
+	icon?: React.ReactElement<unknown> | undefined
+	primary?: React.ReactNode
+	secondary?: React.ReactNode
+	// TODO: these should be fixed in mui
+	tabIndex?: number
+	className?: string
+	style?: CSSProperties
+	autoFocus?: boolean
 }
 
-export default function ListItemLink({
+const ListItemLink = ({
 	icon, primary, secondary, ...props
-}: LilProps) {
-	return (
-		<ListItem disablePadding>
-			<ListItemButton component={Link} {...props}>
-				{icon && <ListItemIcon>{icon}</ListItemIcon>}
-				<ListItemText inset primary={primary} secondary={secondary}/>
-			</ListItemButton>
-		</ListItem>
-	)
-}
+}: LilProps) => (
+	<ListItem disablePadding>
+		<ListItemButton component={Link} {...props}>
+			{icon && <ListItemIcon>{icon}</ListItemIcon>}
+			<ListItemText primary={primary} secondary={secondary}/>
+		</ListItemButton>
+	</ListItem>
+)
+
+export default ListItemLink

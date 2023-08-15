@@ -1,16 +1,26 @@
-import { Margin } from 'plotly.js'
-import { Component } from 'react'
-import Plot, { PlotParams, Figure } from 'react-plotly.js'
+import useFetch from 'fetch-suspense'
+import type { Data, Layout } from 'plotly.js-basic-dist-min'
+import {
+	type FC, lazy, Suspense, useCallback,
+} from 'react'
+import type { PlotParams } from 'react-plotly.js'
+import createPlotlyComponent from 'react-plotly.js/factory'
+
+import CircularProgress from '@mui/material/CircularProgress'
+import Stack from '@mui/material/Stack'
+import type { Theme } from '@mui/material/styles/createTheme'
+import useTheme from '@mui/material/styles/useTheme'
 
 export interface PlotlyProps extends Partial<PlotParams> {
 	url: string
-	onClickLink?: string
+	onClickLink?: string | undefined
 }
 
-const DEFAULT_OVERRIDE: Partial<PlotParams> = {
+const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
 	layout: {
 		paper_bgcolor: 'transparent',
 		plot_bgcolor: 'transparent',
+		font: { color: theme.palette.text.primary },
 		xaxis: { automargin: true },
 		yaxis: { automargin: true },
 		margin: {
@@ -19,45 +29,45 @@ const DEFAULT_OVERRIDE: Partial<PlotParams> = {
 			b: 70,
 			t: 30, // title
 			pad: 0,
-		} as Margin & { pad: number },
+		},
 	},
+})
+
+interface ResponseData { layout: Layout, data: Data[] }
+
+const Plot = lazy(async () => {
+	const { default: Plotly } = await import('plotly.js-basic-dist-min')
+	return { default: createPlotlyComponent(Plotly) }
+})
+
+const PlotlyInner: FC<Omit<PlotlyProps, 'onClickLink'>> = ({ url, onClick, ...rest }) => {
+	const theme = useTheme()
+	const resp = useFetch(url) as ResponseData
+
+	// TODO: deep merge everything
+	const props: PlotParams = {
+		layout: { ...defaultOverride(theme).layout, ...resp.layout, ...rest.layout },
+		data: [...(resp.data ?? []), ...(rest.data ?? [])],
+		onClick,
+		...rest,
+	}
+	return <Plot useResizeHandler {...props}/>
 }
 
-export default class Plotly extends Component<PlotlyProps, Partial<Figure>> {
-	constructor(props: PlotlyProps) {
-		super(props)
-		this.state = {}
-		fetch(props.url).then((r) => {
-			if (r.ok) return r.json()
-			throw new Error(r.statusText)
-		}).then(({ layout, data }) => {
-			this.setState({ layout, data })
-		}).catch((e) => console.error(e)) // eslint-disable-line no-console
-		this.handleOnClickLink = this.handleOnClickLink.bind(this)
-	}
-	
-	handleOnClickLink(e: Readonly<Plotly.PlotMouseEvent>) {
-		const { onClickLink = '{}' } = this.props
-		const point = e.points[0] as { [key: string]: any }
-		const url = onClickLink.replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key] : `{${key}}`))
+const Plotly: FC<PlotlyProps> = ({
+	onClickLink, onClick, ...rest
+}) => {
+	const handleOnClickLink = useCallback((e: Readonly<Plotly.PlotMouseEvent>) => {
+		const point = e.points[0] as unknown as Record<string, string>
+		const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key as string]! : `{${key as string}}`))
 		window.open(url)
-	}
-	
-	render(): React.ReactNode {
-		const { data, layout } = this.state
-		if (!data) return null
-		const {
-			url, onClickLink, onClick: onClickExplicit,
-			...rest
-		} = this.props
-		// TODO: deep merge everything
-		const props: PlotParams = {
-			layout: { ...DEFAULT_OVERRIDE.layout, ...layout, ...rest.layout },
-			data: [...(data || []), ...(rest.data || [])],
-			onClick: onClickLink ? this.handleOnClickLink : onClickExplicit,
-			...rest,
-		}
-		// TODO: resize plot on window resize
-		return <Plot {...props}/>
-	}
+	}, [onClickLink])
+
+	return (
+		<Suspense fallback={<Stack alignItems="center"><CircularProgress/></Stack>}>
+			<PlotlyInner onClick={onClickLink ? handleOnClickLink : onClick} {...rest}/>
+		</Suspense>
+	)
 }
+
+export default Plotly

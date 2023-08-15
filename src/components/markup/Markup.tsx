@@ -1,50 +1,56 @@
-import { Children, Component } from 'react'
-import { Document, Node } from '../../markup/MarkupDocument'
-import { ASTErrorMessageProps } from './ASTErrorMessage'
-import MarkupNodeComponent, { High } from './MarkupNodeComponent'
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
+import {
+	Children, type FC, useCallback, useMemo,
+} from 'react'
+import { JSONTree, type ShouldExpandNodeInitially } from 'react-json-tree'
+import { PortalSource } from 'react-portal-target'
+
+import Box from '@mui/material/Box'
+import useTheme from '@mui/material/styles/useTheme'
+
+import type { Document } from '../../markup/MarkupDocument'
+
+import MarkupNodeComponent from './MarkupNodeComponent'
 
 export interface MarkupProps {
 	doc: Document
 }
 
-export interface MarkupState {
-	errorMessage: string
-}
-
-export default class Markup extends Component<MarkupProps, MarkupState> {
-	title: string | React.ReactElement<ASTErrorMessageProps>
-	children: Node[]
-
-	constructor(props: MarkupProps) {
-		super(props)
-		const { doc } = props
-		this.title = doc.title
-		this.children = doc.children // DEBUG
-	}
-	
-	static getDerivedStateFromError(error: Error) {
-		return { errorMessage: error.message }
-	}
-	
-	render(): React.ReactElement<any> {
-		const nodes = this.children.map((e) => <MarkupNodeComponent node={e} level={0}/>)
-		const article = <article>{Children.toArray(nodes)}</article>
-		if (process.env.NODE_ENV === 'development') {
-			return (
-				<>
-					{article}
-					<High
-						language="json"
-						code={JSON.stringify(this.children, undefined, '\t')}
-						style={{
-							marginLeft: 'calc(50% - 50vw + 1em)',
-							marginRight: 'calc(50% - 50vw + 1em)',
-							overflowY: 'auto',
-						}}
+const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
+	const theme = useTheme()
+	const expand = useCallback<ShouldExpandNodeInitially>((keyPath) => keyPath[0] !== 'pos', [])
+	const nodes = useMemo(
+		() => children.map((e) => <MarkupNodeComponent node={e} level={0}/>),
+		[children],
+	)
+	return (
+		<Box
+			component="article"
+			sx={{
+				// Add space for the header when navigating to anchors
+				':target::before': {
+					content: '""',
+					display: 'block',
+					pointerEvents: 'none',
+					height: '75px',
+					marginTop: '-75px',
+				},
+			}}
+		>
+			{Children.toArray(nodes)}
+			{import.meta.env.DEV && (
+				<PortalSource name="page-source">
+					<JSONTree
+						data={children}
+						hideRoot
+						shouldExpandNodeInitially={expand}
+						theme={{ extend: 'solarized' }}
+						invertTheme={theme.palette.mode === 'light'}
 					/>
-				</>
-			)
-		}
-		return article
-	}
+				</PortalSource>
+			)}
+		</Box>
+	)
 }
+
+export default Markup

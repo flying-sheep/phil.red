@@ -1,13 +1,14 @@
-import {
-	Route, Routes, Navigate, useParams,
-} from 'react-router-dom'
+import type { FC } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { Route, Navigate, useParams } from 'react-router-dom'
+import SlideRoutes from 'react-slide-routes'
 
+import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 
 import posts from '../../posts'
 import ListItemLink from '../ListItemLink'
-import { Markup } from '../markup'
+import Markup from '../markup'
 
 function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
@@ -17,7 +18,7 @@ export function postURL(date: Date, slug: string) {
 	return `${date2url(date)}/${slug}`
 }
 
-function Index() {
+const Index = () => {
 	const sorted = (
 		Object.entries(posts)
 			.map(([slug, post]) => ({
@@ -26,31 +27,34 @@ function Index() {
 			.sort((a, b) => b.date.getTime() - a.date.getTime())
 	)
 	return (
-		<List component="nav">
-			{sorted.map(({ post, date, url }) => (
-				<ListItemLink
-					key={url}
-					to={url}
-					primary={post.document.title}
-					secondary={date.toISOString().slice(0, 10)}
-				/>
-			))}
-		</List>
+		<Grid container justifyContent="center">
+			<List component="nav">
+				{sorted.map(({ post, date, url }) => (
+					<ListItemLink
+						key={url}
+						to={url}
+						primary={post.document.title}
+						secondary={date.toISOString().slice(0, 10)}
+					/>
+				))}
+			</List>
+
+		</Grid>
 	)
 }
 
-function RoutedPost(): React.ReactElement<any> {
+const RoutedPost: FC = () => {
 	const match = useParams<'id' | 'year' | 'month' | 'day'>()
 	const {
 		id,
 		year, month, day,
-	} = match
-	if (!(id! in posts)) {
+	} = match as Record<keyof typeof match, string>
+	if (!(id in posts)) {
 		return <div>{`404 – post ${id} not found`}</div>
 	}
-	const { date, document } = posts[id!]
+	const { date, document } = posts[id]!
 	if (
-		+year! !== date.getFullYear() || +month! !== date.getMonth() + 1 || +day! !== date.getDate()
+		+year !== date.getFullYear() || +month !== date.getMonth() + 1 || +day !== date.getDate()
 	) {
 		return <Navigate replace to={`./../../../../${date2url(date)}/${id}`}/>
 	}
@@ -68,17 +72,17 @@ function RoutedPost(): React.ReactElement<any> {
 	)
 }
 
-export default function Blog() {
-	return (
-		<>
-			<Helmet>
-				<title>Blog – phil.red</title>
-			</Helmet>
-			<Routes>
-				<Route index element={<Index/>}/>
-				<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
-				<Route path="*" element={<Navigate replace to="."/>}/>
-			</Routes>
-		</>
-	)
-}
+const Blog = () => (
+	<>
+		<Helmet>
+			<title>Blog – phil.red</title>
+		</Helmet>
+		<SlideRoutes animation="vertical-slide">
+			<Route index element={<Index/>}/>
+			<Route path=":year/:month/:day/:id" element={<RoutedPost/>}/>
+			<Route path="*" element={<Navigate replace to="."/>}/>
+		</SlideRoutes>
+	</>
+)
+
+export default Blog

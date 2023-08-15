@@ -1,8 +1,9 @@
 import { cloneElement } from 'react'
+
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 
 interface Props {
-	children: React.ReactElement;
+	children: React.ReactElement
 }
 
 export default function ElevationScroll({ children }: Props) {

@@ -1,18 +1,18 @@
 {
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact"
-    ],
-    "spellright.language": [
-        "en_US-large",
-        "en_US"
-    ],
-    "spellright.documentTypes": [
-        "markdown",
-        "restructuredtext",
-        "plaintext"
-    ],
-    "restructuredtext.confPath": ""
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+  ],
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true,
+  },
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
 }

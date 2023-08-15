@@ -1,0 +1,22 @@
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: /
+  schedule:
+    interval: weekly
+  groups:
+    react:
+      patterns:
+        - react
+        - react-dom
+        - '@types/react'
+        - '@types/react-dom'
+      # exclude-patterns: []
+    mui:
+      patterns:
+        - '@mui/*'
+    ts-eslint:
+      patterns:
+        - '@typescript-eslint/*'

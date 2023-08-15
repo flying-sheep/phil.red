@@ -1,12 +1,12 @@
-/** @jsxImportSource . */
+/** @jsxImportSource ../markup */
+/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
 import * as rst from 'restructured'
 import { SyntaxError } from 'restructured/lib/Parser.js'
-import { Language } from 'prism-react-renderer'
 
-import * as m from './MarkupDocument'
-import ASTError from './ASTError'
-import ParseError from './ParseError'
+import ASTError from '../markup/ASTError'
+import * as m from '../markup/MarkupDocument'
+import ParseError from '../markup/ParseError'
 
 interface Directive {
 	header: string | null
@@ -28,11 +28,11 @@ function parseDirective(lines: RSTNode[]): Directive {
 			lastParam = i + 1
 			return true
 		})
-		.reduce((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as string[]
+		.reduce<{ [k: string]: string }>((obj, line) => {
+			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [string, string, string]
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
-		}, {} as { [k: string]: string })
+		}, {})
 	const body = rest.slice(lastParam + 1)
 	return { header, params, body }
 }
@@ -48,8 +48,8 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	case 'comment':
 		return []
 	case 'reference': {
-		const name = (node.children[0] as RSTInlineNode).value as string
-		return [<m.Link ref={{ name }} pos={pos(node)}>{[name]}</m.Link>]
+		const name = (node.children[0] as RSTInlineNode).value
+		return [<m.Link ref={{ name }} pos={pos(node)}>{name}</m.Link>]
 	}
 	case 'section':
 		return [<m.Section pos={pos(node)}>{convertChildren(node, level + 1)}</m.Section>]
@@ -69,11 +69,11 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		return [<m.BlockQuote pos={pos(node)}>{convertChildren(node, level)}</m.BlockQuote>]
 	case 'text': {
 		const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
-		if (!fieldList) return [`${node.value}\n`]
-		const [, fieldName, fieldValue] = fieldList
+		if (!fieldList) return [node.value]
+		const [, fieldName, fieldValue] = fieldList as unknown as [string, string, string]
 		return [ // TODO: convert runs to single lists, not multiple
 			<m.FieldList pos={pos(node)}>
-				<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field>
+				{<m.Field name={fieldName} pos={pos(node)}>{fieldValue.trim()}</m.Field> as m.Field}
 			</m.FieldList>,
 		]
 	}
@@ -110,11 +110,12 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'pep': {
 			const num = node.children.map((text) => (text as RSTInlineNode).value).join('')
 			const href = `https://www.python.org/dev/peps/pep-${num.padStart(4, '0')}/`
-			return [<m.Link ref={{ href }} pos={pos(node)}>{[`PEP ${num}`]}</m.Link>]
+			return [<m.Link ref={{ href }} pos={pos(node)}>{`PEP ${num}`}</m.Link>]
 		}
 		case null:
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		default:
+			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 		}
 	case 'literal_block': {
@@ -128,7 +129,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { header, body } = parseDirective(node.children)
 			// TODO: check if in lang dict
 			return [
-				<m.CodeBlock language={header as Language || undefined} pos={pos(node)}>
+				<m.CodeBlock language={header ?? undefined} pos={pos(node)}>
 					{body}
 				</m.CodeBlock>,
 			]
@@ -136,14 +137,14 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'csv-table': {
 			const { header, params, body } = parseDirective(node.children)
 			const delim = (() => {
-				switch (params.delim) {
+				switch (params['delim']) {
 				case 'tab': return '\t'
 				case 'space': return ' '
-				default: return params.delim
+				default: return params['delim'] ?? ','
 				}
 			})()
 			return [
-				<m.Table caption={header || undefined} pos={pos(node)}>
+				<m.Table caption={header ?? undefined} pos={pos(node)}>
 					{body.map((r) => (
 						<m.Row pos={pos(node)}>
 							{r.split(delim).map((cell) => (
@@ -159,10 +160,10 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { header, params } = parseDirective(node.children)
 			return [
 				<m.Plotly
-					url={header || ''}
-					onClickLink={params.onClickLink}
+					url={header ?? ''}
+					onClickLink={params['onClickLink']}
 					style={{ width: '100%' }}
-					config={{ responsive: true } as any} // typing has no responsive
+					config={{ responsive: true }}
 					pos={pos(node)}
 				/>,
 			]
@@ -200,8 +201,9 @@ function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]>
 			const { name, anchor } = titleAnchor(child)
 			yield [name, `#${anchor}`]
 		} else if (child.type === 'comment') {
-			const comment = (child.children as [RSTInlineNode])[0].value as string
-			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) || []
+			const comment = (child.children as [RSTInlineNode])[0].value
+			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) ?? []
+			// TODO: “_`name with backticks`: ...”
 			if (name !== null && href !== null) yield [name.toLocaleLowerCase(), href]
 		} else if ('children' in child) {
 			yield* extractTargetsInner(child)
@@ -218,11 +220,10 @@ function extractTargets(node: RSTNode): {[key: string]: string} {
 	let newResolvable = true
 	while (newResolvable) {
 		newResolvable = false
-		for (const entry of Object.entries(pending)) {
-			const k = entry[0]
-			const v = entry[1] in resolved ? resolved[entry[1]] : entry[1] // if so the match will be true
+		for (const [k, maybeV] of Object.entries(pending)) {
+			const v = resolved[maybeV] ?? maybeV // if so the match will be true
 			// TODO: more schemas
-			if (v.match(URL_SCHEMA) || v.match(ANCHOR_SCHEMA)) {
+			if (v.match(URL_SCHEMA) ?? v.match(ANCHOR_SCHEMA)) {
 				resolved[k] = v
 				delete pending[k]
 				newResolvable = true
@@ -240,8 +241,20 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 	return nodes.map((node) => {
 		if (typeof node === 'string') return node
 		const elem = { ...node }
-		if (elem.type === m.Type.Link && 'name' in elem.ref && elem.ref.name.toLocaleLowerCase() in targets) {
-			elem.ref = { href: targets[elem.ref.name.toLocaleLowerCase()] }
+		if (elem.type === m.Type.Link && 'name' in elem.ref) {
+			const maybeHref = targets[elem.ref.name.toLocaleLowerCase()]
+			if (maybeHref) {
+				elem.ref = { href: maybeHref }
+			} else { // maybe inline syntax
+				const [, text, href] = /^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
+				if (text && href) {
+					elem.ref = { href }
+					elem.children = [text]
+				} else {
+					// eslint-disable-next-line no-console
+					console.warn(`Unmatched link target ${elem.ref.name}`)
+				}
+			}
 		}
 		elem.children = resolveTargets(elem.children, targets)
 		return elem
@@ -250,11 +263,11 @@ function resolveTargets(nodes: m.Node[], targets: {[key: string]: string}): m.No
 
 function getTitle(body: m.Node[]): string {
 	if (body.length === 0) throw new ASTError('Empty body', undefined)
-	const section = body[0]
+	const section = body[0]!
 	if (typeof section === 'string') throw new ASTError(`Body starts with string: ${section}`, section)
 	if (section.type !== m.Type.Section) throw new ASTError('No section!', section, section.pos)
 	if (section.children.length === 0) throw new ASTError('Empty Section', section, section.pos)
-	const title = section.children[0]
+	const title = section.children[0]!
 	if (typeof title === 'string') throw new ASTError(`Section starts with string: ${title}`, section.pos)
 	if (title.type !== m.Type.Title) throw new ASTError('No title!', title, title.pos)
 	const text = title.children[0]
@@ -263,19 +276,19 @@ function getTitle(body: m.Node[]): string {
 }
 
 function getMeta(fieldLists: m.Elem) {
-	const check = ((n) => typeof n !== 'string' && n.type === m.Type.FieldList) as ((n: m.Node) => n is m.FieldList)
+	// TODO: https://github.com/microsoft/TypeScript/issues/54966
 	return Object.fromEntries(
 		fieldLists.children
-			.filter(check)
-			.flatMap((fl) => fl.children as m.Field[])
-			.map((f) => [f.name, f.children[0].toString()]),
+			.filter((n: m.Node): n is m.FieldList => typeof n !== 'string' && n.type === m.Type.FieldList)
+			.flatMap((fl) => (fl as m.FieldList).children)
+			.map((f) => [f.name, f.children[0]?.toString()]),
 	)
 }
 
 export default function rstConvert(code: string): m.Document {
 	let parsed
 	try {
-		parsed = rst.default.parse(code, { position: true, blanklines: true, indent: true })
+		parsed = rst.default.default.parse(code, { position: true, blanklines: true, indent: true })
 	} catch (e) {
 		if (e instanceof SyntaxError) {
 			throw new ParseError(e, e.location.start) // TODO: capture end too

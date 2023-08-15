@@ -1,10 +1,12 @@
 export default class ASTError extends Error {
-	message: string
-	node: any
+	override message: string
+	node: unknown
 	pos: number | undefined
 	loc: { line: number, column: number } | undefined
 	constructor(
-		message: string, node: any, pos?: number | { line: number, column: number, offset?: number },
+		message: string,
+		node: unknown,
+		pos?: number | { line: number, column: number, offset?: number },
 	) {
 		super()
 		this.message = `${message}\n${JSON.stringify(node, undefined, '\t')}`

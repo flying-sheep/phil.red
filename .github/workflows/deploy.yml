@@ -1,0 +1,30 @@
+name: Deployment
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: 'phil.red'
+      url: https://phil.red
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: "18"
+        cache: yarn
+    - run: yarn install --immutable
+    - run: yarn build
+      env:
+        NODE_ENV: production
+    - uses: burnett01/rsync-deployments@5.2.1
+      with:
+        switches: --recursive --delete --archive --compress --verbose
+        path: dist/
+        remote_path: /srv/http/phil.red
+        remote_host: phil.red
+        remote_user: root
+        remote_port: 1988
+        remote_key: ${{ secrets.DEPLOY_KEY }}

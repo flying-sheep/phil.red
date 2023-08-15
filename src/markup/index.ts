@@ -1,9 +1,7 @@
-import { Document } from './MarkupDocument'
-import mdConvert from './md'
-import rstConvert from './rst'
-import ParseError from './ParseError'
 import ASTError from './ASTError'
+import { Document, Type } from './MarkupDocument'
+import ParseError from './ParseError'
 
 export {
-	mdConvert, rstConvert, Document, ParseError, ASTError,
+	Document, Type, ParseError, ASTError,
 }
