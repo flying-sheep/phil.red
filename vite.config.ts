@@ -1,7 +1,6 @@
 /* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
 
@@ -11,11 +10,6 @@ export default defineConfig({
 		react(),
 		renderdoc({
 			include: '*.@(md|rst)',
-		}),
-		viteStaticCopy({
-			targets: [
-				{ src: 'lighttpd.conf', dest: '.' },
-			],
 		}),
 	],
 })
