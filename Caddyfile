@@ -1,6 +1,10 @@
-phil.red {
-        root * /srv/http/phil.red
-        encode gzip
-        try_files {path} /index.html
-        file_server
+http://phil.red {
+	redir https://{host}{uri} permanent
+}
+
+https://phil.red {
+	root * /srv/http/phil.red
+	encode gzip
+	try_files {path} /index.html
+	file_server
 }
