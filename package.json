@@ -48,7 +48,7 @@
 		"@total-typescript/ts-reset": "^0.4.2",
 		"@tsconfig/strictest": "^2.0.1",
 		"@types/estree": "^1.0.1",
-		"@types/katex": "^0.16.1",
+		"@types/katex": "^0.16.2",
 		"@types/markdown-it": "^12.2.3",
 		"@types/node": "^20.4.1",
 		"@types/plotly.js-basic-dist-min": "^2.12.1",
