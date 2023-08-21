@@ -13,5 +13,7 @@ export declare namespace JSX {
 	type IntrinsicAttributes = { children?: unknown }
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	type IntrinsicClassAttributes<T> = Record<string, never>
-	interface ElementChildrenAttribute { children: unknown }
+	interface ElementChildrenAttribute {
+		children: unknown
+	}
 }

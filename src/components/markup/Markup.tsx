@@ -1,7 +1,5 @@
 /* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
-import {
-	Children, type FC, useCallback, useMemo,
-} from 'react'
+import { Children, type FC, useCallback, useMemo } from 'react'
 import { JSONTree, type ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
 
@@ -19,10 +17,7 @@ export interface MarkupProps {
 const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 	const theme = useTheme()
 	const expand = useCallback<ShouldExpandNodeInitially>((keyPath) => keyPath[0] !== 'pos', [])
-	const nodes = useMemo(
-		() => children.map((e) => <MarkupNodeComponent node={e} level={0}/>),
-		[children],
-	)
+	const nodes = useMemo(() => children.map((e) => <MarkupNodeComponent node={e} level={0} />), [children])
 	return (
 		<Box
 			component="article"

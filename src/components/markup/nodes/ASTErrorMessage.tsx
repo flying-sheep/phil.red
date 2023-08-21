@@ -10,9 +10,7 @@ export interface ASTErrorMessageProps {
 	children: React.ReactNode
 }
 
-const ASTErrorMessage: FC<ASTErrorMessageProps> = ({
-	node, children,
-}: ASTErrorMessageProps) => (
+const ASTErrorMessage: FC<ASTErrorMessageProps> = ({ node, children }: ASTErrorMessageProps) => (
 	<Box sx={{ color: red.A400 }}>
 		{children}
 		{node && <pre>{JSON.stringify(node, undefined, 2)}</pre>}

@@ -12,16 +12,16 @@ const Home = () => (
 		</Typography>
 		<Typography variant="h6" align="center" paragraph>
 			What software won’t sell you out?
-			<br/>
+			<br />
 			When do we get full automation and eternal life?
-			<br/>
+			<br />
 			Why are people blaming immigrants, not capitalism?
 		</Typography>
 		<Typography variant="h6" align="center" paragraph>
 			I won’t be the one to fix those questions.
-			<br/>
+			<br />
 			Currently most progress happens for the first.
-			<br/>
+			<br />
 			But I will never stop living for all.
 		</Typography>
 	</Container>

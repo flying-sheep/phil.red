@@ -30,37 +30,35 @@ type ListItemLinkProps<P = object> = {
 	sub?: React.ReactNode
 }
 
-function isValidComponentType<P = object>(
-	e: React.ReactNode | React.ComponentType<P>,
-): e is React.ComponentType<P> {
+function isValidComponentType<P = object>(e: React.ReactNode | React.ComponentType<P>): e is React.ComponentType<P> {
 	return typeof e !== 'string' && isValidElementType(e)
 }
 
-const ListItemLink = ({
-	href, icon, text, sub,
-}: ListItemLinkProps = {}) => (
+const ListItemLink = ({ href, icon, text, sub }: ListItemLinkProps = {}) => (
 	<ListItem disablePadding>
 		<ListItemButton component={Link} href={href}>
 			<ListItemAvatar>
-				<Avatar>
-					{isValidComponentType(icon) ? createElement(icon) : icon}
-				</Avatar>
+				<Avatar>{isValidComponentType(icon) ? createElement(icon) : icon}</Avatar>
 			</ListItemAvatar>
-			<ListItemText primary={text} secondary={sub}/>
+			<ListItemText primary={text} secondary={sub} />
 		</ListItemButton>
 	</ListItem>
 )
 
 const GitHubItems = () => (
 	<>
-		<ListItem><ListItemText primary="2nd author"/></ListItem>
+		<ListItem>
+			<ListItemText primary="2nd author" />
+		</ListItem>
 		<ListItemLink
 			href="https://github.com/theislab/scanpy"
 			icon={AllInclusive}
 			text="scanpy"
 			sub="single cell analysis in Python"
 		/>
-		<ListItem><ListItemText primary="1st, main, or only author"/></ListItem>
+		<ListItem>
+			<ListItemText primary="1st, main, or only author" />
+		</ListItem>
 		<ListItemLink
 			href="https://github.com/theislab/anndata"
 			icon={ViewComfy}
@@ -97,12 +95,7 @@ const GitHubItems = () => (
 			text="rust-rst"
 			sub="reStructuredText parser and renderer in Rust"
 		/>
-		<ListItemLink
-			href="https://github.com/flying-sheep/phil.red"
-			icon={Web}
-			text="phil.red"
-			sub="this website"
-		/>
+		<ListItemLink href="https://github.com/flying-sheep/phil.red" icon={Web} text="phil.red" sub="this website" />
 	</>
 )
 
@@ -112,12 +105,7 @@ const Code = () => (
 			<title>Code – phil.red</title>
 		</Helmet>
 		<List>
-			<ListItemLink
-				href="https://github.com/flying-sheep"
-				icon={GitHub}
-				text="GitHub"
-				sub="flying-sheep"
-			/>
+			<ListItemLink href="https://github.com/flying-sheep" icon={GitHub} text="GitHub" sub="flying-sheep" />
 			<ListItemLink
 				href="https://pypi.org/user/flyingsheep/"
 				icon={PythonIcon}
@@ -130,7 +118,7 @@ const Code = () => (
 				text="AUR"
 				sub="My Arch Linux packages (me=packager)"
 			/>
-			<GitHubItems/>
+			<GitHubItems />
 		</List>
 	</>
 )

@@ -13,10 +13,7 @@
 		"resolveJsonModule": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"typeRoots": [
-			"./node_modules/@types",
-			"./typings",
-		],
+		"typeRoots": ["./node_modules/@types", "./typings"],
 	},
 	"include": ["vite.config.ts", "src"],
 }

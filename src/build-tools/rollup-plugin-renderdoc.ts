@@ -11,14 +11,12 @@ import MagicString from 'magic-string'
 import type { PluginContext, AcornNode } from 'rollup'
 import type { Plugin } from 'vite'
 
-import {
-	Document, Type, ParseError, ASTError,
-} from '../markup'
+import { Document, Type, ParseError, ASTError } from '../markup'
 
 import mdConvert from './md'
 import rstConvert from './rst'
 
-function zipObject<V>(keys: string[], values: V[]): {[k: string]: V} {
+function zipObject<V>(keys: string[], values: V[]): { [k: string]: V } {
 	if (keys.length !== values.length) {
 		throw new Error(`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`)
 	}
@@ -44,12 +42,12 @@ export interface Converter {
 }
 
 export interface Config {
-	converters: {[ext: string]: Converter}
+	converters: { [ext: string]: Converter }
 	include?: string | string[]
 	exclude?: string | string[]
 }
 
-export const DEFAULT_CONVERTERS: {[ext: string]: Converter} = {
+export const DEFAULT_CONVERTERS: { [ext: string]: Converter } = {
 	'.md': mdConvert,
 	'.rst': rstConvert,
 }
@@ -64,31 +62,41 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		const paths = await doGlob(dir)
 		if (paths.length === 0) return null
 		// eslint-disable-next-line consistent-return
-		const contents = await Promise.all(paths.map(async (p) => {
-			const code = await fs.readFile(p, { encoding: 'utf-8' })
-			const ext = path.extname(p)
-			const convert = converters[path.extname(p)] ?? ctx.error({ id: p, message: `No converter for ${ext} registered` })
-			try {
-				return convert(code)
-			} catch (eOrig) {
-				let e: Error
-				if (eOrig instanceof ParseError) {
-					e = eOrig
-					e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
-				} else if (eOrig instanceof ASTError) {
-					e = eOrig
-					e.message = `Error converting the ${ext} AST: ${eOrig.message}`
-				} else {
-					// eslint-disable-next-line @typescript-eslint/no-base-to-string
-					e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
-					e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
+		const contents = await Promise.all(
+			paths.map(async (p) => {
+				const code = await fs.readFile(p, { encoding: 'utf-8' })
+				const ext = path.extname(p)
+				const convert =
+					converters[path.extname(p)] ??
+					ctx.error({
+						id: p,
+						message: `No converter for ${ext} registered`,
+					})
+				try {
+					return convert(code)
+				} catch (eOrig) {
+					let e: Error
+					if (eOrig instanceof ParseError) {
+						e = eOrig
+						e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
+					} else if (eOrig instanceof ASTError) {
+						e = eOrig
+						e.message = `Error converting the ${ext} AST: ${eOrig.message}`
+					} else {
+						// eslint-disable-next-line @typescript-eslint/no-base-to-string
+						e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
+						e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
+					}
+					;(e as Error & { id: string }).id = p // TODO: why?
+					ctx.error(e)
 				}
-				(e as Error & { id: string }).id = p // TODO: why?
-				ctx.error(e)
-			}
-		}))
-		
-		const map = zipObject(paths.map((p) => path.basename(p)), contents)
+			}),
+		)
+
+		const map = zipObject(
+			paths.map((p) => path.basename(p)),
+			contents,
+		)
 		for (const [p, content] of Object.entries(map)) {
 			if (!content) {
 				console.log(`Skipped ${p}`)
@@ -100,11 +108,11 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		}
 		return map
 	}
-	
+
 	async function createCode(ctx: PluginContext, id: string) {
 		const map = await loadPosts(ctx, id)
 		if (map === null) return null
-		
+
 		const code = `export default ${JSON.stringify(map)}`
 		const magicString = new MagicString(code)
 		const ast = ctx.parse(code) as Node
@@ -136,21 +144,22 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			.join('\n')
 		return `${importBlock}\n${magicString.toString()}`
 	}
-	
+
 	async function doGlob(id: string): Promise<string[]> {
-		const isDir = await fs.stat(id).then((s) => s.isDirectory()).catch(() => false)
+		const isDir = await fs
+			.stat(id)
+			.then((s) => s.isDirectory())
+			.catch(() => false)
 		if (!isDir) return []
 		const paths = await globby(patterns, { cwd: id, absolute: true })
 		return paths
 	}
-	
+
 	return {
 		name: 'renderdoc',
 		async resolveId(id: string, importer?: string) {
 			if (!id.startsWith('./') && !id.startsWith('../')) return null
-			const rel = importer === undefined
-				? id
-				: path.join(path.dirname(importer), id)
+			const rel = importer === undefined ? id : path.join(path.dirname(importer), id)
 			if ((await doGlob(rel)).length === 0) return null
 			return `${rel}/__renderdoc`
 		},

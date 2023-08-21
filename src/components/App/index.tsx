@@ -1,13 +1,7 @@
 import { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { PortalTarget } from 'react-portal-target'
-import {
-	Link,
-	Route,
-	Navigate,
-	useLocation,
-	matchPath,
-} from 'react-router-dom'
+import { Link, Route, Navigate, useLocation, matchPath } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
 
 import AppBar from '@mui/material/AppBar'
@@ -17,9 +11,7 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import { deepPurple } from '@mui/material/colors'
-import {
-	alpha, createTheme, responsiveFontSizes, ThemeProvider,
-} from '@mui/material/styles'
+import { alpha, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Blog from '../Blog'
@@ -54,25 +46,20 @@ const scaleLinear = (domain: [number, number], range: [number, number]) => {
 }
 
 const hScale = scaleLinear([1, 6], [3, 1])
-const hSizes = Object.fromEntries([1, 2, 3, 4, 5, 6].map((n) => (
-	[`h${n}`, { fontSize: `${hScale(n)}rem` }]
-)))
+const hSizes = Object.fromEntries([1, 2, 3, 4, 5, 6].map((n) => [`h${n}`, { fontSize: `${hScale(n)}rem` }]))
 
 const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
-	const theme = useMemo(
-		() => {
-			const baseTheme = createTheme({
-				typography: hSizes,
-				palette: {
-					mode: dark ? 'dark' : 'light',
-					primary: deepPurple,
-				},
-			})
-			return responsiveFontSizes(baseTheme)
-		},
-		[dark],
-	)
+	const theme = useMemo(() => {
+		const baseTheme = createTheme({
+			typography: hSizes,
+			palette: {
+				mode: dark ? 'dark' : 'light',
+				primary: deepPurple,
+			},
+		})
+		return responsiveFontSizes(baseTheme)
+	}, [dark])
 	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))?.pattern.path
 
 	return (
@@ -80,7 +67,7 @@ const App = () => {
 			<Helmet>
 				<title>phil.red</title>
 			</Helmet>
-			<CssBaseline/>
+			<CssBaseline />
 			<ElevationScroll>
 				<AppBar
 					position="sticky"
@@ -94,13 +81,7 @@ const App = () => {
 					<Toolbar component="nav" sx={{ justifyContent: 'center' }}>
 						<Tabs centered value={currentTab}>
 							{ROUTE_LINKS.map(({ label, href, pattern }) => (
-								<Tab
-									key={label}
-									label={label}
-									value={pattern}
-									component={Link}
-									to={href}
-								/>
+								<Tab key={label} label={label} value={pattern} component={Link} to={href} />
 							))}
 						</Tabs>
 					</Toolbar>
@@ -115,13 +96,13 @@ const App = () => {
 				}}
 			>
 				<SlideRoutes>
-					<Route path="blog/*" element={<Blog/>}/>
-					<Route index element={<Home/>}/>
-					<Route path="code" element={<Code/>}/>
-					<Route path="*" element={<Navigate replace to="/"/>}/>
+					<Route path="blog/*" element={<Blog />} />
+					<Route index element={<Home />} />
+					<Route path="code" element={<Code />} />
+					<Route path="*" element={<Navigate replace to="/" />} />
 				</SlideRoutes>
 			</Box>
-			<PortalTarget name="page-source"/>
+			<PortalTarget name="page-source" />
 		</ThemeProvider>
 	)
 }
