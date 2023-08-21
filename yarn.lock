@@ -1965,17 +1965,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-prettier@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "eslint-config-prettier@npm:9.0.0"
-  peerDependencies:
-    eslint: ">=7.0.0"
-  bin:
-    eslint-config-prettier: bin/cli.js
-  checksum: 362e991b6cb343f79362bada2d97c202e5303e6865888918a7445c555fb75e4c078b01278e90be98aa98ae22f8597d8e93d48314bec6824f540f7efcab3ce451
-  languageName: node
-  linkType: hard
-
 "esprima@npm:^4.0.0":
   version: 4.0.1
   resolution: "esprima@npm:4.0.1"
@@ -3053,7 +3042,6 @@ __metadata:
     "@types/react-plotly.js": ^2.6.0
     "@vitejs/plugin-react": ^4.0.3
     depcheck: ^1.4.3
-    eslint-config-prettier: ^9.0.0
     estree-walker: ^3.0.3
     fetch-suspense: ^1.2.2
     globby: ^13.2.2
