@@ -13,8 +13,9 @@
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"bundlesize": "tsc && vite-bundle-visualizer",
-		"lint": "$npm_execpath run lint:style && $npm_execpath run lint:deps",
-		"lint:style": "lint-staged --diff=4b825dc642cb6eb9a060e54bf8d69288fbee4904..",
+		"lint": "$npm_execpath run lint:format && $npm_execpath run lint:style && $npm_execpath run lint:deps",
+		"lint:format": "prettier --write '**/*'",
+		"lint:style": "eslint '{*.ts,src/**/*.ts*}'",
 		"lint:deps": "depcheck --ignores=@tsconfig/strictest,@total-typescript/ts-reset",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red",
 		"postinstall": "husky install"
