@@ -1100,15 +1100,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prettier@npm:^3":
-  version: 3.0.0
-  resolution: "@types/prettier@npm:3.0.0"
-  dependencies:
-    prettier: "*"
-  checksum: a2a512d304e5bcf78f38089dc88ad19215e6ab871d435a17aef3ce538a63b07c0e359c18db23989dc1ed9fff96d99eee1f680416080184df5c7e0e3bf767e165
-  languageName: node
-  linkType: hard
-
 "@types/prismjs@npm:^1.26.0":
   version: 1.26.0
   resolution: "@types/prismjs@npm:1.26.0"
@@ -4608,7 +4599,6 @@ __metadata:
     "@types/markdown-it": ^12.2.3
     "@types/node": ^20.5.1
     "@types/plotly.js-basic-dist-min": ^2.12.1
-    "@types/prettier": ^3
     "@types/prismjs": ^1.26.0
     "@types/react": ^18.2.20
     "@types/react-dom": ^18.2.7
@@ -4838,7 +4828,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:*, prettier@npm:^3.0.2":
+"prettier@npm:^3.0.2":
   version: 3.0.2
   resolution: "prettier@npm:3.0.2"
   bin:
