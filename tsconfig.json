@@ -15,5 +15,5 @@
 		"jsx": "react-jsx",
 		"typeRoots": ["./node_modules/@types", "./typings"],
 	},
-	"include": ["vite.config.ts", "src"],
+	"include": ["vite.config.ts", "src", "posts"],
 }
