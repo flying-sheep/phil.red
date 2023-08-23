@@ -1,8 +1,6 @@
 import useFetch from 'fetch-suspense'
 import type { Data, Layout } from 'plotly.js-basic-dist-min'
-import {
-	type FC, lazy, Suspense, useCallback,
-} from 'react'
+import { type FC, lazy, Suspense, useCallback } from 'react'
 import type { PlotParams } from 'react-plotly.js'
 import createPlotlyComponent from 'react-plotly.js/factory'
 
@@ -33,7 +31,10 @@ const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
 	},
 })
 
-interface ResponseData { layout: Layout, data: Data[] }
+interface ResponseData {
+	layout: Layout
+	data: Data[]
+}
 
 const Plot = lazy(async () => {
 	const { default: Plotly } = await import('plotly.js-basic-dist-min')
@@ -46,26 +47,39 @@ const PlotlyInner: FC<Omit<PlotlyProps, 'onClickLink'>> = ({ url, onClick, ...re
 
 	// TODO: deep merge everything
 	const props: PlotParams = {
-		layout: { ...defaultOverride(theme).layout, ...resp.layout, ...rest.layout },
+		layout: {
+			...defaultOverride(theme).layout,
+			...resp.layout,
+			...rest.layout,
+		},
 		data: [...(resp.data ?? []), ...(rest.data ?? [])],
 		onClick,
 		...rest,
 	}
-	return <Plot useResizeHandler {...props}/>
+	return <Plot useResizeHandler {...props} />
 }
 
-const Plotly: FC<PlotlyProps> = ({
-	onClickLink, onClick, ...rest
-}) => {
-	const handleOnClickLink = useCallback((e: Readonly<Plotly.PlotMouseEvent>) => {
-		const point = e.points[0] as unknown as Record<string, string>
-		const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) => (key in point ? point[key as string]! : `{${key as string}}`))
-		window.open(url)
-	}, [onClickLink])
+const Plotly: FC<PlotlyProps> = ({ onClickLink, onClick, ...rest }) => {
+	const handleOnClickLink = useCallback(
+		(e: Readonly<Plotly.PlotMouseEvent>) => {
+			const point = e.points[0] as unknown as Record<string, string>
+			const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) =>
+				key in point ? point[key as string]! : `{${key as string}}`,
+			)
+			window.open(url)
+		},
+		[onClickLink],
+	)
 
 	return (
-		<Suspense fallback={<Stack alignItems="center"><CircularProgress/></Stack>}>
-			<PlotlyInner onClick={onClickLink ? handleOnClickLink : onClick} {...rest}/>
+		<Suspense
+			fallback={
+				<Stack alignItems="center">
+					<CircularProgress />
+				</Stack>
+			}
+		>
+			<PlotlyInner onClick={onClickLink ? handleOnClickLink : onClick} {...rest} />
 		</Suspense>
 	)
 }

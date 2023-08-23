@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		<StrictMode>
 			<HelmetProvider>
 				<Router>
-					<App/>
+					<App />
 				</Router>
 			</HelmetProvider>
 		</StrictMode>,

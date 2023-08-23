@@ -17,13 +17,11 @@ interface LilProps extends LinkProps {
 	autoFocus?: boolean
 }
 
-const ListItemLink = ({
-	icon, primary, secondary, ...props
-}: LilProps) => (
+const ListItemLink = ({ icon, primary, secondary, ...props }: LilProps) => (
 	<ListItem disablePadding>
 		<ListItemButton component={Link} {...props}>
 			{icon && <ListItemIcon>{icon}</ListItemIcon>}
-			<ListItemText primary={primary} secondary={secondary}/>
+			<ListItemText primary={primary} secondary={secondary} />
 		</ListItemButton>
 	</ListItem>
 )

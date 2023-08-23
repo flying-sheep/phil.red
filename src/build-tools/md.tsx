@@ -42,41 +42,45 @@ function pos(token: Token) {
 
 function convertNode(token: Token): m.Node[] {
 	switch (token.type) {
-	case 'inline':
-		return convertChildren(token)
-	case 'text':
-		return [token.content]
-	case 'paragraph':
-		return [<m.Paragraph pos={pos(token)}>{convertChildren(token)}</m.Paragraph>]
-	case 'heading': {
-		const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
-		if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
-		const anchor = undefined // TODO
-		return [
-			<m.Title level={parseInt(level, 10)} anchor={anchor} pos={pos(token)}>
-				{convertChildren(token)}
-			</m.Title>,
-		]
-	}
-	case 'link': {
-		const [, href] = token.attrs?.find(([name]) => name === 'href') ?? []
-		if (!href) throw new ASTError('Link without href encountered', token)
-		return [<m.Link ref={{ href }} pos={pos(token)}>{convertChildren(token)}</m.Link>]
-	}
-	case 'hardbreak':
-		return [<m.LineBreak pos={pos(token)}/>]
-	case 'softbreak':
-		return []
-	case 'code_inline':
-		return [<m.Code pos={pos(token)}>{token.content}</m.Code>]
-	case 'fence':
-		return [<m.CodeBlock pos={pos(token)}>{token.content}</m.CodeBlock>]
-	case 'bullet_list':
-		return [<m.BulletList pos={pos(token)}>{convertChildren(token)}</m.BulletList>]
-	case 'list_item':
-		return [<m.ListItem pos={pos(token)}>{convertChildren(token)}</m.ListItem>]
-	default:
-		throw new ASTError(`Unknown token type “${token.type}”`, JSON.stringify(token))
+		case 'inline':
+			return convertChildren(token)
+		case 'text':
+			return [token.content]
+		case 'paragraph':
+			return [<m.Paragraph pos={pos(token)}>{convertChildren(token)}</m.Paragraph>]
+		case 'heading': {
+			const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
+			if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
+			const anchor = undefined // TODO
+			return [
+				<m.Title level={parseInt(level, 10)} anchor={anchor} pos={pos(token)}>
+					{convertChildren(token)}
+				</m.Title>,
+			]
+		}
+		case 'link': {
+			const [, href] = token.attrs?.find(([name]) => name === 'href') ?? []
+			if (!href) throw new ASTError('Link without href encountered', token)
+			return [
+				<m.Link ref={{ href }} pos={pos(token)}>
+					{convertChildren(token)}
+				</m.Link>,
+			]
+		}
+		case 'hardbreak':
+			return [<m.LineBreak pos={pos(token)} />]
+		case 'softbreak':
+			return []
+		case 'code_inline':
+			return [<m.Code pos={pos(token)}>{token.content}</m.Code>]
+		case 'fence':
+			return [<m.CodeBlock pos={pos(token)}>{token.content}</m.CodeBlock>]
+		case 'bullet_list':
+			return [<m.BulletList pos={pos(token)}>{convertChildren(token)}</m.BulletList>]
+		case 'list_item':
+			return [<m.ListItem pos={pos(token)}>{convertChildren(token)}</m.ListItem>]
+		default:
+			throw new ASTError(`Unknown token type “${token.type}”`, JSON.stringify(token))
 	}
 }
 

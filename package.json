@@ -13,10 +13,12 @@
 		"build": "tsc && vite build",
 		"preview": "vite preview",
 		"bundlesize": "tsc && vite-bundle-visualizer",
-		"lint": "$npm_execpath run lint:style && $npm_execpath run lint:deps",
-		"lint:style": "eslint '{*.js,*.ts,src/**/*.ts*}'",
+		"lint": "$npm_execpath run lint:format && $npm_execpath run lint:style && $npm_execpath run lint:deps",
+		"lint:format": "prettier --write '**/*'",
+		"lint:style": "eslint '{*.ts,src/**/*.ts*}'",
 		"lint:deps": "depcheck --ignores=@tsconfig/strictest,@total-typescript/ts-reset",
-		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red"
+		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red",
+		"postinstall": "husky install"
 	},
 	"files": [
 		"dist"
@@ -64,6 +66,7 @@
 		"eslint": "^8.47.0",
 		"eslint-config-airbnb": "^19.0.4",
 		"eslint-config-flying-sheep": "^5.2.0",
+		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-import": "^2.27.5",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
 		"eslint-plugin-no-foreach": "^1.0.0",
@@ -72,8 +75,11 @@
 		"eslint-plugin-react-prefer-function-component": "^3.1.0",
 		"estree-walker": "^3.0.3",
 		"globby": "^13.2.2",
+		"husky": ">=6",
+		"lint-staged": ">=10",
 		"magic-string": "^0.30.2",
 		"markdown-it": "^13.0.1",
+		"prettier": "^3.0.2",
 		"react-json-tree": "^0.18.0",
 		"restructured": "^0.0.11",
 		"rollup": "^3.26.2",
@@ -81,5 +87,9 @@
 		"vite": "^4.4.9",
 		"vite-bundle-visualizer": "^0.10.0"
 	},
-	"packageManager": "yarn@3.6.1"
+	"packageManager": "yarn@3.6.1",
+	"lint-staged": {
+		"!(rawPosts)": "prettier --write",
+		"*.ts{,x}": "eslint --cache --fix"
+	}
 }

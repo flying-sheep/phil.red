@@ -10,7 +10,7 @@ declare module 'react-slide-routes' {
 		destroy?: boolean
 		children: ReactNode | ReactNode[]
 	}
-	
+
 	interface SlideRoutesDefaultProps {
 		animation: 'slide'
 		pathList: []
@@ -19,7 +19,9 @@ declare module 'react-slide-routes' {
 		destroy: true
 	}
 
-	const SlideRoutes: FC<SlideRoutesProps> & { defaultProps: SlideRoutesDefaultProps }
+	const SlideRoutes: FC<SlideRoutesProps> & {
+		defaultProps: SlideRoutesDefaultProps
+	}
 
 	export default SlideRoutes
 }

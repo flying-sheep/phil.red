@@ -36,31 +36,31 @@ function isValidComponentType<P = object>(
 	return typeof e !== 'string' && isValidElementType(e)
 }
 
-const ListItemLink = ({
-	href, icon, text, sub,
-}: ListItemLinkProps = {}) => (
+const ListItemLink = ({ href, icon, text, sub }: ListItemLinkProps = {}) => (
 	<ListItem disablePadding>
 		<ListItemButton component={Link} href={href}>
 			<ListItemAvatar>
-				<Avatar>
-					{isValidComponentType(icon) ? createElement(icon) : icon}
-				</Avatar>
+				<Avatar>{isValidComponentType(icon) ? createElement(icon) : icon}</Avatar>
 			</ListItemAvatar>
-			<ListItemText primary={text} secondary={sub}/>
+			<ListItemText primary={text} secondary={sub} />
 		</ListItemButton>
 	</ListItem>
 )
 
 const GitHubItems = () => (
 	<>
-		<ListItem><ListItemText primary="2nd author"/></ListItem>
+		<ListItem>
+			<ListItemText primary="2nd author" />
+		</ListItem>
 		<ListItemLink
 			href="https://github.com/theislab/scanpy"
 			icon={AllInclusive}
 			text="scanpy"
 			sub="single cell analysis in Python"
 		/>
-		<ListItem><ListItemText primary="1st, main, or only author"/></ListItem>
+		<ListItem>
+			<ListItemText primary="1st, main, or only author" />
+		</ListItem>
 		<ListItemLink
 			href="https://github.com/theislab/anndata"
 			icon={ViewComfy}
@@ -130,7 +130,7 @@ const Code = () => (
 				text="AUR"
 				sub="My Arch Linux packages (me=packager)"
 			/>
-			<GitHubItems/>
+			<GitHubItems />
 		</List>
 	</>
 )
