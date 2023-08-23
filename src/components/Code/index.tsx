@@ -30,7 +30,9 @@ type ListItemLinkProps<P = object> = {
 	sub?: React.ReactNode
 }
 
-function isValidComponentType<P = object>(e: React.ReactNode | React.ComponentType<P>): e is React.ComponentType<P> {
+function isValidComponentType<P = object>(
+	e: React.ReactNode | React.ComponentType<P>,
+): e is React.ComponentType<P> {
 	return typeof e !== 'string' && isValidElementType(e)
 }
 
@@ -95,7 +97,12 @@ const GitHubItems = () => (
 			text="rust-rst"
 			sub="reStructuredText parser and renderer in Rust"
 		/>
-		<ListItemLink href="https://github.com/flying-sheep/phil.red" icon={Web} text="phil.red" sub="this website" />
+		<ListItemLink
+			href="https://github.com/flying-sheep/phil.red"
+			icon={Web}
+			text="phil.red"
+			sub="this website"
+		/>
 	</>
 )
 
@@ -105,7 +112,12 @@ const Code = () => (
 			<title>Code – phil.red</title>
 		</Helmet>
 		<List>
-			<ListItemLink href="https://github.com/flying-sheep" icon={GitHub} text="GitHub" sub="flying-sheep" />
+			<ListItemLink
+				href="https://github.com/flying-sheep"
+				icon={GitHub}
+				text="GitHub"
+				sub="flying-sheep"
+			/>
 			<ListItemLink
 				href="https://pypi.org/user/flyingsheep/"
 				icon={PythonIcon}

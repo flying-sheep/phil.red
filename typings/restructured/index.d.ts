@@ -26,15 +26,15 @@ declare module 'restructured' {
 		line: number
 		column: number
 	}
-	export type BaseNode<HasPos> = HasPos extends true ? NodeWithPos : {}
+	export type BaseNode<HasPos> = HasPos extends true ? NodeWithPos : object
 	export interface NodeWithPos {
-		position: { start: Positon; end: Positon }
+		position: { start: Positon, end: Positon }
 	}
 	export type BlockNode<HasPos> = BaseNode<HasPos> & {
 		type: BlockNodeType
 		children: Node<HasPos>[]
 		blanklines?: string[]
-		indent?: { width: number; offset: number }
+		indent?: { width: number, offset: number }
 	}
 	export type InlineNode<HasPos> = BaseNode<HasPos> & {
 		type: InlineNodeType
@@ -82,13 +82,15 @@ declare module 'restructured' {
 }
 
 declare module 'restructured/lib/Parser.js' {
+	/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
+
 	import { Positon } from 'restructured'
 
 	export class SyntaxError extends Error {
 		message: string
 		expected: string | null
 		found: string | null
-		location: { start: Positon; end: Positon }
+		location: { start: Positon, end: Positon }
 	}
 	const exports: { SyntaxError: typeof SyntaxError }
 	export default exports

@@ -29,7 +29,11 @@ function parseDirective(lines: RSTNode[]): Directive {
 			return true
 		})
 		.reduce<{ [k: string]: string }>((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [string, string, string]
+			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [
+				string,
+				string,
+				string,
+			]
 			obj[name] = val // eslint-disable-line no-param-reassign
 			return obj
 		}, {})
@@ -119,7 +123,9 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 				case 'math':
 					return [
 						<m.InlineMath
-							math={node.children.map((text) => (text as RSTInlineNode).value).join('')}
+							math={node.children
+								.map((text) => (text as RSTInlineNode).value)
+								.join('')}
 							pos={pos(node)}
 						/>,
 					]
@@ -135,7 +141,9 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 					throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 			}
 		case 'literal_block': {
-			const texts = node.children.map((n) => (n.type === 'text' ? n.value : JSON.stringify(n)))
+			const texts = node.children.map((n) =>
+				n.type === 'text' ? n.value : JSON.stringify(n),
+			)
 			return [<m.CodeBlock pos={pos(node)}>{texts.join('\n')}</m.CodeBlock>]
 		}
 		case 'directive': {
@@ -284,11 +292,13 @@ function resolveTargets(nodes: m.Node[], targets: { [key: string]: string }): m.
 function getTitle(body: m.Node[]): string {
 	if (body.length === 0) throw new ASTError('Empty body', undefined)
 	const section = body[0]!
-	if (typeof section === 'string') throw new ASTError(`Body starts with string: ${section}`, section)
+	if (typeof section === 'string')
+		throw new ASTError(`Body starts with string: ${section}`, section)
 	if (section.type !== m.Type.Section) throw new ASTError('No section!', section, section.pos)
 	if (section.children.length === 0) throw new ASTError('Empty Section', section, section.pos)
 	const title = section.children[0]!
-	if (typeof title === 'string') throw new ASTError(`Section starts with string: ${title}`, section.pos)
+	if (typeof title === 'string')
+		throw new ASTError(`Section starts with string: ${title}`, section.pos)
 	if (title.type !== m.Type.Title) throw new ASTError('No title!', title, title.pos)
 	const text = title.children[0]
 	if (typeof text !== 'string') throw new ASTError('Empty title!', title, title.pos)
@@ -299,7 +309,10 @@ function getMeta(fieldLists: m.Elem) {
 	// TODO: https://github.com/microsoft/TypeScript/issues/54966
 	return Object.fromEntries(
 		fieldLists.children
-			.filter((n: m.Node): n is m.FieldList => typeof n !== 'string' && n.type === m.Type.FieldList)
+			.filter(
+				(n: m.Node): n is m.FieldList =>
+					typeof n !== 'string' && n.type === m.Type.FieldList,
+			)
 			.flatMap((fl) => (fl as m.FieldList).children)
 			.map((f) => [f.name, f.children[0]?.toString()]),
 	)
@@ -323,7 +336,8 @@ export default function rstConvert(code: string): m.Document {
 	const targets = extractTargets(parsed)
 	const children = resolveTargets(convertNode(parsed, 0), targets)
 
-	const metadata = (children[0] as m.Elem).type === m.Type.Section ? {} : getMeta(children.shift() as m.Elem)
+	const metadata =
+		(children[0] as m.Elem).type === m.Type.Section ? {} : getMeta(children.shift() as m.Elem)
 
 	return { title: getTitle(children), children, metadata }
 }

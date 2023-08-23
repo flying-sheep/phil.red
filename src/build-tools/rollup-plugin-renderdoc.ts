@@ -18,7 +18,9 @@ import rstConvert from './rst'
 
 function zipObject<V>(keys: string[], values: V[]): { [k: string]: V } {
 	if (keys.length !== values.length) {
-		throw new Error(`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`)
+		throw new Error(
+			`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`,
+		)
 	}
 	return keys.reduce((prev, k, i) => ({ ...prev, [k]: values[i] }), {})
 }
@@ -54,8 +56,10 @@ export const DEFAULT_CONVERTERS: { [ext: string]: Converter } = {
 
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
-	const include: string[] = typeof config.include === 'string' ? [config.include] : config.include ?? []
-	const exclude: string[] = typeof config.exclude === 'string' ? [config.exclude] : config.exclude ?? []
+	const include: string[] =
+		typeof config.include === 'string' ? [config.include] : config.include ?? []
+	const exclude: string[] =
+		typeof config.exclude === 'string' ? [config.exclude] : config.exclude ?? []
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
 	async function loadPosts(ctx: PluginContext, dir: string) {
@@ -109,7 +113,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		return map
 	}
 
-	async function createCode(ctx: PluginContext, id: string) {
+	async function createCode(ctx: PluginContext, id: string): Promise<string | null> {
 		const map = await loadPosts(ctx, id)
 		if (map === null) return null
 

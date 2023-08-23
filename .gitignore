@@ -1,4 +1,4 @@
-/.rpt2_cache/
+/.*cache
 /.pnp.*
 /.yarn/*
 !/.yarn/patches/
@@ -6,6 +6,7 @@
 !/.yarn/releases/
 !/.yarn/sdks/
 !/.yarn/versions/
+/.husky/_/
 /dist/
 /node_modules/
 *~

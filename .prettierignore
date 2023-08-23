@@ -1,2 +1,10 @@
 /.yarn/
+/.husky/
+/*.lock
+/.*ignore
+/.actrc
+/.editorconfig
+/Caddyfile
+*.rst
 *.md
+*.svg

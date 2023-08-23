@@ -113,7 +113,7 @@ export type ElementType = ElementMap[Elem['type']]
 interface Element<C extends Node = Node> {
 	type: Type
 	children: C[]
-	pos: number | { line: number; column: number } | undefined
+	pos: number | { line: number, column: number } | undefined
 }
 
 export interface Document {

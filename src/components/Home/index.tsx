@@ -7,7 +7,13 @@ const Home = () => (
 		<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
 			phil.red
 		</Typography>
-		<Typography variant="h5" align="center" color="textSecondary" paragraph sx={{ marginBlock: 4 }}>
+		<Typography
+			variant="h5"
+			align="center"
+			color="textSecondary"
+			paragraph
+			sx={{ marginBlock: 4 }}
+		>
 			programming, science, emancipation
 		</Typography>
 		<Typography variant="h6" align="center" paragraph>

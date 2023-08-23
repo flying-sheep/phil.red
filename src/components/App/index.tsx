@@ -46,7 +46,9 @@ const scaleLinear = (domain: [number, number], range: [number, number]) => {
 }
 
 const hScale = scaleLinear([1, 6], [3, 1])
-const hSizes = Object.fromEntries([1, 2, 3, 4, 5, 6].map((n) => [`h${n}`, { fontSize: `${hScale(n)}rem` }]))
+const hSizes = Object.fromEntries(
+	[1, 2, 3, 4, 5, 6].map((n) => [`h${n}`, { fontSize: `${hScale(n)}rem` }]),
+)
 
 const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
@@ -81,7 +83,13 @@ const App = () => {
 					<Toolbar component="nav" sx={{ justifyContent: 'center' }}>
 						<Tabs centered value={currentTab}>
 							{ROUTE_LINKS.map(({ label, href, pattern }) => (
-								<Tab key={label} label={label} value={pattern} component={Link} to={href} />
+								<Tab
+									key={label}
+									label={label}
+									value={pattern}
+									component={Link}
+									to={href}
+								/>
 							))}
 						</Tabs>
 					</Toolbar>
