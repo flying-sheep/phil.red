@@ -4035,12 +4035,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.2":
-  version: 0.30.2
-  resolution: "magic-string@npm:0.30.2"
+"magic-string@npm:^0.30.3":
+  version: 0.30.3
+  resolution: "magic-string@npm:0.30.3"
   dependencies:
     "@jridgewell/sourcemap-codec": ^1.4.15
-  checksum: c0bbb9b27b2772e6bfaa5d0f6452d47c462d588ae7c43fbaac062b07836d3ec0140fcdd42a57aa53ed990abafcdd0fc17907813921b5df04eccf43e67674bc57
+  checksum: a5a9ddf9bd3bf49a2de1048bf358464f1bda7b3cc1311550f4a0ba8f81a4070e25445d53a5ee28850161336f1bff3cf28aa3320c6b4aeff45ce3e689f300b2f3
   languageName: node
   linkType: hard
 
@@ -4624,7 +4624,7 @@ __metadata:
     husky: ">=6"
     katex: ^0.16.8
     lint-staged: ">=10"
-    magic-string: ^0.30.2
+    magic-string: ^0.30.3
     markdown-it: ^13.0.1
     plotly.js-basic-dist-min: ^2.24.3
     prettier: ^3.0.2
