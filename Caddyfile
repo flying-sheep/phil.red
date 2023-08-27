@@ -1,10 +1,40 @@
-http://phil.red {
-	redir https://{host}{uri} permanent
+{
+	# Restrict the admin interface to a local unix file socket whose directory
+	# is restricted to caddy:caddy.
+	admin "unix//run/caddy/admin.socket"
 }
 
-https://phil.red {
-	root * /srv/http/phil.red
-	encode gzip
-	try_files {path} /index.html
-	file_server
+
+www.phil.red {
+    redir https://phil.red{uri} permanent
 }
+
+phil.red
+
+tls {
+    protocols tls1.3
+}
+
+# Security headers
+header {
+	# disable FLoC tracking
+	Permissions-Policy interest-cohort=()
+	# HSTS (730 days)
+	Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+	# clickjacking protection
+	X-Frame-Options "DENY"
+	# disable clients from sniffing the media type
+	X-Content-Type-Options "nosniff"
+	# load scripts only locally, rest from https
+	Content-Security-Policy: "default-src https: data:; script-src https://phil.red:443"
+	# keep referrer data off of HTTP connections
+	Referrer-Policy "no-referrer-when-downgrade"
+}
+
+root * /srv/http/phil.red
+encode gzip
+try_files {path} /index.html
+file_server
+
+# Import additional caddy config files in /etc/caddy/conf.d/
+import /etc/caddy/conf.d/*
