@@ -25,7 +25,8 @@ header {
 	# disable clients from sniffing the media type
 	X-Content-Type-Options "nosniff"
 	# load scripts only locally, rest from https
-	Content-Security-Policy: "default-src https: data:; script-src https://phil.red:443"
+	# react-router-dom needs the empty string hash
+	Content-Security-Policy "default-src 'self' https: data: ; script-src 'self' ; style-src 'self' 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' ; object-src 'none'"
 	# keep referrer data off of HTTP connections
 	Referrer-Policy "no-referrer-when-downgrade"
 }
