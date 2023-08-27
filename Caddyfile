@@ -4,15 +4,14 @@
 	admin "unix//run/caddy/admin.socket"
 }
 
-
 www.phil.red {
-    redir https://phil.red{uri} permanent
+	redir https://phil.red{uri} permanent
 }
 
 phil.red
 
 tls {
-    protocols tls1.3
+	protocols tls1.3
 }
 
 # Security headers
