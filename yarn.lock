@@ -4745,7 +4745,7 @@ __metadata:
     lint-staged: ">=10"
     magic-string: ^0.30.3
     markdown-it: ^13.0.1
-    plotly.js-basic-dist-min: ^2.24.3
+    plotly.js-basic-dist-min: ^2.26.0
     prettier: ^3.0.2
     prism-react-renderer: ^2.0.6
     prismjs: ^1.29.0
@@ -4801,10 +4801,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plotly.js-basic-dist-min@npm:^2.24.3":
-  version: 2.24.3
-  resolution: "plotly.js-basic-dist-min@npm:2.24.3"
-  checksum: 0989d54d840a602370f85a3cba5e82cdd3e1f4de2b20ba5529d6974f9108c07c694c5b48c0a1e3a69f161033ca70d3a5350de955cc5661fc4160bfba8b2aa87a
+"plotly.js-basic-dist-min@npm:^2.26.0":
+  version: 2.26.0
+  resolution: "plotly.js-basic-dist-min@npm:2.26.0"
+  checksum: f0098d644ab9fae24b2361636e97e7ce0a90988e82d97b59613164f98e1267cf3ef4d10ededea0e62580ad522bf5afea71a687d7ffe30cf851872516fa75da68
   languageName: node
   linkType: hard
 
