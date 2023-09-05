@@ -2905,10 +2905,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-prefer-function-component@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "eslint-plugin-react-prefer-function-component@npm:3.1.0"
-  checksum: 4a82ec1686f619766e698b66f59d35b7b7bc525a8246da8bda76af82662277f3b0fedc0719d20340eaaa1cd9b731d95ebe16e804005d20fc2814142c0b2f835d
+"eslint-plugin-react-prefer-function-component@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "eslint-plugin-react-prefer-function-component@npm:3.3.0"
+  checksum: 8c164e3b7fd04a20fc5ab31dd54f0f8fec7821053a586c8844cf30cfc68bfeab7477e95c6642496c0caba39e2948cf53c4e6b4d9621b1073eab00f58c8a38d33
   languageName: node
   linkType: hard
 
@@ -5007,7 +5007,7 @@ __metadata:
     eslint-plugin-no-foreach: ^1.0.0
     eslint-plugin-react: ^7.33.2
     eslint-plugin-react-hooks: ^4.6.0
-    eslint-plugin-react-prefer-function-component: ^3.1.0
+    eslint-plugin-react-prefer-function-component: ^3.3.0
     estree-walker: ^3.0.3
     fetch-suspense: ^1.2.2
     globby: ^13.2.2
