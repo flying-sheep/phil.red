@@ -1019,13 +1019,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.7.2":
-  version: 1.7.2
-  resolution: "@remix-run/router@npm:1.7.2"
-  checksum: ea43bb662f1f5c93965989b1667fb6e8a301cb69c44341ee92c81cb15ea685b494168e5905593b5777d59058f1455b4b58083d5b895f04382e49362e420d7af4
-  languageName: node
-  linkType: hard
-
 "@remix-run/router@npm:1.8.0":
   version: 1.8.0
   resolution: "@remix-run/router@npm:1.8.0"
@@ -5035,7 +5028,7 @@ __metadata:
     react-json-tree: ^0.18.0
     react-plotly.js: ^2.6.0
     react-portal-target: ^1.0.2
-    react-router: ^6.14.2
+    react-router: ^6.15.0
     react-router-dom: ^6.15.0
     react-slide-routes: ^3.0.3
     restructured: ^0.0.11
@@ -5425,7 +5418,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:6.15.0":
+"react-router@npm:6.15.0, react-router@npm:^6.15.0":
   version: 6.15.0
   resolution: "react-router@npm:6.15.0"
   dependencies:
@@ -5433,17 +5426,6 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 345b29277e13997f2625f0037f537eaf1955bb9f44ebfea80dd3ff83fc06273f7b64e1be944bfc75945fd2af5af917874133a8a93ed5ecaca523be8f045ae166
-  languageName: node
-  linkType: hard
-
-"react-router@npm:^6.14.2":
-  version: 6.14.2
-  resolution: "react-router@npm:6.14.2"
-  dependencies:
-    "@remix-run/router": 1.7.2
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 7507bf5732b3a8ddbd901c2061216eebca73e194449bff58acc1445171e22bdda36b455b8af066e467748ebfb5875b3c0a565941c46af65c6f653a6ed0dc4fe4
   languageName: node
   linkType: hard
 
