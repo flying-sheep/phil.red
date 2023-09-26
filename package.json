@@ -82,7 +82,7 @@
 		"prettier": "^3.0.2",
 		"react-json-tree": "^0.18.0",
 		"restructured": "^0.0.11",
-		"rollup": "^3.26.2",
+		"rollup": "^3.29.3",
 		"typescript": "^5.1.6",
 		"vite": "^4.4.9",
 		"vite-bundle-visualizer": "^0.10.0"
