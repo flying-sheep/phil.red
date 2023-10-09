@@ -1174,12 +1174,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.2.8":
-  version: 18.2.8
-  resolution: "@types/react-dom@npm:18.2.8"
+"@types/react-dom@npm:^18.2.12":
+  version: 18.2.12
+  resolution: "@types/react-dom@npm:18.2.12"
   dependencies:
     "@types/react": "*"
-  checksum: d36264631028d021b73cd9e015f10b95c4959ae1ce8f7a7419f318d1f05b1d063e6afffcd2a349a6bccd64ccc9ee9d2d976e1f0437643f0e7db621fa035bca65
+  checksum: 64eaf808e91c1d58270ea92dda0e0cbb671f7289be4a5a4e0ccbd85857dd69394970eaa403d958dfbca739735c0af9cde4cf8fe135ff34434838360beae8d306
   languageName: node
   linkType: hard
 
@@ -1222,14 +1222,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.2.24":
-  version: 18.2.24
-  resolution: "@types/react@npm:18.2.24"
+"@types/react@npm:^18.2.27":
+  version: 18.2.27
+  resolution: "@types/react@npm:18.2.27"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: ea5d8204e71b1c9c6631f429a93f8e7be0614cdbdb464e92b3181bdccd8a7c45e30ded8b13da726684b6393f651317c36d54832e3d3cdea0da480a3f26268909
+  checksum: bb29779d4e83e30886a4a939b02812a7ae2d49a26e19eb4be48a6d4e73e8b09ca1a639c97c0ba12a7fe46711355059db7f958cbc1754fe697690656cdb9eca07
   languageName: node
   linkType: hard
 
@@ -5027,8 +5027,8 @@ __metadata:
     "@types/node": ^20.7.0
     "@types/plotly.js-basic-dist-min": ^2.12.1
     "@types/prismjs": ^1.26.0
-    "@types/react": ^18.2.24
-    "@types/react-dom": ^18.2.8
+    "@types/react": ^18.2.27
+    "@types/react-dom": ^18.2.12
     "@types/react-is": ^18.2.1
     "@types/react-plotly.js": ^2.6.0
     "@typescript-eslint/eslint-plugin": ^6.7.4
