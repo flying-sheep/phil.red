@@ -1167,6 +1167,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1.26.1":
+  version: 1.26.1
+  resolution: "@types/prismjs@npm:1.26.1"
+  checksum: ef34b2f47e34645760a48fc351e5926c330810a724c64838bfc30b7317c6038ea66abd19fe9c713002679d6f2faa97d90d432869e512dcb660d9a791c150595a
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
@@ -5033,7 +5040,7 @@ __metadata:
     "@types/markdown-it": ^12.2.3
     "@types/node": ^20.7.0
     "@types/plotly.js-basic-dist-min": ^2.12.1
-    "@types/prismjs": ^1.26.0
+    "@types/prismjs": ^1.26.1
     "@types/react": ^18.2.27
     "@types/react-dom": ^18.2.12
     "@types/react-is": ^18.2.1
