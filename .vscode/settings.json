@@ -13,4 +13,7 @@
 	},
 	"eslint.nodePath": ".yarn/sdks",
 	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"[caddyfile]": {
+		"editor.defaultFormatter": "matthewpi.caddyfile-support",
+	},
 }
