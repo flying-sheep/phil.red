@@ -79,7 +79,7 @@
 		"lint-staged": ">=10",
 		"magic-string": "^0.30.5",
 		"markdown-it": "^13.0.1",
-		"prettier": "^3.0.2",
+		"prettier": "^3.0.3",
 		"react-json-tree": "^0.18.0",
 		"restructured": "^0.0.11",
 		"rollup": "^3.29.3",
