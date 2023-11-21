@@ -1298,10 +1298,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prismjs@npm:^1.26.1":
-  version: 1.26.1
-  resolution: "@types/prismjs@npm:1.26.1"
-  checksum: 83086d4de54a1a333e2bef6ab9f34eb9cd9f2e8598150f9f965d9ecd8eeac0d7705b577035ef9786aeb3906b3295afb0d2a6a3e33bebe88217338515b23fdf0f
+"@types/prismjs@npm:^1.26.3":
+  version: 1.26.3
+  resolution: "@types/prismjs@npm:1.26.3"
+  checksum: 4bd55230ffc0b2b16f4008be3a7f1d7c6b32dd3bed8006e64d24fb22c44fc7e300dac77b856f732803ccdc9a3472b2c0ee7776cad048843c47d608c41a89b6a6
   languageName: node
   linkType: hard
 
@@ -5575,7 +5575,7 @@ __metadata:
     "@types/markdown-it": "npm:^12.2.3"
     "@types/node": "npm:^20.7.0"
     "@types/plotly.js-basic-dist-min": "npm:^2.12.1"
-    "@types/prismjs": "npm:^1.26.1"
+    "@types/prismjs": "npm:^1.26.3"
     "@types/react": "npm:^18.2.37"
     "@types/react-dom": "npm:^18.2.15"
     "@types/react-is": "npm:^18.2.1"
