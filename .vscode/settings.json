@@ -5,7 +5,7 @@
 		"source.fixAll.eslint": true,
 	},
 	"eslint.validate": ["typescript", "typescriptreact"],
-	"prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+	"prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
 	"typescript.tsdk": ".yarn/sdks/typescript/lib",
 	"search.exclude": {
 		"**/.yarn": true,
