@@ -8,7 +8,7 @@ import type { Node, ObjectExpression, Property } from 'estree'
 import { asyncWalk } from 'estree-walker'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
-import type { PluginContext, AcornNode } from 'rollup'
+import type { PluginContext, AstNode } from 'rollup'
 import type { Plugin } from 'vite'
 
 import { Document, Type, ParseError, ASTError } from '../markup'
@@ -137,7 +137,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					if (!imports.has(resolved.id)) {
 						imports.set(resolved.id, `$${imports.size}`)
 					}
-					const urlVal = urlProp.value as AcornNode
+					const urlVal = urlProp.value as AstNode
 					magicString.overwrite(urlVal.start, urlVal.end, imports.get(resolved.id)!)
 				}
 			},
