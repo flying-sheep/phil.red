@@ -55,7 +55,7 @@
 		"@types/node": "^20.7.0",
 		"@types/plotly.js-basic-dist-min": "^2.12.1",
 		"@types/prismjs": "^1.26.3",
-		"@types/react": "^18.2.39",
+		"@types/react": "^18.2.42",
 		"@types/react-dom": "^18.2.17",
 		"@types/react-is": "^18.2.1",
 		"@types/react-plotly.js": "^2.6.1",
