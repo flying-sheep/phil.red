@@ -2,7 +2,7 @@
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true,
+		"source.fixAll.eslint": "always",
 	},
 	"eslint.validate": ["typescript", "typescriptreact"],
 	"prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
