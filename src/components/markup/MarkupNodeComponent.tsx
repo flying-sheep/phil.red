@@ -49,7 +49,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			if (node.level < 1) throw new ASTError(`Header with level ${node.level} < 1`, node)
 			const hLevel = Math.min(node.level, 6)
 			return (
-				<Typography id={node.anchor} variant={`h${hLevel}` as Variant}>
+				<Typography id={node.anchor} variant={`h${hLevel}` as Variant} gutterBottom>
 					{convertChildren(node, level)}
 				</Typography>
 			)

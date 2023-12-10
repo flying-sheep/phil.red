@@ -14,6 +14,8 @@ import { deepPurple } from '@mui/material/colors'
 import { alpha, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
+import './base.css'
+
 import Blog from '../Blog'
 import Code from '../Code'
 import Home from '../Home'
@@ -54,7 +56,10 @@ const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(() => {
 		const baseTheme = createTheme({
-			typography: hSizes,
+			typography: {
+				fontFamily: '"IBM Plex Sans", sans-serif',
+				...hSizes,
+			},
 			palette: {
 				mode: dark ? 'dark' : 'light',
 				primary: deepPurple,
