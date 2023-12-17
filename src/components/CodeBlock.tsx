@@ -21,7 +21,13 @@ const CodeBlock = forwardRef<HTMLElement, CodeBlockProps>(
 				{noWrap ? (
 					children
 				) : (
-					<Code sx={mergeSx({ fontFamily: 'Iosevka, monospace' }, codeSx)} {...codeProps}>
+					<Code
+						sx={mergeSx(
+							{ fontFamily: 'Iosevka, monospace', lineHeight: '124%' },
+							codeSx,
+						)}
+						{...codeProps}
+					>
 						{children}
 					</Code>
 				)}

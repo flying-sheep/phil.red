@@ -1,7 +1,12 @@
+import { SxProps } from '@mui/material'
+import { mergeSx } from 'merge-sx'
 import { Highlight, themes } from 'prism-react-renderer'
 import Prism from 'prismjs'
 import { type FC, useEffect, useState } from 'react'
 
+import { SystemStyleObject } from '@mui/system/styleFunctionSx'
+
+import Box from '@mui/material/Box'
 import useTheme from '@mui/material/styles/useTheme'
 
 import * as urls from '../../../build-tools/urls.js'
@@ -32,13 +37,18 @@ const loadScript = async (url: string) => {
 
 const loadLang = (lang: string) => loadScript(urls.prism(`components/prism-${lang}.min.js`))
 
-export interface HighProps {
+const style2Sx = <P extends object>({ style, ...props }: P & { style?: React.CSSProperties }) => ({
+	...props,
+	...(props ? { sx: style as SystemStyleObject } : {}),
+})
+
+export interface HighProps<Theme extends object = object> {
 	code: string
 	language: string
-	style?: React.CSSProperties
+	sx?: SxProps<Theme>
 }
 
-const High: FC<HighProps> = ({ code, language, style }) => {
+const High: FC<HighProps> = ({ code, language, sx }) => {
 	const [loaded, setLoaded] = useState(false)
 	const [err, setErr] = useState<Error>()
 	const {
@@ -53,15 +63,21 @@ const High: FC<HighProps> = ({ code, language, style }) => {
 	if (err) throw err
 	return (
 		<Highlight prism={Prism} code={code} language={loaded ? language : 'text'} theme={theme}>
-			{({ className, style: defaultStyle, tokens, getLineProps, getTokenProps }) => (
-				<CodeBlock className={className} sx={{ ...defaultStyle, ...style, padding: '5px' }}>
+			{({ className, style, tokens, getLineProps, getTokenProps }) => (
+				<CodeBlock
+					className={className}
+					sx={mergeSx(style as SystemStyleObject, sx, { padding: '5px' })}
+				>
 					{tokens.map((line, i) => (
-						<span {...getLineProps({ line, key: i })}>
+						<Box component="span" {...style2Sx(getLineProps({ line, key: i }))}>
 							{line.map((token, key) => (
-								<span {...getTokenProps({ token, key })} />
+								<Box
+									component="span"
+									{...style2Sx(getTokenProps({ token, key }))}
+								/>
 							))}
 							{'\n'}
-						</span>
+						</Box>
 					))}
 				</CodeBlock>
 			)}
