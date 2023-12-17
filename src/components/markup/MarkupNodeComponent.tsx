@@ -141,6 +141,9 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 const MarkupNodeComponent: FC<MarkupElementProps> = ({ node, level }) => {
 	const fallback = useCallback(
 		({ error }: FallbackProps) => {
+			if (process.env['NODE_ENV'] === 'production') {
+				throw error
+			}
 			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 			const errorMessage = error instanceof Error ? error.message : `${error as unknown}`
 			return <ASTErrorMessage node={node}>{errorMessage}</ASTErrorMessage>
