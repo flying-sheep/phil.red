@@ -16,7 +16,7 @@
 		"lint": "$npm_execpath run lint:format && $npm_execpath run lint:style && $npm_execpath run lint:deps",
 		"lint:format": "prettier --write '**/*'",
 		"lint:style": "eslint '{*.ts,src/**/*.ts*}'",
-		"lint:deps": "depcheck --ignores=@yarnpkg/sdks,@tsconfig/strictest,@total-typescript/ts-reset",
+		"lint:deps": "depcheck --ignores=unfonts.css,@fontsource/iosevka,@fontsource/iosevka-aile,@yarnpkg/sdks,@tsconfig/strictest,@total-typescript/ts-reset",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red",
 		"postinstall": "husky install"
 	},
