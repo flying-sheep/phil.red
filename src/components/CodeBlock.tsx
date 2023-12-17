@@ -17,7 +17,12 @@ const CodeBlock = forwardRef<HTMLElement, CodeBlockProps>(
 	({ noWrap = false, sx, children, slotProps, ...props }, ref) => {
 		const { sx: codeSx, ...codeProps } = slotProps?.code ?? {}
 		return (
-			<Box component="pre" ref={ref} sx={mergeSx({ lineHeight: '124%' }, sx)} {...props}>
+			<Box
+				component="pre"
+				ref={ref}
+				sx={mergeSx({ lineHeight: '124%', overflowInline: 'auto' }, sx)}
+				{...props}
+			>
 				{noWrap ? (
 					children
 				) : (
