@@ -54,7 +54,10 @@ const App = () => {
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(() => {
 		const baseTheme = createTheme({
-			typography: hSizes,
+			typography: {
+				fontFamily: '"Iosevka Aile", sans-serif',
+				...hSizes,
+			},
 			palette: {
 				mode: dark ? 'dark' : 'light',
 				primary: deepPurple,

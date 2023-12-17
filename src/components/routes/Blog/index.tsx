@@ -6,9 +6,9 @@ import SlideRoutes from 'react-slide-routes'
 import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 
-import posts from '../../posts'
-import ListItemLink from '../ListItemLink'
-import Markup from '../markup'
+import posts from '../../../posts'
+import ListItemLink from '../../ListItemLink'
+import Markup from '../../markup'
 
 function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`

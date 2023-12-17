@@ -32,6 +32,9 @@ rules:
         order: asc
       newlines-between: always
       pathGroups:
+        - pattern: '@mui/system/**/*'
+          group: external
+          position: after
         - pattern: '@mui/material/**/*'
           group: external
           position: after
