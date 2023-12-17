@@ -57,7 +57,7 @@ const App = () => {
 	const theme = useMemo(() => {
 		const baseTheme = createTheme({
 			typography: {
-				fontFamily: '"IBM Plex Sans", sans-serif',
+				fontFamily: '"Iosevka Aile", sans-serif',
 				...hSizes,
 			},
 			palette: {

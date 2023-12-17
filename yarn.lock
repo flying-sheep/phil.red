@@ -674,17 +674,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/ibm-plex-mono@npm:^5.0.8":
-  version: 5.0.8
-  resolution: "@fontsource/ibm-plex-mono@npm:5.0.8"
-  checksum: b97a9edb72d9bcf89c4efa8119223727ce0781b8e2910b9dca7bf17028d2b468a66becf6904eae93cd9f605cad1126f9f1d1f98ac80a6538fa49e03ad8d65a34
+"@fontsource/iosevka-aile@npm:^5.0.7":
+  version: 5.0.7
+  resolution: "@fontsource/iosevka-aile@npm:5.0.7"
+  checksum: 8b95876fa9d3dc54b881dca4448df0e3ba9a135a8f2d537e7dfa0957daa9f34adcacb4a073715a00346f7855121cddcef54495c3bb1f5a4e4db5e92c1e863f2c
   languageName: node
   linkType: hard
 
-"@fontsource/ibm-plex-sans@npm:^5.0.18":
-  version: 5.0.18
-  resolution: "@fontsource/ibm-plex-sans@npm:5.0.18"
-  checksum: e0af360e9a4e1511f831d42320caf49ec78f0825645a851642acb971c573fbb1874cadb0c949c8f6d0973b0d1a78dbd478a4d78302ddc485cb807b516d4c6a75
+"@fontsource/iosevka@npm:^5.0.7":
+  version: 5.0.7
+  resolution: "@fontsource/iosevka@npm:5.0.7"
+  checksum: c251138931670834a74f978216cc3f93b719ec7e64ef1a08dea9e922bc5083fa7322d7a662969680188505d3748e78f5f50ff22609314e16d288a9e5d7e4f450
   languageName: node
   linkType: hard
 
@@ -5471,8 +5471,8 @@ __metadata:
   dependencies:
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
-    "@fontsource/ibm-plex-mono": "npm:^5.0.8"
-    "@fontsource/ibm-plex-sans": "npm:^5.0.18"
+    "@fontsource/iosevka": "npm:^5.0.7"
+    "@fontsource/iosevka-aile": "npm:^5.0.7"
     "@matejmazur/react-katex": "npm:^3.1.3"
     "@mui/icons-material": "npm:^5.14.19"
     "@mui/material": "npm:^5.14.19"

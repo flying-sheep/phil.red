@@ -1,4 +1,7 @@
 code,
 pre {
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: Iosevka, monospace;
+}
+pre {
+	line-height: 124%;
 }

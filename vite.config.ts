@@ -16,15 +16,13 @@ export default defineConfig({
 			fontsource: {
 				families: [
 					{
-						name: 'IBM Plex Sans',
+						name: 'Iosevka Aile',
 						// Needed weights: https://mui.com/material-ui/react-typography/
 						weights: [300, 400, 500, 700],
-						subset: 'latin-ext',
 					},
 					{
-						name: 'IBM Plex Mono',
+						name: 'Iosevka',
 						weights: [400, 700],
-						subset: 'latin-ext',
 					},
 				],
 			},
