@@ -4,6 +4,7 @@ import Box from '@mui/material/Box'
 import red from '@mui/material/colors/red'
 
 import type { Node } from '../../../markup/MarkupDocument'
+import CodeBlock from '../../CodeBlock'
 
 export interface ASTErrorMessageProps {
 	node?: Node
@@ -13,7 +14,7 @@ export interface ASTErrorMessageProps {
 const ASTErrorMessage: FC<ASTErrorMessageProps> = ({ node, children }: ASTErrorMessageProps) => (
 	<Box sx={{ color: red.A400 }}>
 		{children}
-		{node && <pre>{JSON.stringify(node, undefined, 2)}</pre>}
+		{node && <CodeBlock>{JSON.stringify(node, undefined, 2)}</CodeBlock>}
 	</Box>
 )
 

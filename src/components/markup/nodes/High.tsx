@@ -5,6 +5,7 @@ import { type FC, useEffect, useState } from 'react'
 import useTheme from '@mui/material/styles/useTheme'
 
 import * as urls from '../../../build-tools/urls.js'
+import CodeBlock from '../../CodeBlock.js'
 
 const loadScriptNoCache = (url: string) =>
 	new Promise<HTMLScriptElement>((resolve, reject) => {
@@ -53,15 +54,16 @@ const High: FC<HighProps> = ({ code, language, style }) => {
 	return (
 		<Highlight prism={Prism} code={code} language={loaded ? language : 'text'} theme={theme}>
 			{({ className, style: defaultStyle, tokens, getLineProps, getTokenProps }) => (
-				<pre className={className} style={{ ...defaultStyle, ...style, padding: '5px' }}>
+				<CodeBlock className={className} sx={{ ...defaultStyle, ...style, padding: '5px' }}>
 					{tokens.map((line, i) => (
-						<div {...getLineProps({ line, key: i })}>
+						<span {...getLineProps({ line, key: i })}>
 							{line.map((token, key) => (
 								<span {...getTokenProps({ token, key })} />
 							))}
-						</div>
+							{'\n'}
+						</span>
 					))}
-				</pre>
+				</CodeBlock>
 			)}
 		</Highlight>
 	)

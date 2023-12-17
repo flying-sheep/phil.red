@@ -14,8 +14,6 @@ import { deepPurple } from '@mui/material/colors'
 import { alpha, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-import './base.css'
-
 import Blog from '../Blog'
 import Code from '../Code'
 import Home from '../Home'

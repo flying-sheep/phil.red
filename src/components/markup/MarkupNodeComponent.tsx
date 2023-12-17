@@ -15,6 +15,7 @@ import type { Variant } from '@mui/material/styles/createTypography'
 
 import { ASTError } from '../../markup'
 import { type Node, type Elem, Type, Bullet } from '../../markup/MarkupDocument'
+import CodeBlock from '../CodeBlock'
 import Plotly from '../Plotly'
 
 import ASTErrorMessage from './nodes/ASTErrorMessage'
@@ -94,11 +95,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		case Type.CodeBlock: {
 			const code = node.children.map((c) => c.toString()).join('\n')
 			if (!node.language) {
-				return (
-					<pre>
-						<code>{code}</code>
-					</pre>
-				)
+				return <CodeBlock>{code}</CodeBlock>
 			}
 			return <High code={code} language={node.language} />
 		}
