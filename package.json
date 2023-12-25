@@ -79,7 +79,7 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-prefer-function-component": "^3.3.0",
 		"estree-walker": "^3.0.3",
-		"globby": "^13.2.2",
+		"globby": "^14.0.0",
 		"husky": ">=6",
 		"lint-staged": ">=15",
 		"magic-string": "^0.30.5",
