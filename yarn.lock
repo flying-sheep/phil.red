@@ -1314,12 +1314,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/plotly.js-basic-dist-min@npm:^2.12.1":
-  version: 2.12.1
-  resolution: "@types/plotly.js-basic-dist-min@npm:2.12.1"
+"@types/plotly.js-basic-dist-min@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@types/plotly.js-basic-dist-min@npm:2.12.4"
   dependencies:
     "@types/plotly.js": "npm:*"
-  checksum: cccc10c53ee8dadaaa7a81f8447e8a9b2f3b5c49585064c8a591c5be3cd915f111b6b09e65c687ce965d0e77a9c51ae92b8d08dc27f8f593277e180ccd23a8bf
+  checksum: 8a08fa0f0bed44bafe7ec3c3dae44a185ab5a77c712c9a68260f8381c54be011dc7a182e0bb03df1087ff9d6a70aa95aeb6adf4a87fa6cfb1e39dbcb414b76eb
   languageName: node
   linkType: hard
 
@@ -5473,7 +5473,7 @@ __metadata:
     "@types/katex": "npm:^0.16.7"
     "@types/markdown-it": "npm:^13.0.7"
     "@types/node": "npm:^20.7.0"
-    "@types/plotly.js-basic-dist-min": "npm:^2.12.1"
+    "@types/plotly.js-basic-dist-min": "npm:^2.12.4"
     "@types/prismjs": "npm:^1.26.3"
     "@types/react": "npm:^18.2.45"
     "@types/react-dom": "npm:^18.2.18"
@@ -5503,7 +5503,7 @@ __metadata:
     magic-string: "npm:^0.30.5"
     markdown-it: "npm:^13.0.2"
     merge-sx: "npm:^2.0.0"
-    plotly.js-basic-dist-min: "npm:^2.26.0"
+    plotly.js-basic-dist-min: "npm:^2.27.1"
     prettier: "npm:^3.0.3"
     prism-react-renderer: "npm:^2.3.1"
     prismjs: "npm:^1.29.0"
@@ -5560,10 +5560,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plotly.js-basic-dist-min@npm:^2.26.0":
-  version: 2.26.0
-  resolution: "plotly.js-basic-dist-min@npm:2.26.0"
-  checksum: ca42e63b15d17b8adfdf6b8ee1839ed72b5ec656aedf2222a4e522d416b4aa8d8e0925f0fd438c1a56ff258b3803964a61c30c7feb3d38eb8821b7304c0dbc5d
+"plotly.js-basic-dist-min@npm:^2.27.1":
+  version: 2.27.1
+  resolution: "plotly.js-basic-dist-min@npm:2.27.1"
+  checksum: 1448416148c963ee2a8fbd3eb84cabbfc2c9a84ed37c0d737283acdfd6db711ae1af3515640a01d7f4a345f767d434ec79a55cd7d1136809ba5a81c9111f1efd
   languageName: node
   linkType: hard
 
