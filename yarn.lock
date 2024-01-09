@@ -1223,10 +1223,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:^1.0.0, @types/estree@npm:^1.0.1":
+"@types/estree@npm:^1.0.0":
   version: 1.0.1
   resolution: "@types/estree@npm:1.0.1"
   checksum: f252569c002506c61ad913e778aa69415908078c46c78c901ccad77bc66cd34f1e1b9babefb8ff0d27c07a15fb0824755edd7bb3fa7ea828f32ae0fe5faa9962
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@types/estree@npm:1.0.5"
+  checksum: 7de6d928dd4010b0e20c6919e1a6c27b61f8d4567befa89252055fad503d587ecb9a1e3eab1b1901f923964d7019796db810b7fd6430acb26c32866d126fd408
   languageName: node
   linkType: hard
 
@@ -5494,7 +5501,7 @@ __metadata:
     "@mui/system": "npm:^5.15.2"
     "@total-typescript/ts-reset": "npm:^0.5.1"
     "@tsconfig/strictest": "npm:^2.0.2"
-    "@types/estree": "npm:^1.0.1"
+    "@types/estree": "npm:^1.0.5"
     "@types/katex": "npm:^0.16.7"
     "@types/markdown-it": "npm:^13.0.7"
     "@types/node": "npm:^20.7.0"
