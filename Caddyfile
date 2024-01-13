@@ -33,8 +33,13 @@ header {
 
 root * /srv/http/phil.red
 encode gzip
-try_files {path} /index.html
-file_server
+handle /assets/* {
+	file_server browse
+}
+handle {
+	try_files {path} /index.html
+	file_server
+}
 
 # Import additional caddy config files in /etc/caddy/conf.d/
 import /etc/caddy/conf.d/*
