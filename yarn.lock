@@ -5536,7 +5536,7 @@ __metadata:
     markdown-it: "npm:^13.0.2"
     merge-sx: "npm:^2.0.0"
     plotly.js-basic-dist-min: "npm:^2.28.0"
-    prettier: "npm:^3.0.3"
+    prettier: "npm:^3.2.2"
     prism-react-renderer: "npm:^2.3.1"
     prismjs: "npm:^1.29.0"
     react: "npm:^18.2.0"
@@ -5738,12 +5738,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "prettier@npm:3.0.3"
+"prettier@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "prettier@npm:3.2.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: ccf1ead9794b017be6b42d0873f459070beef2069eb393c8b4c0d11aa3430acefc54f6d5f44a5b7ce9af05ad8daf694b912f0aa2808d1c22dfa86e61e9d563f8
+  checksum: ab9470ff6cfd19f28bc424f22e58f2fc4a488d148b9384f6c3739235017c8350cae82b3697392c23d9b098b9d8dfaa1cc9ff4ef25fd45f54c97b95f9cc7a1f7d
   languageName: node
   linkType: hard
 
