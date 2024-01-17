@@ -23,7 +23,7 @@ import Web from '@mui/icons-material/Web'
 import ArchIcon from './arch-icon'
 import PythonIcon from './python-icon'
 
-type ListItemLinkProps<P = object> = {
+interface ListItemLinkProps<P = object> {
 	href?: string
 	icon?: React.ReactNode | React.ComponentType<P>
 	text?: React.ReactNode

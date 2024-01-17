@@ -1,12 +1,17 @@
-plugins: [react-prefer-function-component, '@typescript-eslint']
+plugins:
+  - '@typescript-eslint'
+  - import
+  - react
+  - react-hooks
+  - react-prefer-function-component
 extends:
-  - flying-sheep
-  - eslint-config-airbnb/hooks
-  - plugin:@typescript-eslint/recommended
-  - plugin:@typescript-eslint/recommended-requiring-type-checking
-  - plugin:react-prefer-function-component/recommended
+  - plugin:@typescript-eslint/recommended-type-checked
+  - plugin:@typescript-eslint/stylistic-type-checked
+  - plugin:import/recommended
+  - plugin:import/typescript
   - plugin:react/jsx-runtime
-  - eslint-config-prettier
+  - plugin:react-hooks/recommended
+  - plugin:react-prefer-function-component/recommended
 env:
   browser: true
   es6: true
@@ -20,12 +25,10 @@ ignorePatterns: [/dist/*, /**/*.css.d.ts]
 settings:
   import/external-module-folders: [.yarn]
 rules:
-  consistent-return: 0
-  react/jsx-filename-extension:
-    - 1
-    - extensions: [.jsx, .tsx]
-  import/no-unresolved: 0
-  import/extensions: 0
+  '@typescript-eslint/no-unused-vars':
+    - error
+    - varsIgnorePattern: '^_'
+  import/no-unresolved: 0 # handled by TS itself
   import/order:
     - error
     - alphabetize:
@@ -42,27 +45,4 @@ rules:
           group: external
           position: after
       pathGroupsExcludedImportTypes: []
-  no-continue: 0
-  no-shadow: 0
-  '@typescript-eslint/no-shadow': error
-  no-use-before-define: 0
-  dot-notation: 0
-  '@typescript-eslint/dot-notation':
-    - error
-    - allowIndexSignaturePropertyAccess: false
-  '@typescript-eslint/no-unused-vars':
-    - error
-    - ignoreRestSiblings: true
-  '@typescript-eslint/no-non-null-assertion': 0
-  '@typescript-eslint/member-delimiter-style':
-    - error
-    - singleline:
-        delimiter: semi
-      multiline:
-        delimiter: none
-  react/function-component-definition:
-    - error
-    - namedComponents: arrow-function
-  react/require-default-props: 0
-  react/jsx-props-no-spreading: 0
 root: true
