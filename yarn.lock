@@ -5567,7 +5567,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-error-boundary: "npm:^4.0.11"
-    react-helmet-async: "npm:^2.0.3"
+    react-helmet-async: "npm:^2.0.4"
     react-is: "npm:^18.2.0"
     react-json-tree: "npm:^0.18.0"
     react-plotly.js: "npm:^2.6.0"
@@ -5895,9 +5895,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-helmet-async@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "react-helmet-async@npm:2.0.3"
+"react-helmet-async@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "react-helmet-async@npm:2.0.4"
   dependencies:
     invariant: "npm:^2.2.4"
     react-fast-compare: "npm:^3.2.2"
@@ -5905,7 +5905,7 @@ __metadata:
   peerDependencies:
     react: ^16.6.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.6.0 || ^17.0.0 || ^18.0.0
-  checksum: 0e232a3784c3974d90a049d43159f6c282e97b5f4fa84901f9417f57dfb7322850ded921d7fb38074cf5bd61c7cb464ab7d64a3da1c278a51dc8b51cd8936d0f
+  checksum: 8f18cb27e8f5821811d715906b5fe279d4ce7e1e0ef1a565d90d64db386d2e4676fe7f4182d27393eccf7b03ace7d65fb4c406f945d43de3b57acaaa54711831
   languageName: node
   linkType: hard
 
