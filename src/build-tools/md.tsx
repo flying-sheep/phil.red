@@ -2,7 +2,7 @@
 /* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
 import MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token.js'
+import Token from 'markdown-it/lib/token.mjs'
 
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
