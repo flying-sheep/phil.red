@@ -1,7 +1,5 @@
 import { Document } from '../../markup'
 
-interface Documents {
-	[key: string]: Document
-}
+type Documents = Record<string, Document>
 declare const stringfiles: Documents
 export default stringfiles

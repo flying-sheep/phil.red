@@ -10,7 +10,7 @@ import ParseError from '../markup/ParseError'
 
 interface Directive {
 	header: string | null
-	params: { [k: string]: string }
+	params: Record<string, string>
 	body: string[]
 }
 
@@ -28,7 +28,7 @@ function parseDirective(lines: RSTNode[]): Directive {
 			lastParam = i + 1
 			return true
 		})
-		.reduce<{ [k: string]: string }>((obj, line) => {
+		.reduce<Record<string, string>>((obj, line) => {
 			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [
 				string,
 				string,
@@ -241,9 +241,9 @@ function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]>
 const URL_SCHEMA = /^https?:.*$/
 const ANCHOR_SCHEMA = /^#.*$/
 
-function extractTargets(node: RSTNode): { [key: string]: string } {
+function extractTargets(node: RSTNode): Record<string, string> {
 	const pending = Object.fromEntries(extractTargetsInner(node))
-	const resolved: { [key: string]: string } = {}
+	const resolved: Record<string, string> = {}
 	let newResolvable = true
 	while (newResolvable) {
 		newResolvable = false
@@ -264,7 +264,7 @@ function extractTargets(node: RSTNode): { [key: string]: string } {
 	return resolved
 }
 
-function resolveTargets(nodes: m.Node[], targets: { [key: string]: string }): m.Node[] {
+function resolveTargets(nodes: m.Node[], targets: Record<string, string>): m.Node[] {
 	return nodes.map((node) => {
 		if (typeof node === 'string') return node
 		const elem = { ...node }

@@ -130,7 +130,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			return <TeX math={node.math} settings={KATEX_SETTINGS} />
 		// custom
 		case Type.Plotly: {
-			const { type, ...props } = node
+			const { type: _, ...props } = node
 			return <Plotly {...props} />
 		}
 		default:

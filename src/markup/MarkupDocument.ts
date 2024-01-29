@@ -119,7 +119,7 @@ interface Element<C extends Node = Node> {
 export interface Document {
 	title: string
 	children: Node[]
-	metadata: { [key: string]: unknown }
+	metadata: Record<string, unknown>
 }
 export const Document = (props: Document) => props
 

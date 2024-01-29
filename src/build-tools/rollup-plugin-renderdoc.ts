@@ -16,7 +16,7 @@ import { Document, Type, ParseError, ASTError } from '../markup'
 import mdConvert from './md'
 import rstConvert from './rst'
 
-function zipObject<V>(keys: string[], values: V[]): { [k: string]: V } {
+function zipObject<V>(keys: string[], values: V[]): Record<string, V> {
 	if (keys.length !== values.length) {
 		throw new Error(
 			`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`,
@@ -39,17 +39,15 @@ function getVal(prop: Property | undefined) {
 	return prop.value.value
 }
 
-export interface Converter {
-	(source: string): Document
-}
+export type Converter = (source: string) => Document
 
 export interface Config {
-	converters: { [ext: string]: Converter }
+	converters: Record<string, Converter>
 	include?: string | string[]
 	exclude?: string | string[]
 }
 
-export const DEFAULT_CONVERTERS: { [ext: string]: Converter } = {
+export const DEFAULT_CONVERTERS: Record<string, Converter> = {
 	'.md': mdConvert,
 	'.rst': rstConvert,
 }
