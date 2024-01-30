@@ -1396,13 +1396,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-plotly.js@npm:^2.6.1":
-  version: 2.6.1
-  resolution: "@types/react-plotly.js@npm:2.6.1"
+"@types/react-plotly.js@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "@types/react-plotly.js@npm:2.6.3"
   dependencies:
     "@types/plotly.js": "npm:*"
     "@types/react": "npm:*"
-  checksum: 86a62827310fa6564039e6d7ca2d340bad2895c2128db16bd539fea33bd98664ac53bbf9c693f2ef9430ab24ad655baefa731ee2f01e1b5ebe704f029a73914c
+  checksum: 6fa7a9df0599288f3e658c5a4b34bf5cb8d877637e3607253b53531b1739b99ddd1e1e79e6fdf293f840e2081654476aba0de91ab13a451409dabf1a224176fd
   languageName: node
   linkType: hard
 
@@ -5553,7 +5553,7 @@ __metadata:
     "@types/react": "npm:^18.2.48"
     "@types/react-dom": "npm:^18.2.18"
     "@types/react-is": "npm:^18.2.4"
-    "@types/react-plotly.js": "npm:^2.6.1"
+    "@types/react-plotly.js": "npm:^2.6.3"
     "@typescript-eslint/eslint-plugin": "npm:^6.19.1"
     "@typescript-eslint/parser": "npm:^6.19.1"
     "@vitejs/plugin-react": "npm:^4.2.1"
