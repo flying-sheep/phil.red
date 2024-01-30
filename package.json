@@ -80,7 +80,7 @@
 		"eslint-plugin-react-prefer-function-component": "^3.3.0",
 		"estree-walker": "^3.0.3",
 		"globby": "^14.0.0",
-		"husky": ">=6",
+		"husky": ">=9",
 		"lint-staged": ">=15",
 		"magic-string": "^0.30.5",
 		"markdown-it": "^14.0.0",
