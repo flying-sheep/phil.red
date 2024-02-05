@@ -1397,7 +1397,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.48":
+"@types/react@npm:*":
   version: 18.2.48
   resolution: "@types/react@npm:18.2.48"
   dependencies:
@@ -1405,6 +1405,17 @@ __metadata:
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 2e56ea6bd821ae96bd943f727a59d85384eaf5f8a3e6fce4fa1d34453e32d8eedda742432b3857fa0de7a4214bf84ce4239757eb52918e76452c00384731e585
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.2.54":
+  version: 18.2.54
+  resolution: "@types/react@npm:18.2.54"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    "@types/scheduler": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 69f1a98c5504864fced16261247f0a79322bcfd8d689848cc523fb62e2dd1d64e6c7ac97819fc18f794f8904e1ff7b13fdb0dc28456060ca90b1da62eaa1ee5d
   languageName: node
   linkType: hard
 
@@ -5514,7 +5525,7 @@ __metadata:
     "@types/node": "npm:^20.11.3"
     "@types/plotly.js-basic-dist-min": "npm:^2.12.4"
     "@types/prismjs": "npm:^1.26.3"
-    "@types/react": "npm:^18.2.48"
+    "@types/react": "npm:^18.2.54"
     "@types/react-dom": "npm:^18.2.18"
     "@types/react-is": "npm:^18.2.4"
     "@types/react-plotly.js": "npm:^2.6.3"
