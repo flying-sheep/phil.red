@@ -1023,13 +1023,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@remix-run/router@npm:1.8.0":
-  version: 1.8.0
-  resolution: "@remix-run/router@npm:1.8.0"
-  checksum: 7b5b4a6e6224ffbf61ff5e6daa21ca84b71c55c8e2f5789ad991a51497009453f38f37aad262eb6525b5f00c8b783de968e93c41fc0c2f2dafaf6ae843c17711
-  languageName: node
-  linkType: hard
-
 "@rollup/rollup-android-arm-eabi@npm:4.10.0":
   version: 4.10.0
   resolution: "@rollup/rollup-android-arm-eabi@npm:4.10.0"
@@ -5673,7 +5666,7 @@ __metadata:
     react-plotly.js: "npm:^2.6.0"
     react-portal-target: "npm:^1.0.2"
     react-router: "npm:^6.22.0"
-    react-router-dom: "npm:^6.15.0"
+    react-router-dom: "npm:^6.22.0"
     react-slide-routes: "npm:^3.0.3"
     restructured: "npm:^0.0.11"
     rollup: "npm:^4.10.0"
@@ -6072,31 +6065,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.15.0":
-  version: 6.15.0
-  resolution: "react-router-dom@npm:6.15.0"
+"react-router-dom@npm:^6.22.0":
+  version: 6.22.0
+  resolution: "react-router-dom@npm:6.22.0"
   dependencies:
-    "@remix-run/router": "npm:1.8.0"
-    react-router: "npm:6.15.0"
+    "@remix-run/router": "npm:1.15.0"
+    react-router: "npm:6.22.0"
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 8969ceeb8022f310d12f7e163c04e79bd87edb2f372bbcd8ee4f7910084d87f57fa810a3ef6e4cdb3141f0d5286e2179c2f552e14d6b15afafc5ba95ae18ce51
+  checksum: 32ba0386d400354094116fa7dd98f1d23bc7cf683b0f4509694be5f730d4957fcb8cc73e35946576fc3f48b4d36743422f1b9bcdc37ad77f04bde0bde5d9102e
   languageName: node
   linkType: hard
 
-"react-router@npm:6.15.0":
-  version: 6.15.0
-  resolution: "react-router@npm:6.15.0"
-  dependencies:
-    "@remix-run/router": "npm:1.8.0"
-  peerDependencies:
-    react: ">=16.8"
-  checksum: 8724a83a0e08c8bd7a818baec84cb3035392ae352878dd5b062a691888ba82f88910cf402f776ba867a7a485efd0da7d7aa60a4e0aec7bbd47bc69c8e33d3671
-  languageName: node
-  linkType: hard
-
-"react-router@npm:^6.22.0":
+"react-router@npm:6.22.0, react-router@npm:^6.22.0":
   version: 6.22.0
   resolution: "react-router@npm:6.22.0"
   dependencies:
