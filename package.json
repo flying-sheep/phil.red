@@ -25,7 +25,7 @@
 	],
 	"dependencies": {
 		"@emotion/react": "^11.11.4",
-		"@emotion/styled": "^11.11.0",
+		"@emotion/styled": "^11.11.5",
 		"@fontsource/iosevka": "^5.0.7",
 		"@fontsource/iosevka-aile": "^5.0.7",
 		"@matejmazur/react-katex": "^3.1.3",
