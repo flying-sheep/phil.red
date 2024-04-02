@@ -91,7 +91,7 @@
 		"typescript": "^5.3.3",
 		"unplugin-fonts": "^1.1.1",
 		"vite": "^5.0.12",
-		"vite-bundle-visualizer": "^1.0.1"
+		"vite-bundle-visualizer": "^1.1.0"
 	},
 	"packageManager": "yarn@4.0.2",
 	"lint-staged": {
