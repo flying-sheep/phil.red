@@ -1163,10 +1163,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/strictest@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@tsconfig/strictest@npm:2.0.2"
-  checksum: 10/5409233288d872a2d79aca5eb65d3da681c6e0baa9ee58744adceda834fececdaa8265869793cfd5a80f4c887e3296b4d13309ef5bffbf7c8272071f00b60ba7
+"@tsconfig/strictest@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "@tsconfig/strictest@npm:2.0.5"
+  checksum: 10/c1dfc581c6b46218034aa05a0ea2d0284ae8dc3508a38bee7014dd6868ed681e6b88d4d13a8e1b7f35221e84cd020ffab18f3991bc9e652ce441775e2fcbad57
   languageName: node
   linkType: hard
 
@@ -5619,7 +5619,7 @@ __metadata:
     "@mui/material": "npm:^5.15.15"
     "@mui/system": "npm:^5.15.15"
     "@total-typescript/ts-reset": "npm:^0.5.1"
-    "@tsconfig/strictest": "npm:^2.0.2"
+    "@tsconfig/strictest": "npm:^2.0.5"
     "@types/estree": "npm:^1.0.5"
     "@types/katex": "npm:^0.16.7"
     "@types/markdown-it": "npm:^13.0.7"
