@@ -82,7 +82,7 @@
 		"globby": "^14.0.1",
 		"husky": ">=9",
 		"lint-staged": ">=15",
-		"magic-string": "^0.30.8",
+		"magic-string": "^0.30.10",
 		"markdown-it": "^14.1.0",
 		"prettier": "^3.2.5",
 		"react-json-tree": "^0.18.0",
