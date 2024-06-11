@@ -5786,7 +5786,7 @@ __metadata:
     magic-string: "npm:^0.30.10"
     markdown-it: "npm:^14.1.0"
     merge-sx: "npm:^2.0.1"
-    plotly.js-basic-dist-min: "npm:^2.32.0"
+    plotly.js-basic-dist-min: "npm:^2.33.0"
     prettier: "npm:^3.2.5"
     prism-react-renderer: "npm:^2.3.1"
     prismjs: "npm:^1.29.0"
@@ -5843,10 +5843,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"plotly.js-basic-dist-min@npm:^2.32.0":
-  version: 2.32.0
-  resolution: "plotly.js-basic-dist-min@npm:2.32.0"
-  checksum: 10/99317c7f82a02a8fc911dc865c1e47d1d44dbde135136ea536edcedda0a8540a180cca4e33027d20636bda5980b64f40cd0e10f58a20bebab7e5f210fe61f762
+"plotly.js-basic-dist-min@npm:^2.33.0":
+  version: 2.33.0
+  resolution: "plotly.js-basic-dist-min@npm:2.33.0"
+  checksum: 10/9e07f6320482af257f9fb8da736f490fc688e973dc91a186d2f36392373c28758b30837ba6dd2824e6f24182009e58567a81d55d02859b7723cc3deb3e25681b
   languageName: node
   linkType: hard
 
