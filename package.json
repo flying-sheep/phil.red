@@ -65,7 +65,7 @@
 		"@types/react-plotly.js": "^2.6.3",
 		"@typescript-eslint/eslint-plugin": "^7.13.0",
 		"@typescript-eslint/parser": "^7.13.0",
-		"@vitejs/plugin-react": "^4.2.1",
+		"@vitejs/plugin-react": "^4.3.1",
 		"@yarnpkg/sdks": "^3.1.2",
 		"depcheck": "^1.4.7",
 		"eslint": "^8.57.0",
