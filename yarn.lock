@@ -349,7 +349,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.23.9, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.23.9
   resolution: "@babel/runtime@npm:7.23.9"
   dependencies:
@@ -1534,13 +1534,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/base16@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@types/base16@npm:1.0.2"
-  checksum: 10/5bc587d45066dae6fb14a4a7f72e57044fa1a8057eed86d4005f9e38a0c38b83009828ac3072e6e9e4be1cf5d5032849690adf8cd51efd545fa281bee5cf0fa5
-  languageName: node
-  linkType: hard
-
 "@types/cacheable-request@npm:^6.0.1":
   version: 6.0.3
   resolution: "@types/cacheable-request@npm:6.0.3"
@@ -1611,10 +1604,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.178, @types/lodash@npm:^4.14.191":
-  version: 4.14.191
-  resolution: "@types/lodash@npm:4.14.191"
-  checksum: 10/ab8cd8eeb941f0fb89248cd5d520b942b841e936e4fcb093370f76d137a8b6f6be0de7f38fc259d56d3cc45b1b50ed69d15c9b94922545166e3ef1f0218be2f2
+"@types/lodash@npm:^4.17.0":
+  version: 4.17.6
+  resolution: "@types/lodash@npm:4.17.6"
+  checksum: 10/6d3a68b3e795381f4aaf946855134d24eeb348ad5d66e9a44461d30026da82b215d55b92b70486d811ca45d54d4ab956aa2dced37fd04e19d49afe160ae3da2e
   languageName: node
   linkType: hard
 
@@ -2481,13 +2474,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"base16@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "base16@npm:1.0.0"
-  checksum: 10/7fdd91cc01c0ff8301f500c75f4dcf80e2e05124c137fa91a11955f74dacb7babceac11c7a8db232f49429c33f27d2dee29a36a3a347d2f2c4d319715056d348
-  languageName: node
-  linkType: hard
-
 "binary-extensions@npm:^2.0.0":
   version: 2.2.0
   resolution: "binary-extensions@npm:2.2.0"
@@ -2793,7 +2779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
+"color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -2825,7 +2811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-string@npm:^1.6.0":
+"color-string@npm:^1.9.0":
   version: 1.9.1
   resolution: "color-string@npm:1.9.1"
   dependencies:
@@ -2844,13 +2830,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "color@npm:3.2.1"
+"color@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "color@npm:4.2.3"
   dependencies:
-    color-convert: "npm:^1.9.3"
-    color-string: "npm:^1.6.0"
-  checksum: 10/bf70438e0192f4f62f4bfbb303e7231289e8cc0d15ff6b6cbdb722d51f680049f38d4fdfc057a99cb641895cf5e350478c61d98586400b060043afc44285e7ae
+    color-convert: "npm:^2.0.1"
+    color-string: "npm:^1.9.0"
+  checksum: 10/b23f5e500a79ea22428db43d1a70642d983405c0dd1f95ef59dbdb9ba66afbb4773b334fa0b75bb10b0552fd7534c6b28d4db0a8b528f91975976e70973c0152
   languageName: node
   linkType: hard
 
@@ -2967,7 +2953,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.10, csstype@npm:^3.0.2, csstype@npm:^3.1.3":
+"csstype@npm:^3.0.2, csstype@npm:^3.1.3":
   version: 3.1.3
   resolution: "csstype@npm:3.1.3"
   checksum: 10/f593cce41ff5ade23f44e77521e3a1bcc2c64107041e1bf6c3c32adc5187d0d60983292fda326154d20b01079e24931aa5b08e4467cc488b60bb1e7f6d478ade
@@ -5332,10 +5318,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.curry@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "lodash.curry@npm:4.1.1"
-  checksum: 10/ce6c2bc42eacc25c5697b90a6fc42a121fec2b3c944fd324b61f93a6e1b4c8bb4875dc8c32b89ca4ce5f7be7346f485ed8410d3f4728eceebcbca9760bcac3d1
+"lodash-es@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash-es@npm:4.17.21"
+  checksum: 10/03f39878ea1e42b3199bd3f478150ab723f93cc8730ad86fec1f2804f4a07c6e30deaac73cad53a88e9c3db33348bb8ceeb274552390e7a75d7849021c02df43
   languageName: node
   linkType: hard
 
@@ -6176,7 +6162,7 @@ __metadata:
     react-error-boundary: "npm:^4.0.13"
     react-helmet-async: "npm:^2.0.5"
     react-is: "npm:^18.3.1"
-    react-json-tree: "npm:^0.18.0"
+    react-json-tree: "npm:^0.19.0"
     react-plotly.js: "npm:^2.6.0"
     react-portal-target: "npm:^1.0.2"
     react-router: "npm:^6.23.0"
@@ -6471,18 +6457,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-base16-styling@npm:^0.9.1":
-  version: 0.9.1
-  resolution: "react-base16-styling@npm:0.9.1"
+"react-base16-styling@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "react-base16-styling@npm:0.10.0"
   dependencies:
-    "@babel/runtime": "npm:^7.16.7"
-    "@types/base16": "npm:^1.0.2"
-    "@types/lodash": "npm:^4.14.178"
-    base16: "npm:^1.0.0"
-    color: "npm:^3.2.1"
-    csstype: "npm:^3.0.10"
-    lodash.curry: "npm:^4.1.1"
-  checksum: 10/c8344a437e230894572e4ae4e164d23442cd258a34e725abdc6b06b98b0eeeecf5d3886119379cbcd5f897ad22324dbd23f13d8f3cc16f8000f78a5ba2cd25f7
+    "@types/lodash": "npm:^4.17.0"
+    color: "npm:^4.2.3"
+    csstype: "npm:^3.1.3"
+    lodash-es: "npm:^4.17.21"
+  checksum: 10/af1263d3638e61418bc770ddb5d86b23d574ba34706419e61fa9c339ed5e532bd788b060831876699ef510ce46b7392b984c95737ed529a8fe07b27e3dac3ac1
   languageName: node
   linkType: hard
 
@@ -6550,17 +6533,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-json-tree@npm:^0.18.0":
-  version: 0.18.0
-  resolution: "react-json-tree@npm:0.18.0"
+"react-json-tree@npm:^0.19.0":
+  version: 0.19.0
+  resolution: "react-json-tree@npm:0.19.0"
   dependencies:
-    "@babel/runtime": "npm:^7.20.6"
-    "@types/lodash": "npm:^4.14.191"
-    react-base16-styling: "npm:^0.9.1"
+    "@types/lodash": "npm:^4.17.0"
+    react-base16-styling: "npm:^0.10.0"
   peerDependencies:
     "@types/react": ^16.8.0 || ^17.0.0 || ^18.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10/601e3670676e28e5a0c51979bd597f3b879cd7ae7ac4642f30529f4a604cb3b994d77eeabf39415c3d42dd63429ddd971c5d615962ef97b3514149cdd8f0a8c8
+  checksum: 10/2ba9960fea2ab915d76672184219d8b953b5bb06e18e7aea6362943fea19f40f991d317bc32c69730dd8cbc6f9b92e25f6a2a1e1aa32b48a1b6aaa0e2a20293a
   languageName: node
   linkType: hard
 
