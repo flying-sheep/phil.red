@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { PortalTarget } from 'react-portal-target'
-import { Link, Route, Navigate, useLocation, matchPath } from 'react-router-dom'
+import { Link, Navigate, Route, matchPath, useLocation } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
 
 import AppBar from '@mui/material/AppBar'
@@ -11,7 +11,12 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import { deepPurple } from '@mui/material/colors'
-import { alpha, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles'
+import {
+	ThemeProvider,
+	alpha,
+	createTheme,
+	responsiveFontSizes,
+} from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Blog from '../Blog'
@@ -65,7 +70,8 @@ const App = () => {
 		})
 		return responsiveFontSizes(baseTheme)
 	}, [dark])
-	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))?.pattern.path
+	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))
+		?.pattern.path
 
 	return (
 		<ThemeProvider theme={theme}>

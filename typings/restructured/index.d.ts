@@ -57,7 +57,10 @@ declare module 'restructured' {
 		role: RoleType
 	}
 	export type OtherBlockNode<HasPos> = BlockNode<HasPos> & {
-		type: Exclude<BlockNodeType, 'section' | 'bullet_list' | 'directive' | 'interpreted_text'>
+		type: Exclude<
+			BlockNodeType,
+			'section' | 'bullet_list' | 'directive' | 'interpreted_text'
+		>
 	}
 	export type OtherInlineNode<HasPos> = InlineNode<HasPos> & {
 		// type: Exclude<InlineNodeType, ...>
@@ -82,10 +85,9 @@ declare module 'restructured' {
 }
 
 declare module 'restructured/lib/Parser.js' {
-	/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
+	import type { Positon } from 'restructured'
 
-	import { Positon } from 'restructured'
-
+	// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 	export class SyntaxError extends Error {
 		message: string
 		expected: string | null

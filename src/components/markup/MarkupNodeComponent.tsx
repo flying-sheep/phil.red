@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography'
 import type { Variant } from '@mui/material/styles/createTypography'
 
 import { ASTError } from '../../markup'
-import { type Node, type Elem, Type, Bullet } from '../../markup/MarkupDocument'
+import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
 import CodeBlock from '../CodeBlock'
 import Plotly from '../Plotly'
 
@@ -35,22 +35,29 @@ export interface MarkupElementState {
 }
 
 function convertChildren(elem: Elem, level: number) {
-	const children = elem.children.map((e) => <MarkupNodeComponent node={e} level={level} />)
+	const children = elem.children.map((e) => (
+		// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
+		<MarkupNodeComponent node={e} level={level} />
+	))
 	return <>{Children.toArray(children)}</>
 }
 
 const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
-	// eslint-disable-next-line react/jsx-no-useless-fragment
 	if (typeof node === 'string') return <>{node}</>
 	switch (node.type) {
 		// Block
 		case Type.Section:
 			return <section>{convertChildren(node, level + 1)}</section>
 		case Type.Title: {
-			if (node.level < 1) throw new ASTError(`Header with level ${node.level} < 1`, node)
+			if (node.level < 1)
+				throw new ASTError(`Header with level ${node.level} < 1`, node)
 			const hLevel = Math.min(node.level, 6)
 			return (
-				<Typography id={node.anchor} variant={`h${hLevel}` as Variant} gutterBottom>
+				<Typography
+					id={node.anchor}
+					variant={`h${hLevel}` as Variant}
+					gutterBottom
+				>
 					{convertChildren(node, level)}
 				</Typography>
 			)
@@ -60,12 +67,15 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		case Type.BlockQuote:
 			return <blockquote>{convertChildren(node, level)}</blockquote>
 		case Type.BulletList: {
-			const listStyleType = node.bullet === Bullet.text ? node.text : node.bullet
+			const listStyleType =
+				node.bullet === Bullet.text ? node.text : node.bullet
 			return <ul style={{ listStyleType }}>{convertChildren(node, level)}</ul>
 		}
 		case Type.EnumList:
 			return (
-				<ol style={{ listStyleType: node.enumeration }}>{convertChildren(node, level)}</ol>
+				<ol style={{ listStyleType: node.enumeration }}>
+					{convertChildren(node, level)}
+				</ol>
 			)
 		case Type.ListItem:
 			return <li>{convertChildren(node, level)}</li>
@@ -141,10 +151,9 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 const MarkupNodeComponent: FC<MarkupElementProps> = ({ node, level }) => {
 	const fallback = useCallback(
 		({ error }: FallbackProps) => {
-			// eslint-disable-next-line no-console
 			console.error(error)
-			// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-			const errorMessage = error instanceof Error ? error.message : `${error as unknown}`
+			const errorMessage =
+				error instanceof Error ? error.message : `${error as unknown}`
 			return <ASTErrorMessage node={node}>{errorMessage}</ASTErrorMessage>
 		},
 		[node],

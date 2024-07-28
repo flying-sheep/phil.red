@@ -1,8 +1,7 @@
 /** @jsxImportSource ../markup */
-/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
 import * as rst from 'restructured'
-import { SyntaxError } from 'restructured/lib/Parser.js'
+import { SyntaxError as RSTSyntaxError } from 'restructured/lib/Parser.js'
 
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
@@ -18,7 +17,9 @@ type RSTNode = rst.Node<true>
 type RSTInlineNode = rst.InlineNode<true>
 
 function parseDirective(lines: RSTNode[]): Directive {
-	const texts = lines.map((n) => (n.type === 'text' ? n.value : JSON.stringify(n)))
+	const texts = lines.map((n) =>
+		n.type === 'text' ? n.value : JSON.stringify(n),
+	)
 	const [header = null, ...rest] = texts
 	let lastParam = -1
 	const params = rest
@@ -34,7 +35,7 @@ function parseDirective(lines: RSTNode[]): Directive {
 				string,
 				string,
 			]
-			obj[name] = val // eslint-disable-line no-param-reassign
+			obj[name] = val
 			return obj
 		}, {})
 	const body = rest.slice(lastParam + 1)
@@ -60,9 +61,14 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		case 'section':
-			return [<m.Section pos={pos(node)}>{convertChildren(node, level + 1)}</m.Section>]
+			return [
+				<m.Section pos={pos(node)}>
+					{convertChildren(node, level + 1)}
+				</m.Section>,
+			]
 		case 'title': {
-			if (level < 1) throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
+			if (level < 1)
+				throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 			const hLevel = Math.min(level, 6)
 			const { anchor } = titleAnchor(node)
 			return [
@@ -72,13 +78,25 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		case 'paragraph':
-			return [<m.Paragraph pos={pos(node)}>{convertChildren(node, level)}</m.Paragraph>]
+			return [
+				<m.Paragraph pos={pos(node)}>
+					{convertChildren(node, level)}
+				</m.Paragraph>,
+			]
 		case 'block_quote':
-			return [<m.BlockQuote pos={pos(node)}>{convertChildren(node, level)}</m.BlockQuote>]
+			return [
+				<m.BlockQuote pos={pos(node)}>
+					{convertChildren(node, level)}
+				</m.BlockQuote>,
+			]
 		case 'text': {
 			const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
 			if (!fieldList) return [node.value]
-			const [, fieldName, fieldValue] = fieldList as unknown as [string, string, string]
+			const [, fieldName, fieldValue] = fieldList as unknown as [
+				string,
+				string,
+				string,
+			]
 			return [
 				// TODO: convert runs to single lists, not multiple
 				<m.FieldList pos={pos(node)}>
@@ -97,7 +115,9 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'emphasis':
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		case 'strong':
-			return [<m.Strong pos={pos(node)}>{convertChildren(node, level)}</m.Strong>]
+			return [
+				<m.Strong pos={pos(node)}>{convertChildren(node, level)}</m.Strong>,
+			]
 		case 'bullet_list': {
 			// TODO: convert some known bullets
 			return [
@@ -107,15 +127,25 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		case 'enumerated_list':
-			return [<m.EnumList pos={pos(node)}>{convertChildren(node, level)}</m.EnumList>]
+			return [
+				<m.EnumList pos={pos(node)}>{convertChildren(node, level)}</m.EnumList>,
+			]
 		case 'list_item':
-			return [<m.ListItem pos={pos(node)}>{convertChildren(node, level)}</m.ListItem>]
+			return [
+				<m.ListItem pos={pos(node)}>{convertChildren(node, level)}</m.ListItem>,
+			]
 		case 'definition_list':
-			return [<m.DefList pos={pos(node)}>{convertChildren(node, level)}</m.DefList>]
+			return [
+				<m.DefList pos={pos(node)}>{convertChildren(node, level)}</m.DefList>,
+			]
 		case 'definition_list_item':
-			return [<m.DefItem pos={pos(node)}>{convertChildren(node, level)}</m.DefItem>]
+			return [
+				<m.DefItem pos={pos(node)}>{convertChildren(node, level)}</m.DefItem>,
+			]
 		case 'term':
-			return [<m.DefTerm pos={pos(node)}>{convertChildren(node, level)}</m.DefTerm>]
+			return [
+				<m.DefTerm pos={pos(node)}>{convertChildren(node, level)}</m.DefTerm>,
+			]
 		case 'definition':
 			return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
 		case 'interpreted_text':
@@ -130,14 +160,19 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 						/>,
 					]
 				case 'pep': {
-					const num = node.children.map((text) => (text as RSTInlineNode).value).join('')
+					const num = node.children
+						.map((text) => (text as RSTInlineNode).value)
+						.join('')
 					const href = `https://www.python.org/dev/peps/pep-${num.padStart(4, '0')}/`
-					return [<m.Link ref={{ href }} pos={pos(node)}>{`PEP ${num}`}</m.Link>]
+					return [
+						<m.Link ref={{ href }} pos={pos(node)}>{`PEP ${num}`}</m.Link>,
+					]
 				}
 				case null:
-					return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
+					return [
+						<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>,
+					]
 				default:
-					// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 					throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 			}
 		case 'literal_block': {
@@ -196,17 +231,25 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 					]
 				}
 				default:
-					throw new ASTError(`Unknown directive “${node.directive}”`, node, pos(node))
+					throw new ASTError(
+						`Unknown directive “${node.directive}”`,
+						node,
+						pos(node),
+					)
 			}
 		}
 		default:
-			throw new ASTError(`Unknown node type “${(node as RSTNode).type}”`, node, pos(node))
+			throw new ASTError(
+				`Unknown node type “${(node as RSTNode).type}”`,
+				node,
+				pos(node),
+			)
 	}
 }
 
 function convertChildren(node: RSTNode, level: number): m.Node[] {
 	return ('children' in node ? node.children : []).reduce(
-		(ns: m.Node[], n: RSTNode) => [...ns, ...convertNode(n, level)],
+		(ns: m.Node[], n: RSTNode) => ns.concat(convertNode(n, level)),
 		[],
 	)
 }
@@ -221,7 +264,9 @@ function titleAnchor(node: RSTNode) {
 	return { name, anchor }
 }
 
-function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]> {
+function* extractTargetsInner(
+	node: RSTNode,
+): IterableIterator<[string, string]> {
 	for (const child of 'children' in node ? node.children : []) {
 		if (typeof child === 'string') continue
 		if (child.type === 'title') {
@@ -229,7 +274,8 @@ function* extractTargetsInner(node: RSTNode): IterableIterator<[string, string]>
 			yield [name, `#${anchor}`]
 		} else if (child.type === 'comment') {
 			const comment = (child.children as [RSTInlineNode])[0].value
-			const [, name = null, href = null] = /^_([^:]+):\s+(.+)$/.exec(comment) ?? []
+			const [, name = null, href = null] =
+				/^_([^:]+):\s+(.+)$/.exec(comment) ?? []
 			// TODO: “_`name with backticks`: ...”
 			if (name !== null && href !== null) yield [name.toLocaleLowerCase(), href]
 		} else if ('children' in child) {
@@ -258,13 +304,15 @@ function extractTargets(node: RSTNode): { [key: string]: string } {
 		}
 	}
 	if (Object.keys(pending).length) {
-		// eslint-disable-next-line no-console
 		console.warn('Could not resolve references: %s', pending)
 	}
 	return resolved
 }
 
-function resolveTargets(nodes: m.Node[], targets: { [key: string]: string }): m.Node[] {
+function resolveTargets(
+	nodes: m.Node[],
+	targets: { [key: string]: string },
+): m.Node[] {
 	return nodes.map((node) => {
 		if (typeof node === 'string') return node
 		const elem = { ...node }
@@ -274,12 +322,12 @@ function resolveTargets(nodes: m.Node[], targets: { [key: string]: string }): m.
 				elem.ref = { href: maybeHref }
 			} else {
 				// maybe inline syntax
-				const [, text, href] = /^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
+				const [, text, href] =
+					/^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
 				if (text && href) {
 					elem.ref = { href }
 					elem.children = [text]
 				} else {
-					// eslint-disable-next-line no-console
 					console.warn(`Unmatched link target ${elem.ref.name}`)
 				}
 			}
@@ -291,17 +339,21 @@ function resolveTargets(nodes: m.Node[], targets: { [key: string]: string }): m.
 
 function getTitle(body: m.Node[]): string {
 	if (body.length === 0) throw new ASTError('Empty body', undefined)
-	const section = body[0]!
+	const section = body[0]
 	if (typeof section === 'string')
 		throw new ASTError(`Body starts with string: ${section}`, section)
-	if (section.type !== m.Type.Section) throw new ASTError('No section!', section, section.pos)
-	if (section.children.length === 0) throw new ASTError('Empty Section', section, section.pos)
-	const title = section.children[0]!
+	if (!section || section.type !== m.Type.Section)
+		throw new ASTError('No section!', section, section?.pos)
+	if (section.children.length === 0)
+		throw new ASTError('Empty Section', section, section.pos)
+	const title = section.children[0]
 	if (typeof title === 'string')
 		throw new ASTError(`Section starts with string: ${title}`, section.pos)
-	if (title.type !== m.Type.Title) throw new ASTError('No title!', title, title.pos)
+	if (!title || title.type !== m.Type.Title)
+		throw new ASTError('No title!', title, title?.pos ?? section.pos)
 	const text = title.children[0]
-	if (typeof text !== 'string') throw new ASTError('Empty title!', title, title.pos)
+	if (typeof text !== 'string')
+		throw new ASTError('Empty title!', title, title.pos)
 	return text.trim()
 }
 
@@ -319,7 +371,7 @@ function getMeta(fieldLists: m.Elem) {
 }
 
 export default function rstConvert(code: string): m.Document {
-	let parsed
+	let parsed: RSTNode
 	try {
 		parsed = rst.default.default.parse(code, {
 			position: true,
@@ -327,17 +379,18 @@ export default function rstConvert(code: string): m.Document {
 			indent: true,
 		})
 	} catch (e) {
-		if (e instanceof SyntaxError) {
+		if (e instanceof RSTSyntaxError) {
 			throw new ParseError(e, e.location.start) // TODO: capture end too
-		} else {
-			throw e
 		}
+		throw e
 	}
 	const targets = extractTargets(parsed)
 	const children = resolveTargets(convertNode(parsed, 0), targets)
 
 	const metadata =
-		(children[0] as m.Elem).type === m.Type.Section ? {} : getMeta(children.shift() as m.Elem)
+		(children[0] as m.Elem).type === m.Type.Section
+			? {}
+			: getMeta(children.shift() as m.Elem)
 
 	return { title: getTitle(children), children, metadata }
 }

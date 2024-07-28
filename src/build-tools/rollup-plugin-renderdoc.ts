@@ -1,17 +1,15 @@
-/* eslint import/no-extraneous-dependencies: [1, { devDependencies: true }], no-console: 0 */
-
-import { promises as fs } from 'fs'
-import * as path from 'path'
-import { cwd } from 'process'
+import { promises as fs } from 'node:fs'
+import * as path from 'node:path'
+import { cwd } from 'node:process'
 
 import type { Node, ObjectExpression, Property } from 'estree'
 import { asyncWalk } from 'estree-walker'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
-import type { PluginContext, AstNode } from 'rollup'
+import type { AstNode, PluginContext } from 'rollup'
 import type { Plugin } from 'vite'
 
-import { Document, Type, ParseError, ASTError } from '../markup'
+import { ASTError, type Document, ParseError, Type } from '../markup'
 
 import mdConvert from './md'
 import rstConvert from './rst'
@@ -22,12 +20,22 @@ function zipObject<V>(keys: string[], values: V[]): { [k: string]: V } {
 			`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`,
 		)
 	}
-	return keys.reduce((prev, k, i) => ({ ...prev, [k]: values[i] }), {})
+	return keys.reduce(
+		(prev, k, i) => {
+			prev[k] = values[i] as V // length checked above
+			return prev
+		},
+		{} as { [k: string]: V },
+	)
 }
 
 function getProp(node: ObjectExpression, key: string): Property | undefined {
 	for (const prop of node.properties) {
-		if (prop.type === 'Property' && prop.key.type === 'Literal' && prop.key.value === key) {
+		if (
+			prop.type === 'Property' &&
+			prop.key.type === 'Literal' &&
+			prop.key.value === key
+		) {
 			return prop
 		}
 	}
@@ -35,13 +43,12 @@ function getProp(node: ObjectExpression, key: string): Property | undefined {
 }
 
 function getVal(prop: Property | undefined) {
-	if (prop?.type !== 'Property' || prop.value.type !== 'Literal') return undefined
+	if (prop?.type !== 'Property' || prop.value.type !== 'Literal')
+		return undefined
 	return prop.value.value
 }
 
-export interface Converter {
-	(source: string): Document
-}
+export type Converter = (source: string) => Document
 
 export interface Config {
 	converters: { [ext: string]: Converter }
@@ -65,7 +72,6 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	async function loadPosts(ctx: PluginContext, dir: string) {
 		const paths = await doGlob(dir)
 		if (paths.length === 0) return null
-		// eslint-disable-next-line consistent-return
 		const contents = await Promise.all(
 			paths.map(async (p) => {
 				const code = await fs.readFile(p, { encoding: 'utf-8' })
@@ -87,8 +93,10 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 						e = eOrig
 						e.message = `Error converting the ${ext} AST: ${eOrig.message}`
 					} else {
-						// eslint-disable-next-line @typescript-eslint/no-base-to-string
-						e = eOrig instanceof Error ? eOrig : new Error((eOrig as object).toString())
+						e =
+							eOrig instanceof Error
+								? eOrig
+								: new Error((eOrig as object).toString())
 						e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 					}
 					;(e as Error & { id: string }).id = p // TODO: why?
@@ -113,7 +121,10 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		return map
 	}
 
-	async function createCode(ctx: PluginContext, id: string): Promise<string | null> {
+	async function createCode(
+		ctx: PluginContext,
+		id: string,
+	): Promise<string | null> {
 		const map = await loadPosts(ctx, id)
 		if (map === null) return null
 
@@ -130,7 +141,8 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
 					if (!types.has(getVal(getProp(node, 'type')) as Type)) return
-					const urlProp = getProp(node, 'url')!
+					const urlProp = getProp(node, 'url')
+					if (!urlProp) ctx.error(`missing “url” in “${id}”`)
 					const url = getVal(urlProp) as string
 					const resolved = await ctx.resolve(url)
 					if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
@@ -138,7 +150,12 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 						imports.set(resolved.id, `$${imports.size}`)
 					}
 					const urlVal = urlProp.value as AstNode
-					magicString.overwrite(urlVal.start, urlVal.end, imports.get(resolved.id)!)
+					magicString.overwrite(
+						urlVal.start,
+						urlVal.end,
+						// biome-ignore lint/style/noNonNullAssertion: Is set above
+						imports.get(resolved.id)!,
+					)
 				}
 			},
 		})
@@ -163,7 +180,8 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		name: 'renderdoc',
 		async resolveId(id: string, importer?: string) {
 			if (!id.startsWith('./') && !id.startsWith('../')) return null
-			const rel = importer === undefined ? id : path.join(path.dirname(importer), id)
+			const rel =
+				importer === undefined ? id : path.join(path.dirname(importer), id)
 			if ((await doGlob(rel)).length === 0) return null
 			return `${rel}/__renderdoc`
 		},
@@ -175,14 +193,16 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			return createCode(this, dir)
 		},
 		configureServer(server) {
-			// eslint-disable-next-line @typescript-eslint/no-misused-promises
 			server.middlewares.use(async (req, res, next) => {
 				if (!req.url?.endsWith('__renderdoc')) {
 					next()
 					return
 				}
-				const { default: posts = null } = await server.ssrLoadModule(`.${req.url}`)
-				if (posts === null) throw new Error(`${req.url} not found from ${cwd()}`)
+				const { default: posts = null } = await server.ssrLoadModule(
+					`.${req.url}`,
+				)
+				if (posts === null)
+					throw new Error(`${req.url} not found from ${cwd()}`)
 				res.setHeader('Content-Type', 'application/javascript')
 				res.end(`export default ${JSON.stringify(posts, undefined, '\t')}`)
 			})

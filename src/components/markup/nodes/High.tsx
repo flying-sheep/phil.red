@@ -1,10 +1,10 @@
-import { SxProps } from '@mui/material'
+import type { SxProps } from '@mui/material'
 import { mergeSx } from 'merge-sx'
 import { Highlight, themes } from 'prism-react-renderer'
 import Prism from 'prismjs'
 import { type FC, useEffect, useState } from 'react'
 
-import { SystemStyleObject } from '@mui/system/styleFunctionSx'
+import type { SystemStyleObject } from '@mui/system/styleFunctionSx'
 
 import Box from '@mui/material/Box'
 import useTheme from '@mui/material/styles/useTheme'
@@ -35,9 +35,13 @@ const loadScript = async (url: string) => {
 	return scriptPromise
 }
 
-const loadLang = (lang: string) => loadScript(urls.prism(`components/prism-${lang}.min.js`))
+const loadLang = (lang: string) =>
+	loadScript(urls.prism(`components/prism-${lang}.min.js`))
 
-const style2Sx = <P extends object>({ style, ...props }: P & { style?: React.CSSProperties }) => ({
+const style2Sx = <P extends object>({
+	style,
+	...props
+}: P & { style?: React.CSSProperties }) => ({
 	...props,
 	...(props ? { sx: style as SystemStyleObject } : {}),
 })
@@ -59,18 +63,25 @@ const High: FC<HighProps> = ({ code, language, sx }) => {
 		loadLang(language)
 			.then(() => setLoaded(true))
 			.catch((e) => setErr(e as Error))
-	}, [language, loaded])
+	}, [language])
 	if (err) throw err
 	return (
-		<Highlight prism={Prism} code={code} language={loaded ? language : 'text'} theme={theme}>
+		<Highlight
+			prism={Prism}
+			code={code}
+			language={loaded ? language : 'text'}
+			theme={theme}
+		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
 				<CodeBlock
 					className={className}
 					sx={mergeSx(style as SystemStyleObject, sx, { padding: '5px' })}
 				>
 					{tokens.map((line, i) => (
+						// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
 						<Box component="span" {...style2Sx(getLineProps({ line, key: i }))}>
 							{line.map((token, key) => (
+								// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
 								<Box
 									component="span"
 									{...style2Sx(getTokenProps({ token, key }))}

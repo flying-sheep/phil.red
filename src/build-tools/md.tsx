@@ -1,5 +1,4 @@
 /** @jsxImportSource ../markup */
-/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 
 import MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token.mjs'
@@ -47,13 +46,20 @@ function convertNode(token: Token): m.Node[] {
 		case 'text':
 			return [token.content]
 		case 'paragraph':
-			return [<m.Paragraph pos={pos(token)}>{convertChildren(token)}</m.Paragraph>]
+			return [
+				<m.Paragraph pos={pos(token)}>{convertChildren(token)}</m.Paragraph>,
+			]
 		case 'heading': {
 			const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
-			if (!level) throw new ASTError(`Unexpected header tag ${token.tag}`, token)
+			if (!level)
+				throw new ASTError(`Unexpected header tag ${token.tag}`, token)
 			const anchor = undefined // TODO
 			return [
-				<m.Title level={parseInt(level, 10)} anchor={anchor} pos={pos(token)}>
+				<m.Title
+					level={Number.parseInt(level, 10)}
+					anchor={anchor}
+					pos={pos(token)}
+				>
 					{convertChildren(token)}
 				</m.Title>,
 			]
@@ -76,11 +82,18 @@ function convertNode(token: Token): m.Node[] {
 		case 'fence':
 			return [<m.CodeBlock pos={pos(token)}>{token.content}</m.CodeBlock>]
 		case 'bullet_list':
-			return [<m.BulletList pos={pos(token)}>{convertChildren(token)}</m.BulletList>]
+			return [
+				<m.BulletList pos={pos(token)}>{convertChildren(token)}</m.BulletList>,
+			]
 		case 'list_item':
-			return [<m.ListItem pos={pos(token)}>{convertChildren(token)}</m.ListItem>]
+			return [
+				<m.ListItem pos={pos(token)}>{convertChildren(token)}</m.ListItem>,
+			]
 		default:
-			throw new ASTError(`Unknown token type “${token.type}”`, JSON.stringify(token))
+			throw new ASTError(
+				`Unknown token type “${token.type}”`,
+				JSON.stringify(token),
+			)
 	}
 }
 
@@ -88,7 +101,10 @@ function convertChildren(token: Token): m.Node[] {
 	return convertAll(token.children ?? [])
 }
 function convertAll(tokens: Token[]) {
-	return tokens.reduce((acc: m.Node[], n: Token) => acc.concat(convertNode(n)), [])
+	return tokens.reduce(
+		(acc: m.Node[], n: Token) => acc.concat(convertNode(n)),
+		[],
+	)
 }
 
 export default function mdConvert(code: string): m.Document {

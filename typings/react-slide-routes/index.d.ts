@@ -1,6 +1,6 @@
 declare module 'react-slide-routes' {
-	import { FC, ReactNode } from 'react'
-	import { Location } from 'react-router'
+	import type { FC, ReactNode } from 'react'
+	import type { Location } from 'react-router'
 
 	export interface SlideRoutesProps {
 		animation?: 'slide' | 'vertical-slide' | 'rotate'

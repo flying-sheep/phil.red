@@ -1,4 +1,4 @@
-import { Document } from '../../markup'
+import type { Document } from '../../markup'
 
 interface Documents {
 	[key: string]: Document

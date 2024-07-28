@@ -1,0 +1,54 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"files": {
+		"ignore": [
+			"/.yarn/",
+			"/.husky/",
+			"/*.lock",
+			"/.*ignore",
+			"/.actrc",
+			"/.editorconfig",
+			"/Caddyfile",
+			"*.rst",
+			"*.md",
+			"*.svg",
+		],
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"quoteStyle": "single",
+		},
+	},
+	"linter": {
+		"rules": {
+			"complexity": {
+				"useLiteralKeys": "off", // conflicts with tsconfig noPropertyAccessFromIndexSignature: https://github.com/biomejs/biome/issues/463
+			},
+		},
+	},
+	"overrides": [
+		{
+			"include": [".vscode/*.json", "tsconfig.json", "**/*.jsonc"],
+			"json": {
+				"formatter": {
+					"trailingCommas": "all",
+				},
+				"parser": {
+					"allowComments": true,
+					"allowTrailingCommas": true,
+				},
+			},
+		},
+		{
+			"include": ["src/build-tools/rst.tsx", "src/build-tools/md.tsx"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"useJsxKeyInIterable": "off", // Static tree, no need for key
+					},
+				},
+			},
+		},
+	],
+}
