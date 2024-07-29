@@ -1,10 +1,10 @@
-import type { Positon } from 'restructured'
+import type { Position } from 'restructured'
 
 export default class ParseError extends Error {
 	orig: Error
-	pos: Positon
+	pos: Position
 
-	constructor(orig: Error, pos: Positon) {
+	constructor(orig: Error, pos: Position) {
 		super()
 		this.message = orig.message
 		this.orig = orig

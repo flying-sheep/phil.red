@@ -21,14 +21,14 @@ declare module 'restructured' {
 	export type RoleType = null | 'math' | 'pep'
 	export type BulletType = '*' | '+' | '-' | '•' | '‣' | '⁃'
 	export type DirectiveType = 'code' | 'code-block' | 'csv-table'
-	export interface Positon {
+	export interface Position {
 		offset: number
 		line: number
 		column: number
 	}
 	export type BaseNode<HasPos> = HasPos extends true ? NodeWithPos : object
 	export interface NodeWithPos {
-		position: { start: Positon; end: Positon }
+		position: { start: Position; end: Position }
 	}
 	export type BlockNode<HasPos> = BaseNode<HasPos> & {
 		type: BlockNodeType
@@ -85,14 +85,14 @@ declare module 'restructured' {
 }
 
 declare module 'restructured/lib/Parser.js' {
-	import type { Positon } from 'restructured'
+	import type { Position } from 'restructured'
 
 	// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 	export class SyntaxError extends Error {
 		message: string
 		expected: string | null
 		found: string | null
-		location: { start: Positon; end: Positon }
+		location: { start: Position; end: Position }
 	}
 	const exports: { SyntaxError: typeof SyntaxError }
 	export default exports
