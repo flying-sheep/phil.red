@@ -13,7 +13,9 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './components/routes/App'
 
 document.addEventListener('DOMContentLoaded', () => {
-	const root = createRoot(document.querySelector('#root')!)
+	const elem = document.querySelector('#root')
+	if (!elem) throw new Error('No #root element found')
+	const root = createRoot(elem)
 	root.render(
 		<StrictMode>
 			<HelmetProvider>

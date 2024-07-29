@@ -1,18 +1,9 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
-	"files": {
-		"ignore": [
-			"/.yarn/",
-			"/.husky/",
-			"/*.lock",
-			"/.*ignore",
-			"/.actrc",
-			"/.editorconfig",
-			"/Caddyfile",
-			"*.rst",
-			"*.md",
-			"*.svg",
-		],
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true,
 	},
 	"javascript": {
 		"formatter": {
