@@ -4,7 +4,13 @@ import Typography from '@mui/material/Typography'
 const Home = () => (
 	// TODO: fix route
 	<Container maxWidth="sm">
-		<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+		<Typography
+			component="h1"
+			variant="h2"
+			align="center"
+			color="textPrimary"
+			gutterBottom
+		>
 			phil.red
 		</Typography>
 		<Typography

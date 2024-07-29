@@ -1,11 +1,12 @@
 import { mergeSx } from 'merge-sx'
-import { ComponentProps, forwardRef } from 'react'
+import { type ComponentProps, forwardRef } from 'react'
 
 import Box from '@mui/material/Box'
 
-import Code, { CodeProps } from './Code'
+import Code, { type CodeProps } from './Code'
 
-export interface CodeBlockProps extends Omit<ComponentProps<typeof Box>, 'component' | 'children'> {
+export interface CodeBlockProps
+	extends Omit<ComponentProps<typeof Box>, 'component' | 'children'> {
 	children?: CodeProps['children']
 	noWrap?: boolean
 	slotProps?: {

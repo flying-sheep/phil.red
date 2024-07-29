@@ -1,6 +1,6 @@
 import useFetch from 'fetch-suspense'
 import type { Data, Layout } from 'plotly.js-basic-dist-min'
-import { type FC, lazy, Suspense, useCallback } from 'react'
+import { type FC, Suspense, lazy, useCallback } from 'react'
 import type { PlotParams } from 'react-plotly.js'
 import createPlotlyComponent from 'react-plotly.js/factory'
 
@@ -41,7 +41,11 @@ const Plot = lazy(async () => {
 	return { default: createPlotlyComponent(Plotly) }
 })
 
-const PlotlyInner: FC<Omit<PlotlyProps, 'onClickLink'>> = ({ url, onClick, ...rest }) => {
+const PlotlyInner: FC<Omit<PlotlyProps, 'onClickLink'>> = ({
+	url,
+	onClick,
+	...rest
+}) => {
 	const theme = useTheme()
 	const resp = useFetch(url) as ResponseData
 
@@ -63,8 +67,9 @@ const Plotly: FC<PlotlyProps> = ({ onClickLink, onClick, ...rest }) => {
 	const handleOnClickLink = useCallback(
 		(e: Readonly<Plotly.PlotMouseEvent>) => {
 			const point = e.points[0] as unknown as Record<string, string>
-			const url = (onClickLink ?? '{}').replace(/\{(\w+)\}/, (_, key) =>
-				key in point ? point[key as string]! : `{${key as string}}`,
+			const url = (onClickLink ?? '{}').replace(
+				/\{(\w+)\}/,
+				(_, key) => point[key] ?? `{${key as string}}`,
 			)
 			window.open(url)
 		},
@@ -79,7 +84,10 @@ const Plotly: FC<PlotlyProps> = ({ onClickLink, onClick, ...rest }) => {
 				</Stack>
 			}
 		>
-			<PlotlyInner onClick={onClickLink ? handleOnClickLink : onClick} {...rest} />
+			<PlotlyInner
+				onClick={onClickLink ? handleOnClickLink : onClick}
+				{...rest}
+			/>
 		</Suspense>
 	)
 }

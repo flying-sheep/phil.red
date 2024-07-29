@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Route, Navigate, useParams } from 'react-router-dom'
+import { Navigate, Route, useParams } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
 
 import Grid from '@mui/material/Grid'
@@ -46,11 +46,16 @@ const Index = () => {
 const RoutedPost: FC = () => {
 	const match = useParams<'id' | 'year' | 'month' | 'day'>()
 	const { id, year, month, day } = match as Record<keyof typeof match, string>
-	if (!(id in posts)) {
+	const post = posts[id]
+	if (!post) {
 		return <div>{`404 – post ${id} not found`}</div>
 	}
-	const { date, document } = posts[id]!
-	if (+year !== date.getFullYear() || +month !== date.getMonth() + 1 || +day !== date.getDate()) {
+	const { date, document } = post
+	if (
+		+year !== date.getFullYear() ||
+		+month !== date.getMonth() + 1 ||
+		+day !== date.getDate()
+	) {
 		return <Navigate replace to={`./../../../../${date2url(date)}/${id}`} />
 	}
 	return (

@@ -40,7 +40,9 @@ const ListItemLink = ({ href, icon, text, sub }: ListItemLinkProps = {}) => (
 	<ListItem disablePadding>
 		<ListItemButton component={Link} href={href}>
 			<ListItemAvatar>
-				<Avatar>{isValidComponentType(icon) ? createElement(icon) : icon}</Avatar>
+				<Avatar>
+					{isValidComponentType(icon) ? createElement(icon) : icon}
+				</Avatar>
 			</ListItemAvatar>
 			<ListItemText primary={text} secondary={sub} />
 		</ListItemButton>

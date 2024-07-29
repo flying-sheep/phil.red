@@ -1,4 +1,3 @@
-/* eslint import/no-extraneous-dependencies: ['error', {devDependencies: true}] */
 import react from '@vitejs/plugin-react'
 import unfonts from 'unplugin-fonts/vite'
 import { defineConfig } from 'vite'

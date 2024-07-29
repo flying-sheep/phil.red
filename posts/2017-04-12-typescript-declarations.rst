@@ -20,7 +20,6 @@ Now i can create module declaration files as ``typings/module-name.d.ts``, e.g. 
 
 .. code:: typescript
 
-	/* eslint import/no-extraneous-dependencies: 0 */
 	import { Plugin } from 'postcss'
 	
 	declare namespace postcssModules {
