@@ -30,7 +30,7 @@
 		"@mui/material": "^5.16.5",
 		"@mui/system": "^5.16.5",
 		"fetch-suspense": "^1.2.2",
-		"katex": "^0.16.10",
+		"katex": "^0.16.11",
 		"merge-sx": "^3.0.1",
 		"plotly.js-basic-dist-min": "^2.33.0",
 		"prism-react-renderer": "^2.3.1",
