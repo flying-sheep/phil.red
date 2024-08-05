@@ -61,7 +61,7 @@
 		"@types/react-is": "^18.3.0",
 		"@types/react-plotly.js": "^2.6.3",
 		"@vitejs/plugin-react": "^4.3.1",
-		"@yarnpkg/sdks": "^3.1.2",
+		"@yarnpkg/sdks": "^3.2.0",
 		"depcheck": "^1.4.7",
 		"estree-walker": "^3.0.3",
 		"globby": "^14.0.2",
