@@ -1487,20 +1487,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/core@npm:^4.0.5":
-  version: 4.0.5
-  resolution: "@yarnpkg/core@npm:4.0.5"
+"@yarnpkg/core@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "@yarnpkg/core@npm:4.1.2"
   dependencies:
     "@arcanis/slice-ansi": "npm:^1.1.1"
     "@types/semver": "npm:^7.1.0"
     "@types/treeify": "npm:^1.0.0"
-    "@yarnpkg/fslib": "npm:^3.0.2"
-    "@yarnpkg/libzip": "npm:^3.0.1"
+    "@yarnpkg/fslib": "npm:^3.1.0"
+    "@yarnpkg/libzip": "npm:^3.1.0"
     "@yarnpkg/parsers": "npm:^3.0.2"
     "@yarnpkg/shell": "npm:^4.0.2"
     camelcase: "npm:^5.3.1"
     chalk: "npm:^3.0.0"
-    ci-info: "npm:^3.2.0"
+    ci-info: "npm:^4.0.0"
     clipanion: "npm:^4.0.0-rc.2"
     cross-spawn: "npm:7.0.3"
     diff: "npm:^5.1.0"
@@ -1517,7 +1517,7 @@ __metadata:
     treeify: "npm:^1.1.0"
     tslib: "npm:^2.4.0"
     tunnel: "npm:^0.0.6"
-  checksum: 10/ed2db44e6c172a746e93791de38510cd46db7d6b992d71c68b471513a0884bafd3d47dcca99f43bb33c8767560f423f0570c161b35f1696197e32c3d19764b65
+  checksum: 10/ec7d02e00e776d171fb9b13c49437b2a5489e131a2b7b11a219574caf9794dc02241981aaa816d80e957f7f33c9f63849ed761b4208e31b2ddf9e6408d3b8037
   languageName: node
   linkType: hard
 
@@ -1530,7 +1530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/libzip@npm:^3.0.1":
+"@yarnpkg/libzip@npm:^3.1.0":
   version: 3.1.0
   resolution: "@yarnpkg/libzip@npm:3.1.0"
   dependencies:
@@ -1553,12 +1553,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/sdks@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "@yarnpkg/sdks@npm:3.1.2"
+"@yarnpkg/sdks@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "@yarnpkg/sdks@npm:3.2.0"
   dependencies:
-    "@yarnpkg/core": "npm:^4.0.5"
-    "@yarnpkg/fslib": "npm:^3.0.2"
+    "@yarnpkg/core": "npm:^4.1.2"
+    "@yarnpkg/fslib": "npm:^3.1.0"
     "@yarnpkg/parsers": "npm:^3.0.2"
     chalk: "npm:^3.0.0"
     clipanion: "npm:^4.0.0-rc.2"
@@ -1567,7 +1567,7 @@ __metadata:
     tslib: "npm:^2.4.0"
   bin:
     sdks: ./lib/cli.js
-  checksum: 10/dc138005caa2aa306519cef65f410872252eb81879187839250df7bd377ff5e0b612c15c6b3e90e21c78d6a744122b16fa32f9cdb8f31ac4302b8368dd061954
+  checksum: 10/36890284ce523b6766300234f4006998d5b747fbfc3846f4d8bc14ccaecbd0ce11f03243994bdc279b28233a04e4010fc9c8add314c5ef9d7244563177fea34b
   languageName: node
   linkType: hard
 
@@ -2001,10 +2001,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0":
-  version: 3.9.0
-  resolution: "ci-info@npm:3.9.0"
-  checksum: 10/75bc67902b4d1c7b435497adeb91598f6d52a3389398e44294f6601b20cfef32cf2176f7be0eb961d9e085bb333a8a5cae121cb22f81cf238ae7f58eb80e9397
+"ci-info@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "ci-info@npm:4.0.0"
+  checksum: 10/c983bb7ff1b06648f4a47432201abbd58291147d8ab5043dbb5c03e1a0e3fb2347f40d29b66a3044f28ffeb5dade01ac35aa6bd4e7464a44d9a49a3d7532415a
   languageName: node
   linkType: hard
 
@@ -4162,7 +4162,7 @@ __metadata:
     "@types/react-is": "npm:^18.3.0"
     "@types/react-plotly.js": "npm:^2.6.3"
     "@vitejs/plugin-react": "npm:^4.3.1"
-    "@yarnpkg/sdks": "npm:^3.1.2"
+    "@yarnpkg/sdks": "npm:^3.2.0"
     depcheck: "npm:^1.4.7"
     estree-walker: "npm:^3.0.3"
     fetch-suspense: "npm:^1.2.2"
