@@ -21,7 +21,7 @@
 	},
 	"files": ["dist"],
 	"dependencies": {
-		"@emotion/react": "^11.13.0",
+		"@emotion/react": "^11.13.3",
 		"@emotion/styled": "^11.13.0",
 		"@fontsource/iosevka": "^5.0.11",
 		"@fontsource/iosevka-aile": "^5.0.11",
