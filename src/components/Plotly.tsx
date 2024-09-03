@@ -18,7 +18,7 @@ const defaultOverride = (theme: Theme): Partial<PlotParams> => ({
 	layout: {
 		paper_bgcolor: 'transparent',
 		plot_bgcolor: 'transparent',
-		font: { color: theme.palette.text.primary },
+		font: { color: theme.vars.palette.text.primary },
 		xaxis: { automargin: true },
 		yaxis: { automargin: true },
 		margin: {
