@@ -1,10 +1,10 @@
 /// <reference types="vite/client" />
 /// <reference types="@total-typescript/ts-reset" />
 /// <reference types="unplugin-fonts/client" />
+/// <reference types="@mui/material/themeCssVarsAugmentation" />
 
 import 'unfonts.css'
 import './main.css'
-import type {} from '@mui/material/themeCssVarsAugmentation'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
