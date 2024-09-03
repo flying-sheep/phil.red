@@ -17,7 +17,6 @@ import {
 	createTheme,
 	responsiveFontSizes,
 } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
 
 import Blog from '../Blog'
 import Code from '../Code'
