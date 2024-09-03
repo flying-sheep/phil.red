@@ -85,8 +85,8 @@ const App = () => {
 				<AppBar
 					position="sticky"
 					sx={{
-						color: theme.palette.text.primary,
-						background: alpha(theme.palette.background.default, 0.7),
+						color: theme.vars.palette.text.primary,
+						background: `color(from ${theme.vars.palette.background.default} / 0.7)`,
 						// TODO re-add contrast(200%) before blur without discoloring dark mode
 						backdropFilter: 'blur(15px)',
 					}}
