@@ -4,6 +4,7 @@
 
 import 'unfonts.css'
 import './main.css'
+import type {} from '@mui/material/themeCssVarsAugmentation'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'

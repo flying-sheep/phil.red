@@ -56,20 +56,23 @@ const hSizes = Object.fromEntries(
 )
 
 const App = () => {
-	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 	const theme = useMemo(() => {
 		const baseTheme = createTheme({
+			cssVariables: true,
 			typography: {
 				fontFamily: '"Iosevka Aile", sans-serif',
 				...hSizes,
 			},
+			colorSchemes: {
+				light: true,
+				dark: true,
+			},
 			palette: {
-				mode: dark ? 'dark' : 'light',
 				primary: deepPurple,
 			},
 		})
 		return responsiveFontSizes(baseTheme)
-	}, [dark])
+	}, [])
 	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))
 		?.pattern.path
 
