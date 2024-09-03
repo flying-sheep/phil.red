@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Code, { type CodeProps } from './Code'
 
 export interface CodeBlockProps
-	extends Omit<ComponentProps<typeof Box>, 'component' | 'children'> {
+	extends Omit<ComponentProps<typeof Box<'pre'>>, 'component' | 'children'> {
 	children?: CodeProps['children']
 	noWrap?: boolean
 	slotProps?: {
@@ -14,7 +14,7 @@ export interface CodeBlockProps
 	}
 }
 
-const CodeBlock = forwardRef<HTMLElement, CodeBlockProps>(
+const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
 	({ noWrap = false, sx, children, slotProps, ...props }, ref) => {
 		const { sx: codeSx, ...codeProps } = slotProps?.code ?? {}
 		return (

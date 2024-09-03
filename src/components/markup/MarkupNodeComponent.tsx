@@ -103,7 +103,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 				</TableRow>
 			)
 		case Type.CodeBlock: {
-			const code = node.children.map((c) => c.toString()).join('\n')
+			const code = node.children.join('\n')
 			if (!node.language) {
 				return <CodeBlock>{code}</CodeBlock>
 			}
