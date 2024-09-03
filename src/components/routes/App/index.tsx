@@ -13,7 +13,6 @@ import Toolbar from '@mui/material/Toolbar'
 import { deepPurple } from '@mui/material/colors'
 import {
 	ThemeProvider,
-	alpha,
 	createTheme,
 	responsiveFontSizes,
 } from '@mui/material/styles'
