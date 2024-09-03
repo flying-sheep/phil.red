@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
 import Box from '@mui/material/Box'
-import red from '@mui/material/colors/red'
+import useTheme from '@mui/material/styles/useTheme'
 
 import type { Node } from '../../../markup/MarkupDocument'
 import CodeBlock from '../../CodeBlock'
@@ -14,11 +14,14 @@ export interface ASTErrorMessageProps {
 const ASTErrorMessage: FC<ASTErrorMessageProps> = ({
 	node,
 	children,
-}: ASTErrorMessageProps) => (
-	<Box sx={{ color: red.A400 }}>
-		{children}
-		{node && <CodeBlock>{JSON.stringify(node, undefined, 2)}</CodeBlock>}
-	</Box>
-)
+}: ASTErrorMessageProps) => {
+	const theme = useTheme()
+	return (
+		<Box sx={{ color: theme.vars.palette.error.main }}>
+			{children}
+			{node && <CodeBlock>{JSON.stringify(node, undefined, 2)}</CodeBlock>}
+		</Box>
+	)
+}
 
 export default ASTErrorMessage

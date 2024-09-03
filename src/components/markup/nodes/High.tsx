@@ -55,10 +55,9 @@ export interface HighProps<Theme extends object = object> {
 const High: FC<HighProps> = ({ code, language, sx }) => {
 	const [loaded, setLoaded] = useState(false)
 	const [err, setErr] = useState<Error>()
-	const {
-		palette: { mode },
-	} = useTheme()
-	const theme = mode === 'dark' ? themes.vsDark : themes.vsLight
+	const theme = useTheme()
+	const prismTheme =
+		theme.palette.mode === 'dark' ? themes.vsDark : themes.vsLight
 	useEffect(() => {
 		loadLang(language)
 			.then(() => setLoaded(true))
@@ -70,7 +69,7 @@ const High: FC<HighProps> = ({ code, language, sx }) => {
 			prism={Prism}
 			code={code}
 			language={loaded ? language : 'text'}
-			theme={theme}
+			theme={prismTheme}
 		>
 			{({ className, style, tokens, getLineProps, getTokenProps }) => (
 				<CodeBlock
