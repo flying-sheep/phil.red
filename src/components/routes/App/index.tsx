@@ -12,6 +12,7 @@ import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import { deepPurple } from '@mui/material/colors'
 import {
+	type ColorSystemOptions,
 	ThemeProvider,
 	createTheme,
 	responsiveFontSizes,
@@ -55,6 +56,11 @@ const hSizes = Object.fromEntries(
 
 const App = () => {
 	const theme = useMemo(() => {
+		const themeOptions: ColorSystemOptions = {
+			palette: {
+				primary: deepPurple,
+			},
+		}
 		const baseTheme = createTheme({
 			cssVariables: true,
 			typography: {
@@ -62,11 +68,8 @@ const App = () => {
 				...hSizes,
 			},
 			colorSchemes: {
-				light: true,
-				dark: true,
-			},
-			palette: {
-				primary: deepPurple,
+				light: themeOptions,
+				dark: themeOptions,
 			},
 		})
 		return responsiveFontSizes(baseTheme)
