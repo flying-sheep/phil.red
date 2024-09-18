@@ -1,0 +1,33 @@
+name: Dedupe Dependabot PRs
+
+on:
+  push:
+    branches: ['dependabot/**']
+
+permissions:
+  contents: write
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  dedupe:
+    name: Dedupe Dependabot PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: corepack enable
+      - name: git config
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - run: yarn dedupe
+        env:
+          HUSKY: 0
+      - name: git commit
+        run: |
+          git add yarn.lock
+          git commit -m '[dependabot skip] Dedupe dependencies' || true
+      - run: git push
