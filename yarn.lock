@@ -1123,10 +1123,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@total-typescript/ts-reset@npm:^0.5.1":
-  version: 0.5.1
-  resolution: "@total-typescript/ts-reset@npm:0.5.1"
-  checksum: 10/f773a2b91707fab677c361837ef7855522d470e8a3abc0b9209a04832715feb0aa1ef0d10db880c1232acbd2c84222ec7c1bbf3f92d1d34d18c18ce08d304e45
+"@total-typescript/ts-reset@npm:^0.6.1":
+  version: 0.6.1
+  resolution: "@total-typescript/ts-reset@npm:0.6.1"
+  checksum: 10/3e18063433c4667561b2a5ea6b698d95f8ca2cbecc7e3717b60f9266e2fd7070b2006cab0df255e60eaad5658d1cec4afc89ea4ca5645c8f36a312093bba3645
   languageName: node
   linkType: hard
 
@@ -4135,7 +4135,7 @@ __metadata:
     "@mui/icons-material": "npm:^6.1.1"
     "@mui/material": "npm:^6.1.1"
     "@mui/system": "npm:^6.1.0"
-    "@total-typescript/ts-reset": "npm:^0.5.1"
+    "@total-typescript/ts-reset": "npm:^0.6.1"
     "@tsconfig/strictest": "npm:^2.0.5"
     "@types/estree": "npm:^1.0.5"
     "@types/katex": "npm:^0.16.7"
