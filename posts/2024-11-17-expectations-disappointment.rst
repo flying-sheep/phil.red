@@ -31,9 +31,16 @@ or
 The other way to react
 ----------------------
 
-.. TODO: Rationalism mantra: I notice that I am confused. Therefore something I believe is fiction.
+.. epigraph::
 
-PS: Of course sometimes people knowingly violate expectations to hurt others.
+   As a rationalist, my strength is to be more confused by fiction than reality.
+   I notice that I am confused.
+   Therefore either something I believe is fiction or this story is.
+
+And often in such situations, you know that something you believe is fiction.
+
+While the rationalist mantra leaves open the door for the story to be false,
+most people dont tend to knowingly violate expectations to hurt others.
 But if you aren’t in a situation that is so toxic that you can expect that to be the case,
 don’t make the situation toxic by expecting the worst, but think “I notice that I am confused …”
 
