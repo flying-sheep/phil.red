@@ -4090,7 +4090,7 @@ __metadata:
     react-json-tree: "npm:^0.19.0"
     react-plotly.js: "npm:^2.6.0"
     react-portal-target: "npm:^1.0.2"
-    react-router-dom: "npm:^7.0.1"
+    react-router-dom: "npm:^7.1.1"
     react-slide-routes: "npm:^3.0.3"
     restructured: "npm:^0.0.11"
     rollup: "npm:^4.27.4"
@@ -4460,21 +4460,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "react-router-dom@npm:7.0.1"
+"react-router-dom@npm:^7.1.1":
+  version: 7.1.1
+  resolution: "react-router-dom@npm:7.1.1"
   dependencies:
-    react-router: "npm:7.0.1"
+    react-router: "npm:7.1.1"
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: 10/ba7dd32e07195467dba2fd4b29a1d470849f8cc8a43633bda924c115b53ddb16a60c9c623b8f81169828b3a1223b1baa6bacfa295c40a2e9e50f860c96bd8174
+  checksum: 10/d7b978959f89051cf6705cdc0907d92167e39f2835b20b78508cc69e46ebecdbb0b7b95c4d2f954b60c01cdfc70ffc842ee261c0b7b22507a51990e4cebc41ee
   languageName: node
   linkType: hard
 
-"react-router@npm:7.0.1":
-  version: 7.0.1
-  resolution: "react-router@npm:7.0.1"
+"react-router@npm:7.1.1":
+  version: 7.1.1
+  resolution: "react-router@npm:7.1.1"
   dependencies:
     "@types/cookie": "npm:^0.6.0"
     cookie: "npm:^1.0.1"
@@ -4486,7 +4486,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/f41ee8b496c70f625112b0ade9e11575d8ef344e672704425db2fe4fb02ace66cb8aeb6fce56745dda85839fb589446fc5604f30e7e7860fb85f2eeb83216df5
+  checksum: 10/f12e229d79bd6de561e697b64556959361365610450c12bfd89116fccca8428728d7c372a096eff570a917ef02473ef4f5145beb6a2881d6935f69fe25bebcfd
   languageName: node
   linkType: hard
 
