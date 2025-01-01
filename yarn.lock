@@ -3392,14 +3392,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.16.18":
-  version: 0.16.18
-  resolution: "katex@npm:0.16.18"
+"katex@npm:^0.16.19":
+  version: 0.16.19
+  resolution: "katex@npm:0.16.19"
   dependencies:
     commander: "npm:^8.3.0"
   bin:
     katex: cli.js
-  checksum: 10/5c90a770969eaaa18cb62e5a2f4937704e4378e6c5848e02138b3a681bc4bda5faf3fba33a12642f042345c429fafb4af48c2e36ecbe953f7db2cacb7cedc28f
+  checksum: 10/c22a2befc3fe8fb11fdd8492ad5c93665cbbd7ed81e2e4c3505e0706a1b9dddbbcbc7baf7f6f831ad96c268091777449aecadd061897dba1a8ec930826c62822
   languageName: node
   linkType: hard
 
@@ -4074,7 +4074,7 @@ __metadata:
     fetch-suspense: "npm:^1.2.2"
     globby: "npm:^14.0.2"
     husky: "npm:>=9.1.7"
-    katex: "npm:^0.16.18"
+    katex: "npm:^0.16.19"
     lint-staged: "npm:>=15.3.0"
     magic-string: "npm:^0.30.14"
     markdown-it: "npm:^14.1.0"
