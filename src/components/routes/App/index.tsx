@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { PortalTarget } from 'react-portal-target'
 import { Link, Navigate, Route, matchPath, useLocation } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
@@ -79,9 +78,7 @@ const App = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<Helmet>
-				<title>phil.red</title>
-			</Helmet>
+			<title>phil.red</title>
 			<CssBaseline />
 			<ElevationScroll>
 				<AppBar

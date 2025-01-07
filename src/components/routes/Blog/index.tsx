@@ -1,5 +1,4 @@
 import type { FC } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { Navigate, Route, useParams } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
 
@@ -60,13 +59,10 @@ const RoutedPost: FC = () => {
 	}
 	return (
 		<>
-			<Helmet>
-				<title>
-					{document.title}
-					{' – '}
-					Blog – phil.red
-				</title>
-			</Helmet>
+			<title>
+				{document.title}
+				{' – Blog – phil.red'}
+			</title>
 			<Markup doc={document} />
 		</>
 	)
@@ -74,9 +70,7 @@ const RoutedPost: FC = () => {
 
 const Blog = () => (
 	<>
-		<Helmet>
-			<title>Blog – phil.red</title>
-		</Helmet>
+		<title>Blog – phil.red</title>
 		<SlideRoutes animation="vertical-slide">
 			<Route index element={<Index />} />
 			<Route path=":year/:month/:day/:id" element={<RoutedPost />} />
