@@ -1288,12 +1288,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19.0.2":
-  version: 19.0.2
-  resolution: "@types/react-dom@npm:19.0.2"
+"@types/react-dom@npm:^19.0.3":
+  version: 19.0.3
+  resolution: "@types/react-dom@npm:19.0.3"
   peerDependencies:
     "@types/react": ^19.0.0
-  checksum: 10/d2ae81ec0b8eee7a4bf31918796fdaa34e8db68f69682163bc212d759de76783e6ffcc02c02722dcf508429067148841e6da81414cc730ca2a28c9c2b350c880
+  checksum: 10/815907f7adaa078acbf1d1ae7b6bf69cebe86bd301b8b9744e392bc0f16feb31bfb9fe0bfa2681d7d86678c83d52dedba5ed9bc7776736d4050cdd426b8b2d2b
   languageName: node
   linkType: hard
 
@@ -1325,12 +1325,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^19.0.3":
-  version: 19.0.3
-  resolution: "@types/react@npm:19.0.3"
+"@types/react@npm:*, @types/react@npm:^19.0.6":
+  version: 19.0.6
+  resolution: "@types/react@npm:19.0.6"
   dependencies:
     csstype: "npm:^3.0.2"
-  checksum: 10/f984eff815e7fcb09b1ec16b2e450850c3b120ba8051d6811493eeb08d88dd4f7bbfca8d75e9ade64489b96c1e52c0a922242a7a877d8f6960de5c7ca419fe7b
+  checksum: 10/dc7604e4a0ee338447acaf6fded732e3a9528c4411ad8d6a2504ffb45c3613d5347a02a426d0b314015673317010977e3db01f69bb0257219cacda1884ce31f4
   languageName: node
   linkType: hard
 
@@ -4063,8 +4063,8 @@ __metadata:
     "@types/node": "npm:^22.10.5"
     "@types/plotly.js-basic-dist-min": "npm:^2.12.4"
     "@types/prismjs": "npm:^1.26.5"
-    "@types/react": "npm:^19.0.3"
-    "@types/react-dom": "npm:^19.0.2"
+    "@types/react": "npm:^19.0.6"
+    "@types/react-dom": "npm:^19.0.3"
     "@types/react-is": "npm:^19.0.0"
     "@types/react-plotly.js": "npm:^2.6.3"
     "@vitejs/plugin-react": "npm:^4.3.4"
