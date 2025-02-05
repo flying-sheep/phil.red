@@ -67,7 +67,7 @@
 		"globby": "^14.0.2",
 		"husky": ">=9.1.7",
 		"lint-staged": ">=15.4.1",
-		"magic-string": "^0.30.14",
+		"magic-string": "^0.30.17",
 		"markdown-it": "^14.1.0",
 		"react-json-tree": "^0.19.0",
 		"restructured": "^0.0.11",
