@@ -2,6 +2,6 @@
 .slide-routes > .item {
 	overflow-inline: auto;
 }
-.slide-routes > .item:has([class$='-active'], [class*='-active ']) {
+.slide-routes > .item:has([class$="-active"], [class*="-active "]) {
 	overflow-inline: auto;
 }
