@@ -64,9 +64,13 @@ export const DEFAULT_CONVERTERS: { [ext: string]: Converter } = {
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
 	const include: string[] =
-		typeof config.include === 'string' ? [config.include] : config.include ?? []
+		typeof config.include === 'string'
+			? [config.include]
+			: (config.include ?? [])
 	const exclude: string[] =
-		typeof config.exclude === 'string' ? [config.exclude] : config.exclude ?? []
+		typeof config.exclude === 'string'
+			? [config.exclude]
+			: (config.exclude ?? [])
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
 	async function loadPosts(ctx: PluginContext, dir: string) {
