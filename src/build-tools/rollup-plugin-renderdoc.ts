@@ -1,6 +1,5 @@
 import { promises as fs } from 'node:fs'
 import * as path from 'node:path'
-import { cwd } from 'node:process'
 
 import type { Node, ObjectExpression, Property } from 'estree'
 import { asyncWalk } from 'estree-walker'
