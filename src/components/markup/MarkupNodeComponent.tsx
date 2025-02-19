@@ -18,8 +18,19 @@ import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
 import CodeBlock from '../CodeBlock'
 import Plotly from '../Plotly'
 
+import type {
+	CSSPseudoSelectorProps,
+	CSSSelectorObjectOrCssVariables,
+	SystemCssProperties,
+} from '@mui/system'
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
+
+/** Actual type of `sx`, no idea why the one imported from `@mui/system` doesn’t work */
+type SystemStyleObject<Theme extends object = object> =
+	SystemCssProperties<Theme> &
+		CSSPseudoSelectorProps<Theme> &
+		CSSSelectorObjectOrCssVariables<Theme>
 
 const KATEX_SETTINGS: KatexOptions = {
 	output: 'mathml',
@@ -63,9 +74,37 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			)
 		}
 		case Type.Paragraph:
-			return <Typography paragraph>{convertChildren(node, level)}</Typography>
-		case Type.BlockQuote:
-			return <blockquote>{convertChildren(node, level)}</blockquote>
+			return (
+				<Typography
+					gutterBottom
+					variant="body1"
+					sx={{ hyphens: 'auto', textAlign: 'justify' }}
+				>
+					{convertChildren(node, level)}
+				</Typography>
+			)
+		case Type.BlockQuote: {
+			const sx: SystemStyleObject = {
+				marginInlineStart: 5,
+			}
+			if (node.variant === 'epigraph') {
+				sx.fontStyle = 'italic'
+				sx.marginInlineEnd = 5
+				sx['::before'] = {
+					color: 'color(from currentcolor display-p3 r g b / .3)',
+					content: 'open-quote',
+					fontSize: '4em',
+					lineHeight: '0.1em',
+					marginRight: '0.25em',
+					verticalAlign: '-0.4em',
+				}
+			}
+			return (
+				<Typography component="blockquote" sx={sx}>
+					{convertChildren(node, level)}
+				</Typography>
+			)
+		}
 		case Type.BulletList: {
 			const listStyleType =
 				node.bullet === Bullet.text ? node.text : node.bullet
@@ -73,7 +112,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		}
 		case Type.EnumList:
 			return (
-				<ol style={{ listStyleType: node.enumeration }}>
+				<ol style={{ listStyleType: node.enumeration }} start={node.start}>
 					{convertChildren(node, level)}
 				</ol>
 			)
@@ -129,6 +168,10 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			return <em>{convertChildren(node, level)}</em>
 		case Type.Strong:
 			return <strong>{convertChildren(node, level)}</strong>
+		case Type.Subscript:
+			return <sub>{convertChildren(node, level)}</sub>
+		case Type.Superscript:
+			return <sup>{convertChildren(node, level)}</sup>
 		case Type.Link: {
 			if ('name' in node.ref)
 				throw new ASTError(`Unresolved reference ${node.ref.name}`, node)

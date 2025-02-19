@@ -1,10 +1,17 @@
 declare module 'restructured' {
-	export type InlineNodeType = 'text' | 'literal' | 'emphasis' | 'strong'
+	export type InlineNodeType =
+		| 'text'
+		| 'literal'
+		| 'emphasis'
+		| 'strong'
+		| 'subscript'
+		| 'superscript'
 	export type BlockNodeType =
 		| 'document'
 		| 'section'
 		| 'comment'
 		| 'reference'
+		| 'footnote_reference'
 		| 'title'
 		| 'paragraph'
 		| 'block_quote'
@@ -20,7 +27,13 @@ declare module 'restructured' {
 		| 'definition'
 	export type RoleType = null | 'math' | 'pep'
 	export type BulletType = '*' | '+' | '-' | '•' | '‣' | '⁃'
-	export type DirectiveType = 'code' | 'code-block' | 'csv-table'
+	export type DirectiveType =
+		| 'epigraph'
+		| 'highlights'
+		| 'pull-quote'
+		| 'code'
+		| 'code-block'
+		| 'csv-table'
 	export interface Position {
 		offset: number
 		line: number

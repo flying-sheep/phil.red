@@ -50,13 +50,33 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	switch (node.type) {
 		case 'document':
 			return convertChildren(node, level)
-		case 'comment':
+		case 'comment': {
+			const comment = (node.children as [RSTInlineNode])[0].value
+
+			const [name, text] = parseCommentAsFootnote(comment)
+			if (name !== null && text !== null) {
+				return [
+					// TODO: anchor
+					<m.EnumList pos={pos(node)} start={Number(name)}>
+						<m.ListItem pos={pos(node)}>{text}</m.ListItem>
+					</m.EnumList>,
+				]
+			}
 			return []
-		case 'reference': {
-			const name = (node.children[0] as RSTInlineNode).value
+		}
+		case 'reference':
+		case 'footnote_reference': {
+			const text = (node.children[0] as RSTInlineNode).value
+			const [name, label] =
+				node.type === 'footnote_reference'
+					? [
+							`footnote-${text}`,
+							<m.Superscript pos={pos(node)}>{text}</m.Superscript>,
+						]
+					: [text, text]
 			return [
 				<m.Link ref={{ name }} pos={pos(node)}>
-					{name}
+					{label}
 				</m.Link>,
 			]
 		}
@@ -182,7 +202,22 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			return [<m.CodeBlock pos={pos(node)}>{texts.join('\n')}</m.CodeBlock>]
 		}
 		case 'directive': {
-			switch (node.directive as rst.DirectiveType | 'plotly') {
+			const directive = node.directive as rst.DirectiveType | 'plotly'
+			switch (directive) {
+				case 'epigraph':
+				case 'highlights':
+				case 'pull-quote': {
+					const parsed = rstConvertInner(
+						node.children
+							.map((n) => (n as rst.InlineNode<true>).value)
+							.join('\n'),
+					)
+					return [
+						<m.BlockQuote pos={pos(node)} variant={directive}>
+							{convertNode(parsed, level)}
+						</m.BlockQuote>,
+					]
+				}
 				case 'code-block':
 				case 'code': {
 					const { header, body } = parseDirective(node.children)
@@ -274,14 +309,37 @@ function* extractTargetsInner(
 			yield [name, `#${anchor}`]
 		} else if (child.type === 'comment') {
 			const comment = (child.children as [RSTInlineNode])[0].value
-			const [, name = null, href = null] =
-				/^_([^:]+):\s+(.+)$/.exec(comment) ?? []
-			// TODO: “_`name with backticks`: ...”
-			if (name !== null && href !== null) yield [name.toLocaleLowerCase(), href]
+
+			{
+				// normal reference
+				const [, name = null, href = null] =
+					/^_([^:]+):\s+(.+)$/.exec(comment) ?? []
+				// TODO: “_`name with backticks`: ...”
+				if (name !== null && href !== null) {
+					yield [name.toLocaleLowerCase(), href]
+				}
+			}
+
+			{
+				// footnote reference
+				const [name, text] = parseCommentAsFootnote(comment)
+				if (name !== null && text !== null) {
+					const ref = `footnote-${name.toLocaleLowerCase()}`
+					yield [ref, `#${ref}`]
+				}
+			}
 		} else if ('children' in child) {
 			yield* extractTargetsInner(child)
 		}
 	}
+}
+
+function parseCommentAsFootnote(
+	comment: string,
+): [string | null, string | null] {
+	const [, name = null, text = null] =
+		/^\[([^\]]+)\]\s+(.+)$/.exec(comment) ?? []
+	return [name, text]
 }
 
 const URL_SCHEMA = /^https?:.*$/
@@ -371,9 +429,21 @@ function getMeta(fieldLists: m.Elem) {
 }
 
 export default function rstConvert(code: string): m.Document {
-	let parsed: RSTNode
+	const parsed = rstConvertInner(code)
+	const targets = extractTargets(parsed)
+	const children = resolveTargets(convertNode(parsed, 0), targets)
+
+	const metadata =
+		(children[0] as m.Elem).type === m.Type.Section
+			? {}
+			: getMeta(children.shift() as m.Elem)
+
+	return { title: getTitle(children), children, metadata }
+}
+
+function rstConvertInner(code: string): RSTNode {
 	try {
-		parsed = rst.default.default.parse(code, {
+		return rst.default.default.parse(code, {
 			position: true,
 			blanklines: true,
 			indent: true,
@@ -384,13 +454,4 @@ export default function rstConvert(code: string): m.Document {
 		}
 		throw e
 	}
-	const targets = extractTargets(parsed)
-	const children = resolveTargets(convertNode(parsed, 0), targets)
-
-	const metadata =
-		(children[0] as m.Elem).type === m.Type.Section
-			? {}
-			: getMeta(children.shift() as m.Elem)
-
-	return { title: getTitle(children), children, metadata }
 }
