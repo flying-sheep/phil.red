@@ -24,6 +24,8 @@ export enum Type {
 	LineBreak,
 	Emph,
 	Strong,
+	Subscript,
+	Superscript,
 	Link,
 	Code,
 	InlineMath,
@@ -101,6 +103,8 @@ export type Elem =
 	| LineBreak
 	| Emph
 	| Strong
+	| Subscript
+	| Superscript
 	| Link
 	| Code
 	| InlineMath
@@ -192,6 +196,7 @@ export const BulletList = mkFun<BulletList>(Type.BulletList)
 export interface EnumList extends Element {
 	type: Type.EnumList
 	enumeration?: Enumeration
+	start?: number | undefined
 }
 export const EnumList = mkFun<EnumList>(Type.EnumList)
 export interface ListItem extends Element {
@@ -262,6 +267,16 @@ export interface Strong extends Element {
 	type: Type.Strong
 }
 export const Strong = mkFun<Strong>(Type.Strong)
+
+export interface Subscript extends Element {
+	type: Type.Subscript
+}
+export const Subscript = mkFun<Subscript>(Type.Subscript)
+
+export interface Superscript extends Element {
+	type: Type.Superscript
+}
+export const Superscript = mkFun<Superscript>(Type.Superscript)
 
 export interface Link extends Element {
 	type: Type.Link

@@ -112,7 +112,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		}
 		case Type.EnumList:
 			return (
-				<ol style={{ listStyleType: node.enumeration }}>
+				<ol style={{ listStyleType: node.enumeration }} start={node.start}>
 					{convertChildren(node, level)}
 				</ol>
 			)
@@ -168,6 +168,10 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			return <em>{convertChildren(node, level)}</em>
 		case Type.Strong:
 			return <strong>{convertChildren(node, level)}</strong>
+		case Type.Subscript:
+			return <sub>{convertChildren(node, level)}</sub>
+		case Type.Superscript:
+			return <sup>{convertChildren(node, level)}</sup>
 		case Type.Link: {
 			if ('name' in node.ref)
 				throw new ASTError(`Unresolved reference ${node.ref.name}`, node)

@@ -1,10 +1,17 @@
 declare module 'restructured' {
-	export type InlineNodeType = 'text' | 'literal' | 'emphasis' | 'strong'
+	export type InlineNodeType =
+		| 'text'
+		| 'literal'
+		| 'emphasis'
+		| 'strong'
+		| 'subscript'
+		| 'superscript'
 	export type BlockNodeType =
 		| 'document'
 		| 'section'
 		| 'comment'
 		| 'reference'
+		| 'footnote_reference'
 		| 'title'
 		| 'paragraph'
 		| 'block_quote'
