@@ -44,6 +44,6 @@ most people don’t tend to knowingly violate expectations to hurt others.
 But if you aren’t in a situation that is so toxic that you can expect that to be the case,
 don’t make the situation toxic by expecting the worst, but think “I notice that I am confused …”
 
-PPS: Also people forget rules.
+PS: People tend to forget rules that rarely come into play.
 Especially if they aren’t aware that how important they are to you.
 So make sure that close others know what’s important to you.
