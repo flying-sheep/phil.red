@@ -196,21 +196,6 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			for (const p of paths) this.addWatchFile(p)
 			return createCode(this, dir)
 		},
-		configureServer(server) {
-			server.middlewares.use(async (req, res, next) => {
-				if (!req.url?.endsWith('__renderdoc')) {
-					next()
-					return
-				}
-				const { default: posts = null } = await server.ssrLoadModule(
-					`.${req.url}`,
-				)
-				if (posts === null)
-					throw new Error(`${req.url} not found from ${cwd()}`)
-				res.setHeader('Content-Type', 'application/javascript')
-				res.end(`export default ${JSON.stringify(posts, undefined, '\t')}`)
-			})
-		},
 	}
 }
 

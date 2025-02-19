@@ -18,6 +18,7 @@ import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
 import CodeBlock from '../CodeBlock'
 import Plotly from '../Plotly'
 
+import type { SystemCssProperties } from '@mui/system'
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
 
@@ -63,9 +64,27 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			)
 		}
 		case Type.Paragraph:
-			return <Typography paragraph>{convertChildren(node, level)}</Typography>
-		case Type.BlockQuote:
-			return <blockquote>{convertChildren(node, level)}</blockquote>
+			return (
+				<Typography
+					gutterBottom
+					variant="body1"
+					sx={{ hyphens: 'auto', textAlign: 'justify' }}
+				>
+					{convertChildren(node, level)}
+				</Typography>
+			)
+		case Type.BlockQuote: {
+			const sx: SystemCssProperties = { marginInlineStart: 5 }
+			if (node.variant === 'epigraph') {
+				sx.fontStyle = 'italic'
+				sx.marginInlineEnd = 5
+			}
+			return (
+				<Typography component="blockquote" sx={sx}>
+					{convertChildren(node, level)}
+				</Typography>
+			)
+		}
 		case Type.BulletList: {
 			const listStyleType =
 				node.bullet === Bullet.text ? node.text : node.bullet

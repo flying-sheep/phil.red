@@ -178,8 +178,9 @@ export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
 
 export interface BlockQuote extends Element {
 	type: Type.BlockQuote
+	variant?: 'epigraph' | 'highlights' | 'pull-quote' | undefined
 }
-export const BlockQuote = mkFun<Paragraph>(Type.BlockQuote)
+export const BlockQuote = mkFun<BlockQuote>(Type.BlockQuote)
 
 export interface BulletList extends Element {
 	type: Type.BulletList

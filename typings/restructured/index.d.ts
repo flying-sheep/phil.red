@@ -20,7 +20,13 @@ declare module 'restructured' {
 		| 'definition'
 	export type RoleType = null | 'math' | 'pep'
 	export type BulletType = '*' | '+' | '-' | '•' | '‣' | '⁃'
-	export type DirectiveType = 'code' | 'code-block' | 'csv-table'
+	export type DirectiveType =
+		| 'epigraph'
+		| 'highlights'
+		| 'pull-quote'
+		| 'code'
+		| 'code-block'
+		| 'csv-table'
 	export interface Position {
 		offset: number
 		line: number

@@ -11,17 +11,17 @@ This feeling is called “frustration”.
 
 Now there are a few ways people tend to go from here.
 
-> I don’t deserve to feel frustrated, that’s not fair.
-> This person I’m close with is not very nice to do that to me.
+    I don’t deserve to feel frustrated, that’s not fair.
+    This person I’m close with is not very nice to do that to me.
 
 We could say, they expect the other person to be able to read minds.
 To react in a way that caters to the unspoken expectations of someone else.
 
 or
 
-> I really believed that person I’m close with to be the kind of person that would have done the other thing.
-> Maybe they just did this thing I didn’t like that once, that would be naughty of them.
-> Or it’s a character flaw of them to be the kind of person that doesn’t do that.
+    I really believed that person I’m close with to be the kind of person that would have done the other thing.
+    Maybe they just did this thing I didn’t like that once, that would be naughty of them.
+    Or it’s a character flaw of them to be the kind of person that doesn’t do that.
 
 In other words, they are filling in the blanks in their mental model with themselves;
 they apply their own personal standards to someone else who never agreed to live by these rules.
