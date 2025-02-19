@@ -40,7 +40,7 @@ The other way to react
 And often in such situations, you know that something you believe is fiction.
 
 While the rationalist mantra leaves open the door for the story to be false,
-most people dont tend to knowingly violate expectations to hurt others.
+most people don’t tend to knowingly violate expectations to hurt others.
 But if you aren’t in a situation that is so toxic that you can expect that to be the case,
 don’t make the situation toxic by expecting the worst, but think “I notice that I am confused …”
 

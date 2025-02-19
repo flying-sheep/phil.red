@@ -18,9 +18,19 @@ import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
 import CodeBlock from '../CodeBlock'
 import Plotly from '../Plotly'
 
-import type { SystemCssProperties } from '@mui/system'
+import type {
+	CSSPseudoSelectorProps,
+	CSSSelectorObjectOrCssVariables,
+	SystemCssProperties,
+} from '@mui/system'
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
+
+/** Actual type of `sx`, no idea why the one imported from `@mui/system` doesn’t work */
+type SystemStyleObject<Theme extends object = object> =
+	SystemCssProperties<Theme> &
+		CSSPseudoSelectorProps<Theme> &
+		CSSSelectorObjectOrCssVariables<Theme>
 
 const KATEX_SETTINGS: KatexOptions = {
 	output: 'mathml',
@@ -74,10 +84,20 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 				</Typography>
 			)
 		case Type.BlockQuote: {
-			const sx: SystemCssProperties = { marginInlineStart: 5 }
+			const sx: SystemStyleObject = {
+				marginInlineStart: 5,
+			}
 			if (node.variant === 'epigraph') {
 				sx.fontStyle = 'italic'
 				sx.marginInlineEnd = 5
+				sx['::before'] = {
+					color: 'color(from currentcolor display-p3 r g b / .3)',
+					content: 'open-quote',
+					fontSize: '4em',
+					lineHeight: '0.1em',
+					marginRight: '0.25em',
+					verticalAlign: '-0.4em',
+				}
 			}
 			return (
 				<Typography component="blockquote" sx={sx}>
