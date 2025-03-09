@@ -71,7 +71,12 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 					sx={{ '&:not(:hover) > button': { display: 'none' } }}
 				>
 					{convertChildren(node, level)}
-					{level > 1 && <CopySectionLinkButton anchor={node.anchor} />}
+					{level > 1 && (
+						<CopySectionLinkButton
+							anchor={node.anchor}
+							size={level >= 3 ? 'small' : 'medium'}
+						/>
+					)}
 				</Typography>
 			)
 		}
