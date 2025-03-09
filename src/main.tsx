@@ -7,6 +7,7 @@ import 'unfonts.css'
 import './main.css'
 
 import { HelmetProvider } from '@dr.pogodin/react-helmet'
+import { SnackbarProvider } from 'notistack'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -20,9 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	root.render(
 		<StrictMode>
 			<HelmetProvider>
-				<Router>
-					<App />
-				</Router>
+				<SnackbarProvider autoHideDuration={3000}>
+					<Router>
+						<App />
+					</Router>
+				</SnackbarProvider>
 			</HelmetProvider>
 		</StrictMode>,
 	)

@@ -20,8 +20,11 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 		[],
 	)
 	const nodes = useMemo(
-		// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
-		() => children.map((e) => <MarkupNodeComponent node={e} level={0} />),
+		() =>
+			children.map((e, i) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: Static tree, no need for key
+				<MarkupNodeComponent node={e} level={0} key={i} />
+			)),
 		[children],
 	)
 	return (
