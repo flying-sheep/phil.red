@@ -1,5 +1,5 @@
+import { Helmet } from '@dr.pogodin/react-helmet'
 import { createElement } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { isValidElementType } from 'react-is'
 
 import Avatar from '@mui/material/Avatar'
