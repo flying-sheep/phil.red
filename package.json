@@ -21,6 +21,7 @@
 	},
 	"files": ["dist"],
 	"dependencies": {
+		"@dr.pogodin/react-helmet": "^2.0.4",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.0",
 		"@fontsource/iosevka": "^5.1.0",
@@ -38,7 +39,6 @@
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-error-boundary": "^5.0.0",
-		"react-helmet-async": "^2.0.5",
 		"react-is": "^19.0.0",
 		"react-plotly.js": "^2.6.0",
 		"react-portal-target": "^1.0.2",

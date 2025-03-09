@@ -6,9 +6,9 @@
 import 'unfonts.css'
 import './main.css'
 
+import { HelmetProvider } from '@dr.pogodin/react-helmet'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './components/routes/App'

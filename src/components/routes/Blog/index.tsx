@@ -1,5 +1,5 @@
+import { Helmet } from '@dr.pogodin/react-helmet'
 import type { FC } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { Navigate, Route, useParams } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
 

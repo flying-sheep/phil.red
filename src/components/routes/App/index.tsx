@@ -1,5 +1,5 @@
+import { Helmet } from '@dr.pogodin/react-helmet'
 import { useMemo } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { PortalTarget } from 'react-portal-target'
 import { Link, Navigate, Route, matchPath, useLocation } from 'react-router-dom'
 import SlideRoutes from 'react-slide-routes'
