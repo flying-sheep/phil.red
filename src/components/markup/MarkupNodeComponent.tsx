@@ -47,9 +47,9 @@ export interface MarkupElementState {
 }
 
 function convertChildren(elem: Elem, level: number) {
-	const children = elem.children.map((e) => (
-		// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
-		<MarkupNodeComponent node={e} level={level} />
+	const children = elem.children.map((e, i) => (
+		// biome-ignore lint/suspicious/noArrayIndexKey: Static tree, no need for key
+		<MarkupNodeComponent node={e} level={level} key={i} />
 	))
 	return <>{Children.toArray(children)}</>
 }
@@ -63,11 +63,11 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		case Type.Title: {
 			if (node.level < 1)
 				throw new ASTError(`Header with level ${node.level} < 1`, node)
-			const hLevel = Math.min(node.level, 6)
+			const hLevel = Math.min(node.level, 6) as 1 | 2 | 3 | 4 | 5 | 6
 			return (
 				<Typography
 					id={node.anchor}
-					variant={`h${hLevel}` as Variant}
+					variant={`h${hLevel}`}
 					gutterBottom
 					sx={{ '&:not(:hover) > button': { display: 'none' } }}
 				>

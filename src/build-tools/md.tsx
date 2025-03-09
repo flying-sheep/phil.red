@@ -54,7 +54,7 @@ function convertNode(token: Token): m.Node[] {
 			const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
 			if (!level)
 				throw new ASTError(`Unexpected header tag ${token.tag}`, token)
-			const { anchor } = toAnchor(token.content)
+			const { anchor } = toAnchor(innerText(token))
 			return [
 				<m.Title
 					level={Number.parseInt(level, 10)}
@@ -96,6 +96,12 @@ function convertNode(token: Token): m.Node[] {
 				JSON.stringify(token),
 			)
 	}
+}
+
+function innerText(token: Token): string {
+	return token.content
+		? token.content
+		: (token.children?.map(innerText).join('') ?? '')
 }
 
 function convertChildren(token: Token): m.Node[] {
