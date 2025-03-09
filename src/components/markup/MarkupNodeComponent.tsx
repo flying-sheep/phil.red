@@ -11,7 +11,6 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-import type { Variant } from '@mui/material/styles/createTypography'
 
 import { ASTError } from '../../markup'
 import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
