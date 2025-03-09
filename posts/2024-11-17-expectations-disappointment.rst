@@ -47,7 +47,7 @@ But if you aren’t in a situation that is so toxic that you can expect that to 
 don’t make the situation toxic by expecting the worst, but think “I notice that I am confused …”
 
 PS: People tend to forget rules that rarely come into play.
-Especially if they aren’t aware that how important they are to you.
+Especially if they aren’t aware of how important they are to you.
 So make sure that close others know what’s important to you.
 
 .. [1] The problems in the rationalist community notwithstanding, they do have nice ideals.
