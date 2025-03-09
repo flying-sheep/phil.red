@@ -6,6 +6,7 @@ import { SyntaxError as RSTSyntaxError } from 'restructured/lib/Parser.js'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import ParseError from '../markup/ParseError'
+import anchor from './anchor'
 
 interface Directive {
 	header: string | null
@@ -293,10 +294,8 @@ function innerText(node: RSTNode): string {
 	return 'value' in node ? node.value : node.children.map(innerText).join('')
 }
 
-function titleAnchor(node: RSTNode) {
-	const name = innerText(node).toLocaleLowerCase()
-	const anchor = name.replaceAll(' ', '-')
-	return { name, anchor }
+function titleAnchor(node: RSTNode): { name: string; anchor: string } {
+	return anchor(innerText(node))
 }
 
 function* extractTargetsInner(

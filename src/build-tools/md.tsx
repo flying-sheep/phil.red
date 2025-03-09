@@ -6,6 +6,7 @@ import Token from 'markdown-it/lib/token.mjs'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import { rsplit } from '../utils'
+import toAnchor from './anchor'
 
 const NO_END = Symbol('no end')
 
@@ -53,7 +54,7 @@ function convertNode(token: Token): m.Node[] {
 			const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
 			if (!level)
 				throw new ASTError(`Unexpected header tag ${token.tag}`, token)
-			const anchor = undefined // TODO
+			const { anchor } = toAnchor(token.content)
 			return [
 				<m.Title
 					level={Number.parseInt(level, 10)}
