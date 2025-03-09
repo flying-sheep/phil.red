@@ -23,6 +23,7 @@ import type {
 	CSSSelectorObjectOrCssVariables,
 	SystemCssProperties,
 } from '@mui/system'
+import CopySectionLinkButton from '../CopySectionLinkButton'
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
 
@@ -68,8 +69,10 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 					id={node.anchor}
 					variant={`h${hLevel}` as Variant}
 					gutterBottom
+					sx={{ '&:not(:hover) > button': { display: 'none' } }}
 				>
 					{convertChildren(node, level)}
+					{level > 1 && <CopySectionLinkButton anchor={node.anchor} />}
 				</Typography>
 			)
 		}

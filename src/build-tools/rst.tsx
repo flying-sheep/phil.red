@@ -295,7 +295,7 @@ function innerText(node: RSTNode): string {
 
 function titleAnchor(node: RSTNode) {
 	const name = innerText(node).toLocaleLowerCase()
-	const anchor = name.replace(' ', '-')
+	const anchor = name.replaceAll(' ', '-')
 	return { name, anchor }
 }
 

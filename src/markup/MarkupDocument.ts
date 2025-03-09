@@ -171,7 +171,7 @@ export const Section = mkFun<Section>(Type.Section)
 export interface Title extends Element {
 	type: Type.Title
 	level: number
-	anchor?: string | undefined
+	anchor: string
 }
 export const Title = mkFun<Title>(Type.Title)
 
