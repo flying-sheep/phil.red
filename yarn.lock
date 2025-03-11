@@ -653,10 +653,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/iosevka@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "@fontsource/iosevka@npm:5.1.0"
-  checksum: 10/fa6af24b97a9f17cae14fdcea7276758149790975852a03efbccd41407d73b2a998afaea6c5f470f43331e180373d2e7753af50a48086cd7ab8206b1ce885125
+"@fontsource/iosevka@npm:^5.2.5":
+  version: 5.2.5
+  resolution: "@fontsource/iosevka@npm:5.2.5"
+  checksum: 10/352f93c27da017ae2003079fe25d2233d1cc4caf1b9db3328053d2bfafc13ed47cc4147d22987d758fe5b6c00081ca43997b7d088430438311a2ffa139ec6286
   languageName: node
   linkType: hard
 
@@ -3632,7 +3632,7 @@ __metadata:
     "@dr.pogodin/react-helmet": "npm:^2.0.4"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.0"
-    "@fontsource/iosevka": "npm:^5.1.0"
+    "@fontsource/iosevka": "npm:^5.2.5"
     "@fontsource/iosevka-aile": "npm:^5.2.5"
     "@matejmazur/react-katex": "npm:^3.1.3"
     "@mui/icons-material": "npm:^6.4.7"
