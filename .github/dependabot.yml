@@ -17,3 +17,6 @@ updates:
       mui:
         patterns:
           - '@mui/*'
+      fontsource:
+        patterns:
+          - '@fontsource/*'
