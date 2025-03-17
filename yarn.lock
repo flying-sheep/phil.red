@@ -3222,12 +3222,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"merge-sx@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "merge-sx@npm:3.3.1"
+"merge-sx@npm:^3.3.2":
+  version: 3.3.2
+  resolution: "merge-sx@npm:3.3.2"
   peerDependencies:
     "@mui/material": ^5.1.0 || ^6.0.0
-  checksum: 10/7fcf2264971b03e400f947aa91cc4b8f09beff8dab422145be08602496d1ea4f8a44bbb5d80c32ee60e72619bd3c9905a379ae8274f629885d8570e7800f53f4
+  checksum: 10/ed061e8a936262cee90a4293f9356267646f0e245d4e0b46a22e0903dee2a9269003ec3aa353ff2f17a9d6b38d38dd0a8e42f1418e17ffed4f1dd48602deb35d
   languageName: node
   linkType: hard
 
@@ -3660,7 +3660,7 @@ __metadata:
     lint-staged: "npm:>=15.4.3"
     magic-string: "npm:^0.30.17"
     markdown-it: "npm:^14.1.0"
-    merge-sx: "npm:^3.3.1"
+    merge-sx: "npm:^3.3.2"
     notistack: "npm:^3.0.2"
     plotly.js-basic-dist-min: "npm:^3.0.1"
     prism-react-renderer: "npm:^2.4.1"
