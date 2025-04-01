@@ -7,7 +7,7 @@ import { type FC, useEffect, useState } from 'react'
 import type { SystemStyleObject } from '@mui/system/styleFunctionSx'
 
 import Box from '@mui/material/Box'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 
 import * as urls from '../../../build-tools/urls.js'
 import CodeBlock from '../../CodeBlock.js'

@@ -77,7 +77,7 @@
 		"vite": "^6.2.4",
 		"vite-bundle-visualizer": "^1.2.1"
 	},
-	"packageManager": "yarn@4.5.3",
+	"packageManager": "yarn@4.8.1",
 	"lint-staged": {
 		"!(rawPosts)": "biome check --no-errors-on-unmatched --files-ignore-unknown=true --write"
 	}

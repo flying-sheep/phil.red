@@ -6,8 +6,8 @@ import createPlotlyComponent from 'react-plotly.js/factory'
 
 import CircularProgress from '@mui/material/CircularProgress'
 import Stack from '@mui/material/Stack'
+import { useTheme } from '@mui/material/styles'
 import type { Theme } from '@mui/material/styles/createTheme'
-import useTheme from '@mui/material/styles/useTheme'
 
 export interface PlotlyProps extends Partial<PlotParams> {
 	url: string
