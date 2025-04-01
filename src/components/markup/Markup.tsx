@@ -3,7 +3,7 @@ import { JSONTree, type ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
 
 import Box from '@mui/material/Box'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 
 import type { Document } from '../../markup/MarkupDocument'
 
