@@ -21,7 +21,7 @@
 	},
 	"files": ["dist"],
 	"dependencies": {
-		"@dr.pogodin/react-helmet": "^2.0.4",
+		"@dr.pogodin/react-helmet": "^3.0.1",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.0",
 		"@fontsource/iosevka": "^5.2.5",
