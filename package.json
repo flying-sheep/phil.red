@@ -61,7 +61,7 @@
 		"@types/react-dom": "^19.1.2",
 		"@types/react-is": "^19.0.0",
 		"@types/react-plotly.js": "^2.6.3",
-		"@vitejs/plugin-react": "^4.3.4",
+		"@vitejs/plugin-react": "^4.4.1",
 		"depcheck": "^1.4.7",
 		"estree-walker": "^3.0.3",
 		"globby": "^14.1.0",
