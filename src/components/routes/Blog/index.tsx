@@ -1,6 +1,6 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import type { FC } from 'react'
-import { Navigate, Route, useParams } from 'react-router-dom'
+import { Navigate, Route, useParams } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
 
 import Grid from '@mui/material/Grid'

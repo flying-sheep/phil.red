@@ -1,7 +1,7 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import { useMemo } from 'react'
 import { PortalTarget } from 'react-portal-target'
-import { Link, Navigate, Route, matchPath, useLocation } from 'react-router-dom'
+import { Link, Navigate, Route, matchPath, useLocation } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
 
 import AppBar from '@mui/material/AppBar'
