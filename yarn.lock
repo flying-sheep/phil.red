@@ -376,7 +376,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.10.5, @emotion/react@npm:^11.14.0":
+"@emotion/react@npm:^11.14.0":
   version: 11.14.0
   resolution: "@emotion/react@npm:11.14.0"
   dependencies:
@@ -3674,7 +3674,7 @@ __metadata:
     react-plotly.js: "npm:^2.6.0"
     react-portal-target: "npm:^1.0.2"
     react-router-dom: "npm:^7.5.3"
-    react-slide-routes: "npm:^3.0.3"
+    react-slide-routes: "npm:^3.1.0"
     restructured: "npm:^0.0.11"
     rollup: "npm:^4.40.1"
     typed-jsx: "npm:^0.1.1"
@@ -4042,18 +4042,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-slide-routes@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "react-slide-routes@npm:3.0.3"
+"react-slide-routes@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "react-slide-routes@npm:3.1.0"
   dependencies:
-    "@emotion/react": "npm:^11.10.5"
+    "@emotion/react": "npm:^11.14.0"
     react-transition-group: "npm:^4.4.5"
-    tslib: "npm:^2.4.1"
+    tslib: "npm:^2.8.1"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-    react-router-dom: ">=6.0.0"
-  checksum: 10/cae03170ac9149b2df988ce407da39ee31456270febda4ea58fef1f86836d8536abbd3475d2bc7c84f61d208cb6271a7e9e0ec844e26c78c7292b3203a02adbc
+    react-router: ">=6.0.0"
+  checksum: 10/1ae2a83b5388695c91afad84fbedc3aaefb3a5ae02187a0eb222d19bf4da00432d13a2474616a06316c44f1448a609867f5d0d2bdae4c11b67ad0891b2f6d661
   languageName: node
   linkType: hard
 
@@ -4704,10 +4704,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.4.1":
-  version: 2.6.2
-  resolution: "tslib@npm:2.6.2"
-  checksum: 10/bd26c22d36736513980091a1e356378e8b662ded04204453d353a7f34a4c21ed0afc59b5f90719d4ba756e581a162ecbf93118dc9c6be5acf70aa309188166ca
+"tslib@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
   languageName: node
   linkType: hard
 
