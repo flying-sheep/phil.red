@@ -10,7 +10,7 @@ import { HelmetProvider } from '@dr.pogodin/react-helmet'
 import { SnackbarProvider } from 'notistack'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router'
 
 import App from './components/routes/App'
 
