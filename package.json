@@ -54,7 +54,7 @@
 		"@types/estree": "^1.0.7",
 		"@types/katex": "^0.16.7",
 		"@types/markdown-it": "^14.1.2",
-		"@types/node": "^22.15.21",
+		"@types/node": "^22.15.29",
 		"@types/plotly.js-basic-dist-min": "^2.12.4",
 		"@types/prismjs": "^1.26.5",
 		"@types/react": "^19.1.6",
