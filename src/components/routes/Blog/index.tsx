@@ -1,10 +1,9 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
+import Grid from '@mui/material/Grid'
+import List from '@mui/material/List'
 import type { FC } from 'react'
 import { Navigate, Route, useParams } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
-
-import Grid from '@mui/material/Grid'
-import List from '@mui/material/List'
 
 import posts from '../../../posts'
 import ListItemLink from '../../ListItemLink'

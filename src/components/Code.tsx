@@ -1,6 +1,5 @@
-import { type ComponentProps, forwardRef } from 'react'
-
 import Typography from '@mui/material/Typography'
+import { type ComponentProps, forwardRef } from 'react'
 
 export type CodeProps = Omit<ComponentProps<typeof Typography>, 'component'>
 

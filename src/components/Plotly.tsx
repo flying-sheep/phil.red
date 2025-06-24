@@ -1,12 +1,11 @@
-import useFetch from 'fetch-suspense'
-import type { Data, Layout } from 'plotly.js-basic-dist-min'
-import { type FC, Suspense, lazy, useCallback } from 'react'
-import type { PlotParams } from 'react-plotly.js'
-import createPlotlyComponent from 'react-plotly.js/factory'
-
 import CircularProgress from '@mui/material/CircularProgress'
 import Stack from '@mui/material/Stack'
 import { type Theme, useTheme } from '@mui/material/styles'
+import useFetch from 'fetch-suspense'
+import type { Data, Layout } from 'plotly.js-basic-dist-min'
+import { type FC, lazy, Suspense, useCallback } from 'react'
+import type { PlotParams } from 'react-plotly.js'
+import createPlotlyComponent from 'react-plotly.js/factory'
 
 export interface PlotlyProps extends Partial<PlotParams> {
 	url: string
