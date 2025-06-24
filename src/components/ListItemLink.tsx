@@ -1,10 +1,9 @@
-import type { CSSProperties } from 'react'
-import { Link, type LinkProps } from 'react-router'
-
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
+import type { CSSProperties } from 'react'
+import { Link, type LinkProps } from 'react-router'
 
 interface LilProps extends LinkProps {
 	icon?: React.ReactElement<unknown> | undefined

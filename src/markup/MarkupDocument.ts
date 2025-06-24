@@ -1,6 +1,5 @@
 import type { FunctionComponent } from 'typed-jsx'
 
-// biome-ignore lint/style/useEnumInitializers: only used internally, don’t need to be stable
 export enum Type {
 	// block
 	Section,
