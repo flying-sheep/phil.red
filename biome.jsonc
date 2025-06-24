@@ -5,7 +5,10 @@
 		"clientKind": "git",
 		"useIgnoreFile": true,
 	},
-	"files": { "includes": ["**", "!.yarn/**"] },
+	"files": {
+		"includes": ["**", "!.yarn/**"],
+		"ignoreUnknown": true,
+	},
 	"javascript": {
 		"formatter": {
 			"semicolons": "asNeeded",

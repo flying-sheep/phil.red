@@ -10,7 +10,7 @@ export declare namespace JSX {
 	type IntrinsicElements = Record<string, never>
 	type ElementClass = ComponentInstance
 	type IntrinsicAttributes = { children?: unknown }
-	type IntrinsicClassAttributes<T> = Record<string, never>
+	type IntrinsicClassAttributes<_T> = Record<string, never>
 	interface ElementChildrenAttribute {
 		children: unknown
 	}

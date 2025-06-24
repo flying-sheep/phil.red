@@ -100,7 +100,7 @@ declare module 'restructured' {
 declare module 'restructured/lib/Parser.js' {
 	import type { Position } from 'restructured'
 
-	// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
+	// biome-ignore lint/suspicious/noShadowRestrictedNames: not my choice
 	export class SyntaxError extends Error {
 		message: string
 		expected: string | null
