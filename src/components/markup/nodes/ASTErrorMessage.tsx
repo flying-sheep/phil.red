@@ -1,7 +1,6 @@
-import type { FC } from 'react'
-
 import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
+import type { FC } from 'react'
 
 import type { Node } from '../../../markup/MarkupDocument'
 import CodeBlock from '../../CodeBlock'

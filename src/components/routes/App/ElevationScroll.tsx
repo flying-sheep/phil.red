@@ -1,7 +1,6 @@
-import { cloneElement } from 'react'
-
 import type { PaperProps } from '@mui/material'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
+import { cloneElement } from 'react'
 
 interface Props {
 	children: React.ReactElement<PaperProps>
