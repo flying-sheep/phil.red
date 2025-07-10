@@ -1,11 +1,14 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true,
 	},
-	"files": { "ignore": [".yarn/**"] },
+	"files": {
+		"includes": ["**", "!.yarn/**"],
+		"ignoreUnknown": true,
+	},
 	"javascript": {
 		"formatter": {
 			"semicolons": "asNeeded",
@@ -21,7 +24,7 @@
 	},
 	"overrides": [
 		{
-			"include": [".vscode/*.json", "tsconfig.json", "**/*.jsonc"],
+			"includes": [".vscode/*.json", "tsconfig.json", "**/*.jsonc"],
 			"json": {
 				"formatter": {
 					"trailingCommas": "all",
@@ -33,7 +36,7 @@
 			},
 		},
 		{
-			"include": ["src/build-tools/rst.tsx", "src/build-tools/md.tsx"],
+			"includes": ["src/build-tools/rst.tsx", "src/build-tools/md.tsx"],
 			"linter": {
 				"rules": {
 					"correctness": {

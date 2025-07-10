@@ -14,12 +14,15 @@
 		"preview": "vite preview",
 		"bundlesize": "tsc && vite-bundle-visualizer",
 		"lint": "$npm_execpath run lint:check && $npm_execpath run lint:deps",
+		"lint:ci": "biome ci && $npm_execpath run lint:deps",
 		"lint:check": "biome check --write .",
 		"lint:deps": "depcheck --ignores=unfonts.css,@fontsource/iosevka,@fontsource/iosevka-aile,@tsconfig/strictest,@total-typescript/ts-reset",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red",
 		"prepare": "husky"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"dependencies": {
 		"@dr.pogodin/react-helmet": "^3.0.2",
 		"@emotion/react": "^11.14.0",
@@ -48,7 +51,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.1.1",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@tsconfig/strictest": "^2.0.5",
 		"@types/estree": "^1.0.8",
@@ -77,7 +80,7 @@
 		"vite": "^7.0.2",
 		"vite-bundle-visualizer": "^1.2.1"
 	},
-	"packageManager": "yarn@4.8.1",
+	"packageManager": "yarn@4.9.2",
 	"lint-staged": {
 		"!(rawPosts)": "biome check --no-errors-on-unmatched --files-ignore-unknown=true --write"
 	}

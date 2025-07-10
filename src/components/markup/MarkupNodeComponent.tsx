@@ -1,28 +1,25 @@
 import 'katex/dist/katex.min.css'
 
 import TeX from '@matejmazur/react-katex'
-import type { KatexOptions } from 'katex'
-import { Children, type FC, useCallback } from 'react'
-import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
-
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
-
-import { ASTError } from '../../markup'
-import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
-import CodeBlock from '../CodeBlock'
-import Plotly from '../Plotly'
-
 import type {
 	CSSPseudoSelectorProps,
 	CSSSelectorObjectOrCssVariables,
 	SystemCssProperties,
 } from '@mui/system'
+import type { KatexOptions } from 'katex'
+import { Children, type FC, useCallback } from 'react'
+import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
+import { ASTError } from '../../markup'
+import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
+import CodeBlock from '../CodeBlock'
 import CopySectionLinkButton from '../CopySectionLinkButton'
+import Plotly from '../Plotly'
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
 
@@ -190,7 +187,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			return <TeX math={node.math} settings={KATEX_SETTINGS} />
 		// custom
 		case Type.Plotly: {
-			const { type, ...props } = node
+			const { type: _, ...props } = node
 			return <Plotly {...props} />
 		}
 		default:

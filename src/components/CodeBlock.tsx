@@ -1,7 +1,6 @@
+import Box from '@mui/material/Box'
 import { mergeSx } from 'merge-sx'
 import { type ComponentProps, forwardRef } from 'react'
-
-import Box from '@mui/material/Box'
 
 import Code, { type CodeProps } from './Code'
 

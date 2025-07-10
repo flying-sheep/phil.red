@@ -1,13 +1,11 @@
 import type { SxProps } from '@mui/material'
+import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material/styles'
+import type { SystemStyleObject } from '@mui/system/styleFunctionSx'
 import { mergeSx } from 'merge-sx'
 import { Highlight, themes } from 'prism-react-renderer'
 import Prism from 'prismjs'
 import { type FC, useEffect, useState } from 'react'
-
-import type { SystemStyleObject } from '@mui/system/styleFunctionSx'
-
-import Box from '@mui/material/Box'
-import { useTheme } from '@mui/material/styles'
 
 import * as urls from '../../../build-tools/urls.js'
 import CodeBlock from '../../CodeBlock.js'
