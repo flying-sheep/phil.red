@@ -51,7 +51,7 @@
 		"typed-jsx": "^0.1.1"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.0.5",
+		"@biomejs/biome": "^2.1.1",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@tsconfig/strictest": "^2.0.5",
 		"@types/estree": "^1.0.8",
