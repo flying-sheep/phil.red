@@ -1408,12 +1408,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.14.0":
-  version: 8.14.0
-  resolution: "acorn@npm:8.14.0"
+"acorn@npm:^8.14.1":
+  version: 8.15.0
+  resolution: "acorn@npm:8.15.0"
   bin:
     acorn: bin/acorn
-  checksum: 10/6df29c35556782ca9e632db461a7f97947772c6c1d5438a81f0c873a3da3a792487e83e404d1c6c25f70513e91aa18745f6eafb1fcc3a43ecd1920b21dd173d2
+  checksum: 10/77f2de5051a631cf1729c090e5759148459cdb76b5f5c70f890503d629cf5052357b0ce783c0f976dd8a93c5150f59f6d18df1def3f502396a20f81282482fa4
   languageName: node
   linkType: hard
 
@@ -2300,7 +2300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
+"fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -3599,7 +3599,7 @@ __metadata:
     rollup: "npm:^4.45.0"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^5.8.3"
-    unplugin-fonts: "npm:^1.3.1"
+    unplugin-fonts: "npm:^1.4.0"
     vite: "npm:^7.0.4"
     vite-bundle-visualizer: "npm:^1.2.1"
   languageName: unknown
@@ -4690,29 +4690,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-fonts@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "unplugin-fonts@npm:1.3.1"
+"unplugin-fonts@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "unplugin-fonts@npm:1.4.0"
   dependencies:
-    fast-glob: "npm:^3.3.2"
-    unplugin: "npm:2.0.0-beta.1"
+    fast-glob: "npm:^3.3.3"
+    unplugin: "npm:2.3.5"
   peerDependencies:
-    "@nuxt/kit": ^3.0.0
-    vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    "@nuxt/kit": ^3.0.0 || ^4.0.0
+    vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
   peerDependenciesMeta:
     "@nuxt/kit":
       optional: true
-  checksum: 10/980c927d95d825fe7889dbecd8425fb528282ac6d40680ccbadfdfee943b7b77ce8280dfbb7ef79b4e5da98f17cf7a11cde1af31eafec4816dd620071f4d84ab
+  checksum: 10/3a2455dd4e5be1b14f5bb304e9bb8e7c5261aec99aba39a0e23d302555db6aa7cc1d44381cf646556b4f90f6860ecabed55c827b18849e13efd015d20b9850ae
   languageName: node
   linkType: hard
 
-"unplugin@npm:2.0.0-beta.1":
-  version: 2.0.0-beta.1
-  resolution: "unplugin@npm:2.0.0-beta.1"
+"unplugin@npm:2.3.5":
+  version: 2.3.5
+  resolution: "unplugin@npm:2.3.5"
   dependencies:
-    acorn: "npm:^8.14.0"
+    acorn: "npm:^8.14.1"
+    picomatch: "npm:^4.0.2"
     webpack-virtual-modules: "npm:^0.6.2"
-  checksum: 10/f5f01c2808ad5fa07634f016701ddcd2f8ee17e4c0e9cc29325b40850b7a2c62bea6e0c48446baae87ca7fdf7c8276e826271537b54daf1570cbadcd826c88fd
+  checksum: 10/93956b472c66ba452599d64343ef3c2440f8279bdc449f399f9c884307934f9b383fa09c646f998f0cf1488204e993316f9a2e483d6cf01f45fd618f401942dd
   languageName: node
   linkType: hard
 
