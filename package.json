@@ -46,7 +46,7 @@
 		"react-is": "^19.1.0",
 		"react-plotly.js": "^2.6.0",
 		"react-portal-target": "^1.0.2",
-		"react-router": "^7.6.3",
+		"react-router": "^7.7.1",
 		"react-slide-routes": "^3.1.0",
 		"typed-jsx": "^0.1.1"
 	},
