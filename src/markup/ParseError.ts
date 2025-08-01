@@ -1,4 +1,8 @@
-import type { Position } from 'restructured'
+interface Position {
+	offset: number
+	line: number
+	column: number
+}
 
 export default class ParseError extends Error {
 	orig: Error
