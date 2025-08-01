@@ -1,12 +1,10 @@
 /** @jsxImportSource ../markup */
 
-import * as rst from 'restructured'
-import { SyntaxError as RSTSyntaxError } from 'restructured/lib/Parser.js'
-
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import ParseError from '../markup/ParseError'
 import anchor from './anchor'
+import * as rst from './pyiodide-docutils'
 
 interface Directive {
 	header: string | null
@@ -14,8 +12,7 @@ interface Directive {
 	body: string[]
 }
 
-type RSTNode = rst.Node<true>
-type RSTInlineNode = rst.InlineNode<true>
+type RSTNode = rst.Node
 
 function parseDirective(lines: RSTNode[]): Directive {
 	const texts = lines.map((n) =>
@@ -52,7 +49,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'document':
 			return convertChildren(node, level)
 		case 'comment': {
-			const comment = (node.children as [RSTInlineNode])[0].value
+			const comment = (node.children as [RSTNode])[0].value
 
 			const [name, text] = parseCommentAsFootnote(comment)
 			if (name !== null && text !== null) {
@@ -67,7 +64,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		}
 		case 'reference':
 		case 'footnote_reference': {
-			const text = (node.children[0] as RSTInlineNode).value
+			const text = (node.children[0] as RSTNode).value
 			const [name, label] =
 				node.type === 'footnote_reference'
 					? [
