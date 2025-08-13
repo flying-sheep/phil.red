@@ -260,7 +260,7 @@ function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 					return [
 						<m.Plotly
 							url={header ?? ''}
-							onClickLink={params['onClickLink']}
+							onClickLink={params['href']}
 							style={{ width: '100%' }}
 							config={{ responsive: true }}
 							pos={pos(node)}
