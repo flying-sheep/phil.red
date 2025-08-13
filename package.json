@@ -10,7 +10,7 @@
 	"license": "GPL-3.0",
 	"scripts": {
 		"start": "vite",
-		"build": "tsc && vite build",
+		"build": "tsc && vite build --configLoader runner",
 		"preview": "vite preview",
 		"bundlesize": "tsc && vite-bundle-visualizer",
 		"lint": "$npm_execpath run lint:check && $npm_execpath run lint:deps",
