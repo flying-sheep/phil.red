@@ -10,7 +10,7 @@ export async function load(): Promise<{
 }> {
 	const pyodide = await loadPyodide({
 		packages: ['docutils'],
-		packageBaseUrl: 'https://cdn.jsdelivr.net/pyodide/v0.28.1/full',
+		packageBaseUrl: 'https://cdn.jsdelivr.net/pyodide/v0.28.1/full/',
 	})
 	const core = await pyodide.pyimport('docutils.core')
 	return { pyodide, core }
