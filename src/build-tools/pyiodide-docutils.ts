@@ -17,6 +17,10 @@ export async function load(): Promise<{
 }
 
 // https://sphinx-docutils.readthedocs.io/en/latest/docutils.core.html#docutils.core.publish_programmatically
-export async function publish(source: string, core: PyProxy): Promise<PyProxy> {
-	return core['publish_doctree'](source)
+export async function publish(
+	source: string,
+	path: string | undefined,
+	core: PyProxy,
+): Promise<PyProxy> {
+	return core['publish_doctree'](source, path)
 }

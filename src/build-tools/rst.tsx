@@ -447,8 +447,11 @@ function getMeta(fieldLists: m.Elem) {
 }
 */
 
-export default async function rstConvert(code: string): Promise<m.Document> {
-	const children = await rstConvertInner(code)
+export default async function rstConvert(
+	code: string,
+	path?: string,
+): Promise<m.Document> {
+	const children = await rstConvertInner(code, path)
 	return { title: '', children, metadata: {} }
 	/*const targets = extractTargets(parsed)
 	const children = resolveTargets(convertNode(parsed, 0), targets)
@@ -461,9 +464,10 @@ export default async function rstConvert(code: string): Promise<m.Document> {
 	return { title: getTitle(children), children, metadata }*/
 }
 
-async function rstConvertInner(code: string): Promise<m.Node[]> {
+async function rstConvertInner(code: string, path?: string): Promise<m.Node[]> {
 	const { core } = await docutils.load()
-	const children: PySequence = (await docutils.publish(code, core))['children']
+	const document: PyProxy = await docutils.publish(code, path, core)
+	const children: PySequence = document['children']
 	// biome-ignore lint/complexity/useFlatMap: PySequence doesn’t have it
 	return children.map(convertNode).flat()
 }
