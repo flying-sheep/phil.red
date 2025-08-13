@@ -2,7 +2,7 @@
 // https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.Element
 
 import { loadPyodide, type PyodideAPI } from 'pyodide'
-import type { PyProxy } from 'pyodide/ffi'
+import type { PyProxy, PyProxyWithGet } from 'pyodide/ffi'
 
 export async function load(): Promise<{
 	pyodide: PyodideAPI
@@ -21,6 +21,6 @@ export async function publish(
 	source: string,
 	path: string | undefined,
 	core: PyProxy,
-): Promise<PyProxy> {
+): Promise<PyProxyWithGet> {
 	return core['publish_doctree'](source, path)
 }

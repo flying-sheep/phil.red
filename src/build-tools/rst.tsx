@@ -1,6 +1,6 @@
 /** @jsxImportSource ../markup */
 
-import type { PyProxy, PySequence } from 'pyodide/ffi'
+import type { PyProxyWithGet, PySequence } from 'pyodide/ffi'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import * as docutils from './pyiodide-docutils'
@@ -39,62 +39,41 @@ function parseDirective(lines: m.Node[]): Directive {
 }
 */
 
-function pos(node: PyProxy): m.Position | undefined {
-	const { line } = node
-	return line === undefined ? undefined : { line, column: undefined }
+function pos(node: PyProxyWithGet): m.Position | undefined {
+	const line: number | undefined = node['line']
+	return line === undefined ? undefined : { line, column: 1 }
 }
 
-function convertNode(node: PyProxy, level: number): m.Node[] {
-	console.log(level)
+function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 	switch (node?.['tagname']) {
-		case 'paragraph':
-			return [
-				{
-					type: m.Type.Paragraph,
-					children: node['children'].map(convertNode),
-					pos: pos(node),
-				},
-			]
-		case 'literal':
-			return [
-				{
-					type: m.Type.Code,
-					children: node['children'].map(convertNode),
-					pos: pos(node),
-				},
-			]
-		case undefined:
-			return [node.toString()]
-		/*
-		case 'document':
-			return convertChildren(node, level)
-		case 'comment': {
-			const comment = (node.children as [RSTNode])[0].value
-
-			const [name, text] = parseCommentAsFootnote(comment)
-			if (name !== null && text !== null) {
-				return [
-					// TODO: anchor
-					<m.EnumList pos={pos(node)} start={Number(name)}>
-						<m.ListItem pos={pos(node)}>{text}</m.ListItem>
-					</m.EnumList>,
-				]
-			}
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.comment
+		case 'comment':
 			return []
-		}
-		case 'reference':
-		case 'footnote_reference': {
-			const text = (node.children[0] as RSTNode).value
-			const [name, label] =
-				node.type === 'footnote_reference'
-					? [
-							`footnote-${text}`,
-							<m.Superscript pos={pos(node)}>{text}</m.Superscript>,
-						]
-					: [text, text]
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote
+		case 'footnote': {
+			// TODO: validate that it exists and has tagname "label"
+			const label = convertChildren(node['children'][0], level)
 			return [
-				<m.Link ref={{ name }} pos={pos(node)}>
-					{label}
+				// TODO: anchor from node['ids'], backlink to footnote_reference using node["backrefs"]
+				<m.EnumList pos={pos(node)} start={Number(node.get('names')[0])}>
+					<m.ListItem pos={pos(node)}>{label}</m.ListItem>
+				</m.EnumList>,
+			]
+		}
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.reference
+		case 'reference':
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote_reference
+		case 'footnote_reference': {
+			const children = convertChildren(node, level)
+
+			// TODO: allow backlinks with node['ids']
+			return [
+				<m.Link ref={{ name: node.get('refid') }} pos={pos(node)}>
+					{node['tagname'] === 'footnote_reference' ? (
+						<m.Superscript pos={pos(node)}>{children}</m.Superscript>
+					) : (
+						children
+					)}
 				</m.Link>,
 			]
 		}
@@ -108,7 +87,7 @@ function convertNode(node: PyProxy, level: number): m.Node[] {
 			if (level < 1)
 				throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 			const hLevel = Math.min(level, 6)
-			const { anchor } = titleAnchor(node)
+			const { anchor } = node['parent'].get('ids')[0] // 'ids' is slugified, 'names' literal
 			return [
 				<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
 					{convertChildren(node, level)}
@@ -121,6 +100,7 @@ function convertNode(node: PyProxy, level: number): m.Node[] {
 					{convertChildren(node, level)}
 				</m.Paragraph>,
 			]
+		/*
 		case 'block_quote':
 			return [
 				<m.BlockQuote pos={pos(node)}>
@@ -148,8 +128,12 @@ function convertNode(node: PyProxy, level: number): m.Node[] {
 				</m.FieldList>,
 			]
 		}
+			*/
+		case undefined:
+			return [node.toString()]
 		case 'literal':
 			return [<m.Code pos={pos(node)}>{convertChildren(node, level)}</m.Code>]
+		/*
 		case 'emphasis':
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		case 'strong':
@@ -301,14 +285,14 @@ function convertNode(node: PyProxy, level: number): m.Node[] {
 	}
 }
 
-/*
-function convertChildren(node: RSTNode, level: number): m.Node[] {
-	return ('children' in node ? node.children : []).reduce(
-		(ns: m.Node[], n: RSTNode) => ns.concat(convertNode(n, level)),
+function convertChildren(node: PyProxyWithGet, level: number): m.Node[] {
+	return ((node?.['children'] as PySequence) ?? []).reduce(
+		(ns: m.Node[], n: PyProxyWithGet) => ns.concat(convertNode(n, level)),
 		[],
 	)
 }
 
+/*
 function innerText(node: RSTNode): string {
 	return 'value' in node ? node.value : node.children.map(innerText).join('')
 }
@@ -413,26 +397,6 @@ function resolveTargets(
 	})
 }
 
-function getTitle(body: m.Node[]): string {
-	if (body.length === 0) throw new ASTError('Empty body', undefined)
-	const section = body[0]
-	if (typeof section === 'string')
-		throw new ASTError(`Body starts with string: ${section}`, section)
-	if (!section || section.type !== m.Type.Section)
-		throw new ASTError('No section!', section, section?.pos)
-	if (section.children.length === 0)
-		throw new ASTError('Empty Section', section, section.pos)
-	const title = section.children[0]
-	if (typeof title === 'string')
-		throw new ASTError(`Section starts with string: ${title}`, section.pos)
-	if (!title || title.type !== m.Type.Title)
-		throw new ASTError('No title!', title, title?.pos ?? section.pos)
-	const text = title.children[0]
-	if (typeof text !== 'string')
-		throw new ASTError('Empty title!', title, title.pos)
-	return text.trim()
-}
-
 function getMeta(fieldLists: m.Elem) {
 	// TODO: https://github.com/microsoft/TypeScript/issues/54966
 	return Object.fromEntries(
@@ -451,8 +415,10 @@ export default async function rstConvert(
 	code: string,
 	path?: string,
 ): Promise<m.Document> {
-	const children = await rstConvertInner(code, path)
-	return { title: '', children, metadata: {} }
+	const { core } = await docutils.load()
+	const document: PyProxyWithGet = await docutils.publish(code, path, core)
+	const children = convertChildren(document, 1)
+	return { title: document['title'], children, metadata: {} }
 	/*const targets = extractTargets(parsed)
 	const children = resolveTargets(convertNode(parsed, 0), targets)
 
@@ -462,12 +428,4 @@ export default async function rstConvert(
 			: getMeta(children.shift() as m.Elem)
 
 	return { title: getTitle(children), children, metadata }*/
-}
-
-async function rstConvertInner(code: string, path?: string): Promise<m.Node[]> {
-	const { core } = await docutils.load()
-	const document: PyProxy = await docutils.publish(code, path, core)
-	const children: PySequence = document['children']
-	// biome-ignore lint/complexity/useFlatMap: PySequence doesn’t have it
-	return children.map(convertNode).flat()
 }
