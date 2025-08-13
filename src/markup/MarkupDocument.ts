@@ -114,10 +114,12 @@ type ElementMap = { [E in Elem as E['type']]: FunctionComponent<Props<E>, E> }
 /** Type that can be used in a JSX expression */
 export type ElementType = ElementMap[Elem['type']]
 
+export type Position = { line: number; column?: number | undefined }
+
 interface Element<C extends Node = Node> {
 	type: Type
 	children: C[]
-	pos: number | { line: number; column: number } | undefined
+	pos: number | Position | undefined
 }
 
 export interface Document {

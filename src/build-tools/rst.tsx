@@ -1,20 +1,18 @@
 /** @jsxImportSource ../markup */
 
+import type { PyProxy, PySequence } from 'pyodide/ffi'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
-import ParseError from '../markup/ParseError'
-import anchor from './anchor'
-import * as rst from './pyiodide-docutils'
+import * as docutils from './pyiodide-docutils'
 
+/*
 interface Directive {
 	header: string | null
 	params: { [k: string]: string }
 	body: string[]
 }
 
-type RSTNode = rst.Node
-
-function parseDirective(lines: RSTNode[]): Directive {
+function parseDirective(lines: m.Node[]): Directive {
 	const texts = lines.map((n) =>
 		n.type === 'text' ? n.value : JSON.stringify(n),
 	)
@@ -39,13 +37,35 @@ function parseDirective(lines: RSTNode[]): Directive {
 	const body = rest.slice(lastParam + 1)
 	return { header, params, body }
 }
+*/
 
-function pos(node: RSTNode) {
-	return node.position.start
+function pos(node: PyProxy): m.Position | undefined {
+	const { line } = node
+	return line === undefined ? undefined : { line, column: undefined }
 }
 
-function convertNode(node: RSTNode, level: number): m.Node[] {
-	switch (node.type) {
+function convertNode(node: PyProxy, level: number): m.Node[] {
+	console.log(level)
+	switch (node?.['tagname']) {
+		case 'paragraph':
+			return [
+				{
+					type: m.Type.Paragraph,
+					children: node['children'].map(convertNode),
+					pos: pos(node),
+				},
+			]
+		case 'literal':
+			return [
+				{
+					type: m.Type.Code,
+					children: node['children'].map(convertNode),
+					pos: pos(node),
+				},
+			]
+		case undefined:
+			return [node.toString()]
+		/*
 		case 'document':
 			return convertChildren(node, level)
 		case 'comment': {
@@ -271,15 +291,17 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 					)
 			}
 		}
+		*/
 		default:
 			throw new ASTError(
-				`Unknown node type “${(node as RSTNode).type}”`,
+				`Unknown node type “${node?.['tagname']}”`,
 				node,
 				pos(node),
 			)
 	}
 }
 
+/*
 function convertChildren(node: RSTNode, level: number): m.Node[] {
 	return ('children' in node ? node.children : []).reduce(
 		(ns: m.Node[], n: RSTNode) => ns.concat(convertNode(n, level)),
@@ -423,10 +445,12 @@ function getMeta(fieldLists: m.Elem) {
 			.map((f) => [f.name, f.children[0]?.toString()]),
 	)
 }
+*/
 
-export default function rstConvert(code: string): m.Document {
-	const parsed = rstConvertInner(code)
-	const targets = extractTargets(parsed)
+export default async function rstConvert(code: string): Promise<m.Document> {
+	const children = await rstConvertInner(code)
+	return { title: '', children, metadata: {} }
+	/*const targets = extractTargets(parsed)
 	const children = resolveTargets(convertNode(parsed, 0), targets)
 
 	const metadata =
@@ -434,20 +458,12 @@ export default function rstConvert(code: string): m.Document {
 			? {}
 			: getMeta(children.shift() as m.Elem)
 
-	return { title: getTitle(children), children, metadata }
+	return { title: getTitle(children), children, metadata }*/
 }
 
-function rstConvertInner(code: string): RSTNode {
-	try {
-		return rst.default.default.parse(code, {
-			position: true,
-			blanklines: true,
-			indent: true,
-		})
-	} catch (e) {
-		if (e instanceof RSTSyntaxError) {
-			throw new ParseError(e, e.location.start) // TODO: capture end too
-		}
-		throw e
-	}
+async function rstConvertInner(code: string): Promise<m.Node[]> {
+	const { core } = await docutils.load()
+	const children: PySequence = (await docutils.publish(code, core))['children']
+	// biome-ignore lint/complexity/useFlatMap: PySequence doesn’t have it
+	return children.map(convertNode).flat()
 }

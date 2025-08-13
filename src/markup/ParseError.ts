@@ -1,8 +1,4 @@
-interface Position {
-	offset: number
-	line: number
-	column: number
-}
+import type { Position } from './MarkupDocument'
 
 export default class ParseError extends Error {
 	orig: Error

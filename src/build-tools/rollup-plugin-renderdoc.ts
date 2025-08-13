@@ -47,7 +47,7 @@ function getVal(prop: Property | undefined) {
 	return prop.value.value
 }
 
-export type Converter = (source: string) => Document
+export type Converter = (source: string) => Document | Promise<Document>
 
 export interface Config {
 	converters: { [ext: string]: Converter }
@@ -86,7 +86,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 						message: `No converter for ${ext} registered`,
 					})
 				try {
-					return convert(code)
+					return await convert(code)
 				} catch (eOrig) {
 					let e: Error
 					if (eOrig instanceof ParseError) {
