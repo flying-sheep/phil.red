@@ -7,40 +7,6 @@ import * as docutils from './pyiodide-docutils'
 
 type RSTNode = PyProxyWithGet
 
-/*
-interface Directive {
-	header: string | null
-	params: { [k: string]: string }
-	body: string[]
-}
-
-function parseDirective(lines: m.Node[]): Directive {
-	const texts = lines.map((n) =>
-		n.type === 'text' ? n.value : JSON.stringify(n),
-	)
-	const [header = null, ...rest] = texts
-	let lastParam = -1
-	const params = rest
-		.filter((line, i) => {
-			if (i > lastParam + 1) return false // there have been non-params
-			if (!/^:\w+:\s/.test(line)) return false
-			lastParam = i + 1
-			return true
-		})
-		.reduce<{ [k: string]: string }>((obj, line) => {
-			const [, name, val] = /^:(\w+):\s(.*)+/.exec(line) as unknown as [
-				string,
-				string,
-				string,
-			]
-			obj[name] = val
-			return obj
-		}, {})
-	const body = rest.slice(lastParam + 1)
-	return { header, params, body }
-}
-*/
-
 function pos(node: RSTNode): m.Position | undefined {
 	const line: number | undefined = node['line']
 	return line === undefined ? undefined : { line: line + 1, column: 1 }
@@ -161,59 +127,15 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
 		case 'math':
 			return [<m.InlineMath math={node['astext']()} pos={pos(node)} />]
-		/*
-		case 'interpreted_text':
-			switch (node.role) {
-				case 'pep': {
-					const num = node.children
-						.map((text) => (text as RSTInlineNode).value)
-						.join('')
-					const href = `https://www.python.org/dev/peps/pep-${num.padStart(4, '0')}/`
-					return [
-						<m.Link ref={{ href }} pos={pos(node)}>{`PEP ${num}`}</m.Link>,
-					]
-				}
-				case null:
-					return [
-						<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>,
-					]
-				default:
-					throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
-			}
-		*/
-		case 'literal_block':
-			return [<m.CodeBlock pos={pos(node)}>{node['astext']()}</m.CodeBlock>]
-		/*
-		case 'directive': {
-			const directive = node.directive as rst.DirectiveType | 'plotly'
-			switch (directive) {
-				case 'epigraph':
-				case 'highlights':
-				case 'pull-quote': {
-					const parsed = rstConvertInner(
-						node.children
-							.map((n) => (n as rst.InlineNode<true>).value)
-							.join('\n'),
-					)
-					return [
-						<m.BlockQuote pos={pos(node)} variant={directive}>
-							{convertNode(parsed, level)}
-						</m.BlockQuote>,
-					]
-				}
-				case 'code-block':
-				case 'code': {
-					const { header, body } = parseDirective(node.children)
-					// TODO: check if in lang dict
-					return [
-						<m.CodeBlock language={header ?? undefined} pos={pos(node)}>
-							{body}
-						</m.CodeBlock>,
-					]
-				}
-			}
+		case 'literal_block': {
+			const classes = (node.get('classes') as string).split(' ')
+			const lang = classes.find((c) => c !== 'code')
+			return [
+				<m.CodeBlock language={lang} pos={pos(node)}>
+					{node['astext']()}
+				</m.CodeBlock>,
+			]
 		}
-		*/
 		case 'table': {
 			const children: [RSTNode, ...RSTNode[]] = node['children'].values()
 			const [title, ...groups] =
@@ -278,112 +200,6 @@ function convertChildren(node: RSTNode, level: number): m.Node[] {
 		[],
 	)
 }
-
-/*
-function innerText(node: RSTNode): string {
-	return 'value' in node ? node.value : node.children.map(innerText).join('')
-}
-
-function titleAnchor(node: RSTNode): { name: string; anchor: string } {
-	return anchor(innerText(node))
-}
-
-function* extractTargetsInner(
-	node: RSTNode,
-): IterableIterator<[string, string]> {
-	for (const child of 'children' in node ? node.children : []) {
-		if (typeof child === 'string') continue
-		if (child.type === 'title') {
-			const { name, anchor } = titleAnchor(child)
-			yield [name, `#${anchor}`]
-		} else if (child.type === 'comment') {
-			const comment = (child.children as [RSTInlineNode])[0].value
-
-			{
-				// normal reference
-				const [, name = null, href = null] =
-					/^_([^:]+):\s+(.+)$/.exec(comment) ?? []
-				// TODO: “_`name with backticks`: ...”
-				if (name !== null && href !== null) {
-					yield [name.toLocaleLowerCase(), href]
-				}
-			}
-
-			{
-				// footnote reference
-				const [name, text] = parseCommentAsFootnote(comment)
-				if (name !== null && text !== null) {
-					const ref = `footnote-${name.toLocaleLowerCase()}`
-					yield [ref, `#${ref}`]
-				}
-			}
-		} else if ('children' in child) {
-			yield* extractTargetsInner(child)
-		}
-	}
-}
-
-function parseCommentAsFootnote(
-	comment: string,
-): [string | null, string | null] {
-	const [, name = null, text = null] =
-		/^\[([^\]]+)\]\s+(.+)$/.exec(comment) ?? []
-	return [name, text]
-}
-
-const URL_SCHEMA = /^https?:.*$/
-const ANCHOR_SCHEMA = /^#.*$/
-
-function extractTargets(node: RSTNode): { [key: string]: string } {
-	const pending = Object.fromEntries(extractTargetsInner(node))
-	const resolved: { [key: string]: string } = {}
-	let newResolvable = true
-	while (newResolvable) {
-		newResolvable = false
-		for (const [k, maybeV] of Object.entries(pending)) {
-			const v = resolved[maybeV] ?? maybeV // if so the match will be true
-			// TODO: more schemas
-			if (v.match(URL_SCHEMA) ?? v.match(ANCHOR_SCHEMA)) {
-				resolved[k] = v
-				delete pending[k]
-				newResolvable = true
-			}
-		}
-	}
-	if (Object.keys(pending).length) {
-		console.warn('Could not resolve references: %s', pending)
-	}
-	return resolved
-}
-
-function resolveTargets(
-	nodes: m.Node[],
-	targets: { [key: string]: string },
-): m.Node[] {
-	return nodes.map((node) => {
-		if (typeof node === 'string') return node
-		const elem = { ...node }
-		if (elem.type === m.Type.Link && 'name' in elem.ref) {
-			const maybeHref = targets[elem.ref.name.toLocaleLowerCase()]
-			if (maybeHref) {
-				elem.ref = { href: maybeHref }
-			} else {
-				// maybe inline syntax
-				const [, text, href] =
-					/^(.+?)\s*<([a-z]+:[^<>]+)>/.exec(elem.ref.name) ?? []
-				if (text && href) {
-					elem.ref = { href }
-					elem.children = [text]
-				} else {
-					console.warn(`Unmatched link target ${elem.ref.name}`)
-				}
-			}
-		}
-		elem.children = resolveTargets(elem.children, targets)
-		return elem
-	})
-}
-*/
 
 function getMeta(document: RSTNode): { [key: string]: string } {
 	// TODO: https://github.com/microsoft/TypeScript/issues/54966
