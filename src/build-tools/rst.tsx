@@ -48,8 +48,9 @@ function pos(node: RSTNode): m.Position | undefined {
 
 function convertNode(node: RSTNode, level: number): m.Node[] {
 	switch (node?.['tagname']) {
-		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.target
-		case 'target': // already resolved
+		// already resolved
+		case 'target':
+		case 'substitution_definition':
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.docinfo
 		case 'docinfo': // handled in getMeta
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.comment
@@ -68,6 +69,8 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		}
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.reference
 		case 'reference':
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.title_reference
+		case 'title_reference':
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote_reference
 		case 'footnote_reference': {
 			const children = convertChildren(node, level)
@@ -156,18 +159,11 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		case 'definition':
 			return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
+		case 'math':
+			return [<m.InlineMath math={node['astext']()} pos={pos(node)} />]
 		/*
 		case 'interpreted_text':
 			switch (node.role) {
-				case 'math':
-					return [
-						<m.InlineMath
-							math={node.children
-								.map((text) => (text as RSTInlineNode).value)
-								.join('')}
-							pos={pos(node)}
-						/>,
-					]
 				case 'pep': {
 					const num = node.children
 						.map((text) => (text as RSTInlineNode).value)
@@ -221,7 +217,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'table': {
 			const children: [RSTNode, ...RSTNode[]] = node['children'].values()
 			const [title, ...groups] =
-				children[0]['tagname'] === 'title' ? children : [null, ...children]
+				children[0]?.['tagname'] === 'title' ? children : [null, ...children]
 			return [
 				// https://docutils.sourceforge.io/docs/ref/doctree.html#tgroup
 				<m.Table caption={title?.['astext']()} pos={pos(node)}>
