@@ -126,9 +126,9 @@ Setuptools
 ~~~~~~~~~~
 The old gods: fearsome, fickle, a known evil, and clearly the past.
 
-Setuptools_ are ``setup.py``, ``setup.cfg``, ``MANIFEST.in``, ``requirements.txt``, and … eggs?
+`Setuptools <st pypi_>`__ are ``setup.py``, ``setup.cfg``, ``MANIFEST.in``, ``requirements.txt``, and … eggs?
 
-.. _setuptools: https://setuptools.pypa.io/en/latest/
+.. _st pypi: https://setuptools.pypa.io/en/latest/
 
 Pros:
 

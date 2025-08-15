@@ -89,6 +89,8 @@ File Management
 - kdf
 - partitionmanager
 
+.. _devel-kde:
+
 Devel
 -----
 - kcachegrind

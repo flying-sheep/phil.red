@@ -5,6 +5,8 @@ import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import * as docutils from './pyiodide-docutils'
 
+type RSTNode = PyProxyWithGet
+
 /*
 interface Directive {
 	header: string | null
@@ -39,13 +41,17 @@ function parseDirective(lines: m.Node[]): Directive {
 }
 */
 
-function pos(node: PyProxyWithGet): m.Position | undefined {
+function pos(node: RSTNode): m.Position | undefined {
 	const line: number | undefined = node['line']
-	return line === undefined ? undefined : { line, column: 1 }
+	return line === undefined ? undefined : { line: line + 1, column: 1 }
 }
 
-function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
+function convertNode(node: RSTNode, level: number): m.Node[] {
 	switch (node?.['tagname']) {
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.target
+		case 'target': // already resolved
+		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.docinfo
+		case 'docinfo': // handled in getMeta
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.comment
 		case 'comment':
 			return []
@@ -100,40 +106,16 @@ function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 					{convertChildren(node, level)}
 				</m.Paragraph>,
 			]
-		/*
 		case 'block_quote':
 			return [
 				<m.BlockQuote pos={pos(node)}>
 					{convertChildren(node, level)}
 				</m.BlockQuote>,
 			]
-		case 'text': {
-			const fieldList = /^:((?:\\:|[^:])+):\s+(.*)/.exec(node.value)
-			if (!fieldList) return [node.value]
-			const [, fieldName, fieldValue] = fieldList as unknown as [
-				string,
-				string,
-				string,
-			]
-			return [
-				// TODO: convert runs to single lists, not multiple
-				<m.FieldList pos={pos(node)}>
-					{
-						(
-							<m.Field name={fieldName} pos={pos(node)}>
-								{fieldValue.trim()}
-							</m.Field>
-						) as m.Field
-					}
-				</m.FieldList>,
-			]
-		}
-			*/
 		case undefined:
 			return [node.toString()]
 		case 'literal':
 			return [<m.Code pos={pos(node)}>{convertChildren(node, level)}</m.Code>]
-		/*
 		case 'emphasis':
 			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
 		case 'strong':
@@ -143,7 +125,11 @@ function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 		case 'bullet_list': {
 			// TODO: convert some known bullets
 			return [
-				<m.BulletList bullet={m.Bullet.text} text={node.bullet} pos={pos(node)}>
+				<m.BulletList
+					bullet={m.Bullet.text}
+					text={node.get('bullet')}
+					pos={pos(node)}
+				>
 					{convertChildren(node, level)}
 				</m.BulletList>,
 			]
@@ -170,6 +156,7 @@ function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 			]
 		case 'definition':
 			return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
+		/*
 		case 'interpreted_text':
 			switch (node.role) {
 				case 'math':
@@ -197,12 +184,10 @@ function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 				default:
 					throw new ASTError(`Unknown role “${node.role}”`, node, pos(node))
 			}
-		case 'literal_block': {
-			const texts = node.children.map((n) =>
-				n.type === 'text' ? n.value : JSON.stringify(n),
-			)
-			return [<m.CodeBlock pos={pos(node)}>{texts.join('\n')}</m.CodeBlock>]
-		}
+		*/
+		case 'literal_block':
+			return [<m.CodeBlock pos={pos(node)}>{node['astext']()}</m.CodeBlock>]
+		/*
 		case 'directive': {
 			const directive = node.directive as rst.DirectiveType | 'plotly'
 			switch (directive) {
@@ -230,64 +215,52 @@ function convertNode(node: PyProxyWithGet, level: number): m.Node[] {
 						</m.CodeBlock>,
 					]
 				}
-				case 'csv-table': {
-					const { header, params, body } = parseDirective(node.children)
-					const delim = (() => {
-						switch (params['delim']) {
-							case 'tab':
-								return '\t'
-							case 'space':
-								return ' '
-							default:
-								return params['delim'] ?? ','
-						}
-					})()
-					return [
-						<m.Table caption={header ?? undefined} pos={pos(node)}>
-							{body.map((r) => (
-								<m.Row pos={pos(node)}>
-									{r.split(delim).map((cell) => (
-										<m.Cell pos={pos(node)}>{cell}</m.Cell>
-									))}
-								</m.Row>
-							))}
-						</m.Table>,
-					]
-				}
-				// custom
-				case 'plotly': {
-					const { header, params } = parseDirective(node.children)
-					return [
-						<m.Plotly
-							url={header ?? ''}
-							onClickLink={params['href']}
-							style={{ width: '100%' }}
-							config={{ responsive: true }}
-							pos={pos(node)}
-						/>,
-					]
-				}
-				default:
-					throw new ASTError(
-						`Unknown directive “${node.directive}”`,
-						node,
-						pos(node),
-					)
 			}
 		}
 		*/
+		case 'table': {
+			const children: [RSTNode, ...RSTNode[]] = node['children'].values()
+			const [title, ...groups] =
+				children[0]['tagname'] === 'title' ? children : [null, ...children]
+			return [
+				// https://docutils.sourceforge.io/docs/ref/doctree.html#tgroup
+				<m.Table caption={title?.['astext']()} pos={pos(node)}>
+					{groups.flatMap((group) => convertChildren(group, level))}
+				</m.Table>,
+			]
+		}
+		case 'colspec':
+		case 'thead':
+			return []
+		case 'tbody':
+			return convertChildren(node, level)
+		case 'row':
+			return [<m.Row pos={pos(node)}>{convertChildren(node, level)}</m.Row>]
+		case 'entry':
+			return [<m.Cell pos={pos(node)}>{convertChildren(node, level)}</m.Cell>]
+		case 'plotly': {
+			return [
+				<m.Plotly
+					url={node.get('url')}
+					onClickLink={node.get('href')}
+					style={{ width: '100%' }}
+					config={{ responsive: true }}
+					pos={pos(node)}
+				/>,
+			]
+		}
 		default:
 			throw new ASTError(
-				`Unknown node type “${node?.['tagname']}”`,
+				`Unknown node type: ${node.toString()}`,
 				node,
 				pos(node),
 			)
 	}
 }
 
-function convertChildren(node: PyProxyWithGet, level: number): m.Node[] {
+function convertChildren(node: RSTNode, level: number): m.Node[] {
 	return ((node?.['children'] as PySequence) ?? []).reduce(
-		(ns: m.Node[], n: PyProxyWithGet) => ns.concat(convertNode(n, level)),
+		(ns: m.Node[], n: RSTNode) => ns.concat(convertNode(n, level)),
 		[],
 	)
 }
@@ -396,36 +369,27 @@ function resolveTargets(
 		return elem
 	})
 }
-
-function getMeta(fieldLists: m.Elem) {
-	// TODO: https://github.com/microsoft/TypeScript/issues/54966
-	return Object.fromEntries(
-		fieldLists.children
-			.filter(
-				(n: m.Node): n is m.FieldList =>
-					typeof n !== 'string' && n.type === m.Type.FieldList,
-			)
-			.flatMap((fl) => (fl as m.FieldList).children)
-			.map((f) => [f.name, f.children[0]?.toString()]),
-	)
-}
 */
+
+function getMeta(document: RSTNode): { [key: string]: string } {
+	// TODO: https://github.com/microsoft/TypeScript/issues/54966
+	const docinfo = document['children'][0]
+	const meta: { [key: string]: string } = {}
+	if (docinfo['tagname'] !== 'docinfo') return meta
+	for (const field of docinfo['children']) {
+		const [name, value] = field['children'] as [RSTNode, RSTNode]
+		meta[name['astext']()] = value['astext']()
+	}
+	return meta
+}
 
 export default async function rstConvert(
 	code: string,
 	path?: string,
 ): Promise<m.Document> {
 	const { core } = await docutils.load()
-	const document: PyProxyWithGet = await docutils.publish(code, path, core)
+	const document: RSTNode = await docutils.publish(code, path, core)
 	const children = convertChildren(document, 1)
-	return { title: document['title'], children, metadata: {} }
-	/*const targets = extractTargets(parsed)
-	const children = resolveTargets(convertNode(parsed, 0), targets)
-
-	const metadata =
-		(children[0] as m.Elem).type === m.Type.Section
-			? {}
-			: getMeta(children.shift() as m.Elem)
-
-	return { title: getTitle(children), children, metadata }*/
+	const metadata = getMeta(document)
+	return { title: document['title'], children, metadata }
 }
