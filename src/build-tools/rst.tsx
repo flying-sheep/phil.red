@@ -249,6 +249,24 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 				/>,
 			]
 		}
+		// https://docutils.sourceforge.io/docs/ref/doctree.html#system-message
+		case 'system_message': {
+			switch (Number(node['level'])) {
+				case 1:
+					console.info(node['astext']())
+					break
+				case 2:
+					console.warn(node['astext']())
+					break
+				case 3:
+				case 4:
+					throw new ASTError(node['astext'](), node, {
+						line: Number(node.get('line')) + 1,
+						column: 1,
+					})
+			}
+			return []
+		}
 		default:
 			throw new ASTError(
 				`Unknown node type: ${node.toString()}`,
