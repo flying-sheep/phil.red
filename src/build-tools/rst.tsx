@@ -76,12 +76,16 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 					{convertChildren(node as docutils.Element, level)}
 				</m.Paragraph>,
 			]
-		case 'block_quote':
+		case 'block_quote': {
+			const variant = node
+				.get('classes')
+				.find((v: string) => m.BlockQuote.VARIANTS.has(v))
 			return [
-				<m.BlockQuote pos={pos(node)}>
+				<m.BlockQuote variant={variant} pos={pos(node)}>
 					{convertChildren(node as docutils.Element, level)}
 				</m.BlockQuote>,
 			]
+		}
 		case undefined:
 			return [node.toString()]
 		case 'literal':
