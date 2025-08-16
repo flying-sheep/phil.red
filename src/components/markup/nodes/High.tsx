@@ -16,25 +16,32 @@ const loadScriptNoCache = (url: string) =>
 		script.src = url
 		document.body.appendChild(script)
 		script.onload = () => resolve(script)
-		script.onerror = (e) => {
+		script.onerror = () => {
 			document.body.removeChild(script)
-			reject(e)
+			reject(`The script ${url} didn't load correctly.`)
 		}
 	})
 
 const langCache = new Map<string, Promise<HTMLScriptElement>>()
 
-const loadScript = async (url: string) => {
+async function loadScript(url: string): Promise<HTMLScriptElement> {
 	let scriptPromise = langCache.get(url)
 	if (!scriptPromise) {
 		scriptPromise = loadScriptNoCache(url)
 		langCache.set(url, scriptPromise)
 	}
-	return scriptPromise
+	return await scriptPromise
 }
 
-const loadLang = (lang: string) =>
-	loadScript(urls.prism(`components/prism-${lang}.min.js`))
+const PRISM_ALIASES: Record<string, string> = {
+	zsh: 'bash',
+}
+
+async function loadLang(alias: string): Promise<HTMLScriptElement> {
+	//TODO: undo when doing pygments or prism 2
+	const lang = PRISM_ALIASES[alias] ?? alias
+	return await loadScript(urls.prism(`components/prism-${lang}.min.js`))
+}
 
 const style2Sx = <P extends object>({
 	style,

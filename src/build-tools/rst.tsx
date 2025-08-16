@@ -41,7 +41,6 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote_reference
 		case 'footnote_reference': {
 			const children = convertChildren(node as docutils.Element, level)
-
 			// TODO: allow backlinks with node['ids']
 			const href = node.get('refuri') ?? `#${node.get('refid')}`
 			return [
@@ -154,11 +153,12 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 		case 'math':
 			return [<m.InlineMath math={node.astext()} pos={pos(node)} />]
 		case 'literal_block': {
-			const classes: string[] = node.get('classes').toString().split(' ')
-			const lang = classes.find((c) => c !== 'code')
+			const lang = Array.from<string>(node.get('classes')).find(
+				(c) => c !== 'code',
+			)
 			return [
 				<m.CodeBlock language={lang} pos={pos(node)}>
-					{node.astext()}
+					{[node.astext()]}
 				</m.CodeBlock>,
 			]
 		}
@@ -193,7 +193,7 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 					{convertChildren(node as docutils.Element, level)}
 				</m.Cell>,
 			]
-		case 'plotly': {
+		case 'plotly':
 			return [
 				<m.Plotly
 					url={node.get('url')}
@@ -203,25 +203,24 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 					pos={pos(node)}
 				/>,
 			]
-		}
 		// https://docutils.sourceforge.io/docs/ref/doctree.html#system-message
-		case 'system_message': {
+		case 'system_message':
 			switch (Number(node['level'])) {
 				case 1:
 					console.info(node.astext())
-					break
+					return []
 				case 2:
 					console.warn(node.astext())
-					break
+					return []
 				case 3:
 				case 4:
 					throw new ASTError(node.astext(), node, {
 						line: Number(node.get('line')) + 1,
 						column: 1,
 					})
+				default:
+					return []
 			}
-			return []
-		}
 		default:
 			throw new ASTError(
 				`Unknown node type: ${node.toString()}`,
