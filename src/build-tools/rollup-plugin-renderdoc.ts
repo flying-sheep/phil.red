@@ -47,9 +47,18 @@ function getVal(prop: Property | undefined) {
 	return prop.value.value
 }
 
+export interface ConverterOptions {
+	path?: string
+	ctx?: {
+		debug(msg: string): void
+		info(msg: string): void
+		warn(msg: string): void
+	}
+}
+
 export type Converter = (
 	source: string,
-	path?: string,
+	opts?: ConverterOptions,
 ) => Document | Promise<Document>
 
 export interface Config {
@@ -89,7 +98,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 						message: `No converter for ${ext} registered`,
 					})
 				try {
-					return await convert(code, p)
+					return await convert(code, { path: p, ctx })
 				} catch (eOrig) {
 					let e: Error
 					if (eOrig instanceof ParseError) {
@@ -117,10 +126,10 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		)
 		for (const [p, content] of Object.entries(map)) {
 			if (!content) {
-				console.log(`Skipped ${p}`)
+				ctx.warn(`Skipped ${p}`)
 				delete map[p]
 			} else if (content.metadata['draft']) {
-				console.log(`Skipped ${p} (“${content.title}” is a draft)`)
+				ctx.warn(`Skipped ${p} (“${content.title}” is a draft)`)
 				delete map[p]
 			}
 		}
