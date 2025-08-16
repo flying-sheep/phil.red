@@ -43,7 +43,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 
 			// TODO: allow backlinks with node['ids']
 			return [
-				<m.Link ref={{ name: node.get('refid') }} pos={pos(node)}>
+				<m.Link ref={{ href: `#${node.get('refid')}` }} pos={pos(node)}>
 					{node['tagname'] === 'footnote_reference' ? (
 						<m.Superscript pos={pos(node)}>{children}</m.Superscript>
 					) : (
@@ -128,7 +128,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'math':
 			return [<m.InlineMath math={node['astext']()} pos={pos(node)} />]
 		case 'literal_block': {
-			const classes = (node.get('classes') as string).split(' ')
+			const classes: string[] = node.get('classes').toString().split(' ')
 			const lang = classes.find((c) => c !== 'code')
 			return [
 				<m.CodeBlock language={lang} pos={pos(node)}>
