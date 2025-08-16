@@ -4,7 +4,29 @@
 import path from 'node:path'
 import { loadPyodide, type PyodideAPI } from 'pyodide'
 import type { PyProxy, PyProxyWithGet } from 'pyodide/ffi'
-import directiveCode from './directives.py?raw'
+
+const python = String.raw
+
+const DIRECTIVE_CODE = python`
+from docutils.nodes import Element, General
+from docutils.parsers import rst
+
+class PlotlyElement(General, Element):
+	tagname = 'plotly'
+		
+class PlotlyDirective(rst.Directive):
+	required_arguments = 1
+	option_spec = dict(href=rst.directives.uri)
+
+	def run(self) -> list[Element]:
+		node = PlotlyElement(self.content)
+		node['url'] = self.arguments[0]
+		node['href'] = self.options['href']
+		node.source, node.line = self.state_machine.get_source_and_line(self.lineno)
+		return [node]
+
+rst.directives.register_directive("plotly", PlotlyDirective)
+`
 
 export async function load(): Promise<{
 	pyodide: PyodideAPI
@@ -16,7 +38,7 @@ export async function load(): Promise<{
 		packageCacheDir: path.join(import.meta.dirname, '../../.pyodide-cache'),
 	})
 	const core = await pyodide.pyimport('docutils.core')
-	await pyodide.runPython(directiveCode)
+	await pyodide.runPython(DIRECTIVE_CODE)
 	return { pyodide, core }
 }
 

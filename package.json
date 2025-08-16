@@ -9,9 +9,9 @@
 	"author": "Philipp A. <flying-sheep@web.de>",
 	"license": "GPL-3.0",
 	"scripts": {
-		"start": "vite --configLoader runner",
-		"build": "tsc && vite build --configLoader runner",
-		"preview": "vite preview --configLoader runner",
+		"start": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
 		"bundlesize": "tsc && vite-bundle-visualizer",
 		"lint": "$npm_execpath run lint:check && $npm_execpath run lint:deps",
 		"lint:ci": "biome ci && $npm_execpath run lint:deps",
