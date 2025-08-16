@@ -81,19 +81,24 @@ const High: FC<HighProps> = ({ code, language, sx }) => {
 					className={className}
 					sx={mergeSx(style as SystemStyleObject, sx, { padding: '5px' })}
 				>
-					{tokens.map((line, i) => (
-						// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
-						<Box component="span" {...style2Sx(getLineProps({ line, key: i }))}>
-							{line.map((token, key) => (
-								// biome-ignore lint/correctness/useJsxKeyInIterable: Static tree, no need for key
-								<Box
-									component="span"
-									{...style2Sx(getTokenProps({ token, key }))}
-								/>
-							))}
-							{'\n'}
-						</Box>
-					))}
+					{tokens.map((line, i) => {
+						const { key, ...props } = getLineProps({ line, key: i })
+						return (
+							<Box component="span" key={key as string} {...props}>
+								{line.map((token, i) => {
+									const { key, ...props } = getTokenProps({ token, key: i })
+									return (
+										<Box
+											component="span"
+											key={key as string}
+											{...style2Sx(props)}
+										/>
+									)
+								})}
+								{'\n'}
+							</Box>
+						)
+					})}
 				</CodeBlock>
 			)}
 		</Highlight>

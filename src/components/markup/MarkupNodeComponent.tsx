@@ -71,7 +71,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 					{level > 1 && (
 						<CopySectionLinkButton
 							anchor={node.anchor}
-							size={level >= 3 ? 'small' : 'medium'}
+							size={level >= 2 ? 'small' : 'medium'}
 						/>
 					)}
 				</Typography>
