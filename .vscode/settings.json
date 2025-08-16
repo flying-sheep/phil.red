@@ -2,6 +2,9 @@
 	"[json][jsonc][typescript][typescriptreact]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "biomejs.biome",
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "always",
+		},
 	},
 	"typescript.tsdk": ".yarn/sdks/typescript/lib",
 	"search.exclude": {

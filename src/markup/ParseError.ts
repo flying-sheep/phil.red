@@ -1,4 +1,4 @@
-import type { Position } from 'restructured'
+import type { Position } from './MarkupDocument'
 
 export default class ParseError extends Error {
 	orig: Error

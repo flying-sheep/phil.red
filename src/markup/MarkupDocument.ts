@@ -114,10 +114,12 @@ type ElementMap = { [E in Elem as E['type']]: FunctionComponent<Props<E>, E> }
 /** Type that can be used in a JSX expression */
 export type ElementType = ElementMap[Elem['type']]
 
+export type Position = { line: number; column?: number | undefined }
+
 interface Element<C extends Node = Node> {
 	type: Type
 	children: C[]
-	pos: number | { line: number; column: number } | undefined
+	pos: number | Position | undefined
 }
 
 export interface Document {
@@ -151,13 +153,17 @@ function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
 type Props<P extends Elem> = Omit<P, 'type' | 'children'> & {
 	children?: P['children'] | P['children'][number] | undefined
 }
-function mkFun<P extends Elem>(type: Type): FunctionComponent<Props<P>, P> {
-	return ({ children: nested, ...props }) =>
+function mkFun<P extends Elem, Extra = unknown>(
+	type: Type,
+	extra?: Extra,
+): FunctionComponent<Props<P>, P> & Extra {
+	const fn: FunctionComponent<Props<P>, P> = ({ children: nested, ...props }) =>
 		({
 			type,
 			children: arrayify(nested),
 			...props,
 		}) as unknown as P
+	return Object.assign(fn, extra)
 }
 
 // Block
@@ -179,11 +185,15 @@ export interface Paragraph extends Element {
 }
 export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
 
+const _bqv = ['epigraph', 'highlights', 'pull-quote', undefined] as const
 export interface BlockQuote extends Element {
 	type: Type.BlockQuote
-	variant?: 'epigraph' | 'highlights' | 'pull-quote' | undefined
+	variant?: (typeof _bqv)[number]
 }
-export const BlockQuote = mkFun<BlockQuote>(Type.BlockQuote)
+export const BlockQuote = mkFun<
+	BlockQuote,
+	{ VARIANTS: Set<(typeof _bqv)[number]> }
+>(Type.BlockQuote, { VARIANTS: new Set(_bqv) })
 
 export interface BulletList extends Element {
 	type: Type.BulletList

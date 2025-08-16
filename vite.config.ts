@@ -6,6 +6,7 @@ import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	assetsInclude: ['**/*.py'],
 	resolve: {
 		// remove legacy browser support with mui-modern
 		conditions: ['mui-modern', 'module', 'browser', 'development|production'],

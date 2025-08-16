@@ -36,7 +36,7 @@ function* tokens2ast(
 	}
 }
 
-function pos(token: Token) {
+function pos(token: Token): m.Position | undefined {
 	return token.map ? { line: token.map[0], column: 1 } : undefined
 }
 
@@ -53,7 +53,11 @@ function convertNode(token: Token): m.Node[] {
 		case 'heading': {
 			const level = /h(?<level>[1-6])/.exec(token.tag)?.groups?.['level']
 			if (!level)
-				throw new ASTError(`Unexpected header tag ${token.tag}`, token)
+				throw new ASTError(
+					`Unexpected header tag ${token.tag}`,
+					token,
+					pos(token),
+				)
 			const { anchor } = toAnchor(innerText(token))
 			return [
 				<m.Title
@@ -67,7 +71,8 @@ function convertNode(token: Token): m.Node[] {
 		}
 		case 'link': {
 			const [, href] = token.attrs?.find(([name]) => name === 'href') ?? []
-			if (!href) throw new ASTError('Link without href encountered', token)
+			if (!href)
+				throw new ASTError('Link without href encountered', token, pos(token))
 			return [
 				<m.Link ref={{ href }} pos={pos(token)}>
 					{convertChildren(token)}
@@ -94,6 +99,7 @@ function convertNode(token: Token): m.Node[] {
 			throw new ASTError(
 				`Unknown token type “${token.type}”`,
 				JSON.stringify(token),
+				pos(token),
 			)
 	}
 }

@@ -1,3 +1,7 @@
 {
-	"recommendations": ["arcanis.vscode-zipfs", "biomejs.biome"],
+	"recommendations": [
+		"arcanis.vscode-zipfs", //yarn
+		"biomejs.biome", //formatting
+		"ruschaaf.extended-embedded-languages", //highlight Python code in template literals
+	],
 }
