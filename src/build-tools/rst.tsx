@@ -43,8 +43,9 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 			const children = convertChildren(node as docutils.Element, level)
 
 			// TODO: allow backlinks with node['ids']
+			const href = node.get('refuri') ?? `#${node.get('refid')}`
 			return [
-				<m.Link ref={{ href: `#${node.get('refid')}` }} pos={pos(node)}>
+				<m.Link ref={{ href }} pos={pos(node)}>
 					{node.tagname === 'footnote_reference' ? (
 						<m.Superscript pos={pos(node)}>{children}</m.Superscript>
 					) : (
@@ -63,7 +64,7 @@ function convertNode(node: docutils.Node, level: number): m.Node[] {
 			if (level < 1)
 				throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 			const hLevel = Math.min(level, 6)
-			const { anchor } = node['parent'].get('ids')[0] // 'ids' is slugified, 'names' literal
+			const anchor = node['parent'].get('ids')[0] // 'ids' is slugified, 'names' literal
 			return [
 				<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
 					{convertChildren(node as docutils.Element, level)}
