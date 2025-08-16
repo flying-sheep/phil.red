@@ -5,7 +5,10 @@ import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import * as docutils from './pyiodide-docutils'
 
-type RSTNode = PyProxyWithGet
+interface RSTNode extends PyProxyWithGet {
+	tagname?: string
+	astext(): string
+}
 
 function pos(node: RSTNode): m.Position | undefined {
 	const line: number | undefined = node['line']
@@ -13,7 +16,7 @@ function pos(node: RSTNode): m.Position | undefined {
 }
 
 function convertNode(node: RSTNode, level: number): m.Node[] {
-	switch (node?.['tagname']) {
+	switch (node?.tagname) {
 		// already resolved
 		case 'target':
 		case 'substitution_definition':
@@ -25,11 +28,15 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote
 		case 'footnote': {
 			// TODO: validate that it exists and has tagname "label"
-			const label = convertChildren(node['children'][0], level)
+			const [label, ...content]: RSTNode[] = Array.from(
+				node['children'].values(),
+			)
 			return [
 				// TODO: anchor from node['ids'], backlink to footnote_reference using node["backrefs"]
-				<m.EnumList pos={pos(node)} start={Number(node.get('names')[0])}>
-					<m.ListItem pos={pos(node)}>{label}</m.ListItem>
+				<m.EnumList pos={pos(node)} start={Number(label)}>
+					<m.ListItem pos={pos(node)}>
+						{content.flatMap((n) => convertNode(n, level))}
+					</m.ListItem>
 				</m.EnumList>,
 			]
 		}
@@ -44,7 +51,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			// TODO: allow backlinks with node['ids']
 			return [
 				<m.Link ref={{ href: `#${node.get('refid')}` }} pos={pos(node)}>
-					{node['tagname'] === 'footnote_reference' ? (
+					{node.tagname === 'footnote_reference' ? (
 						<m.Superscript pos={pos(node)}>{children}</m.Superscript>
 					) : (
 						children
@@ -126,22 +133,22 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'definition':
 			return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
 		case 'math':
-			return [<m.InlineMath math={node['astext']()} pos={pos(node)} />]
+			return [<m.InlineMath math={node.astext()} pos={pos(node)} />]
 		case 'literal_block': {
 			const classes: string[] = node.get('classes').toString().split(' ')
 			const lang = classes.find((c) => c !== 'code')
 			return [
 				<m.CodeBlock language={lang} pos={pos(node)}>
-					{node['astext']()}
+					{node.astext()}
 				</m.CodeBlock>,
 			]
 		}
 		case 'table': {
 			const groups: RSTNode[] = Array.from(node['children'].values())
-			const title = groups[0]?.['tagname'] === 'title' ? groups.shift() : null
+			const title = groups[0]?.tagname === 'title' ? groups.shift() : null
 			return [
 				// https://docutils.sourceforge.io/docs/ref/doctree.html#tgroup
-				<m.Table caption={title?.['astext']()} pos={pos(node)}>
+				<m.Table caption={title?.astext()} pos={pos(node)}>
 					{groups.flatMap((group) => convertChildren(group, level))}
 				</m.Table>,
 			]
@@ -170,14 +177,14 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'system_message': {
 			switch (Number(node['level'])) {
 				case 1:
-					console.info(node['astext']())
+					console.info(node.astext())
 					break
 				case 2:
-					console.warn(node['astext']())
+					console.warn(node.astext())
 					break
 				case 3:
 				case 4:
-					throw new ASTError(node['astext'](), node, {
+					throw new ASTError(node.astext(), node, {
 						line: Number(node.get('line')) + 1,
 						column: 1,
 					})
@@ -204,10 +211,10 @@ function getMeta(document: RSTNode): { [key: string]: string } {
 	// TODO: https://github.com/microsoft/TypeScript/issues/54966
 	const docinfo = document['children'][0]
 	const meta: { [key: string]: string } = {}
-	if (docinfo['tagname'] !== 'docinfo') return meta
+	if (docinfo.tagname !== 'docinfo') return meta
 	for (const field of docinfo['children']) {
 		const [name, value] = field['children'] as [RSTNode, RSTNode]
-		meta[name['astext']()] = value['astext']()
+		meta[name.astext()] = value.astext()
 	}
 	return meta
 }
