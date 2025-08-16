@@ -137,9 +137,8 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		case 'table': {
-			const children: [RSTNode, ...RSTNode[]] = node['children'].values()
-			const [title, ...groups] =
-				children[0]?.['tagname'] === 'title' ? children : [null, ...children]
+			const groups: RSTNode[] = Array.from(node['children'].values())
+			const title = groups[0]?.['tagname'] === 'title' ? groups.shift() : null
 			return [
 				// https://docutils.sourceforge.io/docs/ref/doctree.html#tgroup
 				<m.Table caption={title?.['astext']()} pos={pos(node)}>

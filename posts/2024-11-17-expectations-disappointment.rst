@@ -31,7 +31,7 @@ or
 The other way to react
 ----------------------
 
-I often have to remind myself of the rationalist mantra. [1]_
+I often have to remind myself of the rationalist mantra.\ [1]_
 
 .. epigraph::
 
