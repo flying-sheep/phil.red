@@ -3,7 +3,17 @@
 
 import path from 'node:path'
 import { loadPyodide, type PyodideAPI } from 'pyodide'
-import type { PyProxy, PyProxyWithGet } from 'pyodide/ffi'
+import type { PyProxy, PyProxyWithGet, PySequence } from 'pyodide/ffi'
+
+export interface Node extends PyProxyWithGet {
+	tagname?: string
+	astext(): string
+}
+
+export interface Element extends Node {
+	tagname: string
+	children: PySequence
+}
 
 const python = String.raw
 
@@ -47,6 +57,6 @@ export async function publish(
 	source: string,
 	path: string | undefined,
 	core: PyProxy,
-): Promise<PyProxyWithGet> {
+): Promise<Element> {
 	return core['publish_doctree'](source, path)
 }

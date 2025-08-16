@@ -1,21 +1,15 @@
 /** @jsxImportSource ../markup */
 
-import type { PyProxyWithGet, PySequence } from 'pyodide/ffi'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import * as docutils from './pyiodide-docutils'
 
-interface RSTNode extends PyProxyWithGet {
-	tagname?: string
-	astext(): string
-}
-
-function pos(node: RSTNode): m.Position | undefined {
+function pos(node: docutils.Node): m.Position | undefined {
 	const line: number | undefined = node['line']
 	return line === undefined ? undefined : { line: line + 1, column: 1 }
 }
 
-function convertNode(node: RSTNode, level: number): m.Node[] {
+function convertNode(node: docutils.Node, level: number): m.Node[] {
 	switch (node?.tagname) {
 		// already resolved
 		case 'target':
@@ -28,8 +22,8 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote
 		case 'footnote': {
 			// TODO: validate that it exists and has tagname "label"
-			const [label, ...content]: RSTNode[] = Array.from(
-				node['children'].values(),
+			const [label, ...content]: docutils.Node[] = Array.from(
+				(node as docutils.Element).children.values(),
 			)
 			return [
 				// TODO: anchor from node['ids'], backlink to footnote_reference using node["backrefs"]
@@ -46,7 +40,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'title_reference':
 		// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote_reference
 		case 'footnote_reference': {
-			const children = convertChildren(node, level)
+			const children = convertChildren(node as docutils.Element, level)
 
 			// TODO: allow backlinks with node['ids']
 			return [
@@ -62,7 +56,7 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'section':
 			return [
 				<m.Section pos={pos(node)}>
-					{convertChildren(node, level + 1)}
+					{convertChildren(node as docutils.Element, level + 1)}
 				</m.Section>,
 			]
 		case 'title': {
@@ -72,31 +66,41 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			const { anchor } = node['parent'].get('ids')[0] // 'ids' is slugified, 'names' literal
 			return [
 				<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
-					{convertChildren(node, level)}
+					{convertChildren(node as docutils.Element, level)}
 				</m.Title>,
 			]
 		}
 		case 'paragraph':
 			return [
 				<m.Paragraph pos={pos(node)}>
-					{convertChildren(node, level)}
+					{convertChildren(node as docutils.Element, level)}
 				</m.Paragraph>,
 			]
 		case 'block_quote':
 			return [
 				<m.BlockQuote pos={pos(node)}>
-					{convertChildren(node, level)}
+					{convertChildren(node as docutils.Element, level)}
 				</m.BlockQuote>,
 			]
 		case undefined:
 			return [node.toString()]
 		case 'literal':
-			return [<m.Code pos={pos(node)}>{convertChildren(node, level)}</m.Code>]
+			return [
+				<m.Code pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.Code>,
+			]
 		case 'emphasis':
-			return [<m.Emph pos={pos(node)}>{convertChildren(node, level)}</m.Emph>]
+			return [
+				<m.Emph pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.Emph>,
+			]
 		case 'strong':
 			return [
-				<m.Strong pos={pos(node)}>{convertChildren(node, level)}</m.Strong>,
+				<m.Strong pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.Strong>,
 			]
 		case 'bullet_list': {
 			// TODO: convert some known bullets
@@ -106,32 +110,46 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 					text={node.get('bullet')}
 					pos={pos(node)}
 				>
-					{convertChildren(node, level)}
+					{convertChildren(node as docutils.Element, level)}
 				</m.BulletList>,
 			]
 		}
 		case 'enumerated_list':
 			return [
-				<m.EnumList pos={pos(node)}>{convertChildren(node, level)}</m.EnumList>,
+				<m.EnumList pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.EnumList>,
 			]
 		case 'list_item':
 			return [
-				<m.ListItem pos={pos(node)}>{convertChildren(node, level)}</m.ListItem>,
+				<m.ListItem pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.ListItem>,
 			]
 		case 'definition_list':
 			return [
-				<m.DefList pos={pos(node)}>{convertChildren(node, level)}</m.DefList>,
+				<m.DefList pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.DefList>,
 			]
 		case 'definition_list_item':
 			return [
-				<m.DefItem pos={pos(node)}>{convertChildren(node, level)}</m.DefItem>,
+				<m.DefItem pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.DefItem>,
 			]
 		case 'term':
 			return [
-				<m.DefTerm pos={pos(node)}>{convertChildren(node, level)}</m.DefTerm>,
+				<m.DefTerm pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.DefTerm>,
 			]
 		case 'definition':
-			return [<m.Def pos={pos(node)}>{convertChildren(node, level)}</m.Def>]
+			return [
+				<m.Def pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.Def>,
+			]
 		case 'math':
 			return [<m.InlineMath math={node.astext()} pos={pos(node)} />]
 		case 'literal_block': {
@@ -144,12 +162,16 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 			]
 		}
 		case 'table': {
-			const groups: RSTNode[] = Array.from(node['children'].values())
+			const groups: docutils.Node[] = Array.from(
+				(node as docutils.Element).children.values(),
+			)
 			const title = groups[0]?.tagname === 'title' ? groups.shift() : null
 			return [
 				// https://docutils.sourceforge.io/docs/ref/doctree.html#tgroup
 				<m.Table caption={title?.astext()} pos={pos(node)}>
-					{groups.flatMap((group) => convertChildren(group, level))}
+					{groups.flatMap((group) =>
+						convertChildren(group as docutils.Element, level),
+					)}
 				</m.Table>,
 			]
 		}
@@ -157,11 +179,19 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 		case 'thead':
 			return []
 		case 'tbody':
-			return convertChildren(node, level)
+			return convertChildren(node as docutils.Element, level)
 		case 'row':
-			return [<m.Row pos={pos(node)}>{convertChildren(node, level)}</m.Row>]
+			return [
+				<m.Row pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.Row>,
+			]
 		case 'entry':
-			return [<m.Cell pos={pos(node)}>{convertChildren(node, level)}</m.Cell>]
+			return [
+				<m.Cell pos={pos(node)}>
+					{convertChildren(node as docutils.Element, level)}
+				</m.Cell>,
+			]
 		case 'plotly': {
 			return [
 				<m.Plotly
@@ -200,20 +230,23 @@ function convertNode(node: RSTNode, level: number): m.Node[] {
 	}
 }
 
-function convertChildren(node: RSTNode, level: number): m.Node[] {
-	return ((node?.['children'] as PySequence) ?? []).reduce(
-		(ns: m.Node[], n: RSTNode) => ns.concat(convertNode(n, level)),
+function convertChildren(elem: docutils.Element, level: number): m.Node[] {
+	return elem.children.reduce(
+		(ns: m.Node[], n: docutils.Node) => ns.concat(convertNode(n, level)),
 		[],
 	)
 }
 
-function getMeta(document: RSTNode): { [key: string]: string } {
+function getMeta(document: docutils.Element): { [key: string]: string } {
 	// TODO: https://github.com/microsoft/TypeScript/issues/54966
-	const docinfo = document['children'][0]
+	const docinfo = document.children[0]
 	const meta: { [key: string]: string } = {}
 	if (docinfo.tagname !== 'docinfo') return meta
-	for (const field of docinfo['children']) {
-		const [name, value] = field['children'] as [RSTNode, RSTNode]
+	for (const field of docinfo.children) {
+		const [name, value] = field.children.values() as [
+			docutils.Node,
+			docutils.Node,
+		]
 		meta[name.astext()] = value.astext()
 	}
 	return meta
@@ -224,7 +257,7 @@ export default async function rstConvert(
 	path?: string,
 ): Promise<m.Document> {
 	const { core } = await docutils.load()
-	const document: RSTNode = await docutils.publish(code, path, core)
+	const document = await docutils.publish(code, path, core)
 	const children = convertChildren(document, 1)
 	const metadata = getMeta(document)
 	return { title: document['title'], children, metadata }
