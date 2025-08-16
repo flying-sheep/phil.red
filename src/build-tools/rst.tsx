@@ -260,5 +260,5 @@ export default async function rstConvert(
 	const document = await docutils.publish(code, path, core)
 	const children = convertChildren(document, 1)
 	const metadata = getMeta(document)
-	return { title: document['title'], children, metadata }
+	return { title: document.get('title'), children, metadata }
 }
