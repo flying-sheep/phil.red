@@ -260,9 +260,11 @@ class RSTConverter {
 
 	getMeta(document: docutils.Element): { [key: string]: string } {
 		// TODO: https://github.com/microsoft/TypeScript/issues/54966
-		const docinfo = document.children[0]
+		const docinfo = document.children.find(
+			(n: docutils.Node) => n.tagname === 'docinfo',
+		)
 		const meta: { [key: string]: string } = {}
-		if (docinfo.tagname !== 'docinfo') return meta
+		if (docinfo === undefined) return meta
 		for (const field of docinfo.children) {
 			const [name, value] = field.children.values() as [
 				docutils.Node,
