@@ -1,7 +1,7 @@
-:draft: true
-
 Fully Automated Luxury Communism
 ================================
+
+:draft: true
 
 The logical end goal of human strife.
 I want to explain why.

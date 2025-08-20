@@ -1,7 +1,7 @@
-:draft: true
-
 How should we teach programming
 ===============================
+
+:draft: true
 
 I learned programming in university.
 The professor insisted that the lectures didn’t form a “Java course”, but they did.
