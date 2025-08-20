@@ -14,13 +14,13 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '24'
           cache: yarn
       - run: yarn install --immutable
       - run: yarn build
         env:
           NODE_ENV: production
-      - uses: burnett01/rsync-deployments@5.2.1
+      - uses: burnett01/rsync-deployments@7.0.2
         with:
           switches: --recursive --delete --archive --compress --verbose
           path: dist/
