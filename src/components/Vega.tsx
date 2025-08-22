@@ -29,13 +29,7 @@ const VegaLite: FC<VegaEmbedProps> = ({
 		background: 'transparent',
 	} as Config
 	useVegaEmbed({ ref, spec, options, onEmbed, onError })
-	return (
-		<figure
-			ref={ref}
-			{...divProps}
-			style={{ width: '100%', boxSizing: 'border-box' }}
-		/>
-	)
+	return <figure ref={ref} {...divProps} style={{ width: '100%', margin: 0 }} />
 }
 
 export default VegaLite
