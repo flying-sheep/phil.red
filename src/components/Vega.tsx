@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material/styles'
 import useFetch from 'fetch-suspense'
 import { type ComponentProps, type FC, lazy, Suspense } from 'react'
 import type * as reactVega from 'react-vega'
+import type { Config } from 'vega-lite'
 import * as themes from 'vega-themes'
 
 const Plot = lazy(async () => {
@@ -16,19 +17,18 @@ export interface VegaLiteProps
 	url: string
 }
 
-const VegaLiteInner: FC<VegaLiteProps> = ({ url, spec: rawSpec, ...props }) => {
+const VegaLiteInner: FC<VegaLiteProps> = ({ url, spec, ...props }) => {
 	const theme = useTheme()
 	const data = useFetch(url) as unknown[]
 
-	const spec: reactVega.VisualizationSpec = {
-		...rawSpec,
-		config: {
-			...(theme.palette.mode === 'dark' ? themes.dark : themes.carbonwhite),
-			background: 'transparent',
-		},
-		autosize: { type: 'fit', contains: 'padding' },
-		data: { name: 'table' },
-	}
+	const vltheme = (
+		theme.palette.mode === 'dark' ? themes.dark : themes.carbonwhite
+	) as Config
+
+	spec = Object.assign({}, spec, { data })
+	spec.config = Object.assign({}, spec.config, vltheme, {
+		background: 'transparent',
+	})
 	return <Plot data={{ table: data }} spec={spec} {...props} />
 }
 
