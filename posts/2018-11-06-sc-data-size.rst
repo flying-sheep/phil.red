@@ -6,9 +6,9 @@ In our_ review paper `single cells make big data`_, we showed a graph of the ris
 .. vega:: /static/cellplot.json
    
     {
-        "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
         "title": "Cell numbers per year",
-        "mark": "circle",
+        "mark": { "type": "circle", "tooltip": true },
         "encoding": {
             "x": {
                 "title": "Submission date",
@@ -21,7 +21,12 @@ In our_ review paper `single cells make big data`_, we showed a graph of the ris
                 "type": "quantitative",
                 "scale": { "type": "log" }
             },
-            "color": { "field": "g", "type": "nominal" },
+            "color": {
+                "title": "Platform",
+                "field": "g",
+                "type": "nominal"
+            },
+            "hover": { "field": "href"},
             "href": { "field": "href"}
         },
         "transform": [

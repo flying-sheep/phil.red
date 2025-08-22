@@ -25,11 +25,11 @@ const VegaLiteInner: FC<VegaLiteProps> = ({ url, spec, ...props }) => {
 		theme.palette.mode === 'dark' ? themes.dark : themes.carbonwhite
 	) as Config
 
-	spec = Object.assign({}, spec, { data })
+	spec = Object.assign({}, spec, { data: { name: 'data' } })
 	spec.config = Object.assign({}, spec.config, vltheme, {
 		background: 'transparent',
 	})
-	return <Plot data={{ table: data }} spec={spec} {...props} />
+	return <Plot data={{ data }} spec={spec} {...props} />
 }
 
 const VegaLite: FC<VegaLiteProps> = (props) => (
