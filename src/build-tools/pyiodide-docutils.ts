@@ -6,6 +6,7 @@ import { loadPyodide, type PyodideAPI } from 'pyodide'
 import type { PyProxy, PyProxyWithGet, PySequence } from 'pyodide/ffi'
 
 export interface Node extends PyProxyWithGet {
+	parent: Element | undefined
 	tagname?: string
 	astext(): string
 }
@@ -21,21 +22,20 @@ const DIRECTIVE_CODE = python`
 from docutils.nodes import Element, General
 from docutils.parsers import rst
 
-class PlotlyElement(General, Element):
-	tagname = 'plotly'
+class VegaElement(General, Element):
+	tagname = 'vega'
 		
-class PlotlyDirective(rst.Directive):
+class VegaDirective(rst.Directive):
 	required_arguments = 1
-	option_spec = dict(href=rst.directives.uri)
+	has_content = True
 
 	def run(self) -> list[Element]:
-		node = PlotlyElement(self.content)
+		node = VegaElement("".join(self.content))
 		node['url'] = self.arguments[0]
-		node['href'] = self.options['href']
 		node.source, node.line = self.state_machine.get_source_and_line(self.lineno)
 		return [node]
 
-rst.directives.register_directive("plotly", PlotlyDirective)
+rst.directives.register_directive("vega", VegaDirective)
 `
 
 export async function load(): Promise<{

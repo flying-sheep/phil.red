@@ -1,3 +1,4 @@
+import type { VisualizationSpec } from 'react-vega'
 import type { FunctionComponent } from 'typed-jsx'
 
 export enum Type {
@@ -29,7 +30,7 @@ export enum Type {
 	Code,
 	InlineMath,
 	// custom
-	Plotly,
+	Vega,
 }
 
 /// this doesn’t use HTML 4 type (circle, disc, square),
@@ -108,7 +109,7 @@ export type Elem =
 	| Code
 	| InlineMath
 	// Custom
-	| Plotly
+	| Vega
 
 type ElementMap = { [E in Elem as E['type']]: FunctionComponent<Props<E>, E> }
 /** Type that can be used in a JSX expression */
@@ -306,11 +307,9 @@ export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
 
 // Custom
 
-export interface Plotly extends Element {
-	type: Type.Plotly
+export interface Vega extends Element {
+	type: Type.Vega
 	url: string
-	onClickLink?: string | undefined
-	style?: Partial<React.CSSProperties> | undefined
-	config?: Partial<Plotly.Config> | undefined
+	spec: VisualizationSpec
 }
-export const Plotly = mkFun<Plotly>(Type.Plotly)
+export const Vega = mkFun<Vega>(Type.Vega)

@@ -149,7 +149,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		const imports = new Map<string, string>()
 
 		// TODO: image
-		const types = new Set([Type.Plotly])
+		const types = new Set([Type.Vega])
 
 		await asyncWalk(ast, {
 			async enter(node) {

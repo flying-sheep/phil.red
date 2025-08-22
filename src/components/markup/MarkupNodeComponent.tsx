@@ -19,7 +19,7 @@ import { ASTError } from '../../markup'
 import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
 import CodeBlock from '../CodeBlock'
 import CopySectionLinkButton from '../CopySectionLinkButton'
-import Plotly from '../Plotly'
+import Vega from '../Vega'
 import ASTErrorMessage from './nodes/ASTErrorMessage'
 import High from './nodes/High'
 
@@ -186,9 +186,9 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		case Type.InlineMath:
 			return <TeX math={node.math} settings={KATEX_SETTINGS} />
 		// custom
-		case Type.Plotly: {
+		case Type.Vega: {
 			const { type: _, ...props } = node
-			return <Plotly {...props} />
+			return <Vega {...props} />
 		}
 		default:
 			throw new ASTError(`Unknown type ${(node as Elem).type}`, node)
