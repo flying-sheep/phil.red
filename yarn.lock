@@ -317,29 +317,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cutting/assert@npm:0.1.4":
-  version: 0.1.4
-  resolution: "@cutting/assert@npm:0.1.4"
-  checksum: 10/c9f353f9d0fb76078286ccc4bb39240c4b624d88651f43315e77d157be6bd5e32fc3aafb3528576299c6f5eb222967db759223e54f4469aae2fedbaf3abed812
-  languageName: node
-  linkType: hard
-
-"@cutting/use-get-parent-size@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@cutting/use-get-parent-size@npm:2.4.0"
-  dependencies:
-    "@cutting/assert": "npm:0.1.4"
-    resize-observer-polyfill: "npm:^1.5.1"
-    use-debounce: "npm:^10.0.4"
-  peerDependencies:
-    react: 19.1.0
-    react-dom: 19.1.0
-    resize-observer-polyfill: ">= 1.5.1"
-    use-debounce: ">= 10.0.3"
-  checksum: 10/099943c0d5b522ad67c1339b1847fd433bae81a5d9bcf75910f1f3fd7184e728917f8d3fc9f89390d1ba4b310e9174f96d588c999af99b35f256421b0f90e697
-  languageName: node
-  linkType: hard
-
 "@dr.pogodin/react-helmet@npm:^3.0.2":
   version: 3.0.2
   resolution: "@dr.pogodin/react-helmet@npm:3.0.2"
@@ -1725,6 +1702,17 @@ __metadata:
     strip-ansi: "npm:^6.0.1"
     wrap-ansi: "npm:^7.0.0"
   checksum: 10/eaa5561aeb3135c2cddf7a3b3f562fc4238ff3b3fc666869ef2adf264be0f372136702f16add9299087fb1907c2e4ec5dbfe83bd24bce815c70a80c6c1a2e950
+  languageName: node
+  linkType: hard
+
+"cliui@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "cliui@npm:9.0.1"
+  dependencies:
+    string-width: "npm:^7.2.0"
+    strip-ansi: "npm:^7.1.0"
+    wrap-ansi: "npm:^9.0.0"
+  checksum: 10/df43d8d1c6e3254cbb64b1905310d5f6672c595496a3cbe76946c6d24777136886470686f2772ac9edfe547a74bb70e8017530b3554715aee119efd7752fc0d9
   languageName: node
   linkType: hard
 
@@ -3720,7 +3708,6 @@ __metadata:
   resolution: "phil.red@workspace:."
   dependencies:
     "@biomejs/biome": "npm:^2.2.0"
-    "@cutting/use-get-parent-size": "npm:^2.4.0"
     "@dr.pogodin/react-helmet": "npm:^3.0.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
@@ -3773,7 +3760,7 @@ __metadata:
     unplugin-fonts: "npm:^1.4.0"
     vega: "npm:^6.1.2"
     vega-embed: "npm:^7.0.2"
-    vega-lite: "npm:^5"
+    vega-lite: "npm:^6.2.0"
     vega-themes: "npm:^3.0.0"
     vega-util: "npm:^2.0.0"
     vite: "npm:^7.1.2"
@@ -4074,13 +4061,6 @@ __metadata:
   version: 2.0.1
   resolution: "require-package-name@npm:2.0.1"
   checksum: 10/3332d4eec10a730627ca20f37a8a7d57badd9e8953f238472aa457b0084907f86ca5b2af94694a0c8bb2e1101bdb3ed6ddc964d2044b040fe076a9bf5b19755f
-  languageName: node
-  linkType: hard
-
-"resize-observer-polyfill@npm:^1.5.1":
-  version: 1.5.1
-  resolution: "resize-observer-polyfill@npm:1.5.1"
-  checksum: 10/e10ee50cd6cf558001de5c6fb03fee15debd011c2f694564b71f81742eef03fb30d6c2596d1d5bf946d9991cb692fcef529b7bd2e4057041377ecc9636c753ce
   languageName: node
   linkType: hard
 
@@ -4519,7 +4499,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string-width@npm:^7.0.0":
+"string-width@npm:^7.0.0, string-width@npm:^7.2.0":
   version: 7.2.0
   resolution: "string-width@npm:7.2.0"
   dependencies:
@@ -4747,15 +4727,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-debounce@npm:^10.0.4":
-  version: 10.0.5
-  resolution: "use-debounce@npm:10.0.5"
-  peerDependencies:
-    react: "*"
-  checksum: 10/329e71d3c53baa3e1bc3d1cd8cba8f358d06e3594c606b8f26fc391be6ce0010704026056909d3975314900562dc963c54b1889c875e62d7971a82260cad62d4
-  languageName: node
-  linkType: hard
-
 "util-deprecate@npm:^1.0.1":
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
@@ -4831,13 +4802,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-event-selector@npm:~3.0.1":
-  version: 3.0.1
-  resolution: "vega-event-selector@npm:3.0.1"
-  checksum: 10/fe02aa5942cc410bab11f6c5e61882b9215c4b26728d1979db292c8434dc1516f500714cff1db81413ba63c6d7b2e40acc1cb2473bd779312116236df8a5c03b
-  languageName: node
-  linkType: hard
-
 "vega-expression@npm:^6.0.0, vega-expression@npm:~6.0.0":
   version: 6.0.0
   resolution: "vega-expression@npm:6.0.0"
@@ -4845,16 +4809,6 @@ __metadata:
     "@types/estree": "npm:^1.0.6"
     vega-util: "npm:^2.0.0"
   checksum: 10/75a603f374f85e466ee1b21fdabfdcbe8b807776c1a0aa9dba57ec58897a582a7f1dd2cdc4defab94f702f56f5d027ddfa889fa8a68c77b35f4d0b53b32cbd1b
-  languageName: node
-  linkType: hard
-
-"vega-expression@npm:~5.1.1":
-  version: 5.1.2
-  resolution: "vega-expression@npm:5.1.2"
-  dependencies:
-    "@types/estree": "npm:^1.0.0"
-    vega-util: "npm:^1.17.3"
-  checksum: 10/43b7e0107288f2971d624aa51f938794ab02980a07a2dd16109d01b5309f401a3c97632428b2941e1ce74c7582aeacd580b5621508b45f8ba2d5599ede39ec00
   languageName: node
   linkType: hard
 
@@ -4949,24 +4903,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-lite@npm:^5":
-  version: 5.23.0
-  resolution: "vega-lite@npm:5.23.0"
+"vega-lite@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "vega-lite@npm:6.2.0"
   dependencies:
     json-stringify-pretty-compact: "npm:~4.0.0"
     tslib: "npm:~2.8.1"
-    vega-event-selector: "npm:~3.0.1"
-    vega-expression: "npm:~5.1.1"
-    vega-util: "npm:~1.17.2"
-    yargs: "npm:~17.7.2"
+    vega-event-selector: "npm:~4.0.0"
+    vega-expression: "npm:~6.0.0"
+    vega-util: "npm:~2.0.0"
+    yargs: "npm:~18.0.0"
   peerDependencies:
-    vega: ^5.24.0
+    vega: ^6.0.0
   bin:
     vl2pdf: bin/vl2pdf
     vl2png: bin/vl2png
     vl2svg: bin/vl2svg
     vl2vg: bin/vl2vg
-  checksum: 10/be7279c69c8202535d84e48e7a1295c17c55f47f2bb5c08e6443b7d0c26c71e4b6ae4583eedb9106dd8e05cbbde8e42c8ddfa78594f9d1768bcdf11271c77c16
+  checksum: 10/ab978ea20061acbd000827cf31d990565b1a499d58dd332e93f7b5ed328d1f439c2acadc84c76040686fc8c656bd4e7f3b18485ee7cb1a358950053be7141258
   languageName: node
   linkType: hard
 
@@ -5136,13 +5090,6 @@ __metadata:
     vega-expression: "npm:^6.0.0"
     vega-util: "npm:^2.0.0"
   checksum: 10/70b7be88eba1a704df122dca1e7ff065e6a38eaeddc85b63719d18c6df3271f68543a70da432927167e73f726121597e31d2b88d0094a18340488220af8d7ff2
-  languageName: node
-  linkType: hard
-
-"vega-util@npm:^1.17.3, vega-util@npm:~1.17.2":
-  version: 1.17.3
-  resolution: "vega-util@npm:1.17.3"
-  checksum: 10/0b3ebf16a0fa59456a73fdccc2ce21bc5c6c125643794814f7144ecda2ec0da5509aa740d9fde0e796d662f6b0ff9d28e929267dd1edafa773ec85e654c7f4a9
   languageName: node
   linkType: hard
 
@@ -5448,6 +5395,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"yargs-parser@npm:^22.0.0":
+  version: 22.0.0
+  resolution: "yargs-parser@npm:22.0.0"
+  checksum: 10/f13c42bad6ebed1a587a72f2db5694f5fa772bcaf409a701691d13cf74eb5adfcf61a2611de08807e319b829d3e5e6e1578b16ebe174cae8e8be3bf7b8e7a19e
+  languageName: node
+  linkType: hard
+
 "yargs@npm:^16.2.0":
   version: 16.2.0
   resolution: "yargs@npm:16.2.0"
@@ -5463,7 +5417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^17.5.1, yargs@npm:~17.7.2":
+"yargs@npm:^17.5.1":
   version: 17.7.2
   resolution: "yargs@npm:17.7.2"
   dependencies:
@@ -5475,5 +5429,19 @@ __metadata:
     y18n: "npm:^5.0.5"
     yargs-parser: "npm:^21.1.1"
   checksum: 10/abb3e37678d6e38ea85485ed86ebe0d1e3464c640d7d9069805ea0da12f69d5a32df8e5625e370f9c96dd1c2dc088ab2d0a4dd32af18222ef3c4224a19471576
+  languageName: node
+  linkType: hard
+
+"yargs@npm:~18.0.0":
+  version: 18.0.0
+  resolution: "yargs@npm:18.0.0"
+  dependencies:
+    cliui: "npm:^9.0.1"
+    escalade: "npm:^3.1.1"
+    get-caller-file: "npm:^2.0.5"
+    string-width: "npm:^7.2.0"
+    y18n: "npm:^5.0.5"
+    yargs-parser: "npm:^22.0.0"
+  checksum: 10/5af36234871390386b31cac99f00e79fcbc2ead858a61b30a8ca381c5fde5df8af0b407c36b000d3f774bcbe4aec5833f2f1c915f6ddc49ce97b78176b651801
   languageName: node
   linkType: hard
