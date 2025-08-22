@@ -156,7 +156,17 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
 					if (!types.has(getVal(getProp(node, 'type')) as Type)) return
-					const urlProp = getProp(node, 'url')
+					const specVal = getProp(node, 'spec')?.value
+					if (!specVal || specVal.type !== 'ObjectExpression')
+						ctx.error(
+							`missing “spec” object in “${id}”: ${JSON.stringify(node)}`,
+						)
+					const dataVal = getProp(specVal, 'data')?.value
+					if (!dataVal || dataVal.type !== 'ObjectExpression')
+						ctx.error(
+							`missing “data” object in “${id}”: ${JSON.stringify(node)}`,
+						)
+					const urlProp = getProp(dataVal, 'url')
 					if (!urlProp) ctx.error(`missing “url” in “${id}”`)
 					const url = getVal(urlProp) as string
 					const resolved = await ctx.resolve(url)

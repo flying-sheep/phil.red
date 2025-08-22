@@ -3,11 +3,12 @@ Single cell data Size
 
 In our_ review paper `single cells make big data`_, we showed a graph of the rising numbers of cells in datasets from the `Gene Expression Omnibus`_ (GEO). This is an updated version:
 
-.. vega:: /static/cellplot.json
+.. vega::
    
     {
-        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+        "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
         "title": "Cell numbers per year",
+        "data": { "url": "/static/cellplot.json" },
         "mark": { "type": "circle", "tooltip": true },
         "encoding": {
             "x": {
@@ -26,7 +27,7 @@ In our_ review paper `single cells make big data`_, we showed a graph of the ris
                 "field": "g",
                 "type": "nominal"
             },
-            "hover": { "field": "href"},
+            "hover": { "field": "t" },
             "href": { "field": "href"}
         },
         "transform": [

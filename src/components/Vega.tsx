@@ -1,47 +1,36 @@
-import CircularProgress from '@mui/material/CircularProgress'
-import Stack from '@mui/material/Stack'
+//import { useParentSize } from '@cutting/use-get-parent-size'
 import { useTheme } from '@mui/material/styles'
-import useFetch from 'fetch-suspense'
-import { type ComponentProps, type FC, lazy, Suspense } from 'react'
-import type * as reactVega from 'react-vega'
+import { type FC, useRef } from 'react'
 import type { Config } from 'vega-lite'
 import * as themes from 'vega-themes'
+import { useVegaEmbed, type VegaEmbedProps } from './VegaEmbed'
 
-const Plot = lazy(async () => {
-	const { VegaLite } = await import('react-vega')
-	return { default: VegaLite }
-})
-
-export interface VegaLiteProps
-	extends Omit<ComponentProps<typeof reactVega.VegaLite>, 'data'> {
-	url: string
-}
-
-const VegaLiteInner: FC<VegaLiteProps> = ({ url, spec, ...props }) => {
+const VegaLite: FC<VegaEmbedProps> = ({
+	spec,
+	options = {},
+	onEmbed,
+	onError,
+	...divProps
+}) => {
 	const theme = useTheme()
-	const data = useFetch(url) as unknown[]
+	const ref = useRef<HTMLDivElement>(null)
+	//const { width } = useParentSize(ref)
 
 	const vltheme = (
 		theme.palette.mode === 'dark' ? themes.dark : themes.carbonwhite
 	) as Config
 
-	spec = Object.assign({}, spec, { data: { name: 'data' } })
-	spec.config = Object.assign({}, spec.config, vltheme, {
+	if (typeof spec === 'string') {
+		throw new Error('VegaLite: spec must be an object')
+	}
+	//options.width = width - 100
+	spec.config = {
+		...spec.config,
+		...vltheme,
 		background: 'transparent',
-	})
-	return <Plot data={{ data }} spec={spec} {...props} />
+	} as Config
+	useVegaEmbed({ ref, spec, options, onEmbed, onError })
+	return <div ref={ref} {...divProps} />
 }
-
-const VegaLite: FC<VegaLiteProps> = (props) => (
-	<Suspense
-		fallback={
-			<Stack alignItems="center">
-				<CircularProgress />
-			</Stack>
-		}
-	>
-		<VegaLiteInner {...props} />
-	</Suspense>
-)
 
 export default VegaLite

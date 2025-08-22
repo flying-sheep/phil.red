@@ -1,6 +1,6 @@
 /** @jsxImportSource ../markup */
 
-import type { VisualizationSpec } from 'react-vega'
+import type { VisualizationSpec } from 'vega-embed'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import * as docutils from './pyiodide-docutils'
@@ -213,7 +213,6 @@ class RSTConverter {
 			case 'vega':
 				return [
 					<m.Vega
-						url={node.get('url').toString()}
 						spec={JSON.parse(node['rawsource'].toString()) as VisualizationSpec}
 						pos={pos(node)}
 					/>,

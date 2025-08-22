@@ -26,12 +26,10 @@ class VegaElement(General, Element):
 	tagname = 'vega'
 		
 class VegaDirective(rst.Directive):
-	required_arguments = 1
 	has_content = True
 
 	def run(self) -> list[Element]:
 		node = VegaElement("".join(self.content))
-		node['url'] = self.arguments[0]
 		node.source, node.line = self.state_machine.get_source_and_line(self.lineno)
 		return [node]
 

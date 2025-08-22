@@ -1,5 +1,5 @@
-import type { VisualizationSpec } from 'react-vega'
 import type { FunctionComponent } from 'typed-jsx'
+import type { VisualizationSpec } from 'vega-embed'
 
 export enum Type {
 	// block
@@ -309,7 +309,6 @@ export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
 
 export interface Vega extends Element {
 	type: Type.Vega
-	url: string
 	spec: VisualizationSpec
 }
 export const Vega = mkFun<Vega>(Type.Vega)
