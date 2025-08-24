@@ -1,5 +1,6 @@
 /** @jsxImportSource ../markup */
 
+import type { VisualizationSpec } from 'vega-embed'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import * as docutils from './pyiodide-docutils'
@@ -75,7 +76,7 @@ class RSTConverter {
 				if (level < 1)
 					throw new ASTError(`Header with level ${level} < 1`, node, pos(node))
 				const hLevel = Math.min(level, 6)
-				const anchor = node['parent'].get('ids')[0] // 'ids' is slugified, 'names' literal
+				const anchor = node.parent?.get('ids')[0] // 'ids' is slugified, 'names' literal
 				return [
 					<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
 						{this.convertChildren(node as docutils.Element, level)}
@@ -209,13 +210,10 @@ class RSTConverter {
 						{this.convertChildren(node as docutils.Element, level)}
 					</m.Cell>,
 				]
-			case 'plotly':
+			case 'vega':
 				return [
-					<m.Plotly
-						url={node.get('url')}
-						onClickLink={node.get('href')}
-						style={{ width: '100%' }}
-						config={{ responsive: true }}
+					<m.Vega
+						spec={JSON.parse(node['rawsource'].toString()) as VisualizationSpec}
 						pos={pos(node)}
 					/>,
 				]
