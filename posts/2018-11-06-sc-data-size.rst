@@ -7,6 +7,7 @@ In our_ review paper `single cells make big data`_, we showed a graph of the ris
    
     {
         "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+	    "width": "container",
         "title": "Cell numbers per year",
         "data": { "url": "/static/cellplot.json" },
         "mark": { "type": "circle", "tooltip": true },

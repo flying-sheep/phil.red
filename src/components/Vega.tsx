@@ -18,16 +18,15 @@ const VegaLite: FC<VegaEmbedProps> = ({
 		theme.palette.mode === 'dark' ? themes.dark : themes.carbonwhite
 	) as Config
 
-	if (typeof spec === 'string') {
-		throw new Error('VegaLite: spec must be an object')
+	spec = {
+		...spec,
+		autosize: { type: 'fit', contains: 'padding', resize: true },
+		config: {
+			...spec.config,
+			...vltheme,
+			background: 'transparent',
+		},
 	}
-	spec.width = 'container' // TODO: this is actually correct, make the types know.
-	spec.autosize = { type: 'fit', contains: 'padding', resize: true }
-	spec.config = {
-		...spec.config,
-		...vltheme,
-		background: 'transparent',
-	} as Config
 	useVegaEmbed({ ref, spec, options, onEmbed, onError })
 	return <figure ref={ref} {...divProps} style={{ width: '100%', margin: 0 }} />
 }

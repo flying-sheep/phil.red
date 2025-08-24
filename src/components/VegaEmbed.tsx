@@ -7,7 +7,7 @@ import embed from 'vega-embed'
 
 export type UseVegaEmbedParams = {
 	ref: React.RefObject<HTMLDivElement | null>
-	spec: VisualizationSpec | string
+	spec: VisualizationSpec
 	options?: EmbedOptions | undefined
 	onEmbed?: ((result: Result) => void) | undefined
 	onError?: ((error: unknown) => void) | undefined
