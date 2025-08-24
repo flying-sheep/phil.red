@@ -1,6 +1,5 @@
 import { type FC, useMemo, useRef } from 'react'
 import type { VisualizationSpec } from 'vega-embed'
-import { mergeDeep } from 'vega-lite'
 import { mergeConfig } from 'vega-util'
 import { useMuiVegaOptions } from './mui-vega'
 import { useVegaEmbed, type VegaEmbedProps } from './VegaEmbed'
@@ -14,15 +13,18 @@ const VegaLite: FC<Omit<VegaEmbedProps, 'ref'>> = ({
 }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const vgtheme = useMuiVegaOptions()
-	// TODO: fix types of mergeDeep return value (curently inferred to `{}`)
+	// TODO: fix types, merge deep
 	const spec = useMemo<VisualizationSpec>(
 		() =>
-			mergeDeep({}, rawSpec, {
-				autosize: { type: 'fit', contains: 'padding', resize: true },
-				config: mergeConfig(rawSpec.config ?? {}, vgtheme, {
-					background: 'transparent',
-				}),
-			}),
+			({
+				...rawSpec,
+				...{
+					autosize: { type: 'fit', contains: 'padding', resize: true },
+					config: mergeConfig(rawSpec.config ?? {}, vgtheme, {
+						background: 'transparent',
+					}),
+				},
+			}) as VisualizationSpec,
 		[rawSpec, vgtheme],
 	)
 	useVegaEmbed({ ref, spec, options, onEmbed, onError })

@@ -3,7 +3,6 @@
 import deepEqual from 'fast-deep-equal'
 import React from 'react'
 import type { EmbedOptions, Result, VisualizationSpec } from 'vega-embed'
-import embed from 'vega-embed'
 
 export type UseVegaEmbedParams = {
 	ref: React.RefObject<HTMLDivElement | null>
@@ -24,6 +23,7 @@ export function useVegaEmbed(params: UseVegaEmbedParams): Result | null {
 
 		const createView = async () => {
 			if (!ref.current || cancel) return
+			const embed = (await import('vega-embed')).default
 			try {
 				currentResult = await embed(ref.current, spec, options)
 
