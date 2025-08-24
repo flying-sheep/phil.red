@@ -28,7 +28,7 @@ In our_ review paper `single cells make big data`_, we showed a graph of the ris
                 "field": "g",
                 "type": "nominal"
             },
-            "href": { "field": "href" }
+            "href": { "field": "href", "cursor": "pointer" }
         },
         "transform": [
             { "as": "href", "calculate": "replace(datum.t, /^/, 'https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=')" }

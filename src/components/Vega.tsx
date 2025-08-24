@@ -1,15 +1,25 @@
+import Box, { type BoxProps } from '@mui/material/Box'
+import type { SxProps } from '@mui/system'
+import { mergeSx } from 'merge-sx'
 import { type FC, useMemo, useRef } from 'react'
 import type { VisualizationSpec } from 'vega-embed'
 import { mergeConfig } from 'vega-util'
 import { useMuiVegaOptions } from './mui-vega'
-import { useVegaEmbed, type VegaEmbedProps } from './VegaEmbed'
+import { type UseVegaEmbedParams, useVegaEmbed } from './VegaEmbed'
 
-const VegaLite: FC<Omit<VegaEmbedProps, 'ref'>> = ({
+export interface VegaProps
+	extends Omit<UseVegaEmbedParams, 'ref'>,
+		Omit<BoxProps<'figure'>, 'onError'> {
+	sx?: SxProps
+}
+
+const Vega: FC<VegaProps> = ({
 	spec: rawSpec,
 	options,
 	onEmbed,
 	onError,
-	...divProps
+	sx,
+	...boxProps
 }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const vgtheme = useMuiVegaOptions()
@@ -28,7 +38,14 @@ const VegaLite: FC<Omit<VegaEmbedProps, 'ref'>> = ({
 		[rawSpec, vgtheme],
 	)
 	useVegaEmbed({ ref, spec, options, onEmbed, onError })
-	return <figure ref={ref} {...divProps} style={{ width: '100%', margin: 0 }} />
+	return (
+		<Box
+			ref={ref}
+			component="figure"
+			{...boxProps}
+			sx={mergeSx({ margin: 0 }, sx)}
+		/>
+	)
 }
 
-export default VegaLite
+export default Vega
