@@ -187,7 +187,13 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			return <TeX math={node.math} settings={KATEX_SETTINGS} />
 		// custom
 		case Type.Vega: {
-			return <Vega spec={node.spec} />
+			return (
+				<Vega
+					spec={node.spec}
+					options={{ loader: { target: '_blank' } }}
+					sx={{ width: '100%' }}
+				/>
+			)
 		}
 		default:
 			throw new ASTError(`Unknown type ${(node as Elem).type}`, node)
