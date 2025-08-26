@@ -72,7 +72,7 @@
 		"lint-staged": ">=16.1.5",
 		"magic-string": "^0.30.18",
 		"markdown-it": "^14.1.0",
-		"pyodide": "^0.28.1",
+		"pyodide": "^0.28.2",
 		"react-json-tree": "^0.20.0",
 		"rollup": "^4.48.1",
 		"typescript": "^5.9.2",
