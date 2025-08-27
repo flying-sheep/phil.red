@@ -46,6 +46,7 @@
 		"react-portal-target": "^1.0.2",
 		"react-router": "^7.8.2",
 		"react-slide-routes": "^3.1.0",
+		"react-vega": "^8.0.0",
 		"typed-jsx": "^0.1.1",
 		"vega": "^6.1.2",
 		"vega-embed": "^7.0.2",
