@@ -13,17 +13,13 @@ function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
-export function postURL(date: Date, slug: string) {
-	return `${date2url(date)}/${slug}`
-}
-
 const Index = () => {
 	const sorted = Object.entries(posts)
 		.map(([slug, post]) => ({
 			slug,
 			post,
 			date: post.date,
-			url: postURL(post.date, slug),
+			url: `${date2url(post.date)}/${slug}`,
 		}))
 		.sort((a, b) => b.date.getTime() - a.date.getTime())
 	return (
