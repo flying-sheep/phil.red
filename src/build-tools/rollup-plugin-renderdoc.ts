@@ -13,21 +13,6 @@ import { ASTError, type Document, ParseError, Type } from '../markup'
 import mdConvert from './md'
 import rstConvert from './rst'
 
-function zipObject<V>(keys: string[], values: V[]): { [k: string]: V } {
-	if (keys.length !== values.length) {
-		throw new Error(
-			`Lengths do not match keys.length (${keys.length}) != values.length (${values.length})`,
-		)
-	}
-	return keys.reduce(
-		(prev, k, i) => {
-			prev[k] = values[i] as V // length checked above
-			return prev
-		},
-		{} as { [k: string]: V },
-	)
-}
-
 function getProp(node: ObjectExpression, key: string): Property | undefined {
 	for (const prop of node.properties) {
 		if (
@@ -74,6 +59,7 @@ export const DEFAULT_CONVERTERS: { [ext: string]: Converter } = {
 
 export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
+	const exts = new Set(Object.keys(converters))
 	const include: string[] =
 		typeof config.include === 'string'
 			? [config.include]
@@ -84,66 +70,44 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			: (config.exclude ?? [])
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
-	async function loadPosts(ctx: PluginContext, dir: string) {
-		const paths = await doGlob(dir)
-		if (paths.length === 0) return null
-		const contents = await Promise.all(
-			paths.map(async (p) => {
-				const code = await fs.readFile(p, { encoding: 'utf-8' })
-				const ext = path.extname(p)
-				const convert =
-					converters[path.extname(p)] ??
-					ctx.error({
-						id: p,
-						message: `No converter for ${ext} registered`,
-					})
-				try {
-					return await convert(code, { path: p, ctx })
-				} catch (eOrig) {
-					let e: Error
-					if (eOrig instanceof ParseError) {
-						e = eOrig
-						e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
-					} else if (eOrig instanceof ASTError) {
-						e = eOrig
-						e.message = `Error converting the ${ext} AST: ${eOrig.message}`
-					} else {
-						e =
-							eOrig instanceof Error
-								? eOrig
-								: new Error((eOrig as object).toString())
-						e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
-					}
-					;(e as Error & { id: string }).id = p // TODO: why?
-					ctx.error(e)
-				}
-			}),
-		)
-
-		const map = zipObject(
-			paths.map((p) => path.basename(p)),
-			contents,
-		)
-		for (const [p, content] of Object.entries(map)) {
-			if (!content) {
-				ctx.warn(`Skipped ${p}`)
-				delete map[p]
-			} else if (content.metadata['draft']) {
-				ctx.warn(`Skipped ${p} (“${content.title}” is a draft)`)
-				delete map[p]
+	async function loadPost(ctx: PluginContext, id: string) {
+		const code = await fs.readFile(id, { encoding: 'utf-8' })
+		const ext = path.extname(id)
+		const convert =
+			converters[path.extname(id)] ??
+			ctx.error({
+				id: id,
+				message: `No converter for ${ext} registered`,
+			})
+		try {
+			return await convert(code, { path: id, ctx })
+		} catch (eOrig) {
+			let e: Error
+			if (eOrig instanceof ParseError) {
+				e = eOrig
+				e.message = `Error parsing ${ext} file: ${eOrig.orig.message}`
+			} else if (eOrig instanceof ASTError) {
+				e = eOrig
+				e.message = `Error converting the ${ext} AST: ${eOrig.message}`
+			} else {
+				e =
+					eOrig instanceof Error
+						? eOrig
+						: new Error((eOrig as object).toString())
+				e.message = `Unexpected error parsing or converting ${ext} file: ${e.message}`
 			}
+			;(e as Error & { id: string }).id = id // TODO: why?
+			ctx.error(e)
 		}
-		return map
 	}
 
-	async function createCode(
-		ctx: PluginContext,
-		id: string,
-	): Promise<string | null> {
-		const map = await loadPosts(ctx, id)
-		if (map === null) return null
-
-		const code = `export default ${JSON.stringify(map)}`
+	async function createCode(ctx: PluginContext, id: string): Promise<string> {
+		const post = await loadPost(ctx, id)
+		if (post.metadata['draft']) {
+			ctx.info(`skipping draft “${id}”`)
+			return 'export default null'
+		}
+		const code = `export default ${JSON.stringify(post)}`
 		const magicString = new MagicString(code)
 		const ast = ctx.parse(code) as Node
 		const imports = new Map<string, string>()
@@ -188,7 +152,31 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		const importBlock = Array.from(imports.entries())
 			.map(([p, name]) => `import ${name} from ${JSON.stringify(`${p}?url`)}`)
 			.join('\n')
-		return `${importBlock}\n${magicString.toString()}`
+		return `${importBlock && `${importBlock}\n`}${magicString.toString()}`
+	}
+
+	async function createIndex(
+		ctx: PluginContext,
+		dir: string,
+	): Promise<string | null> {
+		const paths = await doGlob(dir)
+
+		const imports = new Map<string, string>()
+		for (const p of paths) {
+			const resolved = await ctx.resolve(p)
+			if (!resolved) ctx.error(`cannot resolve “${p}” from “${dir}”`)
+			const id = path.relative(dir, resolved.id)
+			if (!imports.has(id)) {
+				imports.set(id, `$${imports.size}`)
+			}
+		}
+		const importBlock = Array.from(imports.entries())
+			.map(([p, name]) => `import ${name} from ${JSON.stringify(p)}`)
+			.join('\n')
+		const map = `{\n${Array.from(imports.entries())
+			.map(([id, name]) => `\t${JSON.stringify(path.basename(id))}: ${name},\n`)
+			.join('')}}`
+		return `${importBlock}\nexport default ${map}`
 	}
 
 	async function doGlob(id: string): Promise<string[]> {
@@ -204,18 +192,24 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	return {
 		name: 'renderdoc',
 		async resolveId(id: string, importer?: string) {
-			if (!id.startsWith('./') && !id.startsWith('../')) return null
-			const rel =
-				importer === undefined ? id : path.join(path.dirname(importer), id)
-			if ((await doGlob(rel)).length === 0) return null
-			return `${rel}/__renderdoc`
+			if (exts.has(path.extname(id))) return id
+			if (id.startsWith('./') || !id.startsWith('../')) {
+				const rel =
+					importer === undefined ? id : path.join(path.dirname(importer), id)
+				if ((await doGlob(rel)).length === 0) return null
+				return `${rel}/__renderdoc`
+			}
+			return null
 		},
 		async load(id: string) {
-			if (!id.endsWith('/__renderdoc')) return null
-			const dir = path.dirname(id)
-			const paths = await doGlob(dir)
-			for (const p of paths) this.addWatchFile(p)
-			return createCode(this, dir)
+			if (exts.has(path.extname(id))) {
+				return createCode(this, id)
+			}
+			if (id.endsWith('/__renderdoc')) {
+				const dir = path.dirname(id)
+				return createIndex(this, dir)
+			}
+			return null
 		},
 	}
 }
