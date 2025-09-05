@@ -32,6 +32,7 @@ export default defineConfig({
 			},
 		}),
 	],
+	build: { sourcemap: true },
 	server: {
 		fs: {
 			// Otherwise problem with loading font files
