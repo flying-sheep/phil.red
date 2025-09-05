@@ -152,7 +152,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		const importBlock = Array.from(imports.entries())
 			.map(([p, name]) => `import ${name} from ${JSON.stringify(`${p}?url`)}`)
 			.join('\n')
-		return `${importBlock}\n${magicString.toString()}`
+		return `${importBlock && `${importBlock}\n`}${magicString.toString()}`
 	}
 
 	async function createIndex(
