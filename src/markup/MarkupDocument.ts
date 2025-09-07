@@ -29,6 +29,7 @@ export enum Type {
 	Link,
 	Code,
 	InlineMath,
+	Problematic,
 	// custom
 	Vega,
 }
@@ -108,6 +109,7 @@ export type Elem =
 	| Link
 	| Code
 	| InlineMath
+	| Problematic
 	// Custom
 	| Vega
 
@@ -304,6 +306,12 @@ export interface InlineMath extends Element {
 	math: string
 }
 export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
+
+export interface Problematic extends Element {
+	type: Type.Problematic
+	children: [string]
+}
+export const Problematic = mkFun<Problematic>(Type.Problematic)
 
 // Custom
 

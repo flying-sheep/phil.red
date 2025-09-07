@@ -31,13 +31,7 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 			component="article"
 			sx={{
 				// Add space for the header when navigating to anchors
-				':target::before': {
-					content: '""',
-					display: 'block',
-					pointerEvents: 'none',
-					height: '75px',
-					marginTop: '-75px',
-				},
+				'& :target': { scrollMarginTop: '75px' },
 			}}
 		>
 			{Children.toArray(nodes)}
