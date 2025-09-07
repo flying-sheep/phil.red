@@ -11,6 +11,7 @@ Skip to `the issues`_ if you clicked any of these links (except for the SMBC one
 The basics
 ----------
 Again, this is well explained by e.g. `the Machine`_, but here’s a quick summary:
+
 .. TODO
 
 The issues
@@ -40,3 +41,7 @@ A frozen brain really truly has no consciousness, yet if it’s possible for a `
 .. _teleporter problems: https://www.smbc-comics.com/comic/teleporter-problems
 .. _the prestige: https://www.imdb.com/title/tt0482571/
 .. _soma: https://www.somagame.com/
+
+.. other links
+
+.. _wood frog: https://owlcation.com/stem/frozen-wood-frogs-and-adaptations-for-survival
