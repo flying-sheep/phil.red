@@ -217,6 +217,8 @@ class RSTConverter {
 						pos={pos(node)}
 					/>,
 				]
+			case 'problematic':
+				return [<m.Problematic pos={pos(node)}>{node.astext()}</m.Problematic>]
 			// https://docutils.sourceforge.io/docs/ref/doctree.html#system-message
 			case 'system_message':
 				switch (Number(node.get('level'))) {

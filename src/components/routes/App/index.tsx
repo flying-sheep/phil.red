@@ -12,7 +12,7 @@ import {
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { PortalTarget } from 'react-portal-target'
 import { Link, matchPath, Navigate, Route, useLocation } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
@@ -75,6 +75,7 @@ const App = () => {
 	}, [])
 	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))
 		?.pattern.path
+	const bar = useRef<HTMLElement>(null)
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -84,6 +85,7 @@ const App = () => {
 			<CssBaseline />
 			<ElevationScroll>
 				<AppBar
+					ref={bar}
 					position="sticky"
 					sx={{
 						color: theme.vars.palette.text.primary,
@@ -113,6 +115,8 @@ const App = () => {
 					maxWidth: '42rem',
 					mx: 'auto',
 					p: 3,
+					// Add space for the header when navigating to anchors
+					'& :target': { scrollMarginTop: bar.current?.offsetHeight },
 				}}
 			>
 				<SlideRoutes>

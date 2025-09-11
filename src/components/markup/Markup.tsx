@@ -27,19 +27,7 @@ const Markup: FC<MarkupProps> = ({ doc: { children } }) => {
 		[children],
 	)
 	return (
-		<Box
-			component="article"
-			sx={{
-				// Add space for the header when navigating to anchors
-				':target::before': {
-					content: '""',
-					display: 'block',
-					pointerEvents: 'none',
-					height: '75px',
-					marginTop: '-75px',
-				},
-			}}
-		>
+		<Box component="article">
 			{Children.toArray(nodes)}
 			{import.meta.env.DEV && (
 				<PortalSource name="page-source">
