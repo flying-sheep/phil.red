@@ -100,7 +100,7 @@ class RSTConverter {
 				]
 			}
 			case undefined:
-				return [node.toString()]
+				return [node.toString().replace(/\0.*/s, '')]
 			case 'literal':
 				return [
 					<m.Code pos={pos(node)}>
