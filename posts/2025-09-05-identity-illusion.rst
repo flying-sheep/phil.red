@@ -17,7 +17,7 @@ Again, this is well explained by e.g. `the Machine`_, but here’s a quick summa
 The issues
 ----------
 Me enjoying these pieces of media doesn’t mean that they don’t have their issues.
-Chief among them is equating an interruption of consiousness with sleep;
+Chief among them is equating an interruption of consciousness with sleep;
 neurons fire even in dreamless sleep, so despite sleep being held as *the* example for loss of consciousness, mental activity doesn’t cease, it just changes.
 
 Yet a simple twist can fix that: cryonics.
