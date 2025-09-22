@@ -3544,7 +3544,7 @@ __metadata:
     unplugin-fonts: "npm:^1.4.0"
     vega: "npm:^6.1.2"
     vega-embed: "npm:^7.0.2"
-    vega-lite: "npm:^6.3.1"
+    vega-lite: "npm:^6.4.0"
     vega-util: "npm:^2.0.0"
     vite: "npm:^7.1.7"
     vite-bundle-visualizer: "npm:^1.2.1"
@@ -4563,7 +4563,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-expression@npm:^6.0.0, vega-expression@npm:~6.0.0":
+"vega-expression@npm:^6.0.0, vega-expression@npm:~6.1.0":
+  version: 6.1.0
+  resolution: "vega-expression@npm:6.1.0"
+  dependencies:
+    "@types/estree": "npm:^1.0.8"
+    vega-util: "npm:^2.1.0"
+  checksum: 10/291a34b249c3b44a6d8f64a9052a66e14710e5dfeb6998120e9eb8e547dda4ae91942b2cc372a25029f47cb0d12b467aadcc6af940fed38db2a345b341c6aaab
+  languageName: node
+  linkType: hard
+
+"vega-expression@npm:~6.0.0":
   version: 6.0.0
   resolution: "vega-expression@npm:6.0.0"
   dependencies:
@@ -4664,15 +4674,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-lite@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "vega-lite@npm:6.3.1"
+"vega-lite@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "vega-lite@npm:6.4.0"
   dependencies:
     json-stringify-pretty-compact: "npm:~4.0.0"
     tslib: "npm:~2.8.1"
     vega-event-selector: "npm:~4.0.0"
-    vega-expression: "npm:~6.0.0"
-    vega-util: "npm:~2.0.0"
+    vega-expression: "npm:~6.1.0"
+    vega-util: "npm:~2.1.0"
     yargs: "npm:~18.0.0"
   peerDependencies:
     vega: ^6.0.0
@@ -4681,7 +4691,7 @@ __metadata:
     vl2png: bin/vl2png
     vl2svg: bin/vl2svg
     vl2vg: bin/vl2vg
-  checksum: 10/526dda15bd8b70fa312bb00980ce802e8fa01fa1bda64597f9918a17d992a81c1ec6dcb027c8db03a8808e0b5cb64d640a5271d7a5640e9a9b6738a9142656e5
+  checksum: 10/6fc68e8b513c90481ca94cb59f68078bb04b01053e5d0c4627d1032807e86bc0a6ac33015609d1d4fbb4f62e0c2f48f424e3d332909dc7fd45dd155981ecc348
   languageName: node
   linkType: hard
 
@@ -4854,7 +4864,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-util@npm:^2.0.0, vega-util@npm:~2.0.0":
+"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:~2.1.0":
+  version: 2.1.0
+  resolution: "vega-util@npm:2.1.0"
+  checksum: 10/76911db30e8a16dc08ec8b8f057401f9ed6f93399259e93dfe6b9efb6ab3664612cc923ee0ebc6a863d8fc2676f4ab299b4538d793a96c151b8138e0cebe9578
+  languageName: node
+  linkType: hard
+
+"vega-util@npm:~2.0.0":
   version: 2.0.0
   resolution: "vega-util@npm:2.0.0"
   checksum: 10/75887bd57931596e83d7b1baed2e7ee432e897050dee457d26aad582d5262bbf956492d3f05b1cec019a75ec856907bb1b848fc125c18ed69b9b2c25372924ef
