@@ -3552,7 +3552,7 @@ __metadata:
     notistack: "npm:^3.0.2"
     prism-react-renderer: "npm:^2.4.1"
     prismjs: "npm:^1.30.0"
-    pyodide: "npm:^0.28.2"
+    pyodide: "npm:^0.28.3"
     react: "npm:^19.1.1"
     react-dom: "npm:^19.1.1"
     react-error-boundary: "npm:^6.0.0"
@@ -3679,12 +3679,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pyodide@npm:^0.28.2":
-  version: 0.28.2
-  resolution: "pyodide@npm:0.28.2"
+"pyodide@npm:^0.28.3":
+  version: 0.28.3
+  resolution: "pyodide@npm:0.28.3"
   dependencies:
     ws: "npm:^8.5.0"
-  checksum: 10/3879e7e478d1af14ca44538dbee5834999493410b56ec6f9236f3a929ee38ea65ef6d3518c2a821b9b911462584e1b400ef7eb541aba0c886f0ba96d758f489a
+  checksum: 10/96f1c259f2fd2ba13fed63a1be23de1a0b325a27fe4c2b67aa2c93d0ff6d32064e6ebce0fea6ae58ece24a4d2ec3d087d7948ba90211b10a175d9d332e8e7cef
   languageName: node
   linkType: hard
 
