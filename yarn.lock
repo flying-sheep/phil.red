@@ -3545,7 +3545,7 @@ __metadata:
     vega: "npm:^6.1.2"
     vega-embed: "npm:^7.0.2"
     vega-lite: "npm:^6.3.1"
-    vega-util: "npm:^2.0.0"
+    vega-util: "npm:^2.1.0"
     vite: "npm:^7.1.7"
     vite-bundle-visualizer: "npm:^1.2.1"
   languageName: unknown
@@ -4854,7 +4854,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-util@npm:^2.0.0, vega-util@npm:~2.0.0":
+"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "vega-util@npm:2.1.0"
+  checksum: 10/76911db30e8a16dc08ec8b8f057401f9ed6f93399259e93dfe6b9efb6ab3664612cc923ee0ebc6a863d8fc2676f4ab299b4538d793a96c151b8138e0cebe9578
+  languageName: node
+  linkType: hard
+
+"vega-util@npm:~2.0.0":
   version: 2.0.0
   resolution: "vega-util@npm:2.0.0"
   checksum: 10/75887bd57931596e83d7b1baed2e7ee432e897050dee457d26aad582d5262bbf956492d3f05b1cec019a75ec856907bb1b848fc125c18ed69b9b2c25372924ef
