@@ -49,7 +49,7 @@
 		"typed-jsx": "^0.1.1",
 		"vega": "^6.1.2",
 		"vega-embed": "^7.0.2",
-		"vega-lite": "^6.3.1",
+		"vega-lite": "^6.4.0",
 		"vega-util": "^2.0.0"
 	},
 	"devDependencies": {
