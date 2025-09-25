@@ -47,7 +47,7 @@
 		"react-slide-routes": "^3.1.0",
 		"react-vega": "^8.0.0",
 		"typed-jsx": "^0.1.1",
-		"vega": "^6.1.2",
+		"vega": "^6.2.0",
 		"vega-embed": "^7.0.2",
 		"vega-lite": "^6.4.0",
 		"vega-util": "^2.0.0"
