@@ -67,7 +67,7 @@
 		"@vitejs/plugin-react": "^5.0.2",
 		"depcheck": "^1.4.7",
 		"estree-walker": "^3.0.3",
-		"globby": "^14.1.0",
+		"globby": "^15.0.0",
 		"husky": ">=9.1.7",
 		"lint-staged": ">=16.2.0",
 		"magic-string": "^0.30.18",
