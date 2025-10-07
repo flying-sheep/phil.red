@@ -3507,7 +3507,7 @@ __metadata:
     unplugin-fonts: "npm:^1.4.0"
     vega: "npm:^6.2.0"
     vega-embed: "npm:^7.0.2"
-    vega-lite: "npm:^6.4.0"
+    vega-lite: "npm:^6.4.1"
     vega-util: "npm:^2.0.0"
     vite: "npm:^7.1.7"
     vite-bundle-visualizer: "npm:^1.2.1"
@@ -4630,9 +4630,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-lite@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "vega-lite@npm:6.4.0"
+"vega-lite@npm:^6.4.1":
+  version: 6.4.1
+  resolution: "vega-lite@npm:6.4.1"
   dependencies:
     json-stringify-pretty-compact: "npm:~4.0.0"
     tslib: "npm:~2.8.1"
@@ -4647,7 +4647,7 @@ __metadata:
     vl2png: bin/vl2png
     vl2svg: bin/vl2svg
     vl2vg: bin/vl2vg
-  checksum: 10/6fc68e8b513c90481ca94cb59f68078bb04b01053e5d0c4627d1032807e86bc0a6ac33015609d1d4fbb4f62e0c2f48f424e3d332909dc7fd45dd155981ecc348
+  checksum: 10/88153767daa07a3c875d85b45e2b3da20e80d45c85105afa2a870b58e28d5eae0b6f236204f9197dd73ff059d5e141a634b1a454be87dfcc0b9b73cedcc5d55d
   languageName: node
   linkType: hard
 
