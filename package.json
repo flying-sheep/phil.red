@@ -33,7 +33,7 @@
 		"@mui/icons-material": "^7.3.4",
 		"@mui/material": "^7.3.4",
 		"@mui/system": "^7.0.1",
-		"katex": "^0.16.22",
+		"katex": "^0.16.25",
 		"merge-sx": "^3.4.0",
 		"notistack": "^3.0.2",
 		"prism-react-renderer": "^2.4.1",
