@@ -43,7 +43,7 @@
 		"react-error-boundary": "^6.0.0",
 		"react-is": "^19.2.0",
 		"react-portal-target": "^1.0.2",
-		"react-router": "^7.9.1",
+		"react-router": "^7.9.4",
 		"react-slide-routes": "^3.1.0",
 		"react-vega": "^8.0.0",
 		"typed-jsx": "^0.1.1",
