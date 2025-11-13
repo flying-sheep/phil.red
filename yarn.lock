@@ -4618,11 +4618,11 @@ __metadata:
   linkType: hard
 
 "vega-interpreter@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "vega-interpreter@npm:2.0.0"
+  version: 2.2.1
+  resolution: "vega-interpreter@npm:2.2.1"
   dependencies:
-    vega-util: "npm:^2.0.0"
-  checksum: 10/964c1ac7aa4ba23c6a4f6b6011ee553cc073317fb70845be986e97e56ff946e177a138c4d4eba2f7df66ad34095e87f493f5c3c0e99b4c83166f67a3602e47ea
+    vega-util: "npm:^2.1.0"
+  checksum: 10/dda5a5eaad0952afcd83865ece37f8392a3c818065ad6548b51c8ceda229ba6767b74f248bfaccd66fa09725838298d713e24651587de1a708aaae68e7e29bcb
   languageName: node
   linkType: hard
 
