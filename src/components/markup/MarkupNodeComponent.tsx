@@ -185,6 +185,12 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			return <code>{convertChildren(node, level)}</code>
 		case Type.InlineMath:
 			return <TeX math={node.math} settings={KATEX_SETTINGS} />
+		case Type.Problematic:
+			return (
+				<ASTErrorMessage component="span">
+					{node.children.join('')}
+				</ASTErrorMessage>
+			)
 		// custom
 		case Type.Vega: {
 			return (
