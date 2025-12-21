@@ -80,7 +80,7 @@
 		"vite": "^7.3.0",
 		"vite-bundle-visualizer": "^1.2.1"
 	},
-	"packageManager": "yarn@4.9.4",
+	"packageManager": "yarn@4.12.0",
 	"lint-staged": {
 		"!(rawPosts)": "biome check --no-errors-on-unmatched --files-ignore-unknown=true --write"
 	}

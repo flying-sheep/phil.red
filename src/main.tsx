@@ -14,19 +14,17 @@ import { BrowserRouter as Router } from 'react-router'
 
 import App from './components/routes/App'
 
-document.addEventListener('DOMContentLoaded', () => {
-	const elem = document.querySelector('#root')
-	if (!elem) throw new Error('No #root element found')
-	const root = createRoot(elem)
-	root.render(
-		<StrictMode>
-			<HelmetProvider>
-				<SnackbarProvider autoHideDuration={3000}>
-					<Router>
-						<App />
-					</Router>
-				</SnackbarProvider>
-			</HelmetProvider>
-		</StrictMode>,
-	)
-})
+const elem = document.querySelector('#root')
+if (!elem) throw new Error('No #root element found')
+const root = createRoot(elem)
+root.render(
+	<StrictMode>
+		<HelmetProvider>
+			<SnackbarProvider autoHideDuration={3000}>
+				<Router>
+					<App />
+				</Router>
+			</SnackbarProvider>
+		</HelmetProvider>
+	</StrictMode>,
+)
