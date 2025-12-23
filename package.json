@@ -59,7 +59,7 @@
 		"@types/estree": "^1.0.8",
 		"@types/katex": "^0.16.7",
 		"@types/markdown-it": "^14.1.2",
-		"@types/node": "^24.10.1",
+		"@types/node": "^25.0.3",
 		"@types/prismjs": "^1.26.5",
 		"@types/react": "^19.2.7",
 		"@types/react-dom": "^19.2.3",
