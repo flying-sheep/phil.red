@@ -3509,7 +3509,7 @@ __metadata:
     react-is: "npm:^19.2.3"
     react-json-tree: "npm:^0.20.0"
     react-portal-target: "npm:^1.0.2"
-    react-router: "npm:^7.9.6"
+    react-router: "npm:^7.11.0"
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
     rollup: "npm:^4.53.3"
@@ -3723,9 +3723,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:^7.9.6":
-  version: 7.9.6
-  resolution: "react-router@npm:7.9.6"
+"react-router@npm:^7.11.0":
+  version: 7.11.0
+  resolution: "react-router@npm:7.11.0"
   dependencies:
     cookie: "npm:^1.0.1"
     set-cookie-parser: "npm:^2.6.0"
@@ -3735,7 +3735,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/f34714b3701caf689c306631f5326a9fdab585799021c234aa3eee75bed6bfcea9250f0867e984e4e3c43c77d947c41bd47b70c0601d76c4290e03247fb7ac23
+  checksum: 10/34c787880f19a7fadaef2906ecd0c1a1576052ad240bfba72708840d5e5181f604818351ff2e82d2761a2f33dfd63e2f68ab35ffd7552aa04563f1a7154b5b58
   languageName: node
   linkType: hard
 
