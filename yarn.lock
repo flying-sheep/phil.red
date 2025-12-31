@@ -5,6 +5,13 @@ __metadata:
   version: 8
   cacheKey: 10
 
+"@arborium/arborium@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@arborium/arborium@npm:2.4.0"
+  checksum: 10/d877e82de2b8588871c2e2821e45e128ee5274a8e028b66157df52dab44db216cd2aab72530afcb8c950c2756b78dc4d364821c4faa1f3ca37cc1d8c1921d43c
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -1248,13 +1255,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prismjs@npm:^1.26.0, @types/prismjs@npm:^1.26.5":
-  version: 1.26.5
-  resolution: "@types/prismjs@npm:1.26.5"
-  checksum: 10/617099479db9550119d0f84272dc79d64b2cf3e0d7a17167fe740d55fdf0f155697d935409464392d164e62080c2c88d649cf4bc4fdd30a87127337536657277
-  languageName: node
-  linkType: hard
-
 "@types/prop-types@npm:^15.7.15":
   version: 15.7.15
   resolution: "@types/prop-types@npm:15.7.15"
@@ -1704,7 +1704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0, clsx@npm:^2.1.1":
+"clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
@@ -3469,6 +3469,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "phil.red@workspace:."
   dependencies:
+    "@arborium/arborium": "npm:^2.4.0"
     "@biomejs/biome": "npm:^2.3.9"
     "@dr.pogodin/react-helmet": "npm:^3.0.5"
     "@emotion/react": "npm:^11.14.0"
@@ -3485,7 +3486,6 @@ __metadata:
     "@types/katex": "npm:^0.16.7"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^24.10.1"
-    "@types/prismjs": "npm:^1.26.5"
     "@types/react": "npm:^19.2.7"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-is": "npm:^19.2.0"
@@ -3500,8 +3500,6 @@ __metadata:
     markdown-it: "npm:^14.1.0"
     merge-sx: "npm:^3.4.0"
     notistack: "npm:^3.0.2"
-    prism-react-renderer: "npm:^2.4.1"
-    prismjs: "npm:^1.30.0"
     pyodide: "npm:^0.29.0"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
@@ -3572,25 +3570,6 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/9e4fbe97574091e9736d0e82a591e29aa100a0bf60276a926308f8c57249698935f35c5d2f4e80de778d0cbb8dcffab4f383d85fd50c5649aca421c3df729b86
-  languageName: node
-  linkType: hard
-
-"prism-react-renderer@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "prism-react-renderer@npm:2.4.1"
-  dependencies:
-    "@types/prismjs": "npm:^1.26.0"
-    clsx: "npm:^2.0.0"
-  peerDependencies:
-    react: ">=16.0.0"
-  checksum: 10/f76ea89b8b18c477eb74e9ddda2571b5c4d21142731f6733160723aa03567b17df315d7db68ffb1122c199750ece65578ecacb488559229b26db5474d6aae55b
-  languageName: node
-  linkType: hard
-
-"prismjs@npm:^1.30.0":
-  version: 1.30.0
-  resolution: "prismjs@npm:1.30.0"
-  checksum: 10/6b48a2439a82e5c6882f48ebc1564c3890e16463ba17ac10c3ad4f62d98dea5b5c915b172b63b83023a70ad4f5d7be3e8a60304420db34a161fae69dd4e3e2da
   languageName: node
   linkType: hard
 

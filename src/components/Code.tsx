@@ -1,10 +1,11 @@
 import Typography from '@mui/material/Typography'
-import { type ComponentProps, forwardRef } from 'react'
+import type { ComponentProps } from 'react'
 
-export type CodeProps = Omit<ComponentProps<typeof Typography>, 'component'>
+export interface CodeProps
+	extends Omit<ComponentProps<typeof Typography>, 'component'> {
+	ref?: React.Ref<HTMLElement>
+}
 
-const Code = forwardRef<HTMLElement, CodeProps>((props, ref) => (
-	<Typography component="code" ref={ref} {...props} />
-))
+const Code = (props: CodeProps) => <Typography component="code" {...props} />
 
 export default Code
