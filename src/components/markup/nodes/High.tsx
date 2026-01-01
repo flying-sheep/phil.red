@@ -1,6 +1,10 @@
 import type { ParseResult } from '@arborium/arborium'
-import { type SxProps, type Theme, useTheme } from '@mui/material'
-import { mergeSx } from 'merge-sx'
+import {
+	GlobalStyles,
+	type PaletteMode,
+	type SxProps,
+	type Theme,
+} from '@mui/material'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
@@ -41,13 +45,18 @@ const ARB_MAP = [
 	['sp', 'spell'],
 ]
 
-const cssTheme = (theme: Theme) =>
+const cssTheme = (mode: PaletteMode) =>
 	Object.fromEntries(
 		ARB_MAP.map(([short, long]) => [
-			`& ::highlight(${long})`,
-			{ color: `var(--arb-${short}-${theme.palette.mode})` },
+			`::highlight(${long})`,
+			{ color: `var(--arb-${short}-${mode})` },
 		]),
 	)
+
+const highlightStyles = (theme: Theme) => [
+	theme.applyStyles('dark', cssTheme('dark')),
+	theme.applyStyles('light', cssTheme('light')),
+]
 
 export interface HighProps<Theme extends object = object> {
 	code: string
@@ -56,14 +65,7 @@ export interface HighProps<Theme extends object = object> {
 	sx?: SxProps<Theme>
 }
 
-const High: FC<HighProps<Theme>> = ({
-	code,
-	parsed,
-	language,
-	sx,
-	...props
-}) => {
-	const theme = useTheme()
+const High: FC<HighProps<Theme>> = ({ code, parsed, language, ...props }) => {
 	const [node, setNode] = useState<HTMLPreElement | null>(null)
 
 	const highlights = useMemo(
@@ -83,17 +85,13 @@ const High: FC<HighProps<Theme>> = ({
 		//return () => { CSS.highlights.delete(id) }
 	}, [highlights])
 
-	const sx2 = useMemo(() => mergeSx<Theme>(cssTheme, sx), [sx])
-
 	return (
-		<CodeBlock
-			ref={setNode}
-			className={`language-${language}`}
-			sx={sx2}
-			{...props}
-		>
-			{code}
-		</CodeBlock>
+		<>
+			<GlobalStyles styles={highlightStyles} />
+			<CodeBlock ref={setNode} className={`language-${language}`} {...props}>
+				{code}
+			</CodeBlock>
+		</>
 	)
 }
 
