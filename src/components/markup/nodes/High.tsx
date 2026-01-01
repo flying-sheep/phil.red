@@ -3,6 +3,7 @@ import type { PaletteMode, SxProps, Theme } from '@mui/material'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
+// TODO: https://github.com/bearcove/arborium/issues/93
 const ARB_MAP = [
 	['at', 'attribute'],
 	['co', 'constant'],

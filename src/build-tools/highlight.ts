@@ -11,15 +11,20 @@ import { PosixFS, VirtualFS } from '@yarnpkg/fslib'
 import { ZipOpenFS } from '@yarnpkg/libzip'
 import type { MaybePromise } from 'rollup'
 
-type WasmModuleOrPath =
-	| string
-	| MaybePromise<Response | BufferSource>
-	| undefined
+type WbgInitInput =
+	| RequestInfo
+	| URL
+	| Response
+	| BufferSource
+	| WebAssembly.Module
 
 /** wasm-bindgen plugin module interface */
 interface WasmBindgenPlugin {
 	default: (
-		wasmUrl?: { module_or_path: WasmModuleOrPath } | WasmModuleOrPath,
+		module_or_path?:
+			| { module_or_path: MaybePromise<WbgInitInput> }
+			| MaybePromise<WbgInitInput>
+			| undefined,
 	) => Promise<void>
 	language_id: () => string
 	injection_languages: () => string[]
@@ -31,11 +36,22 @@ interface WasmBindgenPlugin {
 }
 
 /** A loaded grammar plugin */
-interface GrammarPlugin {
-	languageId: string
-	injectionLanguages: string[]
-	module: WasmBindgenPlugin
-	parse: (text: string) => ParseResult
+class GrammarPlugin {
+	constructor(public module: WasmBindgenPlugin) {}
+	parse(text: string): ParseResult {
+		const session = this.module.create_session()
+		try {
+			this.module.set_text(session, text)
+			// wasm-bindgen returns ParseResult directly (or throws on error)
+			const result = this.module.parse(session)
+			return {
+				spans: result.spans || [],
+				injections: result.injections || [],
+			}
+		} finally {
+			this.module.free_session(session)
+		}
+	}
 }
 
 const GRAMMAR_CACHE = new Map<string, GrammarPlugin>()
@@ -62,36 +78,7 @@ async function loadGrammar(language: string): Promise<GrammarPlugin> {
 	const buf = await fs.readFilePromise(wasmUrl.pathname)
 	await module.default({ module_or_path: buf })
 
-	// verify
-	const loadedId = module.language_id()
-	if (loadedId !== language) {
-		console.warn(
-			`[arborium] Language ID mismatch: expected '${language}', got '${loadedId}'`,
-		)
-	}
-
-	const injectionLanguages = module.injection_languages()
-
-	const plugin: GrammarPlugin = {
-		languageId: language,
-		injectionLanguages,
-		module,
-		parse: (text: string) => {
-			const session = module.create_session()
-			try {
-				module.set_text(session, text)
-				// wasm-bindgen returns ParseResult directly (or throws on error)
-				const result = module.parse(session)
-				return {
-					spans: result.spans || [],
-					injections: result.injections || [],
-				}
-			} finally {
-				module.free_session(session)
-			}
-		},
-	}
-
+	const plugin = new GrammarPlugin(module)
 	GRAMMAR_CACHE.set(language, plugin)
 	return plugin
 }
