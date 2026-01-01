@@ -25,7 +25,7 @@ const CodeBlock = ({
 	return (
 		<Box
 			component="pre"
-			sx={mergeSx({ lineHeight: '124%', overflowInline: 'auto' }, sx)}
+			sx={mergeSx({ lineHeight: '124%', overflow: 'auto hidden' }, sx)}
 			{...props}
 		>
 			{noWrap ? (

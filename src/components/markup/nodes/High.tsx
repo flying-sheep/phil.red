@@ -1,14 +1,53 @@
 import type { ParseResult } from '@arborium/arborium'
-import type { SxProps } from '@mui/material'
+import { type SxProps, type Theme, useTheme } from '@mui/material'
 import { mergeSx } from 'merge-sx'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
-const HIGH = {
-	'&::highlight(string)': {
-		color: 'darkred',
-	},
-}
+const ARB_MAP = [
+	['at', 'attribute'],
+	['co', 'constant'],
+	['fb', 'function.builtin'],
+	['f', 'function'],
+	['kw', 'keyword'],
+	['o', 'operator'],
+	['pr', 'property'],
+	['p', 'punctuation'],
+	['pb', 'punctuation.bracket'],
+	['pd', 'punctuation.delimiter'],
+	['s', 'string'],
+	['ss', 'string.special'],
+	['tg', 'tag'],
+	['t', 'type'],
+	['tb', 'type.builtin'],
+	['v', 'variable'],
+	['vb', 'variable.builtin'],
+	['vp', 'variable.parameter'],
+	['c', 'comment'],
+	['m', 'macro'],
+	['l', 'label'],
+	['da', 'diff.addition'],
+	['dd', 'diff.deletion'],
+	['n', 'number'],
+	['tl', 'text.literal'],
+	['te', 'text.emphasis'],
+	['ts', 'text.strong'],
+	['tu', 'text.uri'],
+	['tr', 'text.reference'],
+	['se', 'string.escape'],
+	['tt', 'text.title'],
+	['ps', 'punctuation.special'],
+	['tx', 'text.strikethrough'],
+	['sp', 'spell'],
+]
+
+const cssTheme = (theme: Theme) =>
+	Object.fromEntries(
+		ARB_MAP.map(([short, long]) => [
+			`& ::highlight(${long})`,
+			{ color: `var(--arb-${short}-${theme.palette.mode})` },
+		]),
+	)
 
 export interface HighProps<Theme extends object = object> {
 	code: string
@@ -17,9 +56,14 @@ export interface HighProps<Theme extends object = object> {
 	sx?: SxProps<Theme>
 }
 
-const High: FC<HighProps> = ({ code, parsed, language, sx, ...props }) => {
-	// const theme = useTheme()
-	//const codeTheme = theme.palette.mode === 'dark' ? themes.vsDark : themes.vsLight
+const High: FC<HighProps<Theme>> = ({
+	code,
+	parsed,
+	language,
+	sx,
+	...props
+}) => {
+	const theme = useTheme()
 	const [node, setNode] = useState<HTMLPreElement | null>(null)
 
 	const highlights = useMemo(
@@ -39,7 +83,7 @@ const High: FC<HighProps> = ({ code, parsed, language, sx, ...props }) => {
 		//return () => { CSS.highlights.delete(id) }
 	}, [highlights])
 
-	const sx2 = mergeSx(HIGH, sx)
+	const sx2 = useMemo(() => mergeSx<Theme>(cssTheme, sx), [sx])
 
 	return (
 		<CodeBlock
