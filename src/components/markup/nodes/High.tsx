@@ -1,10 +1,5 @@
 import type { ParseResult } from '@arborium/arborium'
-import {
-	GlobalStyles,
-	type PaletteMode,
-	type SxProps,
-	type Theme,
-} from '@mui/material'
+import type { PaletteMode, SxProps, Theme } from '@mui/material'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
@@ -53,7 +48,8 @@ const cssTheme = (mode: PaletteMode) =>
 		]),
 	)
 
-const highlightStyles = (theme: Theme) => [
+/** Global styles for highlights */
+export const highStyles = (theme: Theme) => [
 	theme.applyStyles('dark', cssTheme('dark')),
 	theme.applyStyles('light', cssTheme('light')),
 ]
@@ -86,12 +82,9 @@ const High: FC<HighProps<Theme>> = ({ code, parsed, language, ...props }) => {
 	}, [highlights])
 
 	return (
-		<>
-			<GlobalStyles styles={highlightStyles} />
-			<CodeBlock ref={setNode} className={`language-${language}`} {...props}>
-				{code}
-			</CodeBlock>
-		</>
+		<CodeBlock ref={setNode} className={`language-${language}`} {...props}>
+			{code}
+		</CodeBlock>
 	)
 }
 
