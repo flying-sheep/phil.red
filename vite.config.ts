@@ -1,7 +1,6 @@
 import react from '@vitejs/plugin-react'
 import unfonts from 'unplugin-fonts/vite'
 import { defineConfig } from 'vite'
-import wasm from 'vite-plugin-wasm'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
 
@@ -13,7 +12,6 @@ export default defineConfig({
 		conditions: ['mui-modern', 'module', 'browser', 'development|production'],
 	},
 	plugins: [
-		wasm(),
 		react(),
 		renderdoc({
 			include: '*.@(md|rst)',

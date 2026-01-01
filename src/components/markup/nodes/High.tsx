@@ -79,7 +79,13 @@ const High: FC<HighProps<Theme>> = ({ code, parsed, language, ...props }) => {
 				: highlight
 			CSS.highlights.set(k, updated)
 		}
-		//return () => { CSS.highlights.delete(id) }
+		return () => {
+			for (const [k, highlight] of highlights.entries()) {
+				const existing = CSS.highlights.get(k)
+				if (!existing) continue
+				for (const range of highlight) existing.delete(range)
+			}
+		}
 	}, [highlights])
 
 	return (

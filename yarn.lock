@@ -3592,7 +3592,6 @@ __metadata:
     vega-util: "npm:^2.0.0"
     vite: "npm:^7.3.0"
     vite-bundle-visualizer: "npm:^1.2.1"
-    vite-plugin-wasm: "npm:^3.5.0"
   languageName: unknown
   linkType: soft
 
@@ -4986,15 +4985,6 @@ __metadata:
   bin:
     vite-bundle-visualizer: bin.js
   checksum: 10/5a4764a60d44d46c82e978cd8c3229d6b4b1b26e17c167ac45df4b0b5f4e8c5cca0cc332a5cc2bf483dadb291dc4933e5ec44853a9d740ce639bb16d90443360
-  languageName: node
-  linkType: hard
-
-"vite-plugin-wasm@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "vite-plugin-wasm@npm:3.5.0"
-  peerDependencies:
-    vite: ^2 || ^3 || ^4 || ^5 || ^6 || ^7
-  checksum: 10/71edcd89f8550c673c32becb113fcb867dbbf23a64e9f4b445cf2f6ec0aa279eb30621bb779f32878aeaf893dc38c96d4b8e10ff84c5b4aaf1ceffa0adde7bd9
   languageName: node
   linkType: hard
 
