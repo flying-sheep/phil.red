@@ -16,7 +16,7 @@
 		"lint": "$npm_execpath run lint:check && $npm_execpath run lint:deps",
 		"lint:ci": "biome ci && $npm_execpath run lint:deps",
 		"lint:check": "biome check --write .",
-		"lint:deps": "depcheck --ignores=unfonts.css,@fontsource/iosevka,@fontsource/iosevka-aile,@tsconfig/strictest,@total-typescript/ts-reset",
+		"lint:deps": "depcheck --ignores=unfonts.css,@fontsource/iosevka,@fontsource/iosevka-aile,@tsconfig/strictest,@total-typescript/ts-reset,@arborium/ini,@arborium/python,@arborium/toml,@arborium/typescript,@arborium/xml,@arborium/zsh",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red",
 		"prepare": "husky"
 	},
