@@ -25,6 +25,12 @@
 	],
 	"dependencies": {
 		"@arborium/arborium": "^2.4.0",
+		"@arborium/ini": "^2.4.7",
+		"@arborium/python": "^2.4.7",
+		"@arborium/toml": "^2.4.7",
+		"@arborium/typescript": "^2.4.7",
+		"@arborium/xml": "^2.4.7",
+		"@arborium/zsh": "^2.4.7",
 		"@dr.pogodin/react-helmet": "^3.0.5",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
@@ -63,6 +69,8 @@
 		"@types/react-dom": "^19.2.3",
 		"@types/react-is": "^19.2.0",
 		"@vitejs/plugin-react": "^5.1.2",
+		"@yarnpkg/fslib": "^3.1.4",
+		"@yarnpkg/libzip": "^3.2.2",
 		"depcheck": "^1.4.7",
 		"estree-walker": "^3.0.3",
 		"globby": "^16.0.0",
@@ -76,7 +84,8 @@
 		"typescript": "^5.9.3",
 		"unplugin-fonts": "^1.4.0",
 		"vite": "^7.3.0",
-		"vite-bundle-visualizer": "^1.2.1"
+		"vite-bundle-visualizer": "^1.2.1",
+		"vite-plugin-wasm": "^3.5.0"
 	},
 	"packageManager": "yarn@4.12.0",
 	"lint-staged": {
