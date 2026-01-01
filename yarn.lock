@@ -5,6 +5,55 @@ __metadata:
   version: 8
   cacheKey: 10
 
+"@arborium/arborium@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@arborium/arborium@npm:2.4.0"
+  checksum: 10/d877e82de2b8588871c2e2821e45e128ee5274a8e028b66157df52dab44db216cd2aab72530afcb8c950c2756b78dc4d364821c4faa1f3ca37cc1d8c1921d43c
+  languageName: node
+  linkType: hard
+
+"@arborium/ini@npm:^2.4.7":
+  version: 2.4.7
+  resolution: "@arborium/ini@npm:2.4.7"
+  checksum: 10/339531c482b06d5b1079137eb4b6cf9fe40085da773029f8fffdbe5a9760cc7075d18c6512ba62d7d7827f0fb011443954f902e138a2987edf2eb0adb8a71bc2
+  languageName: node
+  linkType: hard
+
+"@arborium/python@npm:^2.4.7":
+  version: 2.4.7
+  resolution: "@arborium/python@npm:2.4.7"
+  checksum: 10/0343a1f911c7e7ebf6c2f1938646877debd17ecae8cc3dfc8ff59d025a762f09f98880cbde6d125577e36d30d2a10f5f422513f3d7ede392f0f89e39202120e5
+  languageName: node
+  linkType: hard
+
+"@arborium/toml@npm:^2.4.7":
+  version: 2.4.7
+  resolution: "@arborium/toml@npm:2.4.7"
+  checksum: 10/4037a372653a8f5456444848db25117e0936823ab77ea9763ab258a9bcf36ff33b28e26f59d56d19b6775a0d41114b8e064e24da179da9a880d6701399cf785d
+  languageName: node
+  linkType: hard
+
+"@arborium/typescript@npm:^2.4.7":
+  version: 2.4.7
+  resolution: "@arborium/typescript@npm:2.4.7"
+  checksum: 10/8174db56a3e62a04696a97e3d200e8d8813970b2e0c34fa62b6fd2855169611828afdc854fcccc71d27a7710ed7699b26f0b61fed5f810cb9dbc7e6e6ebc70ec
+  languageName: node
+  linkType: hard
+
+"@arborium/xml@npm:^2.4.7":
+  version: 2.4.7
+  resolution: "@arborium/xml@npm:2.4.7"
+  checksum: 10/16f7504cb780587e5c51a27fd9118480882620d2ff2006958a9baa0f1560d01fbf161b7496d9cac105a92a29c5ea09d591142d9de24329c650be508bd07f201b
+  languageName: node
+  linkType: hard
+
+"@arborium/zsh@npm:^2.4.7":
+  version: 2.4.7
+  resolution: "@arborium/zsh@npm:2.4.7"
+  checksum: 10/7ac5a34488c17102e3d72449aa72c1fa85410d4f7f5eeae1d937f32d2e1181102ea4f3fc04785f80667b67a0661dd4c43ebd4b02b3b01b2f5a66f0302571ed81
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/code-frame@npm:7.27.1"
@@ -1166,7 +1215,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/emscripten@npm:^1.41.4":
+"@types/emscripten@npm:^1.39.6, @types/emscripten@npm:^1.41.4":
   version: 1.41.5
   resolution: "@types/emscripten@npm:1.41.5"
   checksum: 10/60dfcced39b2d0c94f31907c5cf5d97fe06ed35ed6cb134650a1a96bae861302722d4a6f459b484ea09588cde70cbcc034974454a746be3ce9688b52398d2953
@@ -1245,13 +1294,6 @@ __metadata:
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
   checksum: 10/4df9de98150d2978afc2161482a3a8e6617883effba3223324f079de97ba7eabd7d84b90ced11c3f82b0c08d4a8383f678c9f73e9c41258f769b3fa234a2bb4f
-  languageName: node
-  linkType: hard
-
-"@types/prismjs@npm:^1.26.0, @types/prismjs@npm:^1.26.5":
-  version: 1.26.5
-  resolution: "@types/prismjs@npm:1.26.5"
-  checksum: 10/617099479db9550119d0f84272dc79d64b2cf3e0d7a17167fe740d55fdf0f155697d935409464392d164e62080c2c88d649cf4bc4fdd30a87127337536657277
   languageName: node
   linkType: hard
 
@@ -1368,6 +1410,28 @@ __metadata:
   version: 3.5.26
   resolution: "@vue/shared@npm:3.5.26"
   checksum: 10/9b480f1210e546dcdc94addfe5b2770424a286546078944cf48b4b21c3cbf377b515de4e857f6f435c823e5759e012b75d9e58b4cedc981a6aa6c8372d83c002
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/fslib@npm:^3.1.3, @yarnpkg/fslib@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "@yarnpkg/fslib@npm:3.1.4"
+  dependencies:
+    tslib: "npm:^2.4.0"
+  checksum: 10/9587a154768e61fbcf71ae745b1bf84e4ce0cbaa94163137ec88bd5005000a5b893dacbccbed7ac5f7643f957781c4f481d11ab3baf421ccafffbf43c275073d
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/libzip@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@yarnpkg/libzip@npm:3.2.2"
+  dependencies:
+    "@types/emscripten": "npm:^1.39.6"
+    "@yarnpkg/fslib": "npm:^3.1.3"
+    tslib: "npm:^2.4.0"
+  peerDependencies:
+    "@yarnpkg/fslib": ^3.1.3
+  checksum: 10/b6548be0a421e2390b74fd767d5f90e6da34a84af3ca28389b86d7f9e7602663f01347b5081cb93f8821877cae3ed48d2cb1cb8c35a4a4f7fc3d00109c85af0f
   languageName: node
   linkType: hard
 
@@ -1704,7 +1768,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0, clsx@npm:^2.1.1":
+"clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10/cdfb57fa6c7649bbff98d9028c2f0de2f91c86f551179541cf784b1cfdc1562dcb951955f46d54d930a3879931a980e32a46b598acaea274728dbe068deca919
@@ -3469,6 +3533,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "phil.red@workspace:."
   dependencies:
+    "@arborium/arborium": "npm:^2.4.0"
+    "@arborium/ini": "npm:^2.4.7"
+    "@arborium/python": "npm:^2.4.7"
+    "@arborium/toml": "npm:^2.4.7"
+    "@arborium/typescript": "npm:^2.4.7"
+    "@arborium/xml": "npm:^2.4.7"
+    "@arborium/zsh": "npm:^2.4.7"
     "@biomejs/biome": "npm:^2.3.10"
     "@dr.pogodin/react-helmet": "npm:^3.0.5"
     "@emotion/react": "npm:^11.14.0"
@@ -3485,11 +3556,12 @@ __metadata:
     "@types/katex": "npm:^0.16.7"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^25.0.3"
-    "@types/prismjs": "npm:^1.26.5"
     "@types/react": "npm:^19.2.7"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-is": "npm:^19.2.0"
     "@vitejs/plugin-react": "npm:^5.1.2"
+    "@yarnpkg/fslib": "npm:^3.1.4"
+    "@yarnpkg/libzip": "npm:^3.2.2"
     depcheck: "npm:^1.4.7"
     estree-walker: "npm:^3.0.3"
     globby: "npm:^16.1.0"
@@ -3500,8 +3572,6 @@ __metadata:
     markdown-it: "npm:^14.1.0"
     merge-sx: "npm:^3.4.0"
     notistack: "npm:^3.0.2"
-    prism-react-renderer: "npm:^2.4.1"
-    prismjs: "npm:^1.30.0"
     pyodide: "npm:^0.29.0"
     react: "npm:^19.2.3"
     react-dom: "npm:^19.2.3"
@@ -3572,25 +3642,6 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10/9e4fbe97574091e9736d0e82a591e29aa100a0bf60276a926308f8c57249698935f35c5d2f4e80de778d0cbb8dcffab4f383d85fd50c5649aca421c3df729b86
-  languageName: node
-  linkType: hard
-
-"prism-react-renderer@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "prism-react-renderer@npm:2.4.1"
-  dependencies:
-    "@types/prismjs": "npm:^1.26.0"
-    clsx: "npm:^2.0.0"
-  peerDependencies:
-    react: ">=16.0.0"
-  checksum: 10/f76ea89b8b18c477eb74e9ddda2571b5c4d21142731f6733160723aa03567b17df315d7db68ffb1122c199750ece65578ecacb488559229b26db5474d6aae55b
-  languageName: node
-  linkType: hard
-
-"prismjs@npm:^1.30.0":
-  version: 1.30.0
-  resolution: "prismjs@npm:1.30.0"
-  checksum: 10/6b48a2439a82e5c6882f48ebc1564c3890e16463ba17ac10c3ad4f62d98dea5b5c915b172b63b83023a70ad4f5d7be3e8a60304420db34a161fae69dd4e3e2da
   languageName: node
   linkType: hard
 
@@ -4349,7 +4400,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.8.1, tslib@npm:~2.8.1":
+"tslib@npm:^2.4.0, tslib@npm:^2.8.1, tslib@npm:~2.8.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7

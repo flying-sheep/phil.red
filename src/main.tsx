@@ -3,6 +3,8 @@
 /// <reference types="unplugin-fonts/client" />
 /// <reference types="@mui/material/themeCssVarsAugmentation" />
 
+import '@arborium/arborium/themes/melange-dark.css'
+import '@arborium/arborium/themes/melange-light.css'
 import 'unfonts.css'
 import './main.css'
 
