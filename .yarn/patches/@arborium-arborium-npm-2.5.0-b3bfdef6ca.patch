@@ -1,0 +1,28 @@
+diff --git a/dist/arborium.d.ts b/dist/arborium.d.ts
+index fb6a09d5b1f2e8f56e0f9516979a88af56ab02c0..7aa90c159a06ae31404622ede8ef2fa9e7209372 100644
+--- a/dist/arborium.d.ts
++++ b/dist/arborium.d.ts
+@@ -3,7 +3,7 @@
+  *
+  * ESM entry point for programmatic usage.
+  */
+-export { loadGrammar, highlight, spansToHtml, getConfig } from './loader.js';
++export { loadGrammar, highlight, spansToHtml, getConfig, setConfig } from './loader.js';
+ export { detectLanguage, extractLanguageFromClass, normalizeLanguage } from './detect.js';
+ export { pluginVersion, availableLanguages, highlights } from './plugins-manifest.js';
+ export type { Grammar, Session, Span, Injection, ParseResult, Highlight, ArboriumConfig, } from './types.js';
+diff --git a/dist/arborium.js b/dist/arborium.js
+index 3dcaadad2429a48f7f3a8b69d35a91e495b1f40f..9b172142bd44d0948ce850f5c3c4007d92bbf72c 100644
+--- a/dist/arborium.js
++++ b/dist/arborium.js
+@@ -795,6 +795,9 @@ export {
+   M as loadGrammar,
+   F as normalizeLanguage,
+   x as pluginVersion,
+-  y as spansToHtml
++  y as spansToHtml,
+ };
++export function setConfig(t) {
++  o = { ...o, ...t };
++}
+ //# sourceMappingURL=arborium.js.map

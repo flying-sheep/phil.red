@@ -1,52 +1,15 @@
-import type { ParseResult } from '@arborium/arborium'
+import { highlights, type ParseResult } from '@arborium/arborium'
 import type { PaletteMode, SxProps, Theme } from '@mui/material'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
-// TODO: https://github.com/bearcove/arborium/issues/93
-const ARB_MAP = [
-	['at', 'attribute'],
-	['co', 'constant'],
-	['fb', 'function.builtin'],
-	['f', 'function'],
-	['kw', 'keyword'],
-	['o', 'operator'],
-	['pr', 'property'],
-	['p', 'punctuation'],
-	['pb', 'punctuation.bracket'],
-	['pd', 'punctuation.delimiter'],
-	['s', 'string'],
-	['ss', 'string.special'],
-	['tg', 'tag'],
-	['t', 'type'],
-	['tb', 'type.builtin'],
-	['v', 'variable'],
-	['vb', 'variable.builtin'],
-	['vp', 'variable.parameter'],
-	['c', 'comment'],
-	['m', 'macro'],
-	['l', 'label'],
-	['da', 'diff.addition'],
-	['dd', 'diff.deletion'],
-	['n', 'number'],
-	['tl', 'text.literal'],
-	['te', 'text.emphasis'],
-	['ts', 'text.strong'],
-	['tu', 'text.uri'],
-	['tr', 'text.reference'],
-	['se', 'string.escape'],
-	['tt', 'text.title'],
-	['ps', 'punctuation.special'],
-	['tx', 'text.strikethrough'],
-	['sp', 'spell'],
-]
-
 const cssTheme = (mode: PaletteMode) =>
 	Object.fromEntries(
-		ARB_MAP.map(([short, long]) => [
-			`::highlight(${long})`,
-			{ color: `var(--arb-${short}-${mode})` },
-		]),
+		highlights.flatMap(({ name, tag, parentTag }) =>
+			parentTag
+				? []
+				: [[`::highlight(${name})`, { color: `var(--arb-${tag}-${mode})` }]],
+		),
 	)
 
 /** Global styles for highlights */
