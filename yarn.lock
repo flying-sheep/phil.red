@@ -5,52 +5,59 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@arborium/arborium@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@arborium/arborium@npm:2.4.0"
-  checksum: 10/d877e82de2b8588871c2e2821e45e128ee5274a8e028b66157df52dab44db216cd2aab72530afcb8c950c2756b78dc4d364821c4faa1f3ca37cc1d8c1921d43c
+"@arborium/arborium@npm:2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/arborium@npm:2.5.0"
+  checksum: 10/772bf97fa1f2b5eae148d4c427946151d685d6bdaeada30e9a14b0401a9c3d816a1639899628b9a6d98ca3e6510c31cf1f560a187497552c862b90330d423bb6
   languageName: node
   linkType: hard
 
-"@arborium/ini@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "@arborium/ini@npm:2.4.7"
-  checksum: 10/339531c482b06d5b1079137eb4b6cf9fe40085da773029f8fffdbe5a9760cc7075d18c6512ba62d7d7827f0fb011443954f902e138a2987edf2eb0adb8a71bc2
+"@arborium/arborium@patch:@arborium/arborium@npm%3A2.5.0#~/.yarn/patches/@arborium-arborium-npm-2.5.0-b3bfdef6ca.patch":
+  version: 2.5.0
+  resolution: "@arborium/arborium@patch:@arborium/arborium@npm%3A2.5.0#~/.yarn/patches/@arborium-arborium-npm-2.5.0-b3bfdef6ca.patch::version=2.5.0&hash=d0919c"
+  checksum: 10/3e4d2e1ba9c0307ee9f3c1da53d9b007cba872dde47416eb27002ccf4d748f3ee15219e9e71cab46eccc384df724ee1eab3a3d97cb9abea01f554ae737d57f4b
   languageName: node
   linkType: hard
 
-"@arborium/python@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "@arborium/python@npm:2.4.7"
-  checksum: 10/0343a1f911c7e7ebf6c2f1938646877debd17ecae8cc3dfc8ff59d025a762f09f98880cbde6d125577e36d30d2a10f5f422513f3d7ede392f0f89e39202120e5
+"@arborium/ini@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/ini@npm:2.5.0"
+  checksum: 10/c85aea776f583f618972bd6f096ec7c70ddd1e97d967fc20341c2d1358fa7f5718a3ec05aab399b20c54583f1ea41d2c3f435eeee0043390ceba17e9fcc537ad
   languageName: node
   linkType: hard
 
-"@arborium/toml@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "@arborium/toml@npm:2.4.7"
-  checksum: 10/4037a372653a8f5456444848db25117e0936823ab77ea9763ab258a9bcf36ff33b28e26f59d56d19b6775a0d41114b8e064e24da179da9a880d6701399cf785d
+"@arborium/python@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/python@npm:2.5.0"
+  checksum: 10/e003b27060de3d2a475d716aef55393860f5ea253ea7452e21c4ac76ce37ea0ef42023e33494c26fda7396b9e8e1f4d68e10bc04ccddbd017f4acbc64b86b690
   languageName: node
   linkType: hard
 
-"@arborium/typescript@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "@arborium/typescript@npm:2.4.7"
-  checksum: 10/8174db56a3e62a04696a97e3d200e8d8813970b2e0c34fa62b6fd2855169611828afdc854fcccc71d27a7710ed7699b26f0b61fed5f810cb9dbc7e6e6ebc70ec
+"@arborium/toml@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/toml@npm:2.5.0"
+  checksum: 10/35b20295e594c18db963435b0c51bfc5e5079d0ecb82a84d773724451663cfc9711516bb43fa38e506888de375735a2f6e7f1441a53687a178f91a7d20740292
   languageName: node
   linkType: hard
 
-"@arborium/xml@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "@arborium/xml@npm:2.4.7"
-  checksum: 10/16f7504cb780587e5c51a27fd9118480882620d2ff2006958a9baa0f1560d01fbf161b7496d9cac105a92a29c5ea09d591142d9de24329c650be508bd07f201b
+"@arborium/typescript@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/typescript@npm:2.5.0"
+  checksum: 10/d7b1e97099c5229a51d488977c6c2f56064860b98da406935a6e0e295bae9b1777ee94615ddb9fd1e78c3776d74236ba6e320060ae674d0f80e936eb2973356f
   languageName: node
   linkType: hard
 
-"@arborium/zsh@npm:^2.4.7":
-  version: 2.4.7
-  resolution: "@arborium/zsh@npm:2.4.7"
-  checksum: 10/7ac5a34488c17102e3d72449aa72c1fa85410d4f7f5eeae1d937f32d2e1181102ea4f3fc04785f80667b67a0661dd4c43ebd4b02b3b01b2f5a66f0302571ed81
+"@arborium/xml@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/xml@npm:2.5.0"
+  checksum: 10/b763730e875971565b61519a1100f883a17b1c8544bd5fc699aec24cce5c30af4c59f25229531b8c0b68f8ba8fa448e39fe4abd2a39baadc8c7d561351b65b30
+  languageName: node
+  linkType: hard
+
+"@arborium/zsh@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@arborium/zsh@npm:2.5.0"
+  checksum: 10/40fa480b30a8cf3bac017d54be047fe09336929d98b2f1b8e862a786e209c90fc786b7914620d1dff1d0c3d1127d2263322ca38e8a0c82715bad587bb1806ce4
   languageName: node
   linkType: hard
 
@@ -3533,13 +3540,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "phil.red@workspace:."
   dependencies:
-    "@arborium/arborium": "npm:^2.4.0"
-    "@arborium/ini": "npm:^2.4.7"
-    "@arborium/python": "npm:^2.4.7"
-    "@arborium/toml": "npm:^2.4.7"
-    "@arborium/typescript": "npm:^2.4.7"
-    "@arborium/xml": "npm:^2.4.7"
-    "@arborium/zsh": "npm:^2.4.7"
+    "@arborium/arborium": "patch:@arborium/arborium@npm%3A2.5.0#~/.yarn/patches/@arborium-arborium-npm-2.5.0-b3bfdef6ca.patch"
+    "@arborium/ini": "npm:^2.5.0"
+    "@arborium/python": "npm:^2.5.0"
+    "@arborium/toml": "npm:^2.5.0"
+    "@arborium/typescript": "npm:^2.5.0"
+    "@arborium/xml": "npm:^2.5.0"
+    "@arborium/zsh": "npm:^2.5.0"
     "@biomejs/biome": "npm:^2.3.10"
     "@dr.pogodin/react-helmet": "npm:^3.0.5"
     "@emotion/react": "npm:^11.14.0"
