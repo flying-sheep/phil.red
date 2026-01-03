@@ -7,16 +7,18 @@ import CodeBlock from '../../CodeBlock'
 
 export interface ASTErrorMessageProps {
 	node?: Node
+	component?: 'div' | 'span'
 	children: React.ReactNode
 }
 
 const ASTErrorMessage: FC<ASTErrorMessageProps> = ({
 	node,
+	component = 'div',
 	children,
 }: ASTErrorMessageProps) => {
 	const theme = useTheme()
 	return (
-		<Box sx={{ color: theme.vars.palette.error.main }}>
+		<Box component={component} sx={{ color: theme.vars.palette.error.main }}>
 			{children}
 			{node && <CodeBlock>{JSON.stringify(node, undefined, 2)}</CodeBlock>}
 		</Box>

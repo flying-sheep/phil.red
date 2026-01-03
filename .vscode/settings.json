@@ -1,18 +1,19 @@
 {
-	"[json][jsonc][typescript][typescriptreact]": {
+	"[json][jsonc][typescript][typescriptreact][caddyfile]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.codeActionsOnSave": {
 			"source.organizeImports": "always",
 		},
 	},
+	"[caddyfile]": {
+		"editor.defaultFormatter": "matthewpi.caddyfile-support",
+	},
 	"typescript.tsdk": ".yarn/sdks/typescript/lib",
 	"search.exclude": {
 		"**/.yarn": true,
 		"**/.pnp.*": true,
 	},
+	"search.followSymlinks": false,
 	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"[caddyfile]": {
-		"editor.defaultFormatter": "matthewpi.caddyfile-support",
-	},
 }
