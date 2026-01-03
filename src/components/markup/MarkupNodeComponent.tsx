@@ -1,6 +1,3 @@
-import 'katex/dist/katex.min.css'
-
-import TeX from '@matejmazur/react-katex'
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -12,7 +9,6 @@ import type {
 	CSSSelectorObjectOrCssVariables,
 	SystemCssProperties,
 } from '@mui/system'
-import type { KatexOptions } from 'katex'
 import { Children, type FC, useCallback } from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 import { ASTError } from '../../markup'
@@ -28,10 +24,6 @@ type SystemStyleObject<Theme extends object = object> =
 	SystemCssProperties<Theme> &
 		CSSPseudoSelectorProps<Theme> &
 		CSSSelectorObjectOrCssVariables<Theme>
-
-const KATEX_SETTINGS: KatexOptions = {
-	output: 'mathml',
-}
 
 export interface MarkupElementProps {
 	node: Node
@@ -183,8 +175,10 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		}
 		case Type.Code:
 			return <code>{convertChildren(node, level)}</code>
-		case Type.InlineMath:
-			return <TeX math={node.math} settings={KATEX_SETTINGS} />
+		case Type.InlineMath: {
+			// biome-ignore lint/security/noDangerouslySetInnerHtml: don’t want to model all of MathML
+			return <span dangerouslySetInnerHTML={{ __html: node.math }} />
+		}
 		// custom
 		case Type.Vega: {
 			return (
