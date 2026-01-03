@@ -1,5 +1,6 @@
 /** @jsxImportSource ../markup */
 
+import temml from 'temml'
 import type { VisualizationSpec } from 'vega-embed'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
@@ -172,8 +173,12 @@ class RSTConverter {
 						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Def>,
 				]
-			case 'math':
-				return [<m.InlineMath math={node.astext()} pos={pos(node)} />]
+			case 'math': {
+				const math = node.astext()
+				return [
+					<m.InlineMath math={temml.renderToString(math)} pos={pos(node)} />,
+				]
+			}
 			case 'literal_block': {
 				const lang = Array.from<string>(node.get('classes')).find(
 					(c) => c !== 'code',

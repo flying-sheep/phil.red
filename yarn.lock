@@ -767,16 +767,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@matejmazur/react-katex@npm:^3.1.3":
-  version: 3.1.3
-  resolution: "@matejmazur/react-katex@npm:3.1.3"
-  peerDependencies:
-    katex: ">=0.9"
-    react: ">=16"
-  checksum: 10/db9e9aa03d3b094fcb9854abeab3676732b04dbe4fbfe2dbf26782a6d50c197351d06ad833c78b90f7e418d769b77c30460a60906e80e800d84e16c938f3d6d1
-  languageName: node
-  linkType: hard
-
 "@mui/core-downloads-tracker@npm:^7.3.6":
   version: 7.3.6
   resolution: "@mui/core-downloads-tracker@npm:7.3.6"
@@ -1240,13 +1230,6 @@ __metadata:
   version: 7946.0.16
   resolution: "@types/geojson@npm:7946.0.16"
   checksum: 10/34d07421bdd60e7b99fa265441d17ac6e9aef48e3ce22d04324127d0de1daf7fbaa0bd3be1cece2092eb6995f21da84afa5231e24621a2910ff7340bc98f496f
-  languageName: node
-  linkType: hard
-
-"@types/katex@npm:^0.16.7":
-  version: 0.16.7
-  resolution: "@types/katex@npm:0.16.7"
-  checksum: 10/4fd15d93553be97c02c064e16be18d7ccbabf66ec72a9dc7fd5bfa47f0c7581da2f942f693c7cb59499de4c843c2189796e49c9647d336cbd52b777b6722a95a
   languageName: node
   linkType: hard
 
@@ -1852,13 +1835,6 @@ __metadata:
   version: 14.0.2
   resolution: "commander@npm:14.0.2"
   checksum: 10/2d202db5e5f9bb770112a3c1579b893d17ac6f6d932183077308bdd96d0f87f0bbe6a68b5b9ed2cf3b2514be6bb7de637480703c0e2db9741ee1b383237deb26
-  languageName: node
-  linkType: hard
-
-"commander@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "commander@npm:8.3.0"
-  checksum: 10/6b7b5d334483ce24bd73c5dac2eab901a7dbb25fd983ea24a1eeac6e7166bb1967f641546e8abf1920afbde86a45fbfe5812fbc69d0dc451bb45ca416a12a3a3
   languageName: node
   linkType: hard
 
@@ -3022,17 +2998,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"katex@npm:^0.16.27":
-  version: 0.16.27
-  resolution: "katex@npm:0.16.27"
-  dependencies:
-    commander: "npm:^8.3.0"
-  bin:
-    katex: cli.js
-  checksum: 10/7666ae11c6c1238626bffaf1a526af6ff679114d62293bf2f0e29f8a34d8e961c0edcb686c5b628158ec92a143b4bef5d83539c81b29a63c7dcf0bdb4544eec9
-  languageName: node
-  linkType: hard
-
 "lines-and-columns@npm:^1.1.6":
   version: 1.1.6
   resolution: "lines-and-columns@npm:1.1.6"
@@ -3553,14 +3518,12 @@ __metadata:
     "@emotion/styled": "npm:^11.14.1"
     "@fontsource/iosevka": "npm:^5.2.5"
     "@fontsource/iosevka-aile": "npm:^5.2.5"
-    "@matejmazur/react-katex": "npm:^3.1.3"
     "@mui/icons-material": "npm:^7.3.6"
     "@mui/material": "npm:^7.3.6"
     "@mui/system": "npm:^7.0.1"
     "@total-typescript/ts-reset": "npm:^0.6.1"
     "@tsconfig/strictest": "npm:^2.0.8"
     "@types/estree": "npm:^1.0.8"
-    "@types/katex": "npm:^0.16.7"
     "@types/markdown-it": "npm:^14.1.2"
     "@types/node": "npm:^25.0.3"
     "@types/react": "npm:^19.2.7"
@@ -3573,7 +3536,6 @@ __metadata:
     estree-walker: "npm:^3.0.3"
     globby: "npm:^16.1.0"
     husky: "npm:>=9.1.7"
-    katex: "npm:^0.16.27"
     lint-staged: "npm:>=16.2.7"
     magic-string: "npm:^0.30.21"
     markdown-it: "npm:^14.1.0"
@@ -3590,6 +3552,7 @@ __metadata:
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
     rollup: "npm:^4.54.0"
+    temml: "npm:^0.13.1"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^5.9.3"
     unplugin-fonts: "npm:^1.4.0"
@@ -4358,6 +4321,13 @@ __metadata:
     mkdirp: "npm:^1.0.3"
     yallist: "npm:^4.0.0"
   checksum: 10/bfbfbb2861888077fc1130b84029cdc2721efb93d1d1fb80f22a7ac3a98ec6f8972f29e564103bbebf5e97be67ebc356d37fa48dbc4960600a1eb7230fbd1ea0
+  languageName: node
+  linkType: hard
+
+"temml@npm:^0.13.1":
+  version: 0.13.1
+  resolution: "temml@npm:0.13.1"
+  checksum: 10/60371fc986b9728ef0283391a2971d386451b9a53d78da9cb5e245cdd419432b1c570ce307e87911c4b109dba9f886251c8e62849a555fa58d4a1768e68d6062
   languageName: node
   linkType: hard
 

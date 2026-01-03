@@ -5,6 +5,7 @@
 
 import '@arborium/arborium/themes/melange-dark.css'
 import '@arborium/arborium/themes/melange-light.css'
+import 'temml/dist/Temml-Local.css'
 import 'unfonts.css'
 import './main.css'
 
