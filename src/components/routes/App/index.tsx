@@ -1,4 +1,5 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
+import { GlobalStyles } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
@@ -16,7 +17,7 @@ import { useMemo, useRef } from 'react'
 import { PortalTarget } from 'react-portal-target'
 import { Link, matchPath, Navigate, Route, useLocation } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
-
+import { highStyles } from '../../markup/nodes/High'
 import Blog from '../Blog'
 import Code from '../Code'
 import Home from '../Home'
@@ -83,6 +84,7 @@ const App = () => {
 				<title>phil.red</title>
 			</Helmet>
 			<CssBaseline />
+			<GlobalStyles styles={highStyles} />
 			<ElevationScroll>
 				<AppBar
 					ref={bar}

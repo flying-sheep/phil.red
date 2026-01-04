@@ -1,0 +1,39 @@
+import {
+	type ArboriumConfig,
+	loadGrammar,
+	type ParseResult,
+	setConfig,
+} from '@arborium/arborium'
+import { PosixFS, VirtualFS } from '@yarnpkg/fslib'
+import { ZipOpenFS } from '@yarnpkg/libzip'
+
+const fs = new PosixFS(
+	new VirtualFS({
+		baseFs: new ZipOpenFS({
+			useCache: true,
+			maxOpenFiles: 80,
+		}),
+	}),
+)
+
+const config: ArboriumConfig = {
+	resolveJs({ language, path }) {
+		return import(`@arborium/${language}/${path}`)
+	},
+	resolveWasm({ language, path }) {
+		const wasmUrl = new URL(
+			import.meta.resolve(`@arborium/${language}/${path}`),
+		)
+		return fs.readFilePromise(wasmUrl.pathname)
+	},
+}
+
+export default async function highlightCode(
+	code: string,
+	lang: string,
+): Promise<ParseResult> {
+	setConfig(config) // TODO: pass to loadGrammar instead once arborium supports it
+	const grammar = await loadGrammar(lang)
+	if (!grammar) throw new Error(`Unknown language: ${lang}`)
+	return grammar.parse(code)
+}

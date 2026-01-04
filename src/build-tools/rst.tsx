@@ -1,8 +1,10 @@
 /** @jsxImportSource ../markup */
 
+import temml from 'temml'
 import type { VisualizationSpec } from 'vega-embed'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
+import highlightCode from './highlight'
 import * as docutils from './pyiodide-docutils'
 import type { ConverterOptions } from './rollup-plugin-renderdoc'
 
@@ -22,7 +24,7 @@ class RSTConverter {
 		this.console = opts.ctx ?? console
 	}
 
-	convertNode(node: docutils.Node, level: number): m.Node[] {
+	async convertNode(node: docutils.Node, level: number): Promise<m.Node[]> {
 		switch (node?.tagname) {
 			// already resolved
 			case 'target':
@@ -38,12 +40,13 @@ class RSTConverter {
 				const [label, ...content]: docutils.Node[] = Array.from(
 					(node as docutils.Element).children.values(),
 				)
+				const contents = await Promise.all(
+					content.map((n) => this.convertNode(n, level)),
+				)
 				return [
 					// TODO: anchor from node['ids'], backlink to footnote_reference using node["backrefs"]
 					<m.EnumList pos={pos(node)} start={Number(label)}>
-						<m.ListItem pos={pos(node)}>
-							{content.flatMap((n) => this.convertNode(n, level))}
-						</m.ListItem>
+						<m.ListItem pos={pos(node)}>{contents.flat()}</m.ListItem>
 					</m.EnumList>,
 				]
 			}
@@ -53,7 +56,10 @@ class RSTConverter {
 			case 'title_reference':
 			// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote_reference
 			case 'footnote_reference': {
-				const children = this.convertChildren(node as docutils.Element, level)
+				const children = await this.convertChildren(
+					node as docutils.Element,
+					level,
+				)
 				// TODO: allow backlinks with node['ids']
 				const href = node.get('refuri') ?? `#${node.get('refid')}`
 				return [
@@ -69,7 +75,7 @@ class RSTConverter {
 			case 'section':
 				return [
 					<m.Section pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level + 1)}
+						{await this.convertChildren(node as docutils.Element, level + 1)}
 					</m.Section>,
 				]
 			case 'title': {
@@ -79,14 +85,14 @@ class RSTConverter {
 				const anchor = node.parent?.get('ids')[0] // 'ids' is slugified, 'names' literal
 				return [
 					<m.Title level={hLevel} anchor={anchor} pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Title>,
 				]
 			}
 			case 'paragraph':
 				return [
 					<m.Paragraph pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Paragraph>,
 				]
 			case 'block_quote': {
@@ -95,7 +101,7 @@ class RSTConverter {
 					.find((v: string) => m.BlockQuote.VARIANTS.has(v))
 				return [
 					<m.BlockQuote variant={variant} pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.BlockQuote>,
 				]
 			}
@@ -104,19 +110,19 @@ class RSTConverter {
 			case 'literal':
 				return [
 					<m.Code pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Code>,
 				]
 			case 'emphasis':
 				return [
 					<m.Emph pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Emph>,
 				]
 			case 'strong':
 				return [
 					<m.Strong pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Strong>,
 				]
 			case 'bullet_list': {
@@ -127,55 +133,61 @@ class RSTConverter {
 						text={node.get('bullet')}
 						pos={pos(node)}
 					>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.BulletList>,
 				]
 			}
 			case 'enumerated_list':
 				return [
 					<m.EnumList pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.EnumList>,
 				]
 			case 'list_item':
 				return [
 					<m.ListItem pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.ListItem>,
 				]
 			case 'definition_list':
 				return [
 					<m.DefList pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.DefList>,
 				]
 			case 'definition_list_item':
 				return [
 					<m.DefItem pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.DefItem>,
 				]
 			case 'term':
 				return [
 					<m.DefTerm pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.DefTerm>,
 				]
 			case 'definition':
 				return [
 					<m.Def pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Def>,
 				]
-			case 'math':
-				return [<m.InlineMath math={node.astext()} pos={pos(node)} />]
+			case 'math': {
+				const math = node.astext()
+				return [
+					<m.InlineMath math={temml.renderToString(math)} pos={pos(node)} />,
+				]
+			}
 			case 'literal_block': {
 				const lang = Array.from<string>(node.get('classes')).find(
 					(c) => c !== 'code',
 				)
+				const code = node.astext()
+				const parsed = lang ? await highlightCode(code, lang) : undefined
 				return [
-					<m.CodeBlock language={lang} pos={pos(node)}>
-						{[node.astext()]}
+					<m.CodeBlock language={lang} parsed={parsed} pos={pos(node)}>
+						{[code]}
 					</m.CodeBlock>,
 				]
 			}
@@ -184,12 +196,13 @@ class RSTConverter {
 					(node as docutils.Element).children.values(),
 				)
 				const title = groups[0]?.tagname === 'title' ? groups.shift() : null
+				const rows = await Promise.all(
+					groups.map((g) => this.convertChildren(g as docutils.Element, level)),
+				)
 				return [
 					// https://docutils.sourceforge.io/docs/ref/doctree.html#tgroup
 					<m.Table caption={title?.astext()} pos={pos(node)}>
-						{groups.flatMap((group) =>
-							this.convertChildren(group as docutils.Element, level),
-						)}
+						{rows.flat()}
 					</m.Table>,
 				]
 			}
@@ -201,13 +214,13 @@ class RSTConverter {
 			case 'row':
 				return [
 					<m.Row pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Row>,
 				]
 			case 'entry':
 				return [
 					<m.Cell pos={pos(node)}>
-						{this.convertChildren(node as docutils.Element, level)}
+						{await this.convertChildren(node as docutils.Element, level)}
 					</m.Cell>,
 				]
 			case 'vega':
@@ -251,11 +264,14 @@ class RSTConverter {
 		}
 	}
 
-	convertChildren(elem: docutils.Element, level: number): m.Node[] {
-		return elem.children.reduce(
-			(ns: m.Node[], n: docutils.Node) => ns.concat(this.convertNode(n, level)),
-			[],
+	async convertChildren(
+		elem: docutils.Element,
+		level: number,
+	): Promise<m.Node[]> {
+		const nodes = await Promise.all(
+			elem.children.map((n) => this.convertNode(n, level)),
 		)
+		return nodes.flat()
 	}
 
 	getMeta(document: docutils.Element): { [key: string]: string } {
@@ -283,7 +299,7 @@ export default async function rstConvert(
 	const { core } = await docutils.load()
 	const document = await docutils.publish(code, opts.path, core)
 	const conv = new RSTConverter(opts)
-	const children = conv.convertChildren(document, 1)
+	const children = await conv.convertChildren(document, 1)
 	const metadata = conv.getMeta(document)
 	return { title: document.get('title'), children, metadata }
 }

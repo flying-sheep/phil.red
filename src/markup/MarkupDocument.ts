@@ -1,3 +1,4 @@
+import type { ParseResult } from '@arborium/arborium'
 import type { FunctionComponent } from 'typed-jsx'
 import type { VisualizationSpec } from 'vega-embed'
 
@@ -246,6 +247,7 @@ export const Field = mkFun<Field>(Type.Field)
 export interface CodeBlock extends Element<string> {
 	type: Type.CodeBlock
 	language?: string | undefined
+	parsed?: ParseResult | undefined
 }
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 

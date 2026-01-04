@@ -13,7 +13,7 @@ now it’s probably installed in `/usr/local/MATLAB`. (dear devs: if you can’t
 
 now fire up `kmenuedit` or create a `.desktop` file in `/usr/local/share/applications`, with the following as call:
 
-```bash
+```zsh
 env -u _JAVA_OPTIONS matlab -desktop
 ```
 
