@@ -3,12 +3,20 @@ import type { PaletteMode, SxProps, Theme } from '@mui/material'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
+const styles = (tag: string, mode: PaletteMode) => ({
+	color: `var(--arb-${tag}-${mode})`,
+	textDecoration: `var(--arb-${tag}-${mode}-decoration)`,
+	/* these aren’t actually supported:
+	 * https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::highlight#allowable_properties
+	fontWeight: `var(--arb-${tag}-${mode}-weight)`,
+	fontStyle: `var(--arb-${tag}-${mode}-style)`,
+	 */
+})
+
 const cssTheme = (mode: PaletteMode) =>
 	Object.fromEntries(
 		highlights.flatMap(({ name, tag, parentTag }) =>
-			parentTag
-				? []
-				: [[`::highlight(${name})`, { color: `var(--arb-${tag}-${mode})` }]],
+			parentTag ? [] : [[`::highlight(${name})`, styles(tag, mode)]],
 		),
 	)
 
