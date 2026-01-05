@@ -4603,8 +4603,8 @@ __metadata:
   linkType: hard
 
 "vega-functions@npm:^6.1.0, vega-functions@npm:~6.1.0":
-  version: 6.1.0
-  resolution: "vega-functions@npm:6.1.0"
+  version: 6.1.1
+  resolution: "vega-functions@npm:6.1.1"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-color: "npm:^3.1.0"
@@ -4617,7 +4617,7 @@ __metadata:
     vega-statistics: "npm:^2.0.0"
     vega-time: "npm:^3.1.0"
     vega-util: "npm:^2.1.0"
-  checksum: 10/8d458c9a3a4fe439218dd3080466c467e73ad1d83faa53446dca764872c3ba526f7c798b3dfefeef3721e258c9c83e35cf188db9179251ab7cf36a77ec59dad5
+  checksum: 10/5c17f61f54988079f165f4a7682941356f0406e0436245d1f08c2843b207cb868b9106551309fa7d960a90a85e0baa67460ca3c5d6f736dbb92902678f7c02de
   languageName: node
   linkType: hard
 
