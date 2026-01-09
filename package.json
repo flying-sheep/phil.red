@@ -24,7 +24,7 @@
 		"dist"
 	],
 	"dependencies": {
-		"@arborium/arborium": "patch:@arborium/arborium@npm%3A2.5.0#~/.yarn/patches/@arborium-arborium-npm-2.5.0-b3bfdef6ca.patch",
+		"@arborium/arborium": "^2.6.0",
 		"@arborium/ini": "^2.6.0",
 		"@arborium/python": "^2.6.0",
 		"@arborium/toml": "^2.6.0",
