@@ -1,5 +1,5 @@
 import Box, { type BoxProps } from '@mui/material/Box'
-import type { SxProps } from '@mui/system'
+import type { SxProps } from '@mui/material/styles'
 import { mergeSx } from 'merge-sx'
 import { type FC, useMemo, useRef } from 'react'
 import { type UseVegaEmbedParams, useVegaEmbed } from 'react-vega'

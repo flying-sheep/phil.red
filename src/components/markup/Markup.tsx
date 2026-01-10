@@ -1,10 +1,8 @@
-import {
-	MenuItem,
-	Select,
-	type SelectChangeEvent,
-	useMediaQuery,
-} from '@mui/material'
 import Box from '@mui/material/Box'
+import MenuItem from '@mui/material/MenuItem'
+import type { SelectChangeEvent } from '@mui/material/Select'
+import Select from '@mui/material/Select'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { Children, type FC, useCallback, useMemo, useState } from 'react'
 import { base16Themes } from 'react-base16-styling'
 import { JSONTree, type ShouldExpandNodeInitially } from 'react-json-tree'
