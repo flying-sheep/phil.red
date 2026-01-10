@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box'
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -137,6 +138,28 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 					<TableCell>{convertChildren(node, level)}</TableCell>
 				</TableRow>
 			)
+		case Type.FootNote: {
+			const backrefs =
+				node.backrefs.length === 1 ? (
+					<Link href={`#${node.backrefs[0]}`}>↑</Link>
+				) : (
+					<>
+						↑
+						<sup>
+							{node.backrefs.map((ref, i) => (
+								<Link key={ref} href={`#${ref}`}>
+									{String.fromCharCode(i + 'a'.charCodeAt(0))}{' '}
+								</Link>
+							))}
+						</sup>
+					</>
+				)
+			return (
+				<Box id={node.anchor} sx={{ '&>*': { display: 'inline' } }}>
+					<sup>{node.label}</sup> {backrefs} {convertChildren(node, level)}
+				</Box>
+			)
+		}
 		case Type.CodeBlock: {
 			const code = node.children.join('\n')
 			if (!node.language || !node.parsed) {
@@ -171,7 +194,11 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		case Type.Link: {
 			if ('name' in node.ref)
 				throw new ASTError(`Unresolved reference ${node.ref.name}`, node)
-			return <Link href={node.ref.href}>{convertChildren(node, level)}</Link>
+			return (
+				<Link id={node.anchor} href={node.ref.href}>
+					{convertChildren(node, level)}
+				</Link>
+			)
 		}
 		case Type.Code:
 			return <code>{convertChildren(node, level)}</code>
@@ -196,6 +223,7 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			)
 		}
 		default:
+			node satisfies never
 			throw new ASTError(`Unknown type ${(node as Elem).type}`, node)
 	}
 }
