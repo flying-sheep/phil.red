@@ -179,6 +179,12 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 			// biome-ignore lint/security/noDangerouslySetInnerHtml: don’t want to model all of MathML
 			return <span dangerouslySetInnerHTML={{ __html: node.math }} />
 		}
+		case Type.Problematic:
+			return (
+				<ASTErrorMessage component="span">
+					{node.children.join('')}
+				</ASTErrorMessage>
+			)
 		// custom
 		case Type.Vega: {
 			return (
