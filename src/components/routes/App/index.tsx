@@ -1,9 +1,9 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
-import { GlobalStyles } from '@mui/material'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
 import { deepPurple } from '@mui/material/colors'
+import GlobalStyles from '@mui/material/GlobalStyles'
 import {
 	type ColorSystemOptions,
 	createTheme,
@@ -21,7 +21,6 @@ import { highStyles } from '../../markup/nodes/High'
 import Blog from '../Blog'
 import Code from '../Code'
 import Home from '../Home'
-
 import ElevationScroll from './ElevationScroll'
 
 const ROUTE_LINKS = [

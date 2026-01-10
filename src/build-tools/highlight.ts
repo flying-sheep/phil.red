@@ -27,14 +27,16 @@ const config: ArboriumConfig = {
 	},
 }
 
+const debugOrig = console.debug
+const debugSilent = () => {}
+
 export default async function highlightCode(
 	code: string,
 	lang: string,
 ): Promise<ParseResult> {
-	const debug = console.debug
-	console.debug = () => {}
+	console.debug = debugSilent
 	const grammar = await loadGrammar(lang, config)
-	console.debug = debug
+	console.debug = debugOrig
 	if (!grammar) throw new Error(`Unknown language: ${lang}`)
 	return grammar.parse(code)
 }

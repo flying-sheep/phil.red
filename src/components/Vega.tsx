@@ -1,4 +1,5 @@
-import { CircularProgress, Stack } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress'
+import Stack from '@mui/material/Stack'
 import { lazy, Suspense } from 'react'
 import type { VegaProps } from './VegaInner'
 

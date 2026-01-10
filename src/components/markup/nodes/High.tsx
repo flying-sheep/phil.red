@@ -1,5 +1,5 @@
 import { highlights, type ParseResult } from '@arborium/arborium'
-import type { PaletteMode, SxProps, Theme } from '@mui/material'
+import type { PaletteMode, SxProps, Theme } from '@mui/material/styles'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
