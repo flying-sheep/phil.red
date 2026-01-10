@@ -17,6 +17,7 @@ export enum Type {
 	Def,
 	FieldList,
 	Field,
+	FootNote,
 	CodeBlock,
 	Table,
 	Row,
@@ -97,6 +98,7 @@ export type Elem =
 	| Def
 	| FieldList
 	| Field
+	| FootNote
 	| CodeBlock
 	| Table
 	| Row
@@ -244,6 +246,14 @@ export interface Field extends Element {
 }
 export const Field = mkFun<Field>(Type.Field)
 
+export interface FootNote extends Element {
+	type: Type.FootNote
+	anchor: string
+	backrefs: string[]
+	label: string
+}
+export const FootNote = mkFun<FootNote>(Type.FootNote)
+
 export interface CodeBlock extends Element<string> {
 	type: Type.CodeBlock
 	language?: string | undefined
@@ -294,6 +304,7 @@ export const Superscript = mkFun<Superscript>(Type.Superscript)
 
 export interface Link extends Element {
 	type: Type.Link
+	anchor?: string | undefined
 	ref: { name: string } | { href: string }
 }
 export const Link = mkFun<Link>(Type.Link)
