@@ -24,8 +24,6 @@ The final question is “who is that ‘you’ arriving at the other side?”
 Is it really you? Or a person thinking they’re you?
 Intuitively, there’s a difference, right?
 
-.. [#instant-tele] The instant kind, not the “bend space and walk through a tunnel” kind
-
 The issues
 ----------
 Me enjoying these pieces of media doesn’t mean that they don’t have their issues.
@@ -72,6 +70,10 @@ All of the above are philosophical ramblings,
 but I am not the first one to come up with this idea.
 If you are not convinced and would like to read a scientifically-backed version of my argument,
 `the illusion of the self`_ has a whole book further reading!
+
+----
+
+.. [#instant-tele] The instant kind, not the “bend space and walk through a tunnel” kind
 
 .. _identity: https://plato.stanford.edu/entries/identity/
 .. _teletransportation paradox : https://en.wikipedia.org/wiki/Teletransportation_paradox
