@@ -37,17 +37,24 @@ class RSTConverter {
 			// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.footnote
 			case 'footnote': {
 				// TODO: validate that it exists and has tagname "label"
-				const [label, ...content]: docutils.Node[] = Array.from(
+				const [labelNode, ...content]: docutils.Node[] = Array.from(
 					(node as docutils.Element).children.values(),
 				)
-				const contents = await Promise.all(
-					content.map((n) => this.convertNode(n, level)),
-				)
+				const anchor = node.get('ids')[0]
+				const backrefs = [...node.get('backrefs')]
+				const label = labelNode?.astext() ?? '???'
+				const contents = (
+					await Promise.all(content.map((n) => this.convertNode(n, level)))
+				).flat()
 				return [
-					// TODO: anchor from node['ids'], backlink to footnote_reference using node["backrefs"]
-					<m.EnumList pos={pos(node)} start={Number(label)}>
-						<m.ListItem pos={pos(node)}>{contents.flat()}</m.ListItem>
-					</m.EnumList>,
+					<m.FootNote
+						pos={pos(node)}
+						anchor={anchor}
+						label={label}
+						backrefs={backrefs}
+					>
+						{contents}
+					</m.FootNote>,
 				]
 			}
 			// https://sphinx-docutils.readthedocs.io/en/latest/docutils.nodes.html#docutils.nodes.reference
@@ -60,10 +67,10 @@ class RSTConverter {
 					node as docutils.Element,
 					level,
 				)
-				// TODO: allow backlinks with node['ids']
+				const anchor = node.get('ids')[0]
 				const href = node.get('refuri') ?? `#${node.get('refid')}`
 				return [
-					<m.Link ref={{ href }} pos={pos(node)}>
+					<m.Link anchor={anchor} ref={{ href }} pos={pos(node)}>
 						{node.tagname === 'footnote_reference' ? (
 							<m.Superscript pos={pos(node)}>{children}</m.Superscript>
 						) : (
