@@ -1,4 +1,4 @@
-import type { PaperProps } from '@mui/material'
+import type { PaperProps } from '@mui/material/Paper'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import { cloneElement } from 'react'
 
