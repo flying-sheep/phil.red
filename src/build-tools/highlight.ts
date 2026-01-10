@@ -2,7 +2,6 @@ import {
 	type ArboriumConfig,
 	loadGrammar,
 	type ParseResult,
-	setConfig,
 } from '@arborium/arborium'
 import { PosixFS, VirtualFS } from '@yarnpkg/fslib'
 import { ZipOpenFS } from '@yarnpkg/libzip'
@@ -32,8 +31,7 @@ export default async function highlightCode(
 	code: string,
 	lang: string,
 ): Promise<ParseResult> {
-	setConfig(config) // TODO: pass to loadGrammar instead once arborium supports it
-	const grammar = await loadGrammar(lang)
+	const grammar = await loadGrammar(lang, config)
 	if (!grammar) throw new Error(`Unknown language: ${lang}`)
 	return grammar.parse(code)
 }
