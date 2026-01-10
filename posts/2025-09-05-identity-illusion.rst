@@ -40,6 +40,8 @@ A lot of people acknowledge that they’re not,
 yet due to continuity of consciousness,
 there is no clear boundary between the person they were back then and the person they are now.
 
+The illusion
+------------
 This perceived continuity is what makes the “teleportation is death” idea intuitive.
 But where does the continuity exist but in your perception?
 You’re no longer toddler-you, so isn’t a perfect copy of your every atom more “you” than that?
@@ -48,10 +50,28 @@ are we not all trapped in our own head and body,
 isn’t there an “I” that keeps existing, an “I” that other person wouldn’t have?
 This is the illusion this article sets out to dispell.
 
-..
-    - ego death
-    - mind state copying
-    - ship of theseus
+To start with, it is completely possible to be awake without feeling your “I”.
+Unfortunately the term “ego death” has been mysticized by many,
+but one of the effects described by the term is exactly the temporary loss of this continuous “I”:
+are you sure that this feeling is what makes you alive if it can be suspended and resumed?
+
+If the answer is yes, allow me to propose a final thought experiment.
+It utilizes the common philosophical idea of the ship of theseus.
+Imagine technology existed to
+1. simulate a complete human brain in a computer, and
+2. interface with a good chunk of the hundreds of trillions of synapses in the human brain.
+Imagine that someone uses both to ablate your brain slice by slice,
+all while building a copy of what they removed,
+allowing that copy to interface with your meat brain’s remainder.
+You would keep thinking uninterruptedly throughout the process,
+as every remaining neuron would send and receive the exact same signal as if the rest of your brain was still there.
+When would you “die” and when would “another person thinking they’re you” form in the simulation?
+Or would there just be you?
+
+All of the above are philosophical ramblings,
+but I am not the first one to come up with this idea.
+If you are not convinced and would like to read a scientifically-backed version of my argument,
+`the illusion of the self`_ has a whole book further reading!
 
 .. _identity: https://plato.stanford.edu/entries/identity/
 .. _teletransportation paradox : https://en.wikipedia.org/wiki/Teletransportation_paradox
@@ -68,3 +88,4 @@ This is the illusion this article sets out to dispell.
 .. other links
 
 .. _wood frog: https://owlcation.com/stem/frozen-wood-frogs-and-adaptations-for-survival
+.. _the illusion of the self: https://philosophynow.org/issues/97/The_Illusion_of_the_Self
