@@ -4,6 +4,7 @@ import type { VisualizationSpec } from 'vega-embed'
 
 export enum Type {
 	// block
+	Transition,
 	Section,
 	Title,
 	Paragraph,
@@ -85,6 +86,7 @@ export type Node = string | Elem
 /** All existing constructor functions */
 export type Elem =
 	// Block
+	| Transition
 	| Section
 	| Title
 	| Paragraph
@@ -173,6 +175,11 @@ function mkFun<P extends Elem, Extra = unknown>(
 }
 
 // Block
+
+export interface Transition extends Element<never> {
+	type: Type.Transition
+}
+export const Transition = mkFun<Transition>(Type.Transition)
 
 export interface Section extends Element {
 	type: Type.Section
@@ -277,7 +284,7 @@ export const Cell = mkFun<Cell>(Type.Cell)
 
 // Inline
 
-export interface LineBreak extends Element {
+export interface LineBreak extends Element<never> {
 	type: Type.LineBreak
 }
 export const LineBreak = mkFun<LineBreak>(Type.LineBreak)
@@ -314,7 +321,7 @@ export interface Code extends Element {
 }
 export const Code = mkFun<Code>(Type.Code)
 
-export interface InlineMath extends Element {
+export interface InlineMath extends Element<never> {
 	type: Type.InlineMath
 	math: string
 }
@@ -328,7 +335,7 @@ export const Problematic = mkFun<Problematic>(Type.Problematic)
 
 // Custom
 
-export interface Vega extends Element {
+export interface Vega extends Element<never> {
 	type: Type.Vega
 	spec: VisualizationSpec
 }

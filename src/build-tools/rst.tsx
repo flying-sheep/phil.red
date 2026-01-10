@@ -79,6 +79,8 @@ class RSTConverter {
 					</m.Link>,
 				]
 			}
+			case 'transition':
+				return [<m.Transition pos={pos(node)} />]
 			case 'section':
 				return [
 					<m.Section pos={pos(node)}>
