@@ -3557,6 +3557,7 @@ __metadata:
     notistack: "npm:^3.0.2"
     pyodide: "npm:^0.29.0"
     react: "npm:^19.2.3"
+    react-base16-styling: "npm:^0.10.0"
     react-dom: "npm:^19.2.3"
     react-error-boundary: "npm:^6.0.1"
     react-is: "npm:^19.2.3"
