@@ -47,7 +47,6 @@ class RSTConverter {
 					await Promise.all(content.map((n) => this.convertNode(n, level)))
 				).flat()
 				return [
-					// TODO: anchor from node['ids'], backlink to footnote_reference using node["backrefs"]
 					<m.FootNote
 						pos={pos(node)}
 						anchor={anchor}
@@ -68,7 +67,6 @@ class RSTConverter {
 					node as docutils.Element,
 					level,
 				)
-				// TODO: allow backlinks with node['ids']
 				const anchor = node.get('ids')[0]
 				const href = node.get('refuri') ?? `#${node.get('refid')}`
 				return [
