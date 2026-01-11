@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
-import { useNavigate, useSearchParams } from 'react-router'
+import { Navigate, useSearchParams } from 'react-router'
 
 const Home = () => (
 	// TODO: fix route
@@ -43,13 +43,12 @@ const Home = () => (
 
 const HomeDev = () => {
 	const [params] = useSearchParams()
-	const navigate = useNavigate()
 	const p = params.get('p')
-	if (p !== null) {
-		navigate(`/${decodeURIComponent(p)}`, { replace: true })
-		return null
-	}
-	return <Home />
+	return p === null ? (
+		<Home />
+	) : (
+		<Navigate replace to={`/${decodeURIComponent(p)}`} />
+	)
 }
 
 export default import.meta.env.DEV ? HomeDev : Home
