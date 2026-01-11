@@ -5,10 +5,10 @@ I’ve been thinking a lot about the `teletransportation paradox`_.
 As I’m not the first one to do so, I enjoyed the many takes by media creators:
 videos and comics such as
 
-- John Weldon’s `To Be`_
+- `To Be`_ by John Weldon
 - `the Trouble with Transporters`_ by CGP Grey
-- the very first Existential Comic `the Machine`_
-- the many takes on `teleporter problems`_ by SMBC
+- `the Machine`_, the very first Existential Comic
+- `teleporter problems`_, one of the many takes by SMBC
 
 The first three are nice explainy ones that might clean up the residual confusion that might potentially remain after my upcoming explanation!
 
