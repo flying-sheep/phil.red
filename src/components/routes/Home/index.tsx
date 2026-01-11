@@ -46,7 +46,7 @@ const HomeDev = () => {
 	const navigate = useNavigate()
 	const p = params.get('p')
 	if (p !== null) {
-		navigate(decodeURIComponent(p), { replace: true })
+		navigate(`/${decodeURIComponent(p)}`, { replace: true })
 		return null
 	}
 	return <Home />
