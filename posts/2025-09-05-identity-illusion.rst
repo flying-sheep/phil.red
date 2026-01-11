@@ -3,7 +3,7 @@ Identity is an illusion
 
 I’ve been thinking a lot about the `teletransportation paradox`_.
 As I’m not the first one to do so, I enjoyed the many takes by media creators.
-Videos such as videos like John Weldon’s `To Be`_ or `the Trouble with Transporters`_ by CGP Grey;
+Videos such as John Weldon’s `To Be`_ or `the Trouble with Transporters`_ by CGP Grey;
 comics like the very first Existential Comic `the Machine`_, or the many takes on `teleporter problems`_ by SMBC.
 The first three are nice explainy ones that might clean up the residual confusion that might potentially remain after my upcoming explanation!
 Skip to `the issues`_ if you clicked any of these links (except for the SMBC one) or already know
@@ -13,12 +13,12 @@ The basics
 Again, this is well explained by e.g. `the Machine`_, but here’s a quick summary:
 
 Teleportation\ [#instant-tele]_ rips you apart atom/molecule by atom/molecule and puts you back together.
-Or in most variants, it doesn’t even use the same pieces, but entirely different ones.
+In most variants, the reproduction doesn’t even consist of the same matter, but rather an entirely distinct set of atoms/molecules.
 Being turned into a fine dust is usually called “dying”, so isn’t that the case here?
 
 Different media use different thought experiments to drive the point home,
 like waiting a bit before dissolving the original,
-maybe long enough to ask them how they feel about being misted in a few seconds.
+maybe long enough to ask them how they feel about the imminent prospect of being misted.
 
 The final question is “who is that ‘you’ arriving at the other side?”
 Is it really you? Or a person thinking they’re you?
@@ -45,7 +45,7 @@ But where does the continuity exist but in your perception?
 You’re no longer toddler-you, so isn’t a perfect copy of your every atom more “you” than that?
 “No” many keep insisting, there’s *something* continuing onwards:
 are we not all trapped in our own head and body,
-isn’t there an “I” that keeps existing, an “I” that other person wouldn’t have?
+isn’t there an “I” that keeps existing, an “I” that the other person wouldn’t have?
 This is the illusion this article sets out to dispell.
 
 To start with, it is completely possible to be awake without feeling your “I”.
