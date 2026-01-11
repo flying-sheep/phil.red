@@ -24,7 +24,7 @@ root.render(
 	<StrictMode>
 		<HelmetProvider>
 			<SnackbarProvider autoHideDuration={3000}>
-				<Router>
+				<Router basename={import.meta.env.BASE_URL}>
 					<App />
 				</Router>
 			</SnackbarProvider>

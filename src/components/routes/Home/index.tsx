@@ -1,5 +1,6 @@
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
+import { Navigate, useSearchParams } from 'react-router'
 
 const Home = () => (
 	// TODO: fix route
@@ -40,4 +41,14 @@ const Home = () => (
 	// <CardMedia image={firstPost.image} title={post.imageTitle} />
 )
 
-export default Home
+const HomeDev = () => {
+	const [params] = useSearchParams()
+	const p = params.get('p')
+	return p === null ? (
+		<Home />
+	) : (
+		<Navigate replace to={`/${decodeURIComponent(p)}`} />
+	)
+}
+
+export default import.meta.env.DEV ? HomeDev : Home
