@@ -23,8 +23,13 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - run: yarn build --base=phil.red/pr-${{ github.event.pull_request.number }}
+        if: github.event_name == 'pull_request'
         env:
-          NODE_ENV: ${{ github.event_name == 'pull_request' && 'development' || 'production' }}
+          NODE_ENV: development
+      - run: yarn build
+        if: github.event_name != 'pull_request'
+        env:
+          NODE_ENV: production
       - uses: actions/upload-artifact@v6
         with:
           path: dist
