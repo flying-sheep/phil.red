@@ -33,7 +33,7 @@ Yet a simple twist can fix that: cryonics.
 A frozen brain really truly has no consciousness, yet if it’s possible for a `wood frog`_ to wake up from being frozen, it’s believable that we could, too.
 
 Then who are “you”?
-Are you the same person you were 10 years ago? 20 ago? At birth?
+Are you the same person you were 10 years ago? 20 years ago? At birth?
 A lot of people acknowledge that they’re not,
 yet due to continuity of consciousness,
 there is no clear boundary between the person they were back then and the person they are now.
@@ -50,11 +50,11 @@ This is the illusion this article sets out to dispell.
 
 To start with, it is completely possible to be awake without feeling your “I”.
 Unfortunately the term “ego death” has been mysticized by many,
-but one of the effects described by the term is exactly the temporary loss of this continuous “I”:
+but one of the effects described by the term is exactly this temporary loss of the continuous “I”:
 are you sure that this feeling is what makes you alive if it can be suspended and resumed?
 
 If the answer is yes, allow me to propose a final thought experiment.
-It utilizes the common philosophical idea of the ship of theseus.
+It utilizes the common philosophical idea of the Ship of Theseus.
 Imagine technology existed to
 1. simulate a complete human brain in a computer, and
 2. interface with a good chunk of the hundreds of trillions of synapses in the human brain.
