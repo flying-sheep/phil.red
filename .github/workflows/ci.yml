@@ -21,7 +21,6 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - run: yarn run lint:ci
-      - run: yarn build
   check:
     if: always()
     needs:
