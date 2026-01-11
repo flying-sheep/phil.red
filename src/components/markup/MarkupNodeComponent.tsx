@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
 import Link from '@mui/material/Link'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -47,6 +48,8 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 	if (typeof node === 'string') return <>{node}</>
 	switch (node.type) {
 		// Block
+		case Type.Transition:
+			return <Divider variant="middle" sx={{ mb: 1 }} />
 		case Type.Section:
 			return <section>{convertChildren(node, level + 1)}</section>
 		case Type.Title: {
