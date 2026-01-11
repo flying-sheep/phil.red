@@ -2,25 +2,60 @@ name: Deployment
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
   workflow_dispatch:
+concurrency: deployment-${{ github.ref }}
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: 'phil.red'
-      url: https://phil.red
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '24'
           cache: yarn
       - run: yarn install --immutable
-      - run: yarn build
+      - run: yarn build --base=phil.red/pr-${{ github.event.pull_request.number }}
         env:
-          NODE_ENV: production
-      - uses: burnett01/rsync-deployments@7.0.2
+          NODE_ENV: ${{ github.event_name == 'pull_request' && 'development' || 'production' }}
+      - uses: actions/upload-artifact@v6
+        with:
+          path: dist
+  deploy-preview:
+    needs: build
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6 # setup git
+      - uses: actions/download-artifact@v7
+        with:
+          path: dist
+      - uses: rossjrw/pr-preview-action@v1
+        id: preview
+        with:
+          source-dir: dist
+          preview-branch: gh-pages
+          umbrella-dir: .
+          qr-code: true
+  deploy-production:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: phil.red
+      url: https://phil.red
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          path: dist
+      - uses: burnett01/rsync-deployments@v8
         with:
           switches: --recursive --delete --archive --compress --verbose
           path: dist/
