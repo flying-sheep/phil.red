@@ -1,8 +1,8 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import { deepPurple } from '@mui/material/colors'
 import CssBaseline from '@mui/material/CssBaseline'
+import { deepPurple } from '@mui/material/colors'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import {
 	type ColorSystemOptions,
