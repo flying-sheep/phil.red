@@ -13,15 +13,14 @@ jobs:
         node-version:
           - '24'
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: corepack enable
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: yarn
       - run: yarn install --immutable
       - run: yarn run lint:ci
-      - run: yarn build
   check:
     if: always()
     needs:
