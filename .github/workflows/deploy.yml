@@ -32,9 +32,6 @@ jobs:
     needs: build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.preview.outcome.preview-url }}
     steps:
       - uses: actions/checkout@v6 # setup git
       - uses: actions/download-artifact@v7
