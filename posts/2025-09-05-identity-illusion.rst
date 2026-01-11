@@ -2,10 +2,16 @@ Identity is an illusion
 =======================
 
 I’ve been thinking a lot about the `teletransportation paradox`_.
-As I’m not the first one to do so, I enjoyed the many takes by media creators.
-Videos such as John Weldon’s `To Be`_ or `the Trouble with Transporters`_ by CGP Grey;
-comics like the very first Existential Comic `the Machine`_, or the many takes on `teleporter problems`_ by SMBC.
+As I’m not the first one to do so, I enjoyed the many takes by media creators:
+videos and comics such as
+
+- John Weldon’s `To Be`_
+- `the Trouble with Transporters`_ by CGP Grey
+- the very first Existential Comic `the Machine`_
+- the many takes on `teleporter problems`_ by SMBC
+
 The first three are nice explainy ones that might clean up the residual confusion that might potentially remain after my upcoming explanation!
+
 Skip to `the issues`_ if you clicked any of these links (except for the SMBC one) or already know
 
 The basics
@@ -46,7 +52,7 @@ You’re no longer toddler-you, so isn’t a perfect copy of your every atom mor
 “No” many keep insisting, there’s *something* continuing onwards:
 are we not all trapped in our own head and body,
 isn’t there an “I” that keeps existing, an “I” that the other person wouldn’t have?
-This is the illusion this article sets out to dispell.
+This is the *illusion* this article sets out to dispell.
 
 To start with, it is completely possible to be awake without feeling your “I”.
 Unfortunately the term “ego death” has been mysticized by many,
