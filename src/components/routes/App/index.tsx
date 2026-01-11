@@ -1,8 +1,8 @@
 import { Helmet } from '@dr.pogodin/react-helmet'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import CssBaseline from '@mui/material/CssBaseline'
 import { deepPurple } from '@mui/material/colors'
+import CssBaseline from '@mui/material/CssBaseline'
 import GlobalStyles from '@mui/material/GlobalStyles'
 import {
 	type ColorSystemOptions,
@@ -15,11 +15,12 @@ import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
 import { useMemo, useRef } from 'react'
 import { PortalTarget } from 'react-portal-target'
-import { Link, matchPath, Navigate, Route, useLocation } from 'react-router'
+import { Link, matchPath, Route, useLocation } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
 import { highStyles } from '../../markup/nodes/High'
 import Blog from '../Blog'
 import Code from '../Code'
+import Fallback from '../Fallback'
 import Home from '../Home'
 import ElevationScroll from './ElevationScroll'
 
@@ -124,7 +125,7 @@ const App = () => {
 					<Route path="blog/*" element={<Blog />} />
 					<Route index element={<Home />} />
 					<Route path="code" element={<Code />} />
-					<Route path="*" element={<Navigate replace to="/" />} />
+					<Route path="*" element={<Fallback />} />
 				</SlideRoutes>
 			</Box>
 			<PortalTarget name="page-source" />
