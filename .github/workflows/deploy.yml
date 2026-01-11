@@ -29,6 +29,7 @@ jobs:
         with:
           path: dist
   deploy-preview:
+    needs: build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     environment:
@@ -46,6 +47,7 @@ jobs:
           umbrella-dir: .
           qr-code: true
   deploy-production:
+    needs: build
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
