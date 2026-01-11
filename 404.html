@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="color-scheme" content="dark light" />
+	<title>phil.red – 404</title>
+	<script type="module">
+		// 404 page for gh pages only: redirect to PR preview if possible
+		const match = /^(\/phil.red\/pr-\d+)\/(.*)/.exec(location.pathname)
+		if (match) {
+			location.replace(`${match[1]}/?p=${encodeURIComponent(match[2])}`)
+		}
+	</script>
+</head>
+<body>
+	<h1>404</h1>
+	<p>Page not found.</p>
+</body>
+</html>
