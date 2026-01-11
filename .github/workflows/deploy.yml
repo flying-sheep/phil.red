@@ -22,7 +22,7 @@ jobs:
           node-version: '24'
           cache: yarn
       - run: yarn install --immutable
-      - run: yarn build
+      - run: yarn build --base=pr-${{ github.event.pull_request.number }}
         env:
           NODE_ENV: ${{ github.event_name == 'pull_request' && 'development' || 'production' }}
       - uses: actions/upload-artifact@v6
