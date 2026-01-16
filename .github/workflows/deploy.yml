@@ -49,6 +49,7 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: .
           qr-code: true
+          token: ${{ secrets.PREVIEW_TOKEN }}
   deploy-production:
     needs: build
     if: github.event_name != 'pull_request'
