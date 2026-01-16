@@ -50,6 +50,8 @@ jobs:
           umbrella-dir: .
           qr-code: true
           token: ${{ secrets.PREVIEW_TOKEN }}
+        env:
+          DEPLOY_TOKEN: ${{ secrets.PREVIEW_TOKEN }}
   deploy-production:
     needs: build
     if: github.event_name != 'pull_request'
