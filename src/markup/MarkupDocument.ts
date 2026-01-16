@@ -1,4 +1,4 @@
-import type { ParseResult } from '@arborium/arborium'
+import type { ParseResult as Utf16ParseResult } from '@arborium/arborium'
 import type { FunctionComponent } from 'typed-jsx'
 import type { VisualizationSpec } from 'vega-embed'
 
@@ -264,7 +264,7 @@ export const FootNote = mkFun<FootNote>(Type.FootNote)
 export interface CodeBlock extends Element<string> {
 	type: Type.CodeBlock
 	language?: string | undefined
-	parsed?: ParseResult | undefined
+	parsed?: Utf16ParseResult | undefined
 }
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 
