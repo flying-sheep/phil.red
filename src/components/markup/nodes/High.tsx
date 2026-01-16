@@ -1,4 +1,7 @@
-import { highlights, type ParseResult } from '@arborium/arborium'
+import {
+	highlights,
+	type ParseResult as Utf16ParseResult,
+} from '@arborium/arborium'
 import type { PaletteMode, SxProps, Theme } from '@mui/material/styles'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
@@ -28,7 +31,7 @@ export const highStyles = (theme: Theme) => [
 
 export interface HighProps<Theme extends object = object> {
 	code: string
-	parsed: ParseResult
+	parsed: Utf16ParseResult
 	language: string
 	sx?: SxProps<Theme>
 }
@@ -68,7 +71,7 @@ const High: FC<HighProps<Theme>> = ({ code, parsed, language, ...props }) => {
 
 function convert(
 	node: HTMLPreElement,
-	parsed: ParseResult,
+	parsed: Utf16ParseResult,
 ): Map<string, Highlight> {
 	const highlights = new Map<string, Highlight>()
 	const codeElem = node.querySelector('&>code:only-child')

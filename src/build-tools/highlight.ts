@@ -1,7 +1,7 @@
 import {
 	type ArboriumConfig,
 	loadGrammar,
-	type ParseResult,
+	type ParseResult as Utf16ParseResult,
 } from '@arborium/arborium'
 import { PosixFS, VirtualFS } from '@yarnpkg/fslib'
 import { ZipOpenFS } from '@yarnpkg/libzip'
@@ -33,7 +33,7 @@ const debugSilent = () => {}
 export default async function highlightCode(
 	code: string,
 	lang: string,
-): Promise<ParseResult> {
+): Promise<Utf16ParseResult> {
 	console.debug = debugSilent
 	const grammar = await loadGrammar(lang, config)
 	console.debug = debugOrig
