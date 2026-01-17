@@ -191,12 +191,6 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 
 	return {
 		name: 'renderdoc',
-		buildStart() {
-			// arborium uses console.*
-			console.debug = this.debug.bind(this)
-			console.info = this.info.bind(this)
-			console.warn = this.warn.bind(this)
-		},
 		async resolveId(id: string, importer?: string) {
 			if (exts.has(path.extname(id))) return id
 			if (id.startsWith('./') || !id.startsWith('../')) {
