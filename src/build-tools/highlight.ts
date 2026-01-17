@@ -30,8 +30,9 @@ const config: ArboriumConfig = {
 export default async function highlightCode(
 	code: string,
 	lang: string,
+	configOverride: ArboriumConfig = {},
 ): Promise<Utf16ParseResult> {
-	const grammar = await loadGrammar(lang, config)
+	const grammar = await loadGrammar(lang, { ...config, ...configOverride })
 	if (!grammar) throw new Error(`Unknown language: ${lang}`)
 	return grammar.parse(code)
 }

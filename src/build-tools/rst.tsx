@@ -14,14 +14,10 @@ function pos(node: docutils.Node): m.Position | undefined {
 }
 
 class RSTConverter {
-	console: {
-		debug: (msg: string) => void
-		info: (msg: string) => void
-		warn: (msg: string) => void
-	}
+	logger: NonNullable<ConverterOptions['logger']>
 
 	constructor(opts: ConverterOptions) {
-		this.console = opts.ctx ?? console
+		this.logger = opts.logger ?? console
 	}
 
 	async convertNode(node: docutils.Node, level: number): Promise<m.Node[]> {
@@ -193,7 +189,7 @@ class RSTConverter {
 					(c) => c !== 'code',
 				)
 				const code = node.astext()
-				const parsed = lang ? await highlightCode(code, lang) : undefined
+				const parsed = lang ? await highlightCode(code, lang, this) : undefined
 				return [
 					<m.CodeBlock language={lang} parsed={parsed} pos={pos(node)}>
 						{[code]}
@@ -245,13 +241,13 @@ class RSTConverter {
 			case 'system_message':
 				switch (Number(node.get('level'))) {
 					case 0:
-						this.console.debug(node.astext())
+						this.logger.debug(node.astext())
 						return []
 					case 1:
-						this.console.info(node.astext())
+						this.logger.info(node.astext())
 						return []
 					case 2:
-						this.console.warn(node.astext())
+						this.logger.warn(node.astext())
 						return []
 					case 3:
 					case 4:

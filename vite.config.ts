@@ -4,9 +4,6 @@ import { defineConfig } from 'vite'
 
 import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
 
-// arborium uses this
-console.debug = () => {}
-
 // https://vitejs.dev/config/
 export default defineConfig({
 	assetsInclude: ['**/*.py'],

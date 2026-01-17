@@ -1,15 +1,12 @@
 import { promises as fs } from 'node:fs'
 import * as path from 'node:path'
-
 import type { Node, ObjectExpression, Property } from 'estree'
 import { asyncWalk } from 'estree-walker'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
 import type { AstNode, PluginContext } from 'rollup'
 import type { Plugin } from 'vite'
-
 import { ASTError, type Document, ParseError, Type } from '../markup'
-
 import mdConvert from './md'
 import rstConvert from './rst'
 
@@ -34,11 +31,7 @@ function getVal(prop: Property | undefined) {
 
 export interface ConverterOptions {
 	path?: string
-	ctx?: {
-		debug(msg: string): void
-		info(msg: string): void
-		warn(msg: string): void
-	}
+	logger?: Pick<Console, 'debug' | 'info' | 'warn' | 'error'>
 }
 
 export type Converter = (
@@ -80,7 +73,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 				message: `No converter for ${ext} registered`,
 			})
 		try {
-			return await convert(code, { path: id, ctx })
+			return await convert(code, { path: id, logger: ctx })
 		} catch (eOrig) {
 			let e: Error
 			if (eOrig instanceof ParseError) {
