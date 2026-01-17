@@ -1,4 +1,4 @@
-import type { ParseResult as Utf16ParseResult } from '@arborium/arborium'
+import type { Utf16ParseResult } from '@arborium/arborium'
 import type { FunctionComponent } from 'typed-jsx'
 import type { VisualizationSpec } from 'vega-embed'
 
