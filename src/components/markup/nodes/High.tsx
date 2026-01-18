@@ -3,20 +3,22 @@ import type { PaletteMode, SxProps, Theme } from '@mui/material/styles'
 import { type FC, useEffect, useMemo, useState } from 'react'
 import CodeBlock from '../../CodeBlock.js'
 
+/* font-weight and font-style are not supported by the feature, so we map them to something else:
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::highlight#allowable_properties
+ * unfortunately, text-shadow and stroke are *also* not supported by most browsers:
+ * https://github.com/mdn/browser-compat-data/issues/28852
+ */
 const styles = (tag: string, mode: PaletteMode) => ({
 	color: `var(--arb-${tag}-${mode})`,
 	textDecoration: `var(--arb-${tag}-${mode}-decoration)`,
-	/* these aren’t actually supported:
-	 * https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::highlight#allowable_properties
-	fontWeight: `var(--arb-${tag}-${mode}-weight)`,
-	fontStyle: `var(--arb-${tag}-${mode}-style)`,
-	 */
+	WebkitTextStroke: `if(style(--arb-${tag}-${mode}-weight: bold): thin;)`,
+	textShadow: `if(style(--arb-${tag}-${mode}-style: italic): 0 0 1ex var(--arb-${tag}-${mode});)`,
 })
 
 const cssTheme = (mode: PaletteMode) =>
 	Object.fromEntries(
 		highlights.flatMap(({ name, tag, parentTag }) =>
-			parentTag ? [] : [[`::highlight(${name})`, styles(tag, mode)]],
+			parentTag ? [] : [[`code::highlight(${name})`, styles(tag, mode)]],
 		),
 	)
 
