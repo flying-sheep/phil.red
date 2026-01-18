@@ -24,13 +24,13 @@
 		"dist"
 	],
 	"dependencies": {
-		"@arborium/arborium": "^2.12.2",
-		"@arborium/ini": "^2.12.2",
-		"@arborium/python": "^2.12.2",
-		"@arborium/toml": "^2.12.2",
-		"@arborium/typescript": "^2.12.2",
-		"@arborium/xml": "^2.12.2",
-		"@arborium/zsh": "^2.12.2",
+		"@arborium/arborium": "^2.12.3",
+		"@arborium/ini": "^2.12.3",
+		"@arborium/python": "^2.12.3",
+		"@arborium/toml": "^2.12.3",
+		"@arborium/typescript": "^2.12.3",
+		"@arborium/xml": "^2.12.3",
+		"@arborium/zsh": "^2.12.3",
 		"@dr.pogodin/react-helmet": "^3.0.5",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
@@ -86,6 +86,10 @@
 		"vite-bundle-visualizer": "^1.2.1"
 	},
 	"packageManager": "yarn@4.12.0",
+	"//": "https://github.com/yarnpkg/berry/issues/5995",
+	"resolutions": {
+		"node-gyp": "npm:optional-pkg@1"
+	},
 	"lint-staged": {
 		"!(rawPosts)": "biome check --no-errors-on-unmatched --files-ignore-unknown=true --write"
 	}
