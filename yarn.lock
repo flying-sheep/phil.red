@@ -5,52 +5,52 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@arborium/arborium@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/arborium@npm:2.12.3"
-  checksum: 10/a5b665d976eb36cb8f080fa46fc449dbb8de7b721684c50a658ea39f81b12ad8ccfc53cede5d825bd51e21e3d29653d77c05b2da9c32b36b389aa823fb9ad48c
+"@arborium/arborium@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/arborium@npm:2.12.4"
+  checksum: 10/07c747024fcce9e5dece76daf0f64eef176666b07a1e9a9566d28511d98d349373ecc5a0fc57c9551b9adbaf17d88a1be8681b913c01417986831a2584d9252d
   languageName: node
   linkType: hard
 
-"@arborium/ini@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/ini@npm:2.12.3"
-  checksum: 10/c87b269e70a1f6414bfed3ff02e570edf436078dd0e59bbe5570a5c74d74fd0d6130e2b3438c8719a65a6423904ba8c3db7cda8dab8a82f372bd536bc3e6f02f
+"@arborium/ini@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/ini@npm:2.12.4"
+  checksum: 10/a52b911de248723377a8807bf86920381fa472787844b34a5bdbca5ed7454e018278b020c6b94616083e06482c1e8d7ad8fb07e5c74e4fb0fe41ed966925d81c
   languageName: node
   linkType: hard
 
-"@arborium/python@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/python@npm:2.12.3"
-  checksum: 10/bb1790648c28f2b8828926a41f84c679d74887f10e6b9d6f17fd6ab36270671ddeb986a6f423024ef41c8926ec6230e897a5671ff1c5bce6d9c025ca73db53bc
+"@arborium/python@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/python@npm:2.12.4"
+  checksum: 10/e885b2dbf076d143e1e2d5fbde52711ba661562cd8ef05ec33b19da765a326aed62428bee467990046a4c005260447f5c7bacb22ff86f29395642a8a88eae619
   languageName: node
   linkType: hard
 
-"@arborium/toml@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/toml@npm:2.12.3"
-  checksum: 10/59a9d897eed7318dd8c2a75815ed3c2a2cde4f61c8d1b5363772fbdbae76385a90073dbf94817ab76f3d3c16955a08e60283e54240577f7004e902e70caac0a7
+"@arborium/toml@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/toml@npm:2.12.4"
+  checksum: 10/e775697ce1025b6bd8774d11e0520d65225707d1ff4e5b014d4e235a3652bb7925e3a6363a1d57ba97f8746ff2bc1901e6dce77f479279918178454e1f22951f
   languageName: node
   linkType: hard
 
-"@arborium/typescript@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/typescript@npm:2.12.3"
-  checksum: 10/2435cb72ba1b0f45051c7d804f039277257fc2a76f8cce07762b4eb89ac33be72e4cf901c38e65bb6746a80d96eccc7f678517118e8d4654f70312ca6c35df6e
+"@arborium/typescript@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/typescript@npm:2.12.4"
+  checksum: 10/0c372a75069e2571ae8a38e3dc837d028f63288f6fed5f3fe4c3d16836f54d2fbf398e4ceba7749bd99cdbece1b58e9f419c16ced56fa2c2f7839d46f9944d99
   languageName: node
   linkType: hard
 
-"@arborium/xml@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/xml@npm:2.12.3"
-  checksum: 10/30b413b1f8f47be516a3c2f0cde4fd390f84053a43548f8d5916c20fedbdd673113d294231662dfe59cf292e6a4338a9bc61ea829309152cf6deccdbecf0a36c
+"@arborium/xml@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/xml@npm:2.12.4"
+  checksum: 10/f9f73e67f71be8a79dbd8ce1a931414e67c1ee1e53df29296ce0d0c651b3168cb1c14c657ca38e2d80b45b7667c63a18069fd730eda2b1efc21383a8a540217c
   languageName: node
   linkType: hard
 
-"@arborium/zsh@npm:^2.12.3":
-  version: 2.12.3
-  resolution: "@arborium/zsh@npm:2.12.3"
-  checksum: 10/cd7b1c33f39b44cb016b2c259a053dee069c67734f51566605efcb95d60733ae8928e4ee97b5c0069495f329d5751b1e3484fc6a16d83c34dc6c729ed34b0a93
+"@arborium/zsh@npm:^2.12.4":
+  version: 2.12.4
+  resolution: "@arborium/zsh@npm:2.12.4"
+  checksum: 10/4c2209078684ffb94ae68ea8e673dfe2dd2ec75a235023c56b571900117e7aab7cdf4fd10205f83d0837978509455ae5567179636cc6df48de3e54b9421aefb7
   languageName: node
   linkType: hard
 
@@ -2972,13 +2972,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "phil.red@workspace:."
   dependencies:
-    "@arborium/arborium": "npm:^2.12.3"
-    "@arborium/ini": "npm:^2.12.3"
-    "@arborium/python": "npm:^2.12.3"
-    "@arborium/toml": "npm:^2.12.3"
-    "@arborium/typescript": "npm:^2.12.3"
-    "@arborium/xml": "npm:^2.12.3"
-    "@arborium/zsh": "npm:^2.12.3"
+    "@arborium/arborium": "npm:^2.12.4"
+    "@arborium/ini": "npm:^2.12.4"
+    "@arborium/python": "npm:^2.12.4"
+    "@arborium/toml": "npm:^2.12.4"
+    "@arborium/typescript": "npm:^2.12.4"
+    "@arborium/xml": "npm:^2.12.4"
+    "@arborium/zsh": "npm:^2.12.4"
     "@biomejs/biome": "npm:^2.3.11"
     "@dr.pogodin/react-helmet": "npm:^3.0.5"
     "@emotion/react": "npm:^11.14.0"
