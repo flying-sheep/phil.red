@@ -52,6 +52,8 @@ jobs:
           umbrella-dir: .
           qr-code: true
           token: ${{ secrets.PREVIEW_TOKEN || github.token }}
+          # https://github.com/rossjrw/pr-preview-action/issues/118
+          comment: ${{ github.actor == github.repository_owner }}
   deploy-production:
     needs: build
     if: github.event_name != 'pull_request'
