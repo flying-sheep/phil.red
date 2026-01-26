@@ -37,9 +37,12 @@ jobs:
     needs: build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    # these permissions are used when my PR triggers the pr-preview-action
+    # and when dependabot runs the comment part of the pr preview action
     permissions:
-      issues: write
-      pull-requests: write
+      contents: write       # me doing Git stuff
+      issues: write         # dependabot comment
+      pull-requests: write  # dependabot comment
     steps:
       - uses: actions/checkout@v6 # setup git
         with:
@@ -54,6 +57,7 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: .
           qr-code: true
+          # when dependabot does git things with this actions, it uses the PREVIEW_TOKEN
           token: ${{ secrets.PREVIEW_TOKEN || github.token }}
   deploy-production:
     needs: build
