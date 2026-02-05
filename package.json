@@ -76,7 +76,7 @@
 		"lint-staged": ">=16.2.7",
 		"magic-string": "^0.30.21",
 		"markdown-it": "^14.1.0",
-		"pyodide": "^0.29.1",
+		"pyodide": "^0.29.3",
 		"react-base16-styling": "^0.10.0",
 		"react-json-tree": "^0.20.0",
 		"rollup": "^4.55.1",

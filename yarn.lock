@@ -3008,7 +3008,7 @@ __metadata:
     markdown-it: "npm:^14.1.0"
     merge-sx: "npm:^3.4.0"
     notistack: "npm:^3.0.2"
-    pyodide: "npm:^0.29.1"
+    pyodide: "npm:^0.29.3"
     react: "npm:^19.2.4"
     react-base16-styling: "npm:^0.10.0"
     react-dom: "npm:^19.2.4"
@@ -3101,13 +3101,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pyodide@npm:^0.29.1":
-  version: 0.29.1
-  resolution: "pyodide@npm:0.29.1"
+"pyodide@npm:^0.29.3":
+  version: 0.29.3
+  resolution: "pyodide@npm:0.29.3"
   dependencies:
     "@types/emscripten": "npm:^1.41.4"
     ws: "npm:^8.5.0"
-  checksum: 10/a23b5790b5dc31f44c88bb1e5fe262f7607dff7dfdd1d89f888a18a0e4456bd9fbaa1cd40dc16015190d282bca93492e23b35137d299e9ac5ab250515adfcc43
+  checksum: 10/96ca2f678cb672f7c8e94e48c9f2168e015c8b2636e6207fe443eb7240167ec4e65f0a6593878aa749b3ef9dbb28d0e16d81df6f891f7c813dc93bea9a9da456
   languageName: node
   linkType: hard
 
