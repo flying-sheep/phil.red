@@ -222,7 +222,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.28.4, @babel/runtime@npm:^7.28.6, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.28.6, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.28.6
   resolution: "@babel/runtime@npm:7.28.6"
   checksum: 10/fbcd439cb74d4a681958eb064c509829e3f46d8a4bfaaf441baa81bb6733d1e680bccc676c813883d7741bcaada1d0d04b15aa320ef280b5734e2192b50decf9
@@ -356,14 +356,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dr.pogodin/react-helmet@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "@dr.pogodin/react-helmet@npm:3.0.5"
+"@dr.pogodin/react-helmet@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "@dr.pogodin/react-helmet@npm:3.0.6"
   dependencies:
-    "@babel/runtime": "npm:^7.28.4"
+    "@babel/runtime": "npm:^7.28.6"
   peerDependencies:
     react: 19
-  checksum: 10/6398e5cb41b1fee31bc5d508647fa6b2bafa7d7c1493f2927dc24cb658d723b9ab382037dabb053bf22309c08136fa7e82adc2cf24da5da21a42e66843fdf3ce
+  checksum: 10/2112eea6c49b64245c40a6fc81a823ce0866c17a2c78d6e18a51e72ff14b2c2e0dace4589efa6bae378a30d39e7c8841786aa0312914a9a3cfa650da99dba980
   languageName: node
   linkType: hard
 
@@ -2980,7 +2980,7 @@ __metadata:
     "@arborium/xml": "npm:^2.13.0"
     "@arborium/zsh": "npm:^2.13.0"
     "@biomejs/biome": "npm:^2.3.15"
-    "@dr.pogodin/react-helmet": "npm:^3.0.5"
+    "@dr.pogodin/react-helmet": "npm:^3.0.6"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
     "@fontsource/iosevka": "npm:^5.2.5"
