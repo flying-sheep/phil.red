@@ -356,14 +356,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dr.pogodin/react-helmet@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@dr.pogodin/react-helmet@npm:3.1.0"
+"@dr.pogodin/react-helmet@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@dr.pogodin/react-helmet@npm:3.1.1"
   dependencies:
     "@babel/runtime": "npm:^7.28.6"
   peerDependencies:
     react: 19
-  checksum: 10/0e145d335e81cb25a1d06bc12726ca6b5c01f592ed88ed7f11a8f106ced3e3e69c7a46a5cfa7be66796c1a9cf12d8b65b55f5b4eca725de8fe5f8890588c9965
+  checksum: 10/495a4ce47ff1d5efe767927d4e197c9567b3de4a7f02f4025f3ed64db50f193e2677147c0b2d6776caf2e034c72207d69c2f6625288ce1e0bd4c926350ab84a7
   languageName: node
   linkType: hard
 
@@ -2972,7 +2972,7 @@ __metadata:
     "@arborium/xml": "npm:^2.13.0"
     "@arborium/zsh": "npm:^2.13.0"
     "@biomejs/biome": "npm:^2.4.6"
-    "@dr.pogodin/react-helmet": "npm:^3.1.0"
+    "@dr.pogodin/react-helmet": "npm:^3.1.1"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
     "@fontsource/iosevka": "npm:^5.2.5"
