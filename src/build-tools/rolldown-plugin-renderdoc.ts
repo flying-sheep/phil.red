@@ -104,15 +104,19 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			return 'export default null'
 		}
 		const code = `export default ${JSON.stringify(post)}`
-		const magicString = new MagicString(code)
 		const ast = ctx.parse(code)
-		const imports = new Map<string, string>()
 
 		// TODO: image
 		const types = new Set([Type.Vega])
 
+		interface Edit {
+			start: number
+			end: number
+			url: string
+		}
+		const edits: Edit[] = []
 		walk(ast, {
-			async enter(node) {
+			enter(node) {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
 					if (!types.has(getVal(getProp(node, 'type')) as Type)) return
@@ -129,20 +133,28 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					const urlProp = getProp(dataVal, 'url')
 					if (!urlProp) ctx.error(`missing “url” in “${id}”`)
 					const url = getVal(urlProp) as string
-					const resolved = await ctx.resolve(url)
-					if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
-					if (!imports.has(resolved.id)) {
-						imports.set(resolved.id, `$${imports.size}`)
-					}
-					magicString.overwrite(
-						urlProp.value.start,
-						urlProp.value.end,
-						// biome-ignore lint/style/noNonNullAssertion: Is set above
-						imports.get(resolved.id)!,
-					)
+					edits.push({
+						start: urlProp.start,
+						end: urlProp.end,
+						url,
+					})
 				}
 			},
 		})
+
+		const magicString = new MagicString(code)
+		const imports = new Map<string, string>()
+		await Promise.all(
+			edits.map(async ({ start, end, url }) => {
+				const resolved = await ctx.resolve(url)
+				if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
+				if (!imports.has(resolved.id)) {
+					imports.set(resolved.id, `$${imports.size}`)
+				}
+				// biome-ignore lint/style/noNonNullAssertion: Is set above
+				magicString.overwrite(start, end, imports.get(resolved.id)!)
+			}),
+		)
 
 		const importBlock = Array.from(imports.entries())
 			.map(([p, name]) => `import ${name} from ${JSON.stringify(`${p}?url`)}`)

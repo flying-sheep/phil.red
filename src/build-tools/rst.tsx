@@ -6,7 +6,7 @@ import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import highlightCode from './highlight'
 import * as docutils from './pyiodide-docutils'
-import type { ConverterOptions } from './rollup-plugin-renderdoc'
+import type { ConverterOptions } from './rolldown-plugin-renderdoc'
 
 function pos(node: docutils.Node): m.Position | undefined {
 	const line: number | undefined = node['line']
