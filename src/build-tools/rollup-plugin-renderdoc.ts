@@ -1,16 +1,19 @@
 import { promises as fs } from 'node:fs'
 import * as path from 'node:path'
-import type { Node, ObjectExpression, Property } from 'estree'
-import { asyncWalk } from 'estree-walker'
+import type { ObjectExpression, ObjectProperty } from '@oxc-project/types'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
-import type { AstNode, PluginContext } from 'rollup'
+import { walk } from 'oxc-walker'
+import type { PluginContext } from 'rolldown'
 import type { Plugin } from 'vite'
 import { ASTError, type Document, ParseError, Type } from '../markup'
 import mdConvert from './md'
 import rstConvert from './rst'
 
-function getProp(node: ObjectExpression, key: string): Property | undefined {
+function getProp(
+	node: ObjectExpression,
+	key: string,
+): ObjectProperty | undefined {
 	for (const prop of node.properties) {
 		if (
 			prop.type === 'Property' &&
@@ -23,7 +26,7 @@ function getProp(node: ObjectExpression, key: string): Property | undefined {
 	return undefined
 }
 
-function getVal(prop: Property | undefined) {
+function getVal(prop: ObjectProperty | undefined) {
 	if (prop?.type !== 'Property' || prop.value.type !== 'Literal')
 		return undefined
 	return prop.value.value
@@ -102,13 +105,13 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		}
 		const code = `export default ${JSON.stringify(post)}`
 		const magicString = new MagicString(code)
-		const ast = ctx.parse(code) as Node
+		const ast = ctx.parse(code)
 		const imports = new Map<string, string>()
 
 		// TODO: image
 		const types = new Set([Type.Vega])
 
-		await asyncWalk(ast, {
+		walk(ast, {
 			async enter(node) {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
@@ -131,10 +134,9 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					if (!imports.has(resolved.id)) {
 						imports.set(resolved.id, `$${imports.size}`)
 					}
-					const urlVal = urlProp.value as AstNode
 					magicString.overwrite(
-						urlVal.start,
-						urlVal.end,
+						urlProp.value.start,
+						urlProp.value.end,
 						// biome-ignore lint/style/noNonNullAssertion: Is set above
 						imports.get(resolved.id)!,
 					)
