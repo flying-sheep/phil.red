@@ -1,6 +1,10 @@
 import { promises as fs } from 'node:fs'
 import * as path from 'node:path'
-import type { ObjectExpression, ObjectProperty } from '@oxc-project/types'
+import type {
+	ObjectExpression,
+	ObjectProperty,
+	StringLiteral,
+} from '@oxc-project/types'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
 import { walk } from 'oxc-walker'
@@ -109,12 +113,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		// TODO: image
 		const types = new Set([Type.Vega])
 
-		interface Edit {
-			start: number
-			end: number
-			url: string
-		}
-		const edits: Edit[] = []
+		const urlNodes: StringLiteral[] = []
 		walk(ast, {
 			enter(node) {
 				if (node.type === 'ObjectExpression') {
@@ -130,14 +129,10 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 						ctx.error(
 							`missing “data” object in “${id}”: ${JSON.stringify(node)}`,
 						)
-					const urlProp = getProp(dataVal, 'url')
-					if (!urlProp) ctx.error(`missing “url” in “${id}”`)
-					const url = getVal(urlProp) as string
-					edits.push({
-						start: urlProp.start,
-						end: urlProp.end,
-						url,
-					})
+					const urlVal = getProp(dataVal, 'url')?.value
+					if (urlVal?.type !== 'Literal' || typeof urlVal.value !== 'string')
+						ctx.error(`missing “url” string in “${id}”`)
+					urlNodes.push(urlVal)
 				}
 			},
 		})
@@ -145,9 +140,9 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		const magicString = new MagicString(code)
 		const imports = new Map<string, string>()
 		await Promise.all(
-			edits.map(async ({ start, end, url }) => {
-				const resolved = await ctx.resolve(url)
-				if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
+			urlNodes.map(async ({ start, end, value: ref }) => {
+				const resolved = await ctx.resolve(ref)
+				if (!resolved) ctx.error(`cannot resolve “${ref}” from “${id}”`)
 				if (!imports.has(resolved.id)) {
 					imports.set(resolved.id, `$${imports.size}`)
 				}
