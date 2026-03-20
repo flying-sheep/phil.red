@@ -1,16 +1,23 @@
 import { promises as fs } from 'node:fs'
 import * as path from 'node:path'
-import type { Node, ObjectExpression, Property } from 'estree'
-import { asyncWalk } from 'estree-walker'
+import type {
+	ObjectExpression,
+	ObjectProperty,
+	StringLiteral,
+} from '@oxc-project/types'
 import { globby } from 'globby'
 import MagicString from 'magic-string'
-import type { AstNode, PluginContext } from 'rollup'
+import { walk } from 'oxc-walker'
+import type { PluginContext } from 'rolldown'
 import type { Plugin } from 'vite'
 import { ASTError, type Document, ParseError, Type } from '../markup'
 import mdConvert from './md'
 import rstConvert from './rst'
 
-function getProp(node: ObjectExpression, key: string): Property | undefined {
+function getProp(
+	node: ObjectExpression,
+	key: string,
+): ObjectProperty | undefined {
 	for (const prop of node.properties) {
 		if (
 			prop.type === 'Property' &&
@@ -23,7 +30,7 @@ function getProp(node: ObjectExpression, key: string): Property | undefined {
 	return undefined
 }
 
-function getVal(prop: Property | undefined) {
+function getVal(prop: ObjectProperty | undefined) {
 	if (prop?.type !== 'Property' || prop.value.type !== 'Literal')
 		return undefined
 	return prop.value.value
@@ -101,15 +108,14 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			return 'export default null'
 		}
 		const code = `export default ${JSON.stringify(post)}`
-		const magicString = new MagicString(code)
-		const ast = ctx.parse(code) as Node
-		const imports = new Map<string, string>()
+		const ast = ctx.parse(code)
 
 		// TODO: image
 		const types = new Set([Type.Vega])
 
-		await asyncWalk(ast, {
-			async enter(node) {
+		const urlNodes: StringLiteral[] = []
+		walk(ast, {
+			enter(node) {
 				if (node.type === 'ObjectExpression') {
 					// Set.has should have type `(any) => bool`
 					if (!types.has(getVal(getProp(node, 'type')) as Type)) return
@@ -123,24 +129,27 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 						ctx.error(
 							`missing “data” object in “${id}”: ${JSON.stringify(node)}`,
 						)
-					const urlProp = getProp(dataVal, 'url')
-					if (!urlProp) ctx.error(`missing “url” in “${id}”`)
-					const url = getVal(urlProp) as string
-					const resolved = await ctx.resolve(url)
-					if (!resolved) ctx.error(`cannot resolve “${url}” from “${id}”`)
-					if (!imports.has(resolved.id)) {
-						imports.set(resolved.id, `$${imports.size}`)
-					}
-					const urlVal = urlProp.value as AstNode
-					magicString.overwrite(
-						urlVal.start,
-						urlVal.end,
-						// biome-ignore lint/style/noNonNullAssertion: Is set above
-						imports.get(resolved.id)!,
-					)
+					const urlVal = getProp(dataVal, 'url')?.value
+					if (urlVal?.type !== 'Literal' || typeof urlVal.value !== 'string')
+						ctx.error(`missing “url” string in “${id}”`)
+					urlNodes.push(urlVal)
 				}
 			},
 		})
+
+		const magicString = new MagicString(code)
+		const imports = new Map<string, string>()
+		await Promise.all(
+			urlNodes.map(async ({ start, end, value: ref }) => {
+				const resolved = await ctx.resolve(ref)
+				if (!resolved) ctx.error(`cannot resolve “${ref}” from “${id}”`)
+				if (!imports.has(resolved.id)) {
+					imports.set(resolved.id, `$${imports.size}`)
+				}
+				// biome-ignore lint/style/noNonNullAssertion: Is set above
+				magicString.overwrite(start, end, imports.get(resolved.id)!)
+			}),
+		)
 
 		const importBlock = Array.from(imports.entries())
 			.map(([p, name]) => `import ${name} from ${JSON.stringify(`${p}?url`)}`)
