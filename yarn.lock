@@ -3012,7 +3012,7 @@ __metadata:
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
     rollup: "npm:^4.59.0"
-    temml: "npm:^0.13.1"
+    temml: "npm:^0.13.2"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^5.9.3"
     unplugin-fonts: "npm:^1.4.0"
@@ -3649,10 +3649,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"temml@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "temml@npm:0.13.1"
-  checksum: 10/60371fc986b9728ef0283391a2971d386451b9a53d78da9cb5e245cdd419432b1c570ce307e87911c4b109dba9f886251c8e62849a555fa58d4a1768e68d6062
+"temml@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "temml@npm:0.13.2"
+  checksum: 10/d54e367ffce8f2cd41fc865b775a7b15dcf0f18445702ddd5f04341a2da64aa14167c7b5b9d148d40e4ac76053d65148a3b8a27cbda56956f92234db43e89efe
   languageName: node
   linkType: hard
 
