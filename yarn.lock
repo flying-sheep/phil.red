@@ -5,52 +5,52 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@arborium/arborium@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/arborium@npm:2.13.0"
-  checksum: 10/5031dbe0219cd074d5f7cb843f4a314f5b6d721a6468720c4133ddb9740853b2a0edfde197470f383f386e54f96b4b1674ad098f3f5ffa6d343255d11ed4ce31
+"@arborium/arborium@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/arborium@npm:2.16.0"
+  checksum: 10/fad342c5ede3d68f38beeea87e31815e5540056a77f27d04a31b9826d20fffe23875cfe23aac6277d273344706415ce69b20d9e9dd45d422252cbcaf68bd02de
   languageName: node
   linkType: hard
 
-"@arborium/ini@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/ini@npm:2.13.0"
-  checksum: 10/1ae6635a1e7ab78f49be8c612ce58b9ef075b3e2c609c20a8baf02f387ec64e8448c610f47f39efbe72fa596ec20745e66a89ba0b5b721e76d89b257d2ed17a2
+"@arborium/ini@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/ini@npm:2.16.0"
+  checksum: 10/4216746735938e2757285d96a30cbdacb524a7213041dd8872b572d32d7a3371502331b4960b9d6d493f57e252c8cfeabbf3b3f79811c0e88dd706e953d338b6
   languageName: node
   linkType: hard
 
-"@arborium/python@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/python@npm:2.13.0"
-  checksum: 10/64aaedf7fb3c2f03f0ba370ba29f77d6e088f39ca7d1a46c9c1ae88f613c72ba4aeab077d737b57f935ab263f9362a8d93c5314d47486a89ce96b974023b9cfb
+"@arborium/python@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/python@npm:2.16.0"
+  checksum: 10/9dbf976cbc80418afc39f16df2a9a79768dd7667690ed91e950491d4771d3e701991c1f637c0a646595c05296a63c892841c78ab5981e253f8a39daae3f2f335
   languageName: node
   linkType: hard
 
-"@arborium/toml@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/toml@npm:2.13.0"
-  checksum: 10/a192d723f66455bd089561b6b85d66eb42a4a28b42893bb2f8ac7a8ccfd4e02d42fe2772d5a5a30a05afddb0bb9cf6a476e93c2e60e7f2ca70693172dd20bd08
+"@arborium/toml@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/toml@npm:2.16.0"
+  checksum: 10/536e44c30b36fed5dd274f119387e1275f2bd2d830a6f29d775fee5d64b0ca5e6895d575bc17f0286caebfd87b1cf8adce474dddd3c9b8bca905ac8b82d6aeed
   languageName: node
   linkType: hard
 
-"@arborium/typescript@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/typescript@npm:2.13.0"
-  checksum: 10/fcf237f8d245e72feb3adfc917e7e710cc3b119d3a4d8c674c955f66a97f901613c0f1cab7291ab90a05a6b7992d58f97c53027e7946f8438f44cd77dd55540a
+"@arborium/typescript@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/typescript@npm:2.16.0"
+  checksum: 10/4bf7135941dd44e6e58d60059c342b76c0b0fb538aef4d61e401394ea133a18f0468ab3e274a26cc031880254b12bd8ce4fac78e5af54f6c899a25d049178d53
   languageName: node
   linkType: hard
 
-"@arborium/xml@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/xml@npm:2.13.0"
-  checksum: 10/03e2322eaf60c7cb0eaa7c31e2688ab51d088788ab781a6c7d155c9fc1a97db4bb5a4119a7ef6f8a2cb69991d10df9a2c5b52fff68770a267827a4d7135ba425
+"@arborium/xml@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/xml@npm:2.16.0"
+  checksum: 10/08a3a08919640333700fc890b05949a012ce980444601da113a80b48c8caa775ab5e169e699dafd01b54ab1d00560e55cf95b3a69ba402d395147b397b76fd92
   languageName: node
   linkType: hard
 
-"@arborium/zsh@npm:^2.13.0":
-  version: 2.13.0
-  resolution: "@arborium/zsh@npm:2.13.0"
-  checksum: 10/35b6eca285a4141f12dd109e4b0a659157eace2f9fc37169c62ab8864e4716d4a8d12089cdf7128214c7677128c13d4e6fb291995d3ae2413f7c104eba1ee6dc
+"@arborium/zsh@npm:^2.16.0":
+  version: 2.16.0
+  resolution: "@arborium/zsh@npm:2.16.0"
+  checksum: 10/1a975a01ca0a2b4cd7559069b7af79ca7176d93a5e641787e3926d2162393b628840d5c965b0c201e1d99b94e48f0aa0042965bccb255047819d647fb8775f8a
   languageName: node
   linkType: hard
 
@@ -1128,13 +1128,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "@vitejs/plugin-react@npm:6.0.0"
+"@vitejs/plugin-react@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@vitejs/plugin-react@npm:6.0.1"
   dependencies:
     "@rolldown/pluginutils": "npm:1.0.0-rc.7"
   peerDependencies:
-    "@rolldown/plugin-babel": ^0.1.7
+    "@rolldown/plugin-babel": ^0.1.7 || ^0.2.0
     babel-plugin-react-compiler: ^1.0.0
     vite: ^8.0.0
   peerDependenciesMeta:
@@ -1142,7 +1142,7 @@ __metadata:
       optional: true
     babel-plugin-react-compiler:
       optional: true
-  checksum: 10/1178596e1c696818a0f06c07a9fccfb86381d0ea8c0f5dab691ae52f5a14e83b68304023fdb966c5fdd2d6f8dfd5fe9113164570d319070eaac4c672d6967ff2
+  checksum: 10/a525799252fa6c12bf9a0a367b17dfc3d5e8e02ec0b5b81554db9d97b764c554be6b0686e3dd385b0ac0350f0c023120ce712d79feedd99fa2cb854b7cd1e960
   languageName: node
   linkType: hard
 
@@ -1203,12 +1203,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yarnpkg/fslib@npm:^3.1.3, @yarnpkg/fslib@npm:^3.1.4":
-  version: 3.1.4
-  resolution: "@yarnpkg/fslib@npm:3.1.4"
+"@yarnpkg/fslib@npm:^3.1.3, @yarnpkg/fslib@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "@yarnpkg/fslib@npm:3.1.5"
   dependencies:
     tslib: "npm:^2.4.0"
-  checksum: 10/9587a154768e61fbcf71ae745b1bf84e4ce0cbaa94163137ec88bd5005000a5b893dacbccbed7ac5f7643f957781c4f481d11ab3baf421ccafffbf43c275073d
+  checksum: 10/67b4850cdfbf0c11460302d997c0eacab46246cc8c7718a045beca346c494163e15768e2d20ab719ff6a98adbe7eaa9efcecdfd5cb0b8539f84a96449ac7ceaa
   languageName: node
   linkType: hard
 
@@ -2438,19 +2438,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:>=16.3.3":
-  version: 16.3.3
-  resolution: "lint-staged@npm:16.3.3"
+"lint-staged@npm:>=16.4.0":
+  version: 16.4.0
+  resolution: "lint-staged@npm:16.4.0"
   dependencies:
     commander: "npm:^14.0.3"
     listr2: "npm:^9.0.5"
-    micromatch: "npm:^4.0.8"
+    picomatch: "npm:^4.0.3"
     string-argv: "npm:^0.3.2"
-    tinyexec: "npm:^1.0.2"
+    tinyexec: "npm:^1.0.4"
     yaml: "npm:^2.8.2"
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: 10/64b20a0aa8710a89db49b4d4384f44e471de8544133cd9f80b1ebeac148144e43b1553aea2b34bf530fd32b554374ee8128c9332033ba138f1a9685964de1cd3
+  checksum: 10/eb7aa0d43e321bbf282ce0c693a3db762aa9b8e5bf29419a49c8877a247cd3a14cf8d519f914f8c8dcd2aea73ac83c0bb44fadb97a30004219e060a780dda74e
   languageName: node
   linkType: hard
 
@@ -2815,13 +2815,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "phil.red@workspace:."
   dependencies:
-    "@arborium/arborium": "npm:^2.13.0"
-    "@arborium/ini": "npm:^2.13.0"
-    "@arborium/python": "npm:^2.13.0"
-    "@arborium/toml": "npm:^2.13.0"
-    "@arborium/typescript": "npm:^2.13.0"
-    "@arborium/xml": "npm:^2.13.0"
-    "@arborium/zsh": "npm:^2.13.0"
+    "@arborium/arborium": "npm:^2.16.0"
+    "@arborium/ini": "npm:^2.16.0"
+    "@arborium/python": "npm:^2.16.0"
+    "@arborium/toml": "npm:^2.16.0"
+    "@arborium/typescript": "npm:^2.16.0"
+    "@arborium/xml": "npm:^2.16.0"
+    "@arborium/zsh": "npm:^2.16.0"
     "@biomejs/biome": "npm:^2.4.6"
     "@dr.pogodin/react-helmet": "npm:^3.1.1"
     "@emotion/react": "npm:^11.14.0"
@@ -2839,13 +2839,13 @@ __metadata:
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
     "@types/react-is": "npm:^19.2.0"
-    "@vitejs/plugin-react": "npm:^6.0.0"
-    "@yarnpkg/fslib": "npm:^3.1.4"
+    "@vitejs/plugin-react": "npm:^6.0.1"
+    "@yarnpkg/fslib": "npm:^3.1.5"
     "@yarnpkg/libzip": "npm:^3.2.2"
     depcheck: "npm:^1.4.7"
     globby: "npm:^16.1.1"
     husky: "npm:>=9.1.7"
-    lint-staged: "npm:>=16.3.3"
+    lint-staged: "npm:>=16.4.0"
     magic-string: "npm:^0.30.21"
     markdown-it: "npm:^14.1.1"
     merge-sx: "npm:^3.4.0"
@@ -2864,7 +2864,7 @@ __metadata:
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
     rolldown: "npm:^1.0.0-rc.9"
-    temml: "npm:^0.13.1"
+    temml: "npm:^0.13.2"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^5.9.3"
     unplugin-fonts: "npm:^1.4.0"
@@ -3446,17 +3446,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"temml@npm:^0.13.1":
-  version: 0.13.1
-  resolution: "temml@npm:0.13.1"
-  checksum: 10/60371fc986b9728ef0283391a2971d386451b9a53d78da9cb5e245cdd419432b1c570ce307e87911c4b109dba9f886251c8e62849a555fa58d4a1768e68d6062
+"temml@npm:^0.13.2":
+  version: 0.13.2
+  resolution: "temml@npm:0.13.2"
+  checksum: 10/d54e367ffce8f2cd41fc865b775a7b15dcf0f18445702ddd5f04341a2da64aa14167c7b5b9d148d40e4ac76053d65148a3b8a27cbda56956f92234db43e89efe
   languageName: node
   linkType: hard
 
-"tinyexec@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "tinyexec@npm:1.0.2"
-  checksum: 10/cb709ed4240e873d3816e67f851d445f5676e0ae3a52931a60ff571d93d388da09108c8057b62351766133ee05ff3159dd56c3a0fbd39a5933c6639ce8771405
+"tinyexec@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "tinyexec@npm:1.0.4"
+  checksum: 10/ccebe4044eef6fa5050929df7862fda70b4fb700f15d94aef8ae6109b9d194dbc3a990125d99944fd25b90fe2115e1927f055b909a604c571a81b647ede5757a
   languageName: node
   linkType: hard
 
