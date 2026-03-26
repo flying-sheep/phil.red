@@ -56,7 +56,7 @@
 		"vega-util": "^2.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.6",
+		"@biomejs/biome": "^2.4.9",
 		"@oxc-project/types": "^0.122",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@tsconfig/strictest": "^2.0.8",
