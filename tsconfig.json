@@ -6,7 +6,6 @@
 		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"allowJs": false,
 		"checkJs": false,
-		"esModuleInterop": false,
 		"allowSyntheticDefaultImports": true,
 		"module": "ESNext",
 		"moduleResolution": "bundler",
