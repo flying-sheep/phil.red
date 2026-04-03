@@ -20,11 +20,12 @@ updates:
       mui:
         patterns:
           - '@mui/*'
-      oxc:
+      vite:
         patterns:
           - '@oxc-project/*'
           - 'oxc-*'
           - 'rolldown'
+          - 'vite'
       fontsource:
         patterns:
           - '@fontsource/*'
