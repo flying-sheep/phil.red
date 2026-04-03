@@ -74,7 +74,7 @@
 		"lint-staged": ">=16.4.0",
 		"magic-string": "^0.30.21",
 		"markdown-it": "^14.1.1",
-		"oxc-parser": "^0.121",
+		"oxc-parser": "^0.123",
 		"oxc-walker": "^0.7.0",
 		"pyodide": "^0.29.3",
 		"react-base16-styling": "^0.10.0",
