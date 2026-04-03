@@ -2836,7 +2836,6 @@ __metadata:
     react-router: "npm:^7.14.0"
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
-    rolldown: "npm:1.0.0-rc.12"
     temml: "npm:^0.13.2"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^6.0.2"
