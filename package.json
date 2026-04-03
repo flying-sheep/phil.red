@@ -82,7 +82,7 @@
 		"rolldown": "^1.0.0-rc.13",
 		"typescript": "^6.0.2",
 		"unplugin-fonts": "^1.4.0",
-		"vite": "^8.0.1"
+		"vite": "^8.0.3"
 	},
 	"packageManager": "yarn@4.13.0",
 	"//": "https://github.com/yarnpkg/berry/issues/3366",
