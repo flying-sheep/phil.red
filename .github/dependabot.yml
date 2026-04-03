@@ -20,6 +20,11 @@ updates:
       mui:
         patterns:
           - '@mui/*'
+      oxc:
+        patterns:
+          - '@oxc-project/*'
+          - 'oxc-*'
+          - 'rolldown'
       fontsource:
         patterns:
           - '@fontsource/*'
