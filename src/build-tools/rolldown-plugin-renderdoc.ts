@@ -8,8 +8,7 @@ import type {
 import { globby } from 'globby'
 import MagicString from 'magic-string'
 import { walk } from 'oxc-walker'
-import type { PluginContext } from 'rolldown'
-import type { Plugin } from 'vite'
+import type { Plugin, Rolldown } from 'vite'
 import { ASTError, type Document, ParseError, Type } from '../markup'
 import mdConvert from './md'
 import rstConvert from './rst'
@@ -70,7 +69,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 			: (config.exclude ?? [])
 	const patterns = include.concat(exclude.map((pattern) => `!${pattern}`))
 
-	async function loadPost(ctx: PluginContext, id: string) {
+	async function loadPost(ctx: Rolldown.PluginContext, id: string) {
 		const code = await fs.readFile(id, { encoding: 'utf-8' })
 		const ext = path.extname(id)
 		const convert =
@@ -101,7 +100,10 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 		}
 	}
 
-	async function createCode(ctx: PluginContext, id: string): Promise<string> {
+	async function createCode(
+		ctx: Rolldown.PluginContext,
+		id: string,
+	): Promise<string> {
 		const post = await loadPost(ctx, id)
 		if (post.metadata['draft']) {
 			ctx.info(`skipping draft “${id}”`)
@@ -158,7 +160,7 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 	}
 
 	async function createIndex(
-		ctx: PluginContext,
+		ctx: Rolldown.PluginContext,
 		dir: string,
 	): Promise<string | null> {
 		const paths = await doGlob(dir)

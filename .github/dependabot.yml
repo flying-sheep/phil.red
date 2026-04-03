@@ -24,7 +24,6 @@ updates:
         patterns:
           - '@oxc-project/*'
           - 'oxc-*'
-          - 'rolldown'
           - 'vite'
       fontsource:
         patterns:
