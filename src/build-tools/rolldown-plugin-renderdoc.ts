@@ -8,11 +8,13 @@ import type {
 import { globby } from 'globby'
 import MagicString from 'magic-string'
 import { walk } from 'oxc-walker'
-import type { PluginContext } from 'rolldown'
-import type { Plugin } from 'vite'
+import type { Plugin, perEnvironmentState } from 'vite'
 import { ASTError, type Document, ParseError, Type } from '../markup'
 import mdConvert from './md'
 import rstConvert from './rst'
+
+// not exported directly, but we want to use vite’s rolldown instead of having it as a dependency
+type PluginContext = Parameters<ReturnType<typeof perEnvironmentState>>[0]
 
 function getProp(
 	node: ObjectExpression,

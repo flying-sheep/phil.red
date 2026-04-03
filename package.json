@@ -79,7 +79,6 @@
 		"pyodide": "^0.29.3",
 		"react-base16-styling": "^0.10.0",
 		"react-json-tree": "^0.20.0",
-		"rolldown": "^1.0.0-rc.13",
 		"typescript": "^6.0.2",
 		"unplugin-fonts": "^1.4.0",
 		"vite": "^8.0.3"
