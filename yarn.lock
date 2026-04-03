@@ -846,7 +846,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-project/types@npm:=0.123.0":
+"@oxc-project/types@npm:=0.123.0, @oxc-project/types@npm:^0.123":
   version: 0.123.0
   resolution: "@oxc-project/types@npm:0.123.0"
   checksum: 10/9ce1df2b9cc43b64049c983567abf5369502eb4722742f883d080438ea0939df0c6c8a234067e5c033450315242984acf59bf3648dbaeef6cb524ceedd9965b2
@@ -857,13 +857,6 @@ __metadata:
   version: 0.121.0
   resolution: "@oxc-project/types@npm:0.121.0"
   checksum: 10/3fc27552b24a610dd8b0a1aa6499f16d8c004788a81c7e6773327c88aedf81afb437e67ad820e86234835ab5992dc3fef0bb3cd77ff51bcfe9f0ad27a4e15981
-  languageName: node
-  linkType: hard
-
-"@oxc-project/types@npm:^0.122":
-  version: 0.122.0
-  resolution: "@oxc-project/types@npm:0.122.0"
-  checksum: 10/2b33895c7701a595d10b9c7b0927222954becc4c6cbde7a7b582e9524828937368baacba1cbb6e3c33bc9a18e0a35435ffff6c53f511762ae872d55d3e993a8c
   languageName: node
   linkType: hard
 
@@ -2962,7 +2955,7 @@ __metadata:
     "@mui/icons-material": "npm:^7.3.9"
     "@mui/material": "npm:^7.3.9"
     "@mui/system": "npm:^7.0.1"
-    "@oxc-project/types": "npm:^0.122"
+    "@oxc-project/types": "npm:^0.123"
     "@total-typescript/ts-reset": "npm:^0.6.1"
     "@tsconfig/strictest": "npm:^2.0.8"
     "@types/markdown-it": "npm:^14.1.2"
