@@ -10,7 +10,7 @@ const VegaInner = lazy(() => import('./VegaInner'))
 const Vega = (props: VegaProps) => (
 	<Suspense
 		fallback={
-			<Stack alignItems="center">
+			<Stack sx={{ alignItems: 'center' }}>
 				<CircularProgress />
 			</Stack>
 		}
