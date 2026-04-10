@@ -23,7 +23,7 @@ const Index = () => {
 		}))
 		.sort((a, b) => b.date.getTime() - a.date.getTime())
 	return (
-		<Grid container justifyContent="center">
+		<Grid container sx={{ justifyContent: 'center' }}>
 			<List component="nav">
 				{sorted.map(({ post, date, url }) => (
 					<ListItemLink
