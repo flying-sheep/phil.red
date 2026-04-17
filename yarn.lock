@@ -254,6 +254,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@capsizecss/unpack@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@capsizecss/unpack@npm:4.0.0"
+  dependencies:
+    fontkitten: "npm:^1.0.0"
+  checksum: 10/9e24eb16d6275be66a4b592b606748db0083f179085a78de205a3c5e0c1a6f7136f4650bc69c69eb21cc81f17611f03a34a84f13c02c2ef5e1b14f57a5130268
+  languageName: node
+  linkType: hard
+
 "@dr.pogodin/react-helmet@npm:^3.1.1":
   version: 3.1.1
   resolution: "@dr.pogodin/react-helmet@npm:3.1.1"
@@ -1221,7 +1230,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.14.1, acorn@npm:^8.15.0, acorn@npm:^8.16.0":
+"acorn@npm:^8.15.0, acorn@npm:^8.16.0":
   version: 8.16.0
   resolution: "acorn@npm:8.16.0"
   bin:
@@ -1530,6 +1539,16 @@ __metadata:
     path-type: "npm:^4.0.0"
     yaml: "npm:^1.10.0"
   checksum: 10/03600bb3870c80ed151b7b706b99a1f6d78df8f4bdad9c95485072ea13358ef294b13dd99f9e7bf4cc0b43bcd3599d40df7e648750d21c2f6817ca2cd687e071
+  languageName: node
+  linkType: hard
+
+"css-tree@npm:^3.1.0, css-tree@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "css-tree@npm:3.2.1"
+  dependencies:
+    mdn-data: "npm:2.27.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10/9945b387bdec756738c34d64b8287f05ca6645f51d1c8abaaa5822ec3e74533604103aaad164b8100afd8495e92120be7c1c6afbe5be89f867acc5b456ddd79c
   languageName: node
   linkType: hard
 
@@ -1982,6 +2001,30 @@ __metadata:
     micromatch: "npm:^4.0.4"
     resolve-dir: "npm:^1.0.1"
   checksum: 10/576716c77a0e8330b17ae9cba27d1fda8907c8cda7bf33a47f1999e16e089bfc6df4dd62933e0760f430736183c054348c34aa45dd882d49c8c098f55b89ee1d
+  languageName: node
+  linkType: hard
+
+"fontaine@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "fontaine@npm:0.8.0"
+  dependencies:
+    "@capsizecss/unpack": "npm:^4.0.0"
+    css-tree: "npm:^3.1.0"
+    magic-regexp: "npm:^0.10.0"
+    magic-string: "npm:^0.30.21"
+    pathe: "npm:^2.0.3"
+    ufo: "npm:^1.6.1"
+    unplugin: "npm:^2.3.10"
+  checksum: 10/61641a214bf666be0ad4bc92b65b328ea1236327a7e62cb91663c00f38d10f44d09dfd39dd3fcf1ee153a0943a1c2ff8184c8cbdfa3c6cbda3e163603292d4d9
+  languageName: node
+  linkType: hard
+
+"fontkitten@npm:^1.0.0":
+  version: 1.0.3
+  resolution: "fontkitten@npm:1.0.3"
+  dependencies:
+    tiny-inflate: "npm:^1.0.3"
+  checksum: 10/ec9ca126cb0ac55d1085e6828301f893f204ed9554a8724fbe52ffb9f8489d674366b20dad348fb11a3daaeae50b8fe42b8ac486e20c2cffeb84baf2e924ce16
   languageName: node
   linkType: hard
 
@@ -2542,6 +2585,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mdn-data@npm:2.27.1":
+  version: 2.27.1
+  resolution: "mdn-data@npm:2.27.1"
+  checksum: 10/5046dc83a961b8ea82a5d6d8331d07df6b15faec61519ce2f83e49766702358e7e6af96413be977ff89080534be6762c1d5963b5dd1180c208a47c0a663226b2
+  languageName: node
+  linkType: hard
+
 "mdurl@npm:^2.0.0":
   version: 2.0.0
   resolution: "mdurl@npm:2.0.0"
@@ -2862,7 +2912,7 @@ __metadata:
     temml: "npm:^0.13.2"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^6.0.2"
-    unplugin-fonts: "npm:^1.4.0"
+    unplugin-fonts: "npm:^2.0.0"
     vega: "npm:^6.2.0"
     vega-embed: "npm:^7.1.0"
     vega-lite: "npm:^6.4.2"
@@ -2885,7 +2935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3, picomatch@npm:^4.0.4":
+"picomatch@npm:^4.0.3, picomatch@npm:^4.0.4":
   version: 4.0.4
   resolution: "picomatch@npm:4.0.4"
   checksum: 10/f6ef80a3590827ce20378ae110ac78209cc4f74d39236370f1780f957b7ee41c12acde0e4651b90f39983506fd2f5e449994716f516db2e9752924aff8de93ce
@@ -3448,6 +3498,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tiny-inflate@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tiny-inflate@npm:1.0.3"
+  checksum: 10/f620114fb51ea4a16ea7b4c62d6dd753f8faf41808a133c53d431ed4bf2ca377b21443653a0096894f2be22ca11bb327f148e7e5431f9246068917724ec01ffc
+  languageName: node
+  linkType: hard
+
 "tinyexec@npm:^1.0.4":
   version: 1.0.4
   resolution: "tinyexec@npm:1.0.4"
@@ -3544,7 +3601,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ufo@npm:^1.5.4, ufo@npm:^1.6.3":
+"ufo@npm:^1.5.4, ufo@npm:^1.6.1, ufo@npm:^1.6.3":
   version: 1.6.3
   resolution: "ufo@npm:1.6.3"
   checksum: 10/79803984f3e414567273a666183d6a50d1bec0d852100a98f55c1e393cb705e3b88033e04029dd651714e6eec99e1b00f54fdc13f32404968251a16f8898cfe5
@@ -3565,34 +3622,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-fonts@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "unplugin-fonts@npm:1.4.0"
+"unplugin-fonts@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "unplugin-fonts@npm:2.0.0"
   dependencies:
+    css-tree: "npm:^3.2.1"
     fast-glob: "npm:^3.3.3"
-    unplugin: "npm:2.3.5"
+    fontaine: "npm:^0.8.0"
+    magic-string: "npm:^0.30.21"
+    pathe: "npm:^2.0.3"
+    unplugin: "npm:^3.0.0"
   peerDependencies:
     "@nuxt/kit": ^3.0.0 || ^4.0.0
-    vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    vite: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
   peerDependenciesMeta:
     "@nuxt/kit":
       optional: true
-  checksum: 10/3a2455dd4e5be1b14f5bb304e9bb8e7c5261aec99aba39a0e23d302555db6aa7cc1d44381cf646556b4f90f6860ecabed55c827b18849e13efd015d20b9850ae
+  checksum: 10/f7fd1b6be0dc6dc9f50256f5b7eb6ff659e0bf589681fb2c96de73e01f5eebf7e2cc3f1c9d6a8f08832650cee3f4e082636503b350360a6e1785814cb882d2ca
   languageName: node
   linkType: hard
 
-"unplugin@npm:2.3.5":
-  version: 2.3.5
-  resolution: "unplugin@npm:2.3.5"
-  dependencies:
-    acorn: "npm:^8.14.1"
-    picomatch: "npm:^4.0.2"
-    webpack-virtual-modules: "npm:^0.6.2"
-  checksum: 10/93956b472c66ba452599d64343ef3c2440f8279bdc449f399f9c884307934f9b383fa09c646f998f0cf1488204e993316f9a2e483d6cf01f45fd618f401942dd
-  languageName: node
-  linkType: hard
-
-"unplugin@npm:^2.0.0":
+"unplugin@npm:^2.0.0, unplugin@npm:^2.3.10":
   version: 2.3.11
   resolution: "unplugin@npm:2.3.11"
   dependencies:
@@ -3601,6 +3651,17 @@ __metadata:
     picomatch: "npm:^4.0.3"
     webpack-virtual-modules: "npm:^0.6.2"
   checksum: 10/7b4adbfaac8894e8491c452c0b67c612b57e103761e842d9013ebea89a4ae92a78df4ec0aa30e5e3eaaefd47dd287973d5a662271624b7346a15d9236d257f9d
+  languageName: node
+  linkType: hard
+
+"unplugin@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "unplugin@npm:3.0.0"
+  dependencies:
+    "@jridgewell/remapping": "npm:^2.3.5"
+    picomatch: "npm:^4.0.3"
+    webpack-virtual-modules: "npm:^0.6.2"
+  checksum: 10/d59f5350b1666e38ac6881ee2da4fd00485ee26995131b3ca0d90d0bdeebdc0c4f8a13d3b3709e2114809ca59708f1faa122de6117079bdd394c7e6e5e211faa
   languageName: node
   linkType: hard
 
