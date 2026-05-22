@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material/styles'
 import { useMemo } from 'react'
-import type { Config } from 'vega-lite'
+import type { Config } from 'vega-typings'
 
 export interface MuiVegaThemePreferences {
 	color?: 'primary' | 'secondary' | 'error' | 'warning'
@@ -38,7 +38,7 @@ export function useMuiVegaOptions({
 				labelColor: theme.vars.palette.text.secondary,
 			},
 			mark: {
-				color: theme.vars.palette[color].main,
+				fill: theme.vars.palette[color].main,
 			},
 			/*
 			range: {
