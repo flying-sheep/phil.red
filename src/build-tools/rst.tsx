@@ -1,7 +1,7 @@
 /** @jsxImportSource ../markup */
 
 import temml from 'temml'
-import type { VisualizationSpec } from 'vega-embed'
+import type { Spec } from 'vega-typings'
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
 import highlightCode from './highlight'
@@ -231,7 +231,7 @@ class RSTConverter {
 			case 'vega':
 				return [
 					<m.Vega
-						spec={JSON.parse(node['rawsource'].toString()) as VisualizationSpec}
+						spec={JSON.parse(node['rawsource'].toString()) as Spec}
 						pos={pos(node)}
 					/>,
 				]

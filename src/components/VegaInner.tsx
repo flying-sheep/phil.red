@@ -3,14 +3,19 @@ import type { SxProps } from '@mui/material/styles'
 import { mergeSx } from 'merge-sx'
 import { type FC, useMemo, useRef } from 'react'
 import { type UseVegaEmbedParams, useVegaEmbed } from 'react-vega'
-import type { VisualizationSpec } from 'vega-embed'
-import { mergeConfig } from 'vega-util'
+import type { Config as VlConfig } from 'vega-lite'
+import type { Config, Spec } from 'vega-typings'
+import { mergeConfig as mc } from 'vega-util'
 import { useMuiVegaOptions } from './mui-vega'
+
+const mergeConfig = mc as unknown as (
+	...configs: Partial<Config | VlConfig>[]
+) => Config
 
 export interface VegaProps
 	extends Omit<UseVegaEmbedParams, 'ref' | 'spec'>,
 		Omit<BoxProps<'figure'>, 'onError'> {
-	spec: VisualizationSpec
+	spec: Spec
 	sx?: SxProps
 }
 
@@ -25,17 +30,16 @@ const VegaInner: FC<VegaProps> = ({
 	const ref = useRef<HTMLDivElement>(null)
 	const vgtheme = useMuiVegaOptions()
 	// TODO: fix types, merge deep
-	const spec = useMemo<VisualizationSpec>(
-		() =>
-			({
-				...rawSpec,
-				...{
-					autosize: { type: 'fit', contains: 'padding', resize: true },
-					config: mergeConfig(rawSpec.config ?? {}, vgtheme, {
-						background: 'transparent',
-					}),
-				},
-			}) as VisualizationSpec,
+	const spec = useMemo<Spec>(
+		() => ({
+			...rawSpec,
+			...{
+				autosize: { type: 'fit', contains: 'padding', resize: true },
+				config: mergeConfig(rawSpec.config ?? {}, vgtheme, {
+					background: 'transparent',
+				}),
+			},
+		}),
 		[rawSpec, vgtheme],
 	)
 	useVegaEmbed(
