@@ -1,6 +1,6 @@
 import type { Utf16ParseResult } from '@arborium/arborium'
 import type { FunctionComponent } from 'typed-jsx'
-import type { VisualizationSpec } from 'vega-embed'
+import type { Spec } from 'vega-typings'
 
 export enum Type {
 	// block
@@ -337,6 +337,6 @@ export const Problematic = mkFun<Problematic>(Type.Problematic)
 
 export interface Vega extends Element<never> {
 	type: Type.Vega
-	spec: VisualizationSpec
+	spec: Spec
 }
 export const Vega = mkFun<Vega>(Type.Vega)

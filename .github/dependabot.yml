@@ -20,6 +20,9 @@ updates:
       mui:
         patterns:
           - '@mui/*'
+      vega:
+        patterns:
+          - 'vega-*'
       vite:
         patterns:
           - '@oxc-project/*'

@@ -15,7 +15,7 @@
 		"lint": "$npm_execpath run lint:check && $npm_execpath run lint:deps",
 		"lint:ci": "biome ci && $npm_execpath run lint:deps",
 		"lint:check": "biome check --write .",
-		"lint:deps": "depcheck --ignores=unfonts.css,@fontsource/iosevka,@fontsource/iosevka-aile,@tsconfig/strictest,@total-typescript/ts-reset,@arborium/ini,@arborium/python,@arborium/toml,@arborium/typescript,@arborium/xml,@arborium/zsh",
+		"lint:deps": "depcheck --ignores=unfonts.css,vega,vega-lite,@fontsource/iosevka,@fontsource/iosevka-aile,@tsconfig/strictest,@total-typescript/ts-reset,@arborium/ini,@arborium/python,@arborium/toml,@arborium/typescript,@arborium/xml,@arborium/zsh",
 		"deploy": "$npm_execpath run build && rsync --recursive --delete --archive --compress --progress dist/ root@phil.red:/srv/http/phil.red",
 		"prepare": "husky"
 	},
@@ -53,7 +53,7 @@
 		"vega": "^6.2.0",
 		"vega-embed": "^7.1.0",
 		"vega-lite": "^6.4.3",
-		"vega-util": "^2.0.0"
+		"vega-util": "^2.1.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.15",
@@ -81,6 +81,7 @@
 		"react-json-tree": "^0.20.0",
 		"typescript": "^6.0.3",
 		"unplugin-fonts": "^2.0.0",
+		"vega-typings": "^2.1.0",
 		"vite": "^8.0.14"
 	},
 	"packageManager": "yarn@4.15.0",
