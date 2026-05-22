@@ -7,6 +7,7 @@ import type { Config, Spec } from 'vega-typings'
 import { mergeConfig as mc } from 'vega-util'
 import { useMuiVegaOptions } from './mui-vega'
 
+// https://github.com/vega/vega/issues/4278
 const mergeConfig = mc as unknown as (...configs: Partial<Config>[]) => Config
 
 export interface VegaProps
