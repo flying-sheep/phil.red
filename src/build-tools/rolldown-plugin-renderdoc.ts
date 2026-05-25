@@ -56,7 +56,7 @@ export const DEFAULT_CONVERTERS: { [ext: string]: Converter } = {
 	'.rst': rstConvert,
 }
 
-export const renderdoc = (config: Partial<Config> = {}): Plugin => {
+function renderdoc(config: Partial<Config> = {}): Plugin {
 	const converters = config.converters ?? DEFAULT_CONVERTERS
 	const exts = new Set(Object.keys(converters))
 	const include: string[] =
