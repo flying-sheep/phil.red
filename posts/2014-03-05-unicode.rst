@@ -11,17 +11,18 @@ A way to think about strings and bytestrings is that the first is a series of gl
 a series of bytes, which can hold a *representation* of the first.
 
 .. csv-table:: The whole ASCII Table: All 1-byte encodings only had this and again as many glyphs
-   :delim: tab
-   :quote: ＂
+   :delim: 0x00A0
 
-   ␀	␁	␂	␃	␄	␅	␆	␇	␈	␉	␊	␋	␌	␍	␎	␏
-   ␐	␑	␒	␓	␔	␕	␖	␗	␘	␙	␚	␛	␜	␝	␞	␟
-   ␠	!	"	#	$	%	&	'	(	)	*	+	,	-	.	/
-   0	1	2	3	4	5	6	7	8	9	:	;	<	=	>	?
-   @	A	B	C	D	E	F	G	H	I	J	K	L	M	N	O
-   P	Q	R	S	T	U	V	W	X	Y	Z	[	\	]	^	_
-   `	a	b	c	d	e	f	g	h	i	j	k	l	m	n	o
-   p	q	r	s	t	u	v	w	x	y	z	{	|	}	~	␡
+   ␀ ␁ ␂ ␃ ␄ ␅ ␆ ␇ ␈ ␉ ␊ ␋ ␌ ␍ ␎ ␏
+   ␐ ␑ ␒ ␓ ␔ ␕ ␖ ␗ ␘ ␙ ␚ ␛ ␜ ␝ ␞ ␟
+   ␠ \! \" \# \$ \% \& \' \( \) \* \+ \, \- \. \/
+   0 1 2 3 4 5 6 7 8 9 \: \; \< \= \> \?
+   \@ A B C D E F G H I J K L M N O
+   P Q R S T U V W X Y Z \[ |bs| \] \^ \_
+   \` a b c d e f g h i j k l m n o
+   p q r s t u v w x y z \{ \| \} \~ ␡
+
+.. |bs| unicode:: 0x005C
 
 In the past, there was ASCII and friends, all 1:1 mappings from one to another; one byte = one glyph. One byte is a number between 1 and :math:`2^{8bit} = 256`, or 0 and 255, or any other range you agree upon. If the agreed upon range is a range of glyphs, you have a text encoding, and translating a string of glyphs into a string of such numbers means encoding that string to a bytestring. (The reverse operation being a decoding)
 

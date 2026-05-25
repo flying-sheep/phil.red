@@ -39,7 +39,7 @@ But one step at a time.
 #. Install the Flit command line interface (CLI) and use it
    to create a ``pyproject.toml``:
    
-   .. code:: bash
+   .. code:: zsh
 
       python3 -m pip install flit
       flit init

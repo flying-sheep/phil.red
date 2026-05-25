@@ -41,7 +41,7 @@ For this you could use an online website interface or a local application.
 The local application would retrieve and cache PDFs from open access URLs or SciHub_.
 
 The editor plugin would allow searching documents and inserting citations.
-For *TeX, it would look like this:
+For *TeX*, it would look like this:
 
 1. On key press (e.g. autocompleting ``\cite{<tab>``), it would pop up a little search box with a list of results.
 2. Confirming an entry would insert the DOI directly: ``\cite{10.3233/978-1-61499-649-1-87}``

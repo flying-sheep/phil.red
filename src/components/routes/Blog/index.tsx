@@ -1,10 +1,9 @@
-import type { FC } from 'react'
-import { Helmet } from 'react-helmet-async'
-import { Navigate, Route, useParams } from 'react-router-dom'
-import SlideRoutes from 'react-slide-routes'
-
+import { Helmet } from '@dr.pogodin/react-helmet'
 import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
+import type { FC } from 'react'
+import { Navigate, Route, useParams } from 'react-router'
+import SlideRoutes from 'react-slide-routes'
 
 import posts from '../../../posts'
 import ListItemLink from '../../ListItemLink'
@@ -14,21 +13,17 @@ function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
-export function postURL(date: Date, slug: string) {
-	return `${date2url(date)}/${slug}`
-}
-
 const Index = () => {
 	const sorted = Object.entries(posts)
 		.map(([slug, post]) => ({
 			slug,
 			post,
 			date: post.date,
-			url: postURL(post.date, slug),
+			url: `${date2url(post.date)}/${slug}`,
 		}))
 		.sort((a, b) => b.date.getTime() - a.date.getTime())
 	return (
-		<Grid container justifyContent="center">
+		<Grid container sx={{ justifyContent: 'center' }}>
 			<List component="nav">
 				{sorted.map(({ post, date, url }) => (
 					<ListItemLink

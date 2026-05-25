@@ -7,6 +7,9 @@ updates:
     schedule:
       interval: weekly
     groups:
+      arborium:
+        patterns:
+          - '@arborium/*'
       react:
         patterns:
           - react
@@ -17,3 +20,14 @@ updates:
       mui:
         patterns:
           - '@mui/*'
+      vega:
+        patterns:
+          - 'vega-*'
+      vite:
+        patterns:
+          - '@oxc-project/*'
+          - 'oxc-*'
+          - 'vite'
+      fontsource:
+        patterns:
+          - '@fontsource/*'

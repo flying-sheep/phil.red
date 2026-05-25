@@ -1,9 +1,9 @@
+import type { PaperProps } from '@mui/material/Paper'
+import useScrollTrigger from '@mui/material/useScrollTrigger'
 import { cloneElement } from 'react'
 
-import useScrollTrigger from '@mui/material/useScrollTrigger'
-
 interface Props {
-	children: React.ReactElement
+	children: React.ReactElement<PaperProps>
 }
 
 export default function ElevationScroll({ children }: Props) {

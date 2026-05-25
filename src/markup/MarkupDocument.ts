@@ -1,8 +1,10 @@
+import type { Utf16ParseResult } from '@arborium/arborium'
 import type { FunctionComponent } from 'typed-jsx'
+import type { Spec } from 'vega-typings'
 
-// biome-ignore lint/style/useEnumInitializers: only used internally, don’t need to be stable
 export enum Type {
 	// block
+	Transition,
 	Section,
 	Title,
 	Paragraph,
@@ -16,6 +18,7 @@ export enum Type {
 	Def,
 	FieldList,
 	Field,
+	FootNote,
 	CodeBlock,
 	Table,
 	Row,
@@ -24,11 +27,14 @@ export enum Type {
 	LineBreak,
 	Emph,
 	Strong,
+	Subscript,
+	Superscript,
 	Link,
 	Code,
 	InlineMath,
+	Problematic,
 	// custom
-	Plotly,
+	Vega,
 }
 
 /// this doesn’t use HTML 4 type (circle, disc, square),
@@ -80,6 +86,7 @@ export type Node = string | Elem
 /** All existing constructor functions */
 export type Elem =
 	// Block
+	| Transition
 	| Section
 	| Title
 	| Paragraph
@@ -93,6 +100,7 @@ export type Elem =
 	| Def
 	| FieldList
 	| Field
+	| FootNote
 	| CodeBlock
 	| Table
 	| Row
@@ -101,20 +109,25 @@ export type Elem =
 	| LineBreak
 	| Emph
 	| Strong
+	| Subscript
+	| Superscript
 	| Link
 	| Code
 	| InlineMath
+	| Problematic
 	// Custom
-	| Plotly
+	| Vega
 
 type ElementMap = { [E in Elem as E['type']]: FunctionComponent<Props<E>, E> }
 /** Type that can be used in a JSX expression */
 export type ElementType = ElementMap[Elem['type']]
 
+export type Position = { line: number; column?: number | undefined }
+
 interface Element<C extends Node = Node> {
 	type: Type
 	children: C[]
-	pos: number | { line: number; column: number } | undefined
+	pos: number | Position | undefined
 }
 
 export interface Document {
@@ -148,16 +161,25 @@ function arrayify<E, A extends E | A[]>(obj: undefined | E | A[]): E[] {
 type Props<P extends Elem> = Omit<P, 'type' | 'children'> & {
 	children?: P['children'] | P['children'][number] | undefined
 }
-function mkFun<P extends Elem>(type: Type): FunctionComponent<Props<P>, P> {
-	return ({ children: nested, ...props }) =>
+function mkFun<P extends Elem, Extra = unknown>(
+	type: Type,
+	extra?: Extra,
+): FunctionComponent<Props<P>, P> & Extra {
+	const fn: FunctionComponent<Props<P>, P> = ({ children: nested, ...props }) =>
 		({
 			type,
 			children: arrayify(nested),
 			...props,
 		}) as unknown as P
+	return Object.assign(fn, extra)
 }
 
 // Block
+
+export interface Transition extends Element<never> {
+	type: Type.Transition
+}
+export const Transition = mkFun<Transition>(Type.Transition)
 
 export interface Section extends Element {
 	type: Type.Section
@@ -167,7 +189,7 @@ export const Section = mkFun<Section>(Type.Section)
 export interface Title extends Element {
 	type: Type.Title
 	level: number
-	anchor?: string | undefined
+	anchor: string
 }
 export const Title = mkFun<Title>(Type.Title)
 
@@ -176,10 +198,15 @@ export interface Paragraph extends Element {
 }
 export const Paragraph = mkFun<Paragraph>(Type.Paragraph)
 
+const _bqv = ['epigraph', 'highlights', 'pull-quote', undefined] as const
 export interface BlockQuote extends Element {
 	type: Type.BlockQuote
+	variant?: (typeof _bqv)[number]
 }
-export const BlockQuote = mkFun<Paragraph>(Type.BlockQuote)
+export const BlockQuote = mkFun<
+	BlockQuote,
+	{ VARIANTS: Set<(typeof _bqv)[number]> }
+>(Type.BlockQuote, { VARIANTS: new Set(_bqv) })
 
 export interface BulletList extends Element {
 	type: Type.BulletList
@@ -191,6 +218,7 @@ export const BulletList = mkFun<BulletList>(Type.BulletList)
 export interface EnumList extends Element {
 	type: Type.EnumList
 	enumeration?: Enumeration
+	start?: number | undefined
 }
 export const EnumList = mkFun<EnumList>(Type.EnumList)
 export interface ListItem extends Element {
@@ -225,9 +253,18 @@ export interface Field extends Element {
 }
 export const Field = mkFun<Field>(Type.Field)
 
+export interface FootNote extends Element {
+	type: Type.FootNote
+	anchor: string
+	backrefs: string[]
+	label: string
+}
+export const FootNote = mkFun<FootNote>(Type.FootNote)
+
 export interface CodeBlock extends Element<string> {
 	type: Type.CodeBlock
 	language?: string | undefined
+	parsed?: Utf16ParseResult | undefined
 }
 export const CodeBlock = mkFun<CodeBlock>(Type.CodeBlock)
 
@@ -247,7 +284,7 @@ export const Cell = mkFun<Cell>(Type.Cell)
 
 // Inline
 
-export interface LineBreak extends Element {
+export interface LineBreak extends Element<never> {
 	type: Type.LineBreak
 }
 export const LineBreak = mkFun<LineBreak>(Type.LineBreak)
@@ -262,8 +299,19 @@ export interface Strong extends Element {
 }
 export const Strong = mkFun<Strong>(Type.Strong)
 
+export interface Subscript extends Element {
+	type: Type.Subscript
+}
+export const Subscript = mkFun<Subscript>(Type.Subscript)
+
+export interface Superscript extends Element {
+	type: Type.Superscript
+}
+export const Superscript = mkFun<Superscript>(Type.Superscript)
+
 export interface Link extends Element {
 	type: Type.Link
+	anchor?: string | undefined
 	ref: { name: string } | { href: string }
 }
 export const Link = mkFun<Link>(Type.Link)
@@ -273,19 +321,22 @@ export interface Code extends Element {
 }
 export const Code = mkFun<Code>(Type.Code)
 
-export interface InlineMath extends Element {
+export interface InlineMath extends Element<never> {
 	type: Type.InlineMath
 	math: string
 }
 export const InlineMath = mkFun<InlineMath>(Type.InlineMath)
 
+export interface Problematic extends Element {
+	type: Type.Problematic
+	children: [string]
+}
+export const Problematic = mkFun<Problematic>(Type.Problematic)
+
 // Custom
 
-export interface Plotly extends Element {
-	type: Type.Plotly
-	url: string
-	onClickLink?: string | undefined
-	style?: Partial<React.CSSProperties> | undefined
-	config?: Partial<Plotly.Config> | undefined
+export interface Vega extends Element<never> {
+	type: Type.Vega
+	spec: Spec
 }
-export const Plotly = mkFun<Plotly>(Type.Plotly)
+export const Vega = mkFun<Vega>(Type.Vega)

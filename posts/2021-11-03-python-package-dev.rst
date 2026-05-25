@@ -126,9 +126,9 @@ Setuptools
 ~~~~~~~~~~
 The old gods: fearsome, fickle, a known evil, and clearly the past.
 
-Setuptools_ are ``setup.py``, ``setup.cfg``, ``MANIFEST.in``, ``requirements.txt``, and … eggs?
+`Setuptools <st pypi_>`__ are ``setup.py``, ``setup.cfg``, ``MANIFEST.in``, ``requirements.txt``, and … eggs?
 
-.. _setuptools: https://setuptools.pypa.io/en/latest/
+.. _st pypi: https://setuptools.pypa.io/en/latest/
 
 Pros:
 
@@ -149,9 +149,9 @@ Cons:
 
 Poetry
 ~~~~~~
-Poetry_’s like its webpage: Polished and opinionated.
+`Poetry <poetry website_>`__’s like its webpage: Polished and opinionated.
 
-.. _poetry: https://python-poetry.org/
+.. _poetry website: https://python-poetry.org/
 
 Pros:
 
@@ -172,9 +172,9 @@ Cons:
 
 Flit
 ~~~~
-Flit_’s hummingbird is a fitting logo: small, simple, and easy to overlook.
+`Flit <flit website_>`__’s hummingbird is a fitting logo: small, simple, and easy to overlook.
 
-.. _flit: https://flit.readthedocs.io/en/latest/
+.. _flit website: https://flit.readthedocs.io/en/latest/
 
 Pros:
 

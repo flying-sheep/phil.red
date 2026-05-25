@@ -2,10 +2,15 @@ import react from '@vitejs/plugin-react'
 import unfonts from 'unplugin-fonts/vite'
 import { defineConfig } from 'vite'
 
-import renderdoc from './src/build-tools/rollup-plugin-renderdoc.js'
+import renderdoc from './src/build-tools/rolldown-plugin-renderdoc.js'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	assetsInclude: ['**/*.py'],
+	resolve: {
+		// remove legacy browser support with mui-modern
+		conditions: ['mui-modern', 'module', 'browser', 'development|production'],
+	},
 	plugins: [
 		react(),
 		renderdoc({
@@ -27,6 +32,7 @@ export default defineConfig({
 			},
 		}),
 	],
+	build: { sourcemap: true },
 	server: {
 		fs: {
 			// Otherwise problem with loading font files

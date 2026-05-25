@@ -1,27 +1,26 @@
-import { useMemo } from 'react'
-import { Helmet } from 'react-helmet-async'
-import { PortalTarget } from 'react-portal-target'
-import { Link, Navigate, Route, matchPath, useLocation } from 'react-router-dom'
-import SlideRoutes from 'react-slide-routes'
-
+import { Helmet } from '@dr.pogodin/react-helmet'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
+import { deepPurple } from '@mui/material/colors'
+import GlobalStyles from '@mui/material/GlobalStyles'
+import {
+	type ColorSystemOptions,
+	createTheme,
+	responsiveFontSizes,
+	ThemeProvider,
+} from '@mui/material/styles'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Toolbar from '@mui/material/Toolbar'
-import { deepPurple } from '@mui/material/colors'
-import {
-	type ColorSystemOptions,
-	ThemeProvider,
-	createTheme,
-	responsiveFontSizes,
-} from '@mui/material/styles'
-
+import { useMemo, useRef } from 'react'
+import { PortalTarget } from 'react-portal-target'
+import { Link, matchPath, Navigate, Route, useLocation } from 'react-router'
+import SlideRoutes from 'react-slide-routes'
+import { highStyles } from '../../markup/nodes/High'
 import Blog from '../Blog'
 import Code from '../Code'
 import Home from '../Home'
-
 import ElevationScroll from './ElevationScroll'
 
 const ROUTE_LINKS = [
@@ -76,6 +75,7 @@ const App = () => {
 	}, [])
 	const currentTab = useRouteMatch(ROUTE_LINKS.map(({ pattern }) => pattern))
 		?.pattern.path
+	const bar = useRef<HTMLElement>(null)
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -83,8 +83,10 @@ const App = () => {
 				<title>phil.red</title>
 			</Helmet>
 			<CssBaseline />
+			<GlobalStyles styles={highStyles} />
 			<ElevationScroll>
 				<AppBar
+					ref={bar}
 					position="sticky"
 					sx={{
 						color: theme.vars.palette.text.primary,
@@ -114,6 +116,8 @@ const App = () => {
 					maxWidth: '42rem',
 					mx: 'auto',
 					p: 3,
+					// Add space for the header when navigating to anchors
+					'& :target': { scrollMarginTop: bar.current?.offsetHeight },
 				}}
 			>
 				<SlideRoutes>
