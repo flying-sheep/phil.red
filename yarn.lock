@@ -120,7 +120,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.28.6, @babel/runtime@npm:^7.29.2, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.29.2, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.7":
   version: 7.29.2
   resolution: "@babel/runtime@npm:7.29.2"
   checksum: 10/f55ba4052aa0255055b34371a145fbe69c29b37b49eaea14805b095bfb4153701486416e89392fd27ec8abafa53868be86e960b9f8f959fff91f2c8ac2a14b02
@@ -263,14 +263,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@dr.pogodin/react-helmet@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@dr.pogodin/react-helmet@npm:3.1.1"
+"@dr.pogodin/react-helmet@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "@dr.pogodin/react-helmet@npm:3.2.2"
   dependencies:
-    "@babel/runtime": "npm:^7.28.6"
+    "@babel/runtime": "npm:^7.29.2"
+    react-compiler-runtime: "npm:^1.0.0"
   peerDependencies:
     react: 19
-  checksum: 10/495a4ce47ff1d5efe767927d4e197c9567b3de4a7f02f4025f3ed64db50f193e2677147c0b2d6776caf2e034c72207d69c2f6625288ce1e0bd4c926350ab84a7
+  checksum: 10/65da3af9dcf167d3fd1cb70dc50ba6e7de5229ef2a2c5c06d84f582bb231f1fbebf2c5fd4f02a2d1bedfaed5b6dbc68b99874d2b5205d561f1baa806fa2ce9a3
   languageName: node
   linkType: hard
 
@@ -2869,7 +2870,7 @@ __metadata:
     "@arborium/xml": "npm:^2.17.0"
     "@arborium/zsh": "npm:^2.17.0"
     "@biomejs/biome": "npm:^2.4.15"
-    "@dr.pogodin/react-helmet": "npm:^3.1.1"
+    "@dr.pogodin/react-helmet": "npm:^3.2.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
     "@fontsource/iosevka": "npm:^5.2.5"
@@ -3018,6 +3019,15 @@ __metadata:
     csstype: "npm:^3.1.3"
     lodash-es: "npm:^4.17.21"
   checksum: 10/af1263d3638e61418bc770ddb5d86b23d574ba34706419e61fa9c339ed5e532bd788b060831876699ef510ce46b7392b984c95737ed529a8fe07b27e3dac3ac1
+  languageName: node
+  linkType: hard
+
+"react-compiler-runtime@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "react-compiler-runtime@npm:1.0.0"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0 || ^0.0.0-experimental
+  checksum: 10/7d85297de255c39f1aca3dd4942fbf59253e127db8abef1ad7fe3eb329e39aab4c30656ff77751165e2b21263d96836f44699777ca40c9a717ffe42c6c355543
   languageName: node
   linkType: hard
 
