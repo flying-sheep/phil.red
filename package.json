@@ -73,7 +73,7 @@
 		"husky": ">=9.1.7",
 		"lint-staged": ">=17.0.5",
 		"magic-string": "^0.30.21",
-		"markdown-it": "^14.1.1",
+		"markdown-it": "^14.2.0",
 		"oxc-parser": "^0.133",
 		"oxc-walker": "^1.0.0",
 		"pyodide": "^0.29.4",
