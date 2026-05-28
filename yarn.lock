@@ -2600,12 +2600,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"merge-sx@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "merge-sx@npm:3.4.0"
+"merge-sx@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "merge-sx@npm:3.5.0"
   peerDependencies:
-    "@mui/material": ^5.1.0 || ^6.0.0 || ^7.0.0
-  checksum: 10/be5063628a7d66961c088401fc7865a7c97f3398dc03d19146e84da6195e213ddb587a5a81f27648dd045e2d150563e7ec5ebc37e16ac0dbb9d6ee4a978fc77e
+    "@mui/material": ^5.1.0 || ^6.0.0 || ^7.0.0 || ^9.0.0
+  checksum: 10/af472cad3d13368e4c1c81744088bbcc6427356103fd8f1bd48f43708a0966bb1c7ee500c9739539ebf59c858203a3a739ee441543a63c4df78e616d56948a14
   languageName: node
   linkType: hard
 
@@ -2901,7 +2901,7 @@ __metadata:
     lint-staged: "npm:>=17.0.5"
     magic-string: "npm:^0.30.21"
     markdown-it: "npm:^14.1.1"
-    merge-sx: "npm:^3.4.0"
+    merge-sx: "npm:^3.5.0"
     notistack: "npm:^3.0.2"
     oxc-parser: "npm:^0.133"
     oxc-walker: "npm:^1.0.0"
