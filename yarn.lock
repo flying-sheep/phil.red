@@ -2911,7 +2911,7 @@ __metadata:
     react-base16-styling: "npm:^0.10.0"
     react-dom: "npm:^19.2.6"
     react-error-boundary: "npm:^6.1.2"
-    react-is: "npm:^19.2.6"
+    react-is: "npm:^19.2.7"
     react-json-tree: "npm:^0.20.0"
     react-portal-target: "npm:^1.0.2"
     react-router: "npm:^7.15.1"
@@ -3065,10 +3065,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^19.2.4, react-is@npm:^19.2.6":
-  version: 19.2.6
-  resolution: "react-is@npm:19.2.6"
-  checksum: 10/5248eb5cfc135794c110f97fc0716a9439dc641d6bccbb8c00487c6c492644592ce4dd959fd23790bf05c1f26e0b62f11322b1e51372715a96a4bc4565a17d74
+"react-is@npm:^19.2.4, react-is@npm:^19.2.7":
+  version: 19.2.7
+  resolution: "react-is@npm:19.2.7"
+  checksum: 10/ae0d3ae7638aa2fa2a82a78a817daf2806e57fa0aef357d07e1e8d1e9a301902e5967168e9334b5816db0df8fa980a725cd57569ba5a9e6e76a71e117b18be04
   languageName: node
   linkType: hard
 
