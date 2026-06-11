@@ -76,7 +76,7 @@
 		"markdown-it": "^14.2.0",
 		"oxc-parser": "^0.135",
 		"oxc-walker": "^1.0.0",
-		"pyodide": "^0.29.4",
+		"pyodide": "^314.0.0",
 		"react-base16-styling": "^0.10.0",
 		"react-json-tree": "^0.20.0",
 		"typescript": "^6.0.3",
