@@ -4,6 +4,7 @@
 import path from 'node:path'
 import { loadPyodide, type PyodideAPI } from 'pyodide'
 import type { PyProxy, PyProxyWithGet, PySequence } from 'pyodide/ffi'
+import pyodideMeta from 'pyodide/package.json'
 
 export interface Node extends PyProxyWithGet {
 	parent: Element | undefined
@@ -42,7 +43,7 @@ export async function load(): Promise<{
 }> {
 	const pyodide = await loadPyodide({
 		packages: ['docutils', 'pygments'],
-		packageBaseUrl: 'https://cdn.jsdelivr.net/pyodide/v0.28.1/full/',
+		packageBaseUrl: `https://cdn.jsdelivr.net/pyodide/v${pyodideMeta.version}/full/`,
 		packageCacheDir: path.join(import.meta.dirname, '../../.pyodide-cache'),
 	})
 	const core = await pyodide.pyimport('docutils.core')
