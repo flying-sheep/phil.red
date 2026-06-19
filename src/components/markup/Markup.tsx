@@ -18,7 +18,6 @@ const Markup: FC<MarkupProps> = ({ doc }) => {
 	const nodes = useMemo(
 		() =>
 			doc.children.map((e, i) => (
-				// biome-ignore lint/suspicious/noArrayIndexKey: Static tree, no need for key
 				<MarkupNodeComponent node={e} level={0} key={i} />
 			)),
 		[doc.children],

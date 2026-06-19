@@ -38,7 +38,6 @@ export interface MarkupElementState {
 
 function convertChildren(elem: Elem, level: number) {
 	const children = elem.children.map((e, i) => (
-		// biome-ignore lint/suspicious/noArrayIndexKey: Static tree, no need for key
 		<MarkupNodeComponent node={e} level={level} key={i} />
 	))
 	return <>{Children.toArray(children)}</>
@@ -206,7 +205,6 @@ const MarkupNodeComponentInner: FC<MarkupElementProps> = ({ node, level }) => {
 		case Type.Code:
 			return <code>{convertChildren(node, level)}</code>
 		case Type.InlineMath: {
-			// biome-ignore lint/security/noDangerouslySetInnerHtml: don’t want to model all of MathML
 			return <span dangerouslySetInnerHTML={{ __html: node.math }} />
 		}
 		case Type.Problematic:

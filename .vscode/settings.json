@@ -9,7 +9,7 @@
 	"[caddyfile]": {
 		"editor.defaultFormatter": "matthewpi.caddyfile-support",
 	},
-	"typescript.tsdk": ".yarn/sdks/typescript/lib",
+	"js/ts.tsdk.path": ".yarn/sdks/typescript/lib",
 	"search.exclude": {
 		"**/.yarn": true,
 		"**/.pnp.*": true,
