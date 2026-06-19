@@ -122,12 +122,12 @@ export const renderdoc = (config: Partial<Config> = {}): Plugin => {
 					// Set.has should have type `(any) => bool`
 					if (!types.has(getVal(getProp(node, 'type')) as Type)) return
 					const specVal = getProp(node, 'spec')?.value
-					if (!specVal || specVal.type !== 'ObjectExpression')
+					if (specVal?.type !== 'ObjectExpression')
 						ctx.error(
 							`missing “spec” object in “${id}”: ${JSON.stringify(node)}`,
 						)
 					const dataVal = getProp(specVal, 'data')?.value
-					if (!dataVal || dataVal.type !== 'ObjectExpression')
+					if (dataVal?.type !== 'ObjectExpression')
 						ctx.error(
 							`missing “data” object in “${id}”: ${JSON.stringify(node)}`,
 						)
