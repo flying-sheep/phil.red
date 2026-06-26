@@ -507,10 +507,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/core-downloads-tracker@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "@mui/core-downloads-tracker@npm:9.1.1"
-  checksum: 10/d036e08f7967664005f46c6820925ca2366997288bedfb8d5a34ec92880bb079a06a462e6ab2817ab777fabc85369ce19e8130b0d312e9eb3230e847b42f400a
+"@mui/core-downloads-tracker@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "@mui/core-downloads-tracker@npm:9.1.2"
+  checksum: 10/25bf663e8798542a834faf4689148ee8860b7bad3b0587abc23fc9392511595cd217b6b990d5a680d78183f8642b6943e3aaa54f364d06f1f5b25a568dd77ade
   languageName: node
   linkType: hard
 
@@ -530,13 +530,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "@mui/material@npm:9.1.1"
+"@mui/material@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "@mui/material@npm:9.1.2"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
-    "@mui/core-downloads-tracker": "npm:^9.1.1"
-    "@mui/system": "npm:^9.1.1"
+    "@mui/core-downloads-tracker": "npm:^9.1.2"
+    "@mui/system": "npm:^9.1.2"
     "@mui/types": "npm:^9.1.1"
     "@mui/utils": "npm:^9.1.1"
     "@popperjs/core": "npm:^2.11.8"
@@ -562,7 +562,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 10/fc7db5209c9d42f41e68e46ff0da5a4c689be46ae66d4d369925db66da5235f9168d32e51c3bde504d330a669a3f6e3b5c8aa880033c932bec579f58d3731552
+  checksum: 10/0d8fc47f9024d3b6cd48bcb7b232312716a98b08fb97c5f5e9bc674f345b19ada5b28bc394874c99ca8db3da6a221c4dfca175dcbc27a056b1c334e7629b5f7a
   languageName: node
   linkType: hard
 
@@ -606,9 +606,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/system@npm:^9.0.0, @mui/system@npm:^9.1.1":
-  version: 9.1.1
-  resolution: "@mui/system@npm:9.1.1"
+"@mui/system@npm:^9.0.0, @mui/system@npm:^9.1.2":
+  version: 9.1.2
+  resolution: "@mui/system@npm:9.1.2"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
     "@mui/private-theming": "npm:^9.1.1"
@@ -630,7 +630,7 @@ __metadata:
       optional: true
     "@types/react":
       optional: true
-  checksum: 10/8689663d5a323a0efbd190f968bdd933ef7902eee92430e42f1bf7a55b072bb8884248024d4a456fa19198f094b5ee061accc3efad3dd22d2571628293c3be12
+  checksum: 10/4d311435388f6bc475a5590053ee8563fc19e308a10234c3b880b93b8f87e88c92fd7768bb0fcef9f7b1d85b0b7237ab63ebb650b7332cb1e498e791a3538333
   languageName: node
   linkType: hard
 
@@ -2883,7 +2883,7 @@ __metadata:
     "@fontsource/iosevka": "npm:^5.2.5"
     "@fontsource/iosevka-aile": "npm:^5.2.5"
     "@mui/icons-material": "npm:^9.1.1"
-    "@mui/material": "npm:^9.1.1"
+    "@mui/material": "npm:^9.1.2"
     "@mui/system": "npm:^9.0.0"
     "@oxc-project/types": "npm:^0.135"
     "@total-typescript/ts-reset": "npm:^0.6.1"
