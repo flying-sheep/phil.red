@@ -3,12 +3,9 @@ import type { SxProps } from '@mui/material/styles'
 import { mergeSx } from 'merge-sx'
 import { type FC, useMemo, useRef } from 'react'
 import { type UseVegaEmbedParams, useVegaEmbed } from 'react-vega'
-import type { Config, Spec } from 'vega-typings'
-import { mergeConfig as mc } from 'vega-util'
+import type { Spec } from 'vega-typings'
+import { mergeConfig } from 'vega-util'
 import { useMuiVegaOptions } from './mui-vega'
-
-// https://github.com/vega/vega/issues/4278
-const mergeConfig = mc as unknown as (...configs: Partial<Config>[]) => Config
 
 export interface VegaProps
 	extends Omit<UseVegaEmbedParams, 'ref' | 'spec'>,

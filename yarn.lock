@@ -163,18 +163,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@biomejs/biome@npm:^2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/biome@npm:2.5.4"
+"@biomejs/biome@npm:^2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/biome@npm:2.5.5"
   dependencies:
-    "@biomejs/cli-darwin-arm64": "npm:2.5.4"
-    "@biomejs/cli-darwin-x64": "npm:2.5.4"
-    "@biomejs/cli-linux-arm64": "npm:2.5.4"
-    "@biomejs/cli-linux-arm64-musl": "npm:2.5.4"
-    "@biomejs/cli-linux-x64": "npm:2.5.4"
-    "@biomejs/cli-linux-x64-musl": "npm:2.5.4"
-    "@biomejs/cli-win32-arm64": "npm:2.5.4"
-    "@biomejs/cli-win32-x64": "npm:2.5.4"
+    "@biomejs/cli-darwin-arm64": "npm:2.5.5"
+    "@biomejs/cli-darwin-x64": "npm:2.5.5"
+    "@biomejs/cli-linux-arm64": "npm:2.5.5"
+    "@biomejs/cli-linux-arm64-musl": "npm:2.5.5"
+    "@biomejs/cli-linux-x64": "npm:2.5.5"
+    "@biomejs/cli-linux-x64-musl": "npm:2.5.5"
+    "@biomejs/cli-win32-arm64": "npm:2.5.5"
+    "@biomejs/cli-win32-x64": "npm:2.5.5"
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -194,62 +194,62 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: 10/df9f4c2537d98b93606cefa8591612b8c5287646c5fd01540433ac395a7c2c7eab4941c43b0564485e1b0373e0e2945faac431cb6216c14c409c9adf1928db54
+  checksum: 10/5c3768893b2b77b0d6fed5a3e92394d2fb9520fc4b1c51143b4ed2789230f3fc648aba8cc152debe58a04c4103bf58515a19de2be721bb433879d3a1e9114049
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-darwin-arm64@npm:2.5.4"
+"@biomejs/cli-darwin-arm64@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-darwin-arm64@npm:2.5.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-darwin-x64@npm:2.5.4"
+"@biomejs/cli-darwin-x64@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-darwin-x64@npm:2.5.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64-musl@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.5.4"
+"@biomejs/cli-linux-arm64-musl@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-linux-arm64-musl@npm:2.5.5"
   conditions: os=linux & cpu=arm64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-linux-arm64@npm:2.5.4"
+"@biomejs/cli-linux-arm64@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-linux-arm64@npm:2.5.5"
   conditions: os=linux & cpu=arm64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64-musl@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-linux-x64-musl@npm:2.5.4"
+"@biomejs/cli-linux-x64-musl@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-linux-x64-musl@npm:2.5.5"
   conditions: os=linux & cpu=x64 & libc=musl
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-linux-x64@npm:2.5.4"
+"@biomejs/cli-linux-x64@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-linux-x64@npm:2.5.5"
   conditions: os=linux & cpu=x64 & libc=glibc
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-win32-arm64@npm:2.5.4"
+"@biomejs/cli-win32-arm64@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-win32-arm64@npm:2.5.5"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:2.5.4":
-  version: 2.5.4
-  resolution: "@biomejs/cli-win32-x64@npm:2.5.4"
+"@biomejs/cli-win32-x64@npm:2.5.5":
+  version: 2.5.5
+  resolution: "@biomejs/cli-win32-x64@npm:2.5.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1044,10 +1044,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:^1.0.0, @types/estree@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "@types/estree@npm:1.0.8"
-  checksum: 10/25a4c16a6752538ffde2826c2cc0c6491d90e69cd6187bef4a006dd2c3c45469f049e643d7e516c515f21484dc3d48fd5c870be158a5beb72f5baf3dc43e4099
+"@types/estree@npm:^1.0.0, @types/estree@npm:^1.0.8, @types/estree@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@types/estree@npm:1.0.9"
+  checksum: 10/16aabfa703b5bdac83f719b07ce92a11b2d3c9b8628eacc92889d8af46cab2d78fc45c7b5378de383d0500585cea5c2f79125eeddfe5fbc6bd6a27eb0c8ccee5
   languageName: node
   linkType: hard
 
@@ -1631,7 +1631,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"d3-format@npm:1 - 3, d3-format@npm:^3.1.0":
+"d3-format@npm:1 - 3, d3-format@npm:^3.1.2":
   version: 3.1.2
   resolution: "d3-format@npm:3.1.2"
   checksum: 10/811d913c2c7624cb0d2a8f0ccd7964c50945b3de3c7f7aa14c309fba7266a3ec53cbee8c05f6ad61b2b65b93e157c55a0e07db59bc3180c39dac52be8e841ab1
@@ -2895,7 +2895,7 @@ __metadata:
     "@arborium/typescript": "npm:^2.18.1"
     "@arborium/xml": "npm:^2.18.1"
     "@arborium/zsh": "npm:^2.18.1"
-    "@biomejs/biome": "npm:^2.5.4"
+    "@biomejs/biome": "npm:^2.5.5"
     "@dr.pogodin/react-helmet": "npm:^3.2.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
@@ -2940,11 +2940,11 @@ __metadata:
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^6.0.3"
     unplugin-fonts: "npm:^2.0.0"
-    vega: "npm:^6.2.0"
+    vega: "npm:^6.3.1"
     vega-embed: "npm:^7.1.0"
     vega-lite: "npm:^6.4.3"
-    vega-typings: "npm:^2.1.0"
-    vega-util: "npm:^2.1.1"
+    vega-typings: "npm:^2.2.0"
+    vega-util: "npm:^2.1.2"
     vite: "npm:^8.1.3"
   languageName: unknown
   linkType: soft
@@ -3711,25 +3711,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-crossfilter@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-crossfilter@npm:5.1.0"
+"vega-crossfilter@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-crossfilter@npm:5.1.2"
   dependencies:
     d3-array: "npm:^3.2.4"
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/3cba824f8a30237875889963a9c06ad27a1829e313a9e8eb7df989e3cbdf92624a80fa30a2f5e80a435a54ec8aba510c7a3b9303d197f365de31db922e1709b7
+  checksum: 10/28cac6efeaa56841f9ae11b45067bb7b949afc9131cdb080c15ce5bb0bde436d9cc34b508743f32257da6e4b6a576482710ee20fb3e4d564fb2d7f1e72851fa4
   languageName: node
   linkType: hard
 
-"vega-dataflow@npm:^6.1.0, vega-dataflow@npm:~6.1.0":
-  version: 6.1.0
-  resolution: "vega-dataflow@npm:6.1.0"
+"vega-dataflow@npm:^6.1.2, vega-dataflow@npm:~6.1.2":
+  version: 6.1.2
+  resolution: "vega-dataflow@npm:6.1.2"
   dependencies:
-    vega-format: "npm:^2.1.0"
-    vega-loader: "npm:^5.1.0"
+    vega-format: "npm:^2.1.2"
+    vega-loader: "npm:^5.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/bc4f9ad83f8c89363e8fc40ed7d4fcd7c48058be462a3c37cfae8e21813884c3fa967d0834760a33f5c45d410d9181cc5df975e9fccd274e0c01c074c134c79f
+  checksum: 10/f4936772418eb71766c04e5f3fb44ec0f25db8e73fdf16592f5a603ebf365d8436f8e6ecf60db190c90c7dd037fe050edea0d8d81a44010925c7d7d92b44f532
   languageName: node
   linkType: hard
 
@@ -3752,16 +3752,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-encode@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-encode@npm:5.1.0"
+"vega-encode@npm:~5.2.1":
+  version: 5.2.1
+  resolution: "vega-encode@npm:5.2.1"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-interpolate: "npm:^3.0.1"
-    vega-dataflow: "npm:^6.1.0"
-    vega-scale: "npm:^8.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-scale: "npm:^8.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/f632a18c9ebf2702cb66f273f1149ff0e3dbc36fd9cdaea97b98e5f6dc05cba286315ce9dc21c35106f11b635013e25d880cf168e491454c697d5d7d4f3e1bc6
+  checksum: 10/4f7a35cbfd86ea69b108eebb35ed8630277dacc6867db7932b7d4d95b9ee7c381a2df01f4828755998b3e69c61ab0d6f6fa6545734cc0b7ae96fc0993370168c
   languageName: node
   linkType: hard
 
@@ -3772,7 +3772,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-expression@npm:^6.1.0, vega-expression@npm:~6.1.0":
+"vega-expression@npm:^6.2.0, vega-expression@npm:^6.2.1, vega-expression@npm:~6.2.1":
+  version: 6.2.1
+  resolution: "vega-expression@npm:6.2.1"
+  dependencies:
+    "@types/estree": "npm:^1.0.9"
+    vega-util: "npm:^2.1.0"
+  checksum: 10/4e5747fb018c027691169eab7bfa82142904e7f49d2027d3a5918f178449788166c50168f59602857e740ad9bc75816eceddcde68b4bff0a61e270c8cf93e897
+  languageName: node
+  linkType: hard
+
+"vega-expression@npm:~6.1.0":
   version: 6.1.0
   resolution: "vega-expression@npm:6.1.0"
   dependencies:
@@ -3782,73 +3792,73 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-force@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-force@npm:5.1.0"
+"vega-force@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-force@npm:5.1.2"
   dependencies:
     d3-force: "npm:^3.0.0"
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/4824b33a5bb7c339345545d23a9e0bd5e53586a09094085473234d6a9841f991cdf8beb32b15eca40358d36b8b147cfa0f8dd6e962538f3547de046176c1f7d2
+  checksum: 10/f5d45989547afb3886f5d45a2f683f63696563bc9e23db39d438eb94009106f4c2bc8ad936ca185f2649322d0f2f7673be660cc569b6cedfad4f6c17aa8c6d87
   languageName: node
   linkType: hard
 
-"vega-format@npm:^2.1.0, vega-format@npm:~2.1.0":
-  version: 2.1.0
-  resolution: "vega-format@npm:2.1.0"
+"vega-format@npm:^2.1.2, vega-format@npm:~2.1.2":
+  version: 2.1.2
+  resolution: "vega-format@npm:2.1.2"
   dependencies:
     d3-array: "npm:^3.2.4"
-    d3-format: "npm:^3.1.0"
+    d3-format: "npm:^3.1.2"
     d3-time-format: "npm:^4.1.0"
-    vega-time: "npm:^3.1.0"
+    vega-time: "npm:^3.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/34bc39521f03da0cd110fd588b112437915689bb216062e807ef865783590853fc97f52fcad330e26cdb007d3e62e4da66e4c674d66174eb6a4582811549ef3d
+  checksum: 10/d312387bd8620fa622751f780dbb5394f2a71dbdf881ad72a87591106cf07ba8ad51a0000a84451c1026dfdf8dc017eff69f5a0cdb601f25626c5b231262b17c
   languageName: node
   linkType: hard
 
-"vega-functions@npm:^6.1.0, vega-functions@npm:~6.1.0":
-  version: 6.1.1
-  resolution: "vega-functions@npm:6.1.1"
+"vega-functions@npm:^6.1.3, vega-functions@npm:~6.1.3":
+  version: 6.1.3
+  resolution: "vega-functions@npm:6.1.3"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-color: "npm:^3.1.0"
     d3-geo: "npm:^3.1.1"
-    vega-dataflow: "npm:^6.1.0"
-    vega-expression: "npm:^6.1.0"
-    vega-scale: "npm:^8.1.0"
-    vega-scenegraph: "npm:^5.1.0"
-    vega-selections: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-expression: "npm:^6.2.1"
+    vega-scale: "npm:^8.1.2"
+    vega-scenegraph: "npm:^5.2.1"
+    vega-selections: "npm:^6.1.4"
     vega-statistics: "npm:^2.0.0"
-    vega-time: "npm:^3.1.0"
+    vega-time: "npm:^3.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/5c17f61f54988079f165f4a7682941356f0406e0436245d1f08c2843b207cb868b9106551309fa7d960a90a85e0baa67460ca3c5d6f736dbb92902678f7c02de
+  checksum: 10/8862081d6d36b2048f9e093d9858dde3c511aae0c684298faa65a123d6c1a5d811f8015cc64d506ff11b8bb3683e511d230e0691ef06849729010354474d9f2b
   languageName: node
   linkType: hard
 
-"vega-geo@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-geo@npm:5.1.0"
+"vega-geo@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-geo@npm:5.1.2"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-color: "npm:^3.1.0"
     d3-geo: "npm:^3.1.1"
     vega-canvas: "npm:^2.0.0"
-    vega-dataflow: "npm:^6.1.0"
-    vega-projection: "npm:^2.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-projection: "npm:^2.1.2"
     vega-statistics: "npm:^2.0.0"
     vega-util: "npm:^2.1.0"
-  checksum: 10/0e497be0c565573efb72a8f7ca86d5d40159f4676b56ef67fedb9aae8e137c6f9957609e610114bebb29974f5492808f296841d401ebe6d80c088d04176ab60c
+  checksum: 10/f95c1eba48aa76789e3c54ec21254d9278a016aa1b3c20f3b927320da45583a3c7f5b3f597fac751e025224932450848efa9f71bea5de6aaafe555b26c4764e0
   languageName: node
   linkType: hard
 
-"vega-hierarchy@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-hierarchy@npm:5.1.0"
+"vega-hierarchy@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-hierarchy@npm:5.1.2"
   dependencies:
     d3-hierarchy: "npm:^3.1.2"
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/39e8424ed1e735e6b6078218b2ada416f1d80d1d07a028da18ecb5d89c2598b85f7e2aa1ac12c8b887813b91588e2196298e1ecc8633147609fd437dd66d92b5
+  checksum: 10/0789454dbc2cf69f5367172eaf2b7cada11b106aa0725b028f5df2933afc49ee5124eba45ea207069bd7e248da6c39cf3a5206249c9df086513a0ac8348b9e60
   languageName: node
   linkType: hard
 
@@ -3861,15 +3871,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-label@npm:~2.1.0":
-  version: 2.1.0
-  resolution: "vega-label@npm:2.1.0"
+"vega-label@npm:~2.1.2":
+  version: 2.1.2
+  resolution: "vega-label@npm:2.1.2"
   dependencies:
     vega-canvas: "npm:^2.0.0"
-    vega-dataflow: "npm:^6.1.0"
-    vega-scenegraph: "npm:^5.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-scenegraph: "npm:^5.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/eb6c0bd8326a3a14b47b4b49a8cd1a93386718e92600ca2dfbf4e16203d576aa8c58937d9cf6fb9fa0f7ca786360c509eb3903cfa0798007e6409007066edcbe
+  checksum: 10/1303f0cfe2bc758afaedb7c99f4a5a05787e54a07a316186bf53606e81b45c9340f6f36727be61474c7fac1f673461838522c96b30e64443d24b50aac92e7453
   languageName: node
   linkType: hard
 
@@ -3894,89 +3904,89 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-loader@npm:^5.1.0, vega-loader@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-loader@npm:5.1.0"
+"vega-loader@npm:^5.1.2, vega-loader@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-loader@npm:5.1.2"
   dependencies:
     d3-dsv: "npm:^3.0.1"
     topojson-client: "npm:^3.1.0"
-    vega-format: "npm:^2.1.0"
+    vega-format: "npm:^2.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/ed6f570c781d8c4ac15d5c435ddc8ca51245b1a4dfbe00d77dcb60214e86a48febdd6d854e5b6d8444fa8fc6898623548de47393239c7ae718b1181ae642db50
+  checksum: 10/360dcf9710c77f21bbb535d20e89886dc03cd6ab1516c64d114e9bb564c69b4bb64ff1c6ea471977fded32c4ef71581dbd4bd8d514453554d6de265bfa20170e
   languageName: node
   linkType: hard
 
-"vega-parser@npm:~7.1.0":
-  version: 7.1.0
-  resolution: "vega-parser@npm:7.1.0"
+"vega-parser@npm:~7.1.2":
+  version: 7.1.2
+  resolution: "vega-parser@npm:7.1.2"
   dependencies:
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-event-selector: "npm:^4.0.0"
-    vega-functions: "npm:^6.1.0"
-    vega-scale: "npm:^8.1.0"
+    vega-functions: "npm:^6.1.3"
+    vega-scale: "npm:^8.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/a1c024e6a35403f5f78a5237463989f0d0062827ee037d3d7c4e0bd9c6a8bf65d6788a26c03e3af9a258eb2c64ba51b94a1ee33486c84c06383ca7f6702f4ff3
+  checksum: 10/a7ebc2f65959adb0dc320bb92990cfd3f260c4e041c6adccc2bbc1bba3df08ed54834017079b64bde67b473653e4b5316a72ca1a91fb26bf521c30e95db80801
   languageName: node
   linkType: hard
 
-"vega-projection@npm:^2.1.0, vega-projection@npm:~2.1.0":
-  version: 2.1.0
-  resolution: "vega-projection@npm:2.1.0"
+"vega-projection@npm:^2.1.2, vega-projection@npm:~2.1.2":
+  version: 2.1.2
+  resolution: "vega-projection@npm:2.1.2"
   dependencies:
     d3-geo: "npm:^3.1.1"
     d3-geo-projection: "npm:^4.0.0"
-    vega-scale: "npm:^8.1.0"
-  checksum: 10/aa6a4645fc4406039b7f7069f3fd036eb06f5061e6983b5fcf92684aa0805c5e1e437ac48a8f5e016f8799525460974f5379c05b6ac169d0a45101aa36abf9a7
+    vega-scale: "npm:^8.1.2"
+  checksum: 10/0b8ded3d63ead093b4a6b59e1460ac677466748114dbbfa4608016f09ad292a14a303de2914265392a7dd9b0dfcff5b11cf02366653adb85ef776c3d9b101a3f
   languageName: node
   linkType: hard
 
-"vega-regression@npm:~2.1.0":
-  version: 2.1.0
-  resolution: "vega-regression@npm:2.1.0"
+"vega-regression@npm:~2.1.2":
+  version: 2.1.2
+  resolution: "vega-regression@npm:2.1.2"
   dependencies:
     d3-array: "npm:^3.2.4"
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-statistics: "npm:^2.0.0"
     vega-util: "npm:^2.1.0"
-  checksum: 10/681e5e0258b93dd06d9aa68b9e307c048887f579f3e9d623b8d3cbc6b590f41b7ebf2a037da8af98845e02b4eaab2ea9af44df6e6b6370c5b5751d7f954427c7
+  checksum: 10/f552a76eed141af6679f2cf91a3ea01d259712e086fd96a0bc7667770c78f74402c6b06492b8548e138823453d38c0b655cef9cae6daa8668fe8c24a6ddef812
   languageName: node
   linkType: hard
 
-"vega-runtime@npm:^7.1.0, vega-runtime@npm:~7.1.0":
-  version: 7.1.0
-  resolution: "vega-runtime@npm:7.1.0"
+"vega-runtime@npm:^7.1.2, vega-runtime@npm:~7.1.2":
+  version: 7.1.2
+  resolution: "vega-runtime@npm:7.1.2"
   dependencies:
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/a5bc8299f6f0f5b3f9722376c43002d88b3e27d20e515bea7033a94668e087037c0a5433f7073411881e6e8093379d2e6d9b9bc7f10bcadbcc6502a2fc1d3e0b
+  checksum: 10/b49dcad1921c2418cd0750ec4b1d6f731a95b919676555880a6b7bf3d230416bb325df49dde0551e6991f8eec7cdf17e7dde6f7a8cf9c5457469d698556b5d00
   languageName: node
   linkType: hard
 
-"vega-scale@npm:^8.1.0, vega-scale@npm:~8.1.0":
-  version: 8.1.0
-  resolution: "vega-scale@npm:8.1.0"
+"vega-scale@npm:^8.1.2, vega-scale@npm:~8.1.2":
+  version: 8.1.2
+  resolution: "vega-scale@npm:8.1.2"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-interpolate: "npm:^3.0.1"
     d3-scale: "npm:^4.0.2"
     d3-scale-chromatic: "npm:^3.1.0"
-    vega-time: "npm:^3.1.0"
+    vega-time: "npm:^3.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/53ea4083dbe01d29cddbb95a832264a52eb69e890ce4f58e958ca2c245819c4c6e25733095255cbf4c1e47d48da1ee49e2f3757e0f00a4b4e6ca6b7ee5de2dbb
+  checksum: 10/bfb642c1c917a96d32afd972fb4becbb5ddbbc224c3ef905196e4f1df72eb0e5eed5eb827df7038eb626832f2d34565108071b0b2eebbf9f19ee8b5c554210c0
   languageName: node
   linkType: hard
 
-"vega-scenegraph@npm:^5.1.0, vega-scenegraph@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-scenegraph@npm:5.1.0"
+"vega-scenegraph@npm:^5.2.1, vega-scenegraph@npm:~5.2.1":
+  version: 5.2.1
+  resolution: "vega-scenegraph@npm:5.2.1"
   dependencies:
     d3-path: "npm:^3.1.0"
     d3-shape: "npm:^3.2.0"
     vega-canvas: "npm:^2.0.0"
-    vega-loader: "npm:^5.1.0"
-    vega-scale: "npm:^8.1.0"
+    vega-loader: "npm:^5.1.2"
+    vega-scale: "npm:^8.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/2917abca6618c5eb6bbc7cd026d126fb654b58bfbda0b942774a85ae137d1644b9567894d37472dadb067c530564df9b5c38437bbb6763b5d4fde820fd8c48b1
+  checksum: 10/d51e688ad6a2972f45a6676de35b8617058d1ec54a170a8f18a6ca93cdfc30f40fce945c2cf34b3d27030efe5b4fbce2c49f8e59428e1d53de2b85dac64965de
   languageName: node
   linkType: hard
 
@@ -3987,14 +3997,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-selections@npm:^6.1.0":
-  version: 6.1.2
-  resolution: "vega-selections@npm:6.1.2"
+"vega-selections@npm:^6.1.4":
+  version: 6.1.4
+  resolution: "vega-selections@npm:6.1.4"
   dependencies:
     d3-array: "npm:3.2.4"
-    vega-expression: "npm:^6.1.0"
+    vega-expression: "npm:^6.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/7ec150b8323dde7dac041f28f9e23b9c3ab9d80c072db3d8ffc8103e26957dbc06e553e9340a8d713f317ed57f9cfbf1321c125c9c2ea0db1daae5525600e406
+  checksum: 10/fe64014a6c9c14cef9f6bb1051f6fdb0c4e37da4bdf622b768e9fcee724fe5cbcdd24f7538745660e34294453e9ff10a5e1694479df7749321f26c906ceb8c56
   languageName: node
   linkType: hard
 
@@ -4017,14 +4027,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-time@npm:^3.1.0, vega-time@npm:~3.1.0":
-  version: 3.1.0
-  resolution: "vega-time@npm:3.1.0"
+"vega-time@npm:^3.2.1, vega-time@npm:~3.2.1":
+  version: 3.2.1
+  resolution: "vega-time@npm:3.2.1"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-time: "npm:^3.1.0"
     vega-util: "npm:^2.1.0"
-  checksum: 10/252e82b4e9f3a46ddf2eab59f235e04e5d91bf9273f8cf1b5b4a0e4da2c9b1aa7179be6ac28dc2f192748f8292022802cee508d52ac6ae8adc3614373da33c81
+  checksum: 10/aa216ee6b636d9664a17b48af570583e859b4ff04463bbac47f7e6d2d4cd05132f2eee8bfc586e038a04796a86dec41a97e79a29dfc39376a612336af8deaff8
   languageName: node
   linkType: hard
 
@@ -4037,121 +4047,121 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-transforms@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-transforms@npm:5.1.0"
+"vega-transforms@npm:~5.2.1":
+  version: 5.2.1
+  resolution: "vega-transforms@npm:5.2.1"
   dependencies:
     d3-array: "npm:^3.2.4"
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-statistics: "npm:^2.0.0"
-    vega-time: "npm:^3.1.0"
+    vega-time: "npm:^3.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/7afcbab20205911a9bb3d6dd29f8ba7995207e1af5fb3189ff76a88f91b0f7063fa0543c057c4e7b43eb0b6eabcd208e0f0321fac431580af3afa1b5f6695724
+  checksum: 10/3e0f028c8db7cbdde4f21c74c3b4f4689c0602adca5f3b4dd00df43dd7f78ef132299c424de5a32240bae105871e9af500061c696c5a664c501ba7fd1ea51eb3
   languageName: node
   linkType: hard
 
-"vega-typings@npm:^2.1.0, vega-typings@npm:~2.1.0":
-  version: 2.1.0
-  resolution: "vega-typings@npm:2.1.0"
+"vega-typings@npm:^2.2.0, vega-typings@npm:~2.2.0":
+  version: 2.2.0
+  resolution: "vega-typings@npm:2.2.0"
   dependencies:
     "@types/geojson": "npm:7946.0.16"
     vega-event-selector: "npm:^4.0.0"
-    vega-expression: "npm:^6.1.0"
+    vega-expression: "npm:^6.2.0"
     vega-util: "npm:^2.1.0"
-  checksum: 10/f6ba7de7d69f595a9a0df5be516f574f4b089d383d14db4f044fa259eb43e2160c26446a234e93a7e578879fb894ba08f88ce88056bd5b4bb5dcde9a6c1be31d
+  checksum: 10/7e0b4f9a1fe1073ba402a55bc3f3b1f04189ac4e72aefff503cb740c2c77dbc0e1a2be37631cbd0bf12c8159269ec31554e652ccc727e7f0810f150be008d686
   languageName: node
   linkType: hard
 
-"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:^2.1.1, vega-util@npm:~2.1.0":
-  version: 2.1.1
-  resolution: "vega-util@npm:2.1.1"
-  checksum: 10/65d426b745e49e264901242e1c154f183be3e2cd95f6701701a28f8f45fbb80488b7a7a0e85ca6e2a68aa4dc6cfdfffd0eda5e1e5bfde0f257dc4415d3657a42
+"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:^2.1.2, vega-util@npm:~2.1.0":
+  version: 2.1.2
+  resolution: "vega-util@npm:2.1.2"
+  checksum: 10/5b1f6305381c1cf636f71c380e5c4f9e23bbdfecee22aff6215cdfb661e20081bc4c1b66bf8c323fcfcaad126e0d637c3eba9f117284b223df54ae1a0c498725
   languageName: node
   linkType: hard
 
-"vega-view-transforms@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-view-transforms@npm:5.1.0"
+"vega-view-transforms@npm:~5.2.1":
+  version: 5.2.1
+  resolution: "vega-view-transforms@npm:5.2.1"
   dependencies:
-    vega-dataflow: "npm:^6.1.0"
-    vega-scenegraph: "npm:^5.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-scenegraph: "npm:^5.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/aa001ebb5cb291d3ecc4168705a5e059a670551b11ddb182a3ef24fce3ac55bf2e67d66383c8aab7f01b5951045c4dd8d72f77e94291b510f05f9a8c303020fd
+  checksum: 10/1a04000c574e311f326940aa26f729f9842ca4c59a4c0b7f6b5641c0230a3e4160d69abe3ee1cf51a198f47b643893b578963941a936bf80a00b672ace708738
   languageName: node
   linkType: hard
 
-"vega-view@npm:~6.1.0":
-  version: 6.1.0
-  resolution: "vega-view@npm:6.1.0"
+"vega-view@npm:~6.1.2":
+  version: 6.1.2
+  resolution: "vega-view@npm:6.1.2"
   dependencies:
     d3-array: "npm:^3.2.4"
     d3-timer: "npm:^3.0.1"
-    vega-dataflow: "npm:^6.1.0"
-    vega-format: "npm:^2.1.0"
-    vega-functions: "npm:^6.1.0"
-    vega-runtime: "npm:^7.1.0"
-    vega-scenegraph: "npm:^5.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-format: "npm:^2.1.2"
+    vega-functions: "npm:^6.1.3"
+    vega-runtime: "npm:^7.1.2"
+    vega-scenegraph: "npm:^5.2.1"
     vega-util: "npm:^2.1.0"
-  checksum: 10/c6b479ab9b13618ac5ca0d327b24740e93da16095324dcc18e18e2467d18732e153a460ddbf1e662919ee68f2369b3ea4e2244c4b701688e534e35be4788311d
+  checksum: 10/fcc8048aa02910897e0831d836db531aa5a9b619de374db12ea9812dd5857cc4b50ae07067fc34b48d4568c267de528066a5d01b1d10e7ef240ae4130d68cd3e
   languageName: node
   linkType: hard
 
-"vega-voronoi@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-voronoi@npm:5.1.0"
+"vega-voronoi@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-voronoi@npm:5.1.2"
   dependencies:
     d3-delaunay: "npm:^6.0.4"
-    vega-dataflow: "npm:^6.1.0"
+    vega-dataflow: "npm:^6.1.2"
     vega-util: "npm:^2.1.0"
-  checksum: 10/242065d6b9955b8cabf2c3e59338ec5cfab6ac860a0abf4076ec264db3c03d7c255880e21bd3bf91525f76fad57c08471b567cc9e7b1e1ded88265f8af2996e9
+  checksum: 10/63671e7d94bf82e4bf11d2e7ca3b28a32cf843c4c41cfaa7a0e6dfd3439a64a835a605732a1c79c955bfa6764b9d25dd84ace9aa79ceb8386d47ac2d50534c88
   languageName: node
   linkType: hard
 
-"vega-wordcloud@npm:~5.1.0":
-  version: 5.1.0
-  resolution: "vega-wordcloud@npm:5.1.0"
+"vega-wordcloud@npm:~5.1.2":
+  version: 5.1.2
+  resolution: "vega-wordcloud@npm:5.1.2"
   dependencies:
     vega-canvas: "npm:^2.0.0"
-    vega-dataflow: "npm:^6.1.0"
-    vega-scale: "npm:^8.1.0"
+    vega-dataflow: "npm:^6.1.2"
+    vega-scale: "npm:^8.1.2"
     vega-statistics: "npm:^2.0.0"
     vega-util: "npm:^2.1.0"
-  checksum: 10/ff910936becc002c42424a8d8c7cb6c5ab3ef86c750753dc571bccf5a1628b3b3e9e490fbfbf497f4b31bcaae9603b58ab2575a8e69238490f79011a34d319b7
+  checksum: 10/7cf0f58f631c5d4732fd11ca7f509420275aabb02d56e775e64813ed9aa643a1b08c7057d3e89c686822d6f8610e69f7726c51ba81d33a683a09c8bddf8189ab
   languageName: node
   linkType: hard
 
-"vega@npm:^6.2.0":
-  version: 6.2.0
-  resolution: "vega@npm:6.2.0"
+"vega@npm:^6.3.1":
+  version: 6.3.1
+  resolution: "vega@npm:6.3.1"
   dependencies:
-    vega-crossfilter: "npm:~5.1.0"
-    vega-dataflow: "npm:~6.1.0"
-    vega-encode: "npm:~5.1.0"
+    vega-crossfilter: "npm:~5.1.2"
+    vega-dataflow: "npm:~6.1.2"
+    vega-encode: "npm:~5.2.1"
     vega-event-selector: "npm:~4.0.0"
-    vega-expression: "npm:~6.1.0"
-    vega-force: "npm:~5.1.0"
-    vega-format: "npm:~2.1.0"
-    vega-functions: "npm:~6.1.0"
-    vega-geo: "npm:~5.1.0"
-    vega-hierarchy: "npm:~5.1.0"
-    vega-label: "npm:~2.1.0"
-    vega-loader: "npm:~5.1.0"
-    vega-parser: "npm:~7.1.0"
-    vega-projection: "npm:~2.1.0"
-    vega-regression: "npm:~2.1.0"
-    vega-runtime: "npm:~7.1.0"
-    vega-scale: "npm:~8.1.0"
-    vega-scenegraph: "npm:~5.1.0"
+    vega-expression: "npm:~6.2.1"
+    vega-force: "npm:~5.1.2"
+    vega-format: "npm:~2.1.2"
+    vega-functions: "npm:~6.1.3"
+    vega-geo: "npm:~5.1.2"
+    vega-hierarchy: "npm:~5.1.2"
+    vega-label: "npm:~2.1.2"
+    vega-loader: "npm:~5.1.2"
+    vega-parser: "npm:~7.1.2"
+    vega-projection: "npm:~2.1.2"
+    vega-regression: "npm:~2.1.2"
+    vega-runtime: "npm:~7.1.2"
+    vega-scale: "npm:~8.1.2"
+    vega-scenegraph: "npm:~5.2.1"
     vega-statistics: "npm:~2.0.0"
-    vega-time: "npm:~3.1.0"
-    vega-transforms: "npm:~5.1.0"
-    vega-typings: "npm:~2.1.0"
+    vega-time: "npm:~3.2.1"
+    vega-transforms: "npm:~5.2.1"
+    vega-typings: "npm:~2.2.0"
     vega-util: "npm:~2.1.0"
-    vega-view: "npm:~6.1.0"
-    vega-view-transforms: "npm:~5.1.0"
-    vega-voronoi: "npm:~5.1.0"
-    vega-wordcloud: "npm:~5.1.0"
-  checksum: 10/6c9366d63dbdc774b700f32423149b91ea35b6724b5ef1c06402dae26b48ce32ff56b513a359cd0305b92200cf6939e0bbc27942d84fdf2b0cf0e58e89b5e459
+    vega-view: "npm:~6.1.2"
+    vega-view-transforms: "npm:~5.2.1"
+    vega-voronoi: "npm:~5.1.2"
+    vega-wordcloud: "npm:~5.1.2"
+  checksum: 10/ae564258eb0cfac5bd11d48fdef1a229d6c32e49d8270637e2383fdb2dba17b9df7268479ef052b03db837fa1ab82878773549affd540ff5d594f37619ad62be
   languageName: node
   linkType: hard
 
