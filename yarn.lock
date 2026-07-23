@@ -468,17 +468,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/iosevka-aile@npm:^5.2.5":
-  version: 5.2.5
-  resolution: "@fontsource/iosevka-aile@npm:5.2.5"
-  checksum: 10/1c16856309c65f18053d402d23605077e617fd3638e0833c0a27f9cd31ce7a990c5f6c66f189555fafd109bc0f67e212fadeeae6e5e7e0c7ca1e075bfba646df
+"@fontsource/iosevka-aile@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource/iosevka-aile@npm:5.3.0"
+  checksum: 10/c20db7e7e878e50e6968dcebd060d49e72b83a1903ab32fd359fd031952bb001c49412bcffa5e5469ecca3d3324d4a8603162b80912f0a20d4e6ef5fb5804c62
   languageName: node
   linkType: hard
 
-"@fontsource/iosevka@npm:^5.2.5":
-  version: 5.2.5
-  resolution: "@fontsource/iosevka@npm:5.2.5"
-  checksum: 10/352f93c27da017ae2003079fe25d2233d1cc4caf1b9db3328053d2bfafc13ed47cc4147d22987d758fe5b6c00081ca43997b7d088430438311a2ffa139ec6286
+"@fontsource/iosevka@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "@fontsource/iosevka@npm:5.3.0"
+  checksum: 10/62cd651a4e6e616fbb0f459067d2c62929da55550b3aaff10aa9d5e367b9938138e420275a226fbdbd87f104fdf4fb9ca467b7161454841de6ce133477b46004
   languageName: node
   linkType: hard
 
@@ -2899,8 +2899,8 @@ __metadata:
     "@dr.pogodin/react-helmet": "npm:^3.2.2"
     "@emotion/react": "npm:^11.14.0"
     "@emotion/styled": "npm:^11.14.1"
-    "@fontsource/iosevka": "npm:^5.2.5"
-    "@fontsource/iosevka-aile": "npm:^5.2.5"
+    "@fontsource/iosevka": "npm:^5.3.0"
+    "@fontsource/iosevka-aile": "npm:^5.3.0"
     "@mui/icons-material": "npm:^9.2.0"
     "@mui/material": "npm:^9.2.0"
     "@mui/system": "npm:^9.0.0"
