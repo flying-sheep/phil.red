@@ -23,10 +23,12 @@ export default defineConfig({
 						name: 'Iosevka Aile',
 						// Needed weights: https://mui.com/material-ui/react-typography/
 						weights: [300, 400, 500, 700],
+						fallback: { category: 'sans-serif' },
 					},
 					{
 						name: 'Iosevka',
 						weights: [400, 700],
+						fallback: { category: 'monospace' },
 					},
 				],
 			},
