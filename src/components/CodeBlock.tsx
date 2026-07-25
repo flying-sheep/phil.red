@@ -33,7 +33,10 @@ const CodeBlock = ({
 			) : (
 				<Code
 					sx={mergeSx(
-						{ fontFamily: 'Iosevka, monospace', lineHeight: '124%' },
+						{
+							fontFamily: 'Iosevka, "Iosevka Fallback", monospace',
+							lineHeight: '124%',
+						},
 						codeSx,
 					)}
 					{...codeProps}
