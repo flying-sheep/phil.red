@@ -2933,7 +2933,7 @@ __metadata:
     react-is: "npm:^19.2.8"
     react-json-tree: "npm:^0.20.0"
     react-portal-target: "npm:^1.0.2"
-    react-router: "npm:^8.2.0"
+    react-router: "npm:^8.3.0"
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
     temml: "npm:^0.13.3"
@@ -3113,9 +3113,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "react-router@npm:8.2.0"
+"react-router@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "react-router@npm:8.3.0"
   dependencies:
     cookie-es: "npm:^3.1.1"
   peerDependencies:
@@ -3124,7 +3124,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/cd94c90f83e37a8537d4270bb368e343509be972cc079cd76b4c6e499c890674d70eb97171480e3f34a05ca08f1b460805f5b2249f879d4d7c9145aec7ec28a8
+  checksum: 10/6ef9ee17910356e7a7c1d262d3c3a943a25e36bf871a199628438d1436d1a16828091da30a5df7c318030dff434c5b3f003c16f82c7ffca9cf37545316f6525c
   languageName: node
   linkType: hard
 
