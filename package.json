@@ -71,7 +71,7 @@
 		"depcheck": "^1.4.7",
 		"globby": "^16.2.2",
 		"husky": ">=9.1.7",
-		"lint-staged": ">=17.0.8",
+		"lint-staged": ">=17.2.0",
 		"magic-string": "^0.30.21",
 		"markdown-it": "^14.3.0",
 		"oxc-parser": "^0.141",
