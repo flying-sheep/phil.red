@@ -2925,7 +2925,7 @@ __metadata:
     notistack: "npm:^3.0.2"
     oxc-parser: "npm:^0.141"
     oxc-walker: "npm:^1.0.0"
-    pyodide: "npm:^314.0.2"
+    pyodide: "npm:^314.0.3"
     react: "npm:^19.2.8"
     react-base16-styling: "npm:^0.10.0"
     react-dom: "npm:^19.2.8"
@@ -3019,13 +3019,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pyodide@npm:^314.0.2":
-  version: 314.0.2
-  resolution: "pyodide@npm:314.0.2"
+"pyodide@npm:^314.0.3":
+  version: 314.0.3
+  resolution: "pyodide@npm:314.0.3"
   dependencies:
     "@types/emscripten": "npm:^1.41.4"
     ws: "npm:^8.5.0"
-  checksum: 10/7a48eab883e8c1ce6728deecef7e048ec1dc4b2bfe0cf3ebe029e9c26c716b244420b7ce9ef469eb3d51736bb9269c651fb9a556e76ddd810266a094f8193f65
+  checksum: 10/c3945ce3daaae97260e22242e816fec4ccad8612da109434d191b940019fc5ae258dac6b7ff2589da0489444111961a224fc9aa4b612b501373d8ffb4682a178
   languageName: node
   linkType: hard
 
