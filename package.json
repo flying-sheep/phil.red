@@ -57,7 +57,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.5",
-		"@oxc-project/types": "^0.141",
+		"@oxc-project/types": "^0.142",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@tsconfig/strictest": "^2.0.8",
 		"@types/markdown-it": "^14.1.2",
@@ -74,7 +74,7 @@
 		"lint-staged": ">=17.2.0",
 		"magic-string": "^0.30.21",
 		"markdown-it": "^14.3.0",
-		"oxc-parser": "^0.141",
+		"oxc-parser": "^0.142",
 		"oxc-walker": "^1.0.0",
 		"pyodide": "^314.0.3",
 		"react-base16-styling": "^0.10.0",
