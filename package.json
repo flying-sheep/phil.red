@@ -30,7 +30,7 @@
 		"@arborium/typescript": "^2.18.1",
 		"@arborium/xml": "^2.18.1",
 		"@arborium/zsh": "^2.18.1",
-		"@dr.pogodin/react-helmet": "^3.2.2",
+		"@dr.pogodin/react-helmet": "^3.2.3",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
 		"@fontsource/iosevka": "^5.3.0",
