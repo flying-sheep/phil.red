@@ -57,7 +57,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.5",
-		"@oxc-project/types": "^0.142",
+		"@oxc-project/types": "^0.143",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@tsconfig/strictest": "^2.0.8",
 		"@types/markdown-it": "^14.1.2",
@@ -74,15 +74,15 @@
 		"lint-staged": ">=17.2.0",
 		"magic-string": "^1.1.0",
 		"markdown-it": "^14.3.0",
-		"oxc-parser": "^0.142",
-		"oxc-walker": "^1.0.0",
+		"oxc-parser": "^0.143",
+		"oxc-walker": "^1.1.1",
 		"pyodide": "^314.0.3",
 		"react-base16-styling": "^0.10.0",
 		"react-json-tree": "^0.20.0",
 		"typescript": "^6.0.3",
 		"unplugin-fonts": "^2.0.0",
 		"vega-typings": "^2.2.0",
-		"vite": "^8.1.5"
+		"vite": "^8.2.0"
 	},
 	"packageManager": "yarn@4.17.0",
 	"//": "https://github.com/yarnpkg/berry/issues/3366",
