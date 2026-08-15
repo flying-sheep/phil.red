@@ -2,8 +2,8 @@ import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
 import type { FC } from 'react'
 
-import type { Node } from '../../../markup/MarkupDocument'
-import CodeBlock from '../../CodeBlock'
+import type { Node } from '../../../markup/MarkupDocument.ts'
+import CodeBlock from '../../CodeBlock.tsx'
 
 export interface ASTErrorMessageProps {
 	node?: Node

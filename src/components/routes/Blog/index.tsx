@@ -5,9 +5,9 @@ import type { FC } from 'react'
 import { Navigate, Route, useParams } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
 
-import posts from '../../../posts'
-import ListItemLink from '../../ListItemLink'
-import Markup from '../../markup'
+import posts from '../../../posts/index.ts'
+import ListItemLink from '../../ListItemLink.tsx'
+import Markup from '../../markup/index.ts'
 
 function date2url(date: Date) {
 	return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`

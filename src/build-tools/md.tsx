@@ -3,10 +3,10 @@
 import MarkdownIt from 'markdown-it'
 import Token from 'markdown-it/lib/token.mjs'
 
-import ASTError from '../markup/ASTError'
-import * as m from '../markup/MarkupDocument'
-import { rsplit } from '../utils'
-import toAnchor from './anchor'
+import ASTError from '../markup/ASTError.ts'
+import * as m from '../markup/MarkupDocument.ts'
+import { rsplit } from '../utils.ts'
+import toAnchor from './anchor.ts'
 
 const NO_END = Symbol('no end')
 

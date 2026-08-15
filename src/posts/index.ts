@@ -1,6 +1,6 @@
-import type { Document } from '../markup'
+import type { Document } from '../markup/index.ts'
 
-import rawPosts from './rawPosts'
+import rawPosts from './rawPosts.ts'
 
 export class Post {
 	date: Date

@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import { mergeSx } from 'merge-sx'
 import type { ComponentProps } from 'react'
 
-import Code, { type CodeProps } from './Code'
+import Code, { type CodeProps } from './Code.tsx'
 
 export interface CodeBlockProps
 	extends Omit<ComponentProps<typeof Box<'pre'>>, 'component' | 'children'> {

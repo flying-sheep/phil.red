@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.7/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -24,6 +24,9 @@
 		"rules": {
 			"complexity": {
 				"useLiteralKeys": "off", // conflicts with tsconfig noPropertyAccessFromIndexSignature: https://github.com/biomejs/biome/issues/463
+			},
+			"correctness": {
+				"useImportExtensions": "error",
 			},
 		},
 	},

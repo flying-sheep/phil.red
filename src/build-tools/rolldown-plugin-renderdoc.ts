@@ -9,9 +9,9 @@ import { globby } from 'globby'
 import MagicString from 'magic-string'
 import { walk } from 'oxc-walker'
 import type { Plugin, Rolldown } from 'vite'
-import { ASTError, type Document, ParseError, Type } from '../markup'
-import mdConvert from './md'
-import rstConvert from './rst'
+import { ASTError, type Document, ParseError, Type } from '../markup/index.ts'
+import mdConvert from './md.tsx'
+import rstConvert from './rst.tsx'
 
 function getProp(
 	node: ObjectExpression,

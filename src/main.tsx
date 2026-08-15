@@ -15,7 +15,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router'
 
-import App from './components/routes/App'
+import App from './components/routes/App/index.tsx'
 
 const elem = document.querySelector('#root')
 if (!elem) throw new Error('No #root element found')

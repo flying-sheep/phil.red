@@ -1,7 +1,7 @@
 import { highlights, type Utf16ParseResult } from '@arborium/arborium'
 import type { PaletteMode, SxProps, Theme } from '@mui/material/styles'
 import { type FC, useEffect, useMemo, useState } from 'react'
-import CodeBlock from '../../CodeBlock.js'
+import CodeBlock from '../../CodeBlock.tsx'
 
 /* font-weight and font-style are not supported by the feature, so we map them to something else:
  * https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/::highlight#allowable_properties

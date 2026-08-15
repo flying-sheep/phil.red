@@ -1,4 +1,4 @@
-import type { Position } from './MarkupDocument'
+import type { Position } from './MarkupDocument.ts'
 
 export default class ASTError extends Error {
 	override message: string

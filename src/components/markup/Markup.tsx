@@ -7,8 +7,8 @@ import { Children, type FC, useCallback, useMemo, useState } from 'react'
 import { base16Themes } from 'react-base16-styling'
 import { JSONTree, type ShouldExpandNodeInitially } from 'react-json-tree'
 import { PortalSource } from 'react-portal-target'
-import type { Document } from '../../markup/MarkupDocument'
-import MarkupNodeComponent from './MarkupNodeComponent'
+import type { Document } from '../../markup/MarkupDocument.ts'
+import MarkupNodeComponent from './MarkupNodeComponent.tsx'
 
 export interface MarkupProps {
 	doc: Document

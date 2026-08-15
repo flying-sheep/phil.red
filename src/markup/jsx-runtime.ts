@@ -1,6 +1,6 @@
 import type { ComponentInstance } from 'typed-jsx'
 
-import type { Elem, ElementType as ET } from './MarkupDocument'
+import type { Elem, ElementType as ET } from './MarkupDocument.ts'
 
 export { data as jsx } from 'typed-jsx'
 

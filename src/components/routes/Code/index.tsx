@@ -18,8 +18,8 @@ import ListItemText from '@mui/material/ListItemText'
 import { createElement } from 'react'
 import { isValidElementType } from 'react-is'
 
-import ArchIcon from './arch-icon'
-import PythonIcon from './python-icon'
+import ArchIcon from './arch-icon.tsx'
+import PythonIcon from './python-icon.tsx'
 
 type ListItemLinkProps<P = object> = {
 	href?: string

@@ -5,7 +5,7 @@ import { type FC, useMemo, useRef } from 'react'
 import { type UseVegaEmbedParams, useVegaEmbed } from 'react-vega'
 import type { Spec } from 'vega-typings'
 import { mergeConfig } from 'vega-util'
-import { useMuiVegaOptions } from './mui-vega'
+import { useMuiVegaOptions } from './mui-vega.ts'
 
 export interface VegaProps
 	extends Omit<UseVegaEmbedParams, 'ref' | 'spec'>,

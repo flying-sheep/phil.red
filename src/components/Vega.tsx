@@ -1,11 +1,11 @@
 import CircularProgress from '@mui/material/CircularProgress'
 import Stack from '@mui/material/Stack'
 import { lazy, Suspense } from 'react'
-import type { VegaProps } from './VegaInner'
+import type { VegaProps } from './VegaInner.tsx'
 
 export type { VegaProps }
 
-const VegaInner = lazy(() => import('./VegaInner'))
+const VegaInner = lazy(() => import('./VegaInner.tsx'))
 
 const Vega = (props: VegaProps) => (
 	<Suspense

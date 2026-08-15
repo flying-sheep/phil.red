@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react'
 import unfonts from 'unplugin-fonts/vite'
 import { defineConfig } from 'vite'
 
-import renderdoc from './src/build-tools/rolldown-plugin-renderdoc.js'
+import renderdoc from './src/build-tools/rolldown-plugin-renderdoc.ts'
 
 // https://vitejs.dev/config/
 export default defineConfig({

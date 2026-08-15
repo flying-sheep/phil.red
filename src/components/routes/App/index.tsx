@@ -17,11 +17,11 @@ import { useMemo, useRef } from 'react'
 import { PortalTarget } from 'react-portal-target'
 import { Link, matchPath, Navigate, Route, useLocation } from 'react-router'
 import SlideRoutes from 'react-slide-routes'
-import { highStyles } from '../../markup/nodes/High'
-import Blog from '../Blog'
-import Code from '../Code'
-import Home from '../Home'
-import ElevationScroll from './ElevationScroll'
+import { highStyles } from '../../markup/nodes/High.tsx'
+import Blog from '../Blog/index.tsx'
+import Code from '../Code/index.tsx'
+import Home from '../Home/index.tsx'
+import ElevationScroll from './ElevationScroll.tsx'
 
 const ROUTE_LINKS = [
 	{ label: 'Blog', href: '/blog', pattern: '/blog/*' },

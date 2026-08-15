@@ -2,11 +2,11 @@
 
 import temml from 'temml'
 import type { Spec } from 'vega-typings'
-import ASTError from '../markup/ASTError'
-import * as m from '../markup/MarkupDocument'
-import highlightCode from './highlight'
-import * as docutils from './pyiodide-docutils'
-import type { ConverterOptions } from './rolldown-plugin-renderdoc'
+import ASTError from '../markup/ASTError.ts'
+import * as m from '../markup/MarkupDocument.ts'
+import highlightCode from './highlight.ts'
+import * as docutils from './pyiodide-docutils.ts'
+import type { ConverterOptions } from './rolldown-plugin-renderdoc.ts'
 
 function pos(node: docutils.Node): m.Position | undefined {
 	const line: number | undefined = node['line']

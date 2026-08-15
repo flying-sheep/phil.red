@@ -13,13 +13,18 @@ import type {
 } from '@mui/system'
 import { Children, type FC, useCallback } from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
-import { ASTError } from '../../markup'
-import { Bullet, type Elem, type Node, Type } from '../../markup/MarkupDocument'
-import CodeBlock from '../CodeBlock'
-import CopySectionLinkButton from '../CopySectionLinkButton'
-import Vega from '../Vega'
-import ASTErrorMessage from './nodes/ASTErrorMessage'
-import High from './nodes/High'
+import { ASTError } from '../../markup/index.ts'
+import {
+	Bullet,
+	type Elem,
+	type Node,
+	Type,
+} from '../../markup/MarkupDocument.ts'
+import CodeBlock from '../CodeBlock.tsx'
+import CopySectionLinkButton from '../CopySectionLinkButton.tsx'
+import Vega from '../Vega.tsx'
+import ASTErrorMessage from './nodes/ASTErrorMessage.tsx'
+import High from './nodes/High.tsx'
 
 /** Actual type of `sx`, no idea why the one imported from `@mui/system` doesn’t work */
 type SystemStyleObject<Theme extends object = object> =
