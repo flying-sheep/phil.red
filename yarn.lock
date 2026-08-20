@@ -2543,8 +2543,8 @@ __metadata:
     vega: "npm:^6.3.1"
     vega-embed: "npm:^7.1.0"
     vega-lite: "npm:^6.4.3"
-    vega-typings: "npm:^2.2.0"
-    vega-util: "npm:^2.1.2"
+    vega-typings: "npm:^2.3.0"
+    vega-util: "npm:^2.1.3"
     vite: "npm:^8.2.1"
   languageName: unknown
   linkType: soft
@@ -3306,13 +3306,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-expression@npm:^6.2.0, vega-expression@npm:^6.2.1, vega-expression@npm:~6.2.1":
-  version: 6.2.1
-  resolution: "vega-expression@npm:6.2.1"
+"vega-expression@npm:^6.2.0, vega-expression@npm:^6.2.1, vega-expression@npm:^6.2.2, vega-expression@npm:~6.2.1":
+  version: 6.2.2
+  resolution: "vega-expression@npm:6.2.2"
   dependencies:
     "@types/estree": "npm:^1.0.9"
-    vega-util: "npm:^2.1.0"
-  checksum: 10/4e5747fb018c027691169eab7bfa82142904e7f49d2027d3a5918f178449788166c50168f59602857e740ad9bc75816eceddcde68b4bff0a61e270c8cf93e897
+    vega-util: "npm:^2.1.3"
+  checksum: 10/472e8a1d5b54d7927bda2f072b08c005b7ed7ff1c5508ce01eceb04109b0b11cf9d6cee97a9b857bd8fbf826e7b24b5586e35e6c8e7250206dbdffaf048d1358
   languageName: node
   linkType: hard
 
@@ -3594,7 +3594,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-typings@npm:^2.2.0, vega-typings@npm:~2.2.0":
+"vega-typings@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "vega-typings@npm:2.3.0"
+  dependencies:
+    "@types/geojson": "npm:7946.0.16"
+    vega-event-selector: "npm:^4.0.0"
+    vega-expression: "npm:^6.2.2"
+    vega-util: "npm:^2.1.3"
+  checksum: 10/635afa9ebba12dbe53fa8aa5b96e5bb431a2304630b12ae8a92aca52d41603fbfce0f03c20f0226ece1c2aef24878cca4c56e4cba7bfa4fd3720ac14365ab57d
+  languageName: node
+  linkType: hard
+
+"vega-typings@npm:~2.2.0":
   version: 2.2.0
   resolution: "vega-typings@npm:2.2.0"
   dependencies:
@@ -3606,10 +3618,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:^2.1.2, vega-util@npm:~2.1.0":
-  version: 2.1.2
-  resolution: "vega-util@npm:2.1.2"
-  checksum: 10/5b1f6305381c1cf636f71c380e5c4f9e23bbdfecee22aff6215cdfb661e20081bc4c1b66bf8c323fcfcaad126e0d637c3eba9f117284b223df54ae1a0c498725
+"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:^2.1.3, vega-util@npm:~2.1.0":
+  version: 2.1.3
+  resolution: "vega-util@npm:2.1.3"
+  checksum: 10/b1883e70851d7513302a57569292011c95eea2d09e000ddf9c3ea30efb880ea0b03a8ba78c8fa69703297d81f519a2c9ea3fb539b175ed11a7370e0636f6b164
   languageName: node
   linkType: hard
 
