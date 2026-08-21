@@ -1,7 +1,6 @@
 /** @jsxImportSource ../markup */
 
-import MarkdownIt from 'markdown-it'
-import Token from 'markdown-it/lib/token.mjs'
+import MarkdownIt, { type Token } from 'markdown-it'
 
 import ASTError from '../markup/ASTError'
 import * as m from '../markup/MarkupDocument'
@@ -23,7 +22,7 @@ function* tokens2ast(
 		const [openType, open] = rsplit(token.type, '_', 2)
 		// console.log(openType, open, token.content)
 		if (open === 'open') {
-			const synth = new Token(openType, token.tag, 0)
+			const synth = new MarkdownIt.Token(openType, token.tag, 0)
 			synth.attrs = token.attrs
 			synth.children = Array.from(tokens2ast(tokenIter, openType))
 			yield synth
@@ -74,7 +73,7 @@ function convertNode(token: Token): m.Node[] {
 			if (!href)
 				throw new ASTError('Link without href encountered', token, pos(token))
 			return [
-				<m.Link ref={{ href }} pos={pos(token)}>
+				<m.Link ref={{ href: `${href}` }} pos={pos(token)}>
 					{convertChildren(token)}
 				</m.Link>,
 			]
