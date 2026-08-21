@@ -2550,8 +2550,8 @@ __metadata:
     vega: "npm:^6.4.0"
     vega-embed: "npm:^7.1.0"
     vega-lite: "npm:^6.4.3"
-    vega-typings: "npm:^2.2.0"
-    vega-util: "npm:^2.1.2"
+    vega-typings: "npm:^2.3.0"
+    vega-util: "npm:^2.1.3"
     vite: "npm:^8.2.1"
   languageName: unknown
   linkType: soft
@@ -3602,7 +3602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-typings@npm:^2.2.0, vega-typings@npm:~2.3.0":
+"vega-typings@npm:^2.3.0, vega-typings@npm:~2.3.0":
   version: 2.3.0
   resolution: "vega-typings@npm:2.3.0"
   dependencies:
@@ -3614,7 +3614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:^2.1.2, vega-util@npm:^2.1.3, vega-util@npm:~2.1.0, vega-util@npm:~2.1.3":
+"vega-util@npm:^2.0.0, vega-util@npm:^2.1.0, vega-util@npm:^2.1.3, vega-util@npm:~2.1.0, vega-util@npm:~2.1.3":
   version: 2.1.3
   resolution: "vega-util@npm:2.1.3"
   checksum: 10/b1883e70851d7513302a57569292011c95eea2d09e000ddf9c3ea30efb880ea0b03a8ba78c8fa69703297d81f519a2c9ea3fb539b175ed11a7370e0636f6b164
