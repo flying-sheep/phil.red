@@ -75,7 +75,7 @@
 		"magic-string": "^1.2.0",
 		"markdown-it": "^14.3.0",
 		"oxc-walker": "^1.1.1",
-		"pyodide": "^314.0.3",
+		"pyodide": "^314.0.5",
 		"react-base16-styling": "^0.10.0",
 		"react-json-tree": "^0.20.0",
 		"typescript": "^6.0.3",
