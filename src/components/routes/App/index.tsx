@@ -63,7 +63,7 @@ const App = () => {
 		const baseTheme = createTheme({
 			cssVariables: true,
 			typography: {
-				fontFamily: '"Iosevka Aile", sans-serif',
+				fontFamily: '"Iosevka Aile", "Iosevka Aile Fallback", sans-serif',
 				...hSizes,
 			},
 			colorSchemes: {
