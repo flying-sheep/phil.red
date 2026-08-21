@@ -1,0 +1,53 @@
+CSV considered harmful
+======================
+
+And other vague delimiter-separated data formats (TSV, …) also.
+I’m going to keep typing “CSV” meaning all of them.
+
+TL;DR:
+
+- Never generate CSV files.
+- If you are forced to read a CSV file, do that manually once.
+  Then quadruple-check if everything has been read in correctly.
+  Do not auto-run that code on an updated version of the data.
+
+Why?
+
+(The lack of) standardization
+-----------------------------
+
+Your preferred programming language or library (YPLOL) can read and write CSV?
+That’s just like, your opinion, mate; or YPLOL’s: what *is* CSV, exactly?
+There are as many dialects around as … the sum of the carthesian products of each library’s CSV module’s options.
+So, thousands?
+
+Yeah yeh, `RFC 4180`_ exists.
+Quick: Does YPLOL read that variant by default?
+Does it *write* it by default?
+Are you *sure*.
+Because the answer is “no” for every popular programming language and library I checked.[#f1]_
+
+The consequences
+----------------
+
+Well, what does `NA` mean in the data? Missing value or the string `"NA"`?
+For that matter, if `NA` is a missing value, can you say `"NA"` to get a string?
+What’s an empty line? All missing values or nothing (skip it)?
+How is an incomplete line handled if at all?
+How are timestamps specified? Is `Dec` one?
+
+And after all that? So what?
+Then things are read a bit differently, what gives?
+
+Well, if you actually want to analyze the data, it can take a really long time until you figure out that there was faulty parsing.
+I’ve seen *months* of work invalidated by being built on top of analyses that were based on CSV-corrupted data.
+People have lost multiple $100ks by having zip codes inferred to be numbers (re-sending packages is expensive).
+
+.. rubric:: Footnotes
+
+.. [#f1] There are few places even optionally supporting the standard.
+
+   - Python stdlib: No support. `csv.list_dialects()` doesn’t return it as an option.
+   - pandas: No support.
+
+.. _RFC 4180: https://www.rfc-editor.org/rfc/rfc4180
