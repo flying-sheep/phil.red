@@ -1,0 +1,16 @@
+{
+	"dependencies": {
+		"magic-string": "^1.1.0",
+		"markdown-it": "^14.3.0",
+		"globby": "^16.2.3",
+		"oxc-walker": "^1.1.1",
+		"@yarnpkg/fslib": "^3.1.5",
+		"@yarnpkg/libzip": "^3.2.2",
+		"pyodide": "^314.0.3"
+	},
+	"devDependencies": {
+		"@oxc-project/types": "^0.144",
+		"@types/markdown-it": "^14.1.2",
+		"vega-typings": "^2.2.0"
+	}
+}

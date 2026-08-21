@@ -15,21 +15,3 @@ export function rsplit(
 	}
 	return [prefix, ...suffixes.reverse()]
 }
-
-export function partition<I>(
-	array: I[],
-	pred: (item: I) => boolean,
-): [I[], I[]] {
-	const a: I[] = []
-	const b: I[] = []
-	for (const element of array) {
-		;(pred(element) ? a : b).push(element)
-	}
-	return [a, b]
-}
-
-export function notEmpty<TValue>(
-	value: TValue | null | undefined,
-): value is TValue {
-	return value !== null && value !== undefined
-}
