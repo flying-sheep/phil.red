@@ -51,7 +51,7 @@
 		"temml": "^0.13.4",
 		"typed-jsx": "^0.1.1",
 		"vega": "^6.4.0",
-		"vega-embed": "^7.1.0",
+		"vega-embed": "^7.2.0",
 		"vega-lite": "^6.4.3",
 		"vega-util": "^2.1.3"
 	},
