@@ -671,10 +671,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@oxc-project/types@npm:^0.150":
-  version: 0.150.0
-  resolution: "@oxc-project/types@npm:0.150.0"
-  checksum: 10/f1419d895ca84ea05f63a32f1ce879ae523dfa9cb4b0249a189b717b54de505285eacbff925826bded90c9662662f9757e9d6e58ba1a1068d33801bec69627c0
+"@oxc-project/types@npm:^0.151":
+  version: 0.151.0
+  resolution: "@oxc-project/types@npm:0.151.0"
+  checksum: 10/3c337e500aab16a8aa395ad2caae1323f44ece5d995c70f79f06c634f5d2d0edb8cbc832842852fc9b58a10852f5d1fe52a7f9f1cc8da99dc97f29ce1663f654
   languageName: node
   linkType: hard
 
@@ -2503,7 +2503,7 @@ __metadata:
     "@mui/icons-material": "npm:^9.4.0"
     "@mui/material": "npm:^9.4.0"
     "@mui/system": "npm:^9.0.0"
-    "@oxc-project/types": "npm:^0.150"
+    "@oxc-project/types": "npm:^0.151"
     "@total-typescript/ts-reset": "npm:^0.6.1"
     "@tsconfig/strictest": "npm:^2.0.8"
     "@types/node": "npm:^26.3.0"
