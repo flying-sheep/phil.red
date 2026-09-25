@@ -71,7 +71,7 @@
 		"globby": "^16.2.4",
 		"husky": ">=9.1.7",
 		"lint-staged": ">=17.5.1",
-		"magic-string": "^1.2.0",
+		"magic-string": "^1.4.1",
 		"markdown-it": "^15.0.0",
 		"oxc-walker": "^1.1.1",
 		"pyodide": "^314.0.6",
