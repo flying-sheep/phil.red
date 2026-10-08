@@ -2304,12 +2304,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"merge-sx@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "merge-sx@npm:4.0.0"
+"merge-sx@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "merge-sx@npm:4.0.1"
   peerDependencies:
     "@mui/material": ^5.1.0 || ^6.0.0 || ^7.0.0 || ^9.0.0
-  checksum: 10/46d0125fed959b6c212d403c6d09e01f1abc6e0a044a6310a3c04177c98a7a0b7ad37c5759af983cf65a74ccbce54e224e0d9576c646563941fa1a2c95675f57
+  checksum: 10/20e85f5488dbbf91b94aca43133d6d9bfb508f2b66414ae0412eddc175b4e3c787fd758700203c1cd389159ebb5168dccd6ae91230db6ea722a69ff961bd68a0
   languageName: node
   linkType: hard
 
@@ -2519,7 +2519,7 @@ __metadata:
     lint-staged: "npm:>=17.6.0"
     magic-string: "npm:^1.4.1"
     markdown-it: "npm:^15.0.0"
-    merge-sx: "npm:^4.0.0"
+    merge-sx: "npm:^4.0.1"
     notistack: "npm:^3.0.2"
     oxc-walker: "npm:^1.1.1"
     pyodide: "npm:^314.0.6"
