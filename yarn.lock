@@ -685,6 +685,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remix-run/route-pattern@npm:^0.22.1":
+  version: 0.22.1
+  resolution: "@remix-run/route-pattern@npm:0.22.1"
+  checksum: 10/fed750fab46bf5cc541c333bb248f9c56a59dd1e06a64f5496b2122d89a7eefd7f59d6cdc7939f132fc65f0b8027020777f29c9e54dbe28b0234994e582073bb
+  languageName: node
+  linkType: hard
+
 "@rolldown/binding-android-arm-eabi@npm:1.2.11":
   version: 1.2.11
   resolution: "@rolldown/binding-android-arm-eabi@npm:1.2.11"
@@ -2530,7 +2537,7 @@ __metadata:
     react-is: "npm:^19.3.0"
     react-json-tree: "npm:^0.20.0"
     react-portal-target: "npm:^1.0.2"
-    react-router: "npm:^8.3.0"
+    react-router: "npm:^8.4.0"
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
     temml: "npm:^0.13.5"
@@ -2705,10 +2712,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "react-router@npm:8.3.0"
+"react-router@npm:^8.4.0":
+  version: 8.4.0
+  resolution: "react-router@npm:8.4.0"
   dependencies:
+    "@remix-run/route-pattern": "npm:^0.22.1"
     cookie-es: "npm:^3.1.1"
   peerDependencies:
     react: ">=19.2.7"
@@ -2716,7 +2724,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10/6ef9ee17910356e7a7c1d262d3c3a943a25e36bf871a199628438d1436d1a16828091da30a5df7c318030dff434c5b3f003c16f82c7ffca9cf37545316f6525c
+  checksum: 10/1a20f8d991b54e959d1deaf865fc9d701f289026d3aa1160b5292b4f03a3697ddc43971408e3df926cb4f240f7d266ab3c1157113b59610899c474a98244c610
   languageName: node
   linkType: hard
 
