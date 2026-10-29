@@ -2282,12 +2282,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^1.4.3":
-  version: 1.4.3
-  resolution: "magic-string@npm:1.4.3"
+"magic-string@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "magic-string@npm:1.4.4"
   dependencies:
     "@jridgewell/sourcemap-codec": "npm:^1.6.0"
-  checksum: 10/8942d4afec7855661d697e48f6f48f0113770878f29e25cdc558ecfd2493ebe5620e18ebee5770e8e5b0afdf72f60330166d1bb59e70eecced712fcf29860ea4
+  checksum: 10/5685194c543427b3b4c6c61a1918464427568e1fd4d35e860dede2e7fadeb12b6ba6cd5d5ce1527e5265995ebe342bf27da825f7bbb9b0e334434ba4ba7e81c6
   languageName: node
   linkType: hard
 
@@ -2534,7 +2534,7 @@ __metadata:
     globby: "npm:^16.2.4"
     husky: "npm:>=9.1.7"
     lint-staged: "npm:>=17.6.0"
-    magic-string: "npm:^1.4.3"
+    magic-string: "npm:^1.4.4"
     markdown-it: "npm:^15.0.0"
     merge-sx: "npm:^4.0.1"
     notistack: "npm:^3.0.2"
