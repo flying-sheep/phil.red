@@ -72,7 +72,7 @@
 		"husky": ">=9.1.7",
 		"lint-staged": ">=17.6.0",
 		"magic-string": "^1.4.4",
-		"markdown-it": "^15.0.0",
+		"markdown-it": "^15.0.3",
 		"oxc-walker": "^1.1.1",
 		"pyodide": "^314.0.6",
 		"react-base16-styling": "^0.10.0",
