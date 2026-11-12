@@ -2550,7 +2550,7 @@ __metadata:
     react-router: "npm:^8.5.1"
     react-slide-routes: "npm:^3.1.0"
     react-vega: "npm:^8.0.0"
-    temml: "npm:^0.13.5"
+    temml: "npm:^0.14.0"
     typed-jsx: "npm:^0.1.1"
     typescript: "npm:^6.0.3"
     unplugin-fonts: "npm:^2.0.0"
@@ -3102,10 +3102,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"temml@npm:^0.13.5":
-  version: 0.13.5
-  resolution: "temml@npm:0.13.5"
-  checksum: 10/0d91afd1cd9a1296b394cf55a94681b9508131492351a4618bda7fcf647948e4e620f6f9632da8bddb2e09c6a841b0bc65651bf2703ac0eb4b77b1239cb5bf1f
+"temml@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "temml@npm:0.14.0"
+  checksum: 10/7f7a4d0d85549da562d6d41e92337a2ad795f7a0a162e68c15f4f793384edab9d4b198182e96a522c42fcb63bc1b35f641bf1e2e5d38d1cae272f843773ef558
   languageName: node
   linkType: hard
 
