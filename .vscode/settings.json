@@ -1,5 +1,5 @@
 {
-	"[json][jsonc][typescript][typescriptreact][caddyfile]": {
+	"[json][jsonc][typescript][typescriptreact][caddyfile][yaml]": {
 		"editor.formatOnSave": true,
 		"editor.defaultFormatter": "biomejs.biome",
 		"editor.codeActionsOnSave": {
