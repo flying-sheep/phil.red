@@ -48,7 +48,7 @@ This way, the color scheme is overridden as early as possible for the same “an
 Then add a `JS function`_ to cycle through “System theme” → “Force opposite of system theme” → “Force (current) system theme” → “System theme”.
 The “opposite”/“same” logic is so users see a change when they click the button for the first time and don’t assume it’s broken.
 
-..  code-block:: javascript
+..  code-block:: typescript
 
     function cycleThemeOnce() {
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -95,7 +95,7 @@ Sadly, the `:if()` css function is not supported well yet, so the button needs t
 
 Finally, the JS function needs to be attached to the button:
 
-..  code-block:: javascript
+..  code-block:: typescript
 
     function initThemeCycle() {
         const button = document.querySelector("#theme-cycle")

@@ -12,6 +12,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@arborium/css@npm:^2.18.2":
+  version: 2.18.2
+  resolution: "@arborium/css@npm:2.18.2"
+  checksum: 10/93b075a562728009bc06bdf952684987d2f52f010daf7c9c3481392defcda94d4b0a6d71343205c469ccf4780d7284fbcc1ffffd0249920297510f566696b21a
+  languageName: node
+  linkType: hard
+
+"@arborium/html@npm:^2.18.2":
+  version: 2.18.2
+  resolution: "@arborium/html@npm:2.18.2"
+  checksum: 10/e2284a9d3a7906ce73980d0a6906797c85fe406256dfae6c2ee5b2a90eff0ac74edc0f7f6530b60b66bed01a7f5520931e67fb2572f543de3b8bdd26d3582f42
+  languageName: node
+  linkType: hard
+
 "@arborium/ini@npm:^2.18.2":
   version: 2.18.2
   resolution: "@arborium/ini@npm:2.18.2"
@@ -2505,6 +2519,8 @@ __metadata:
   resolution: "phil.red@workspace:."
   dependencies:
     "@arborium/arborium": "npm:^2.18.2"
+    "@arborium/css": "npm:^2.18.2"
+    "@arborium/html": "npm:^2.18.2"
     "@arborium/ini": "npm:^2.18.2"
     "@arborium/python": "npm:^2.18.2"
     "@arborium/toml": "npm:^2.18.2"
