@@ -57,7 +57,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.15",
-		"@oxc-project/types": "^0.159",
+		"@oxc-project/types": "^0.160",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@tsconfig/strictest": "^2.0.9",
 		"@types/node": "^26.6.6",
